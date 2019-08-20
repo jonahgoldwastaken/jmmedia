@@ -39,6 +39,7 @@ const PlaceholderList = styled.ul`
 const GlobalStyle = createGlobalStyle`
   body {
     all: unset;
+    height: 100vh;
     background: black;
   }
   h1 {
@@ -57,6 +58,12 @@ const GlobalStyle = createGlobalStyle`
   li {
     margin-bottom: 0.5rem;
   }
+  a {
+    font-family: 'Merriweather', serif;
+  }
+  p > a {
+    font-family: 'Red Hat Display', sans-serif;
+  }
 `
 
 export default () => (
@@ -68,7 +75,7 @@ export default () => (
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,700&display=swap"
       />
-      <style />
+      <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet"></link>
     </Head>
     <PlaceholderBody>
       <h1>Jonah Meijers</h1>
