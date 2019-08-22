@@ -75,47 +75,74 @@ export default () => (
         rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Red+Hat+Display:400,500,700&display=swap"
       />
-      <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet"></link>
+      <link
+        href="https://fonts.googleapis.com/css?family=Merriweather&display=swap"
+        rel="stylesheet"
+      />
     </Head>
     <PlaceholderBody>
       <h1>Jonah Meijers</h1>
       <p>
-        <a href="https://www.cmd-amsterdam.nl">CMD</a> student omgetoverd tot
-        enthousiaste filmmaker met een site in aanbouw.
+        <a target="_blank" href="https://www.cmd-amsterdam.nl">
+          CMD
+        </a>{' '}
+        student omgetoverd tot enthousiaste filmmaker met een site in aanbouw.
       </p>
       <PlaceholderGrid>
         <section>
-          <h2>Video's waar ik aan heb gewerkt</h2>
+          <h2>Eigen video's</h2>
           <PlaceholderList>
             <li>
-              <a href="https://youtu.be/KThjqG6xS-Y">
+              <a
+                target="_blank"
+                href="https://www.youtube.com/watch?v=SVP3KVp9CPY"
+              >
+                [Concertvideo] Integrale Eindpresentatie Lori Yiu (2019)
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                href="https://www.youtube.com/watch?v=omnX4gUMv_U"
+              >
+                [Korte video] Dream (2015)
+              </a>
+            </li>
+          </PlaceholderList>
+          <h2>Schoolopdrachten</h2>
+          <PlaceholderList>
+            <li>
+              <a target="_blank" href="https://youtu.be/KThjqG6xS-Y">
                 [Conceptvideo] Concept om sociaal contact in de trein te
                 vermeerderen (2018)
               </a>
             </li>
             <li>
-              <a href="https://vimeo.com/264281094">
+              <a target="_blank" href="https://vimeo.com/264281094">
                 [Productvideo] Case Video over PlantApp (2018)
               </a>
             </li>
             <li>
-              <a href="https://vimeo.com/264280045">
+              <a target="_blank" href="https://vimeo.com/264280045">
                 [Interview] Interview met een CMD professional (2018)
               </a>
             </li>
             <li>
-              <a href="https://www.youtube.com/watch?v=nWusOohzLjA">
+              <a
+                target="_blank"
+                href="https://www.youtube.com/watch?v=nWusOohzLjA"
+              >
                 [Productvideo] Awakening - The Sound of Sleep (2017)
               </a>
             </li>
             <li>
-              <a href="https://youtu.be/oBqNk5x92EU">
+              <a target="_blank" href="https://youtu.be/oBqNk5x92EU">
                 [Filmtrailer] Het hemelse gerecht Trailer (2015)
               </a>
             </li>
             <li>
-              <a href="https://youtu.be/nbAf_VviRaE">
-                [Schoolopdracht] Video over Charity:Water (2015)
+              <a target="_blank" href="https://youtu.be/nbAf_VviRaE">
+                [Promotievideo] Video over Charity:Water (2015)
               </a>
             </li>
           </PlaceholderList>
@@ -129,9 +156,23 @@ export default () => (
             <li>
               <a href="tel:+31623267536">Geef een belletje</a>
             </li>
+          </PlaceholderList>
+          <h2>Sociale media</h2>
+          <PlaceholderList>
             <li>
-              <a href="https://www.instagram.com/jonahgold.mp4/">
-                Zoek me op op Instagram
+              <a
+                target="_blank"
+                href="https://www.linkedin.com/in/jonahmeijers/"
+              >
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank"
+                href="https://www.instagram.com/jonahgold.jpg/"
+              >
+                Fotografie Instagram
               </a>
             </li>
           </PlaceholderList>
