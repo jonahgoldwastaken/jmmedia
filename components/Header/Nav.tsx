@@ -1,10 +1,6 @@
 import styled, { css, keyframes } from 'styled-components'
 import Link from 'next/link'
 
-type HeaderProps = {
-  active: number
-}
-
 type NavLinkProps = {
   href: string
   children: string
@@ -14,24 +10,6 @@ type NavLinkProps = {
 type AnchorProps = {
   active: boolean
 }
-
-const StyledHeader = styled.header`
-  padding-top: 1.5rem;
-  padding-bottom: 0;
-  background: #151515;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
-
-const HeaderHeading = styled.h1`
-  margin: 0;
-  margin-bottom: 3rem;
-  font-family: 'Red Hat Display', sans-serif;
-  font-size: 4rem;
-  text-align: center;
-  color: white;
-`
 
 const StyledNav = styled.nav`
   width: 80rem;
@@ -93,13 +71,7 @@ const StyledAnchor = styled.a<AnchorProps>`
   }
 `
 
-const HeaderNav: React.FunctionComponent = ({ children }) => (
-  <StyledNav>
-    <ul>{children}</ul>
-  </StyledNav>
-)
-
-const NavLink: React.FunctionComponent<NavLinkProps> = ({
+export const NavLink: React.FunctionComponent<NavLinkProps> = ({
   href,
   children,
   active,
@@ -111,26 +83,10 @@ const NavLink: React.FunctionComponent<NavLinkProps> = ({
   </li>
 )
 
-const Header: React.FunctionComponent<HeaderProps> = ({ active }) => {
-  return (
-    <StyledHeader>
-      <HeaderHeading>Jonah Meijers</HeaderHeading>
-      <HeaderNav>
-        <NavLink active={active === 0} href="#">
-          Film
-        </NavLink>
-        <NavLink active={active === 1} href="#">
-          Fotografie
-        </NavLink>
-        <NavLink active={active === 2} href="#">
-          Animatie
-        </NavLink>
-        <NavLink active={active === 3} href="#">
-          Over mij
-        </NavLink>
-      </HeaderNav>
-    </StyledHeader>
-  )
-}
+const HeaderNav: React.FunctionComponent = ({ children }) => (
+  <StyledNav>
+    <ul>{children}</ul>
+  </StyledNav>
+)
 
-export default Header
+export default HeaderNav

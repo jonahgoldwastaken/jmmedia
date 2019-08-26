@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const HeroContainer = styled.section`
   position: relative;
-  height: calc(100vh - 11.6rem);
+  height: 40rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,7 +42,7 @@ export const HerovImage = styled.img`
   z-index: -1;
 `
 
-const Hero: React.FunctionComponent<{}> = ({ children }) => (
+const Hero: React.FunctionComponent = ({ children }) => (
   <HeroContainer>{children}</HeroContainer>
 )
 
