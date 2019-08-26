@@ -1,5 +1,5 @@
-import styled, { css, keyframes } from 'styled-components'
 import Link from 'next/link'
+import styled, { keyframes, css } from 'styled-components'
 
 type NavLinkProps = {
   href: string
@@ -10,32 +10,6 @@ type NavLinkProps = {
 type AnchorProps = {
   active: boolean
 }
-
-const StyledNav = styled.nav`
-  max-width: 80rem;
-  width: 100%;
-
-  ul {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-  }
-
-  li {
-    flex: 1;
-    text-align: center;
-
-    &:not(:last-child) {
-      padding-right: 0.5em;
-    }
-
-    &:not(:first-child) {
-      padding-left: 0.5em;
-    }
-  }
-`
 
 const ActiveAnchorAnimation = keyframes`
   from {
@@ -83,11 +57,3 @@ export const NavLink: React.FunctionComponent<NavLinkProps> = ({
     </Link>
   </li>
 )
-
-const HeaderNav: React.FunctionComponent = ({ children }) => (
-  <StyledNav>
-    <ul>{children}</ul>
-  </StyledNav>
-)
-
-export default HeaderNav

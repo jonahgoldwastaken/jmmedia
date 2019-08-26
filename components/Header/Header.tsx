@@ -15,7 +15,7 @@ const StyledHeader = styled.header`
   align-items: center;
 `
 
-const Header: React.FunctionComponent<HeaderProps> = ({ active }) => {
+export const Header: React.FunctionComponent<HeaderProps> = ({ active }) => {
   return (
     <StyledHeader>
       <HeaderHeading>Jonah Meijers</HeaderHeading>
@@ -36,5 +36,3 @@ const Header: React.FunctionComponent<HeaderProps> = ({ active }) => {
     </StyledHeader>
   )
 }
-
-export default Header
