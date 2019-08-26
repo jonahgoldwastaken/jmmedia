@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const HeroHeading = styled.p`
+  position: relative;
   margin: 0;
   max-width: 80rem;
   font-family: 'Red Hat Display', sans-serif;
@@ -9,4 +10,5 @@ export const HeroHeading = styled.p`
   font-weight: 500;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   color: white;
+  z-index: 2;
 `
