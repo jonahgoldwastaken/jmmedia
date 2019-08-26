@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Header from '../components/Header'
-import Hero, { HeroHeading } from '../components/Hero'
+import Hero, { HeroHeading, HeroVideo } from '../components/Hero'
 import List, { ListItem } from '../components/List'
 import { ItemVideo } from '../components/List/Item/Media'
 import { ItemHeading } from '../components/List/Item/Heading'
@@ -13,6 +13,7 @@ export default () => (
     <Header active={0} />
     <Hero>
       <HeroHeading>Gepassioneerde filmmaker.</HeroHeading>
+      <HeroVideo src="https://ak0.picdn.net/shutterstock/videos/1021491520/preview/stock-footage-the-information-on-the-bills-are-fake-placeholder-name-is-use-paying-bills-using-a-laptop.mp4" />
     </Hero>
     <List heading="2018">
       <ListItem highlight>

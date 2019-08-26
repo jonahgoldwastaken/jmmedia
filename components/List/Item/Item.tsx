@@ -12,7 +12,7 @@ export const StyledItem = styled.li<ItemProps>`
   grid-column: span 1;
   text-align: center;
   color: white;
-  /* border: ${props => props.theme.borderWidth} solid white; */
+  cursor: pointer;
 
   ${props =>
     props.large &&

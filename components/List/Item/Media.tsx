@@ -30,7 +30,7 @@ const VideoContainer = styled.div`
   position: relative;
   height: 100%;
   overflow: hidden;
-  filter: brightness(0.6);
+  filter: brightness(0.75);
 `
 
 const VideoPlaceHolder = styled.img`

@@ -13,4 +13,5 @@ export default {
   fontWeights: [400, 500, 700],
   borderWidth: '0.2rem',
   timing: '0.3s ease-in-out',
+  textShadow: '2px 2px 5px rgba(0, 0, 0, 0.75)',
 }
