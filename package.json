@@ -23,7 +23,9 @@
     "next": "^9.0.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "styled-normalize": "^8.0.6",
+    "styled-sanitize": "^1.1.2"
   },
   "devDependencies": {
     "@types/node": "^12.7.1",

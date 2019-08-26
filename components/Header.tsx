@@ -1,10 +1,18 @@
-import styled from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import Link from 'next/link'
+
+type HeaderProps = {
+  active: number
+}
 
 type NavLinkProps = {
   href: string
   children: string
   active?: boolean
+}
+
+type AnchorProps = {
+  active: boolean
 }
 
 const StyledHeader = styled.header`
@@ -50,18 +58,42 @@ const StyledNav = styled.nav`
   }
 `
 
-const StyledAnchor = styled.a<{ active: boolean }>`
+const ActiveAnchorAnimation = keyframes`
+  from {
+    width: 0%;
+    margin-left: 50%;
+  }
+  to {
+    width: 100%;
+    margin-left: 0%;
+  }
+`
+
+const StyledAnchor = styled.a<AnchorProps>`
   display: block;
-  padding-bottom: 1.15rem;
   color: white;
   font-family: 'Merriweather', serif;
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
-  border-bottom: ${props => (props.active ? '.1rem' : '0px')} solid white;
+
+  &:after {
+    display: block;
+    content: '';
+    height: 100%;
+    padding-bottom: 1.15rem;
+    border-bottom: 0.2rem solid white;
+    width: 0%;
+    margin-left: 50%;
+    ${props =>
+      props.active &&
+      css`
+        animation: ${ActiveAnchorAnimation} 0.4s ease-in-out forwards;
+      `};
+  }
 `
 
-const HeaderNav: React.FunctionComponent<{}> = ({ children }) => (
+const HeaderNav: React.FunctionComponent = ({ children }) => (
   <StyledNav>
     <ul>{children}</ul>
   </StyledNav>
@@ -79,18 +111,26 @@ const NavLink: React.FunctionComponent<NavLinkProps> = ({
   </li>
 )
 
-const Header: React.FunctionComponent<{}> = () => (
-  <StyledHeader>
-    <HeaderHeading>Jonah Meijers</HeaderHeading>
-    <HeaderNav>
-      <NavLink active href="#">
-        Home
-      </NavLink>
-      <NavLink href="#">Video</NavLink>
-      <NavLink href="#">Fotografie</NavLink>
-      <NavLink href="#">Over mij</NavLink>
-    </HeaderNav>
-  </StyledHeader>
-)
+const Header: React.FunctionComponent<HeaderProps> = ({ active }) => {
+  return (
+    <StyledHeader>
+      <HeaderHeading>Jonah Meijers</HeaderHeading>
+      <HeaderNav>
+        <NavLink active={active === 0} href="#">
+          Film
+        </NavLink>
+        <NavLink active={active === 1} href="#">
+          Fotografie
+        </NavLink>
+        <NavLink active={active === 2} href="#">
+          Animatie
+        </NavLink>
+        <NavLink active={active === 3} href="#">
+          Over mij
+        </NavLink>
+      </HeaderNav>
+    </StyledHeader>
+  )
+}
 
 export default Header

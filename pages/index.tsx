@@ -3,9 +3,9 @@ import Hero, { HeroHeading } from '../components/Hero'
 
 export default () => (
   <>
-    <Header />
+    <Header active={0} />
     <Hero>
-      <HeroHeading>Gepassioneerde filmmaker en fotograaf</HeroHeading>
+      <HeroHeading>Gepassioneerde filmmaker</HeroHeading>
     </Hero>
   </>
 )

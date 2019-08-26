@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const HeroContainer = styled.section`
   position: relative;
-  height: 40rem;
+  height: calc(100vh - 11.6rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,7 +34,7 @@ export const HeroVideo = styled.video`
 `
 
 export const HerovImage = styled.img`
-  display: block
+  display: block;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
