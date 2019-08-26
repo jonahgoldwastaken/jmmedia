@@ -12,7 +12,8 @@ type AnchorProps = {
 }
 
 const StyledNav = styled.nav`
-  width: 80rem;
+  max-width: 80rem;
+  width: 100%;
 
   ul {
     display: flex;
