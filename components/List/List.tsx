@@ -18,9 +18,6 @@ const StyledList = styled.ul`
   grid-auto-rows: 20rem;
   grid-column-gap: 2rem;
   grid-row-gap: 2rem;
-  li {
-    color: white;
-  }
 `
 
 export const List: React.FunctionComponent<ListProps> = ({

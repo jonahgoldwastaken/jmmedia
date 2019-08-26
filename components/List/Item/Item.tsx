@@ -10,6 +10,7 @@ export const StyledItem = styled.li<ItemProps>`
   grid-column: span 1;
   text-align: center;
   border: 5px solid white;
+  color: white;
   ${props =>
     props.large &&
     css`
