@@ -6,11 +6,14 @@ type ItemProps = {
 }
 
 export const StyledItem = styled.li<ItemProps>`
+  position: relative;
+  overflow: hidden;
   grid-row: span 1;
   grid-column: span 1;
   text-align: center;
-  border: 5px solid white;
   color: white;
+  /* border: ${props => props.theme.borderWidth} solid white; */
+
   ${props =>
     props.large &&
     css`

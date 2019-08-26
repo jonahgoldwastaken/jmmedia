@@ -35,13 +35,14 @@ const StyledAnchor = styled.a<AnchorProps>`
     content: '';
     height: 100%;
     padding-bottom: 1.15rem;
-    border-bottom: 0.2rem solid white;
+    border-bottom: ${props => props.theme.borderWidth} solid white;
     width: 0%;
     margin-left: 50%;
     ${props =>
       props.active &&
       css`
-        animation: ${ActiveAnchorAnimation} 0.4s ease-in-out forwards;
+        animation: ${ActiveAnchorAnimation} ${props => props.theme.timing}
+          forwards;
       `};
   }
 `

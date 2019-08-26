@@ -20,16 +20,13 @@ export const Header: React.FunctionComponent<HeaderProps> = ({ active }) => {
     <StyledHeader>
       <HeaderHeading>Jonah Meijers</HeaderHeading>
       <HeaderNav>
-        <NavLink active={active === 0} href="#">
+        <NavLink active={active === 0} href="/">
           Film
         </NavLink>
-        <NavLink active={active === 1} href="#">
+        <NavLink active={active === 1} href="/photography">
           Fotografie
         </NavLink>
-        <NavLink active={active === 2} href="#">
-          Animatie
-        </NavLink>
-        <NavLink active={active === 3} href="#">
+        <NavLink active={active === 2} href="/about">
           Over mij
         </NavLink>
       </HeaderNav>

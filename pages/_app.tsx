@@ -1,8 +1,9 @@
 import React from 'react'
 import App from 'next/app'
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import styledSanitize from 'styled-sanitize'
+import theme from '../theme'
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700|Red+Hat+Display:400,500,700&display=swap');
@@ -16,7 +17,9 @@ class MyApp extends App {
     return (
       <>
         <GlobalStyle />
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </>
     )
   }
