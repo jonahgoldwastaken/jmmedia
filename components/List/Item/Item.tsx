@@ -1,11 +1,17 @@
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
+import { styled } from '../../../theme'
 
-type ItemProps = {
+type StyledItemProps = {
   large?: boolean
   highlight?: boolean
 }
 
-export const StyledItem = styled.li<ItemProps>`
+type ListItemProps = {
+  values?: Object
+  openHandler: () => void
+}
+
+const StyledItem = styled.li<StyledItemProps>`
   position: relative;
   overflow: hidden;
   grid-row: span 1;
@@ -26,3 +32,13 @@ export const StyledItem = styled.li<ItemProps>`
       grid-row: span 2;
     `}
 `
+
+export const ListItem: React.FunctionComponent<
+  ListItemProps & StyledItemProps
+> = ({ openHandler, children, large, highlight }) => {
+  return (
+    <StyledItem onClick={openHandler} large={large} highlight={highlight}>
+      {children}
+    </StyledItem>
+  )
+}

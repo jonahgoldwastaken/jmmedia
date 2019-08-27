@@ -1,13 +1,16 @@
-import styled from 'styled-components'
+import { styled } from '../../../theme'
 
 const StyledNav = styled.nav`
-  max-width: 80rem;
-  width: 100%;
+  background: ${props => props.theme.colors.tertiary};
+  z-index: 99;
+  width: ${props => props.theme.sizes.dynamic[2]};
 
   ul {
+    max-width: ${props => props.theme.sizes.static[2]};
+    width: ${props => props.theme.sizes.dynamic[2]};
     display: flex;
     justify-content: center;
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
     list-style-type: none;
   }
@@ -15,19 +18,13 @@ const StyledNav = styled.nav`
   li {
     flex: 1;
     text-align: center;
-
-    &:not(:last-child) {
-      padding-right: 0.5em;
-    }
-
-    &:not(:first-child) {
-      padding-left: 0.5em;
-    }
   }
 `
 
-export const HeaderNav: React.FunctionComponent = ({ children }) => (
-  <StyledNav>
-    <ul>{children}</ul>
-  </StyledNav>
-)
+export const HeaderNav: React.FunctionComponent = ({ children }) => {
+  return (
+    <StyledNav>
+      <ul>{children}</ul>
+    </StyledNav>
+  )
+}

@@ -1,14 +1,14 @@
-import styled from 'styled-components'
+import { styled } from '../../theme'
 
 export const HeroHeading = styled.p`
   position: relative;
   margin: 0;
-  max-width: 80rem;
+  max-width: ${props => props.theme.sizes.static[2]};
   font-family: 'Red Hat Display', sans-serif;
   text-align: center;
-  font-size: 3rem;
-  font-weight: 500;
+  font-size: ${props => props.theme.fontSizes[3]};
+  font-weight: ${props => props.theme.fontWeights[1]};
   text-shadow: ${props => props.theme.textShadow};
-  color: white;
+  color: ${props => props.theme.colors.primary};
   z-index: 2;
 `

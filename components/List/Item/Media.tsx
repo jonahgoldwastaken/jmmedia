@@ -1,5 +1,6 @@
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
 import { createRef, useState } from 'react'
+import { styled } from '../../../theme'
 
 type ItemVideoProps = {
   src: string
@@ -7,20 +8,21 @@ type ItemVideoProps = {
 }
 
 type StyledVideoProps = {
-  active: boolean
+  playing: boolean
 }
 
 export const StyledVideo = styled.video<StyledVideoProps>`
   position: relative;
   object-fit: cover;
   z-index: 1;
-  width: 100%;
-  height: 100%;
+  width: ${props => props.theme.sizes.dynamic[2]};
+  height: ${props => props.theme.sizes.dynamic[2]};
   opacity: 0;
   transition: opacity ${props => props.theme.timing};
   pointer-events: auto;
+
   ${props =>
-    props.active &&
+    props.playing &&
     css`
       opacity: 1;
     `}
@@ -28,7 +30,7 @@ export const StyledVideo = styled.video<StyledVideoProps>`
 
 const VideoContainer = styled.div`
   position: relative;
-  height: 100%;
+  height: ${props => props.theme.sizes.dynamic[2]};
   overflow: hidden;
   filter: brightness(0.75);
 `
@@ -38,9 +40,13 @@ const VideoPlaceHolder = styled.img`
   position: absolute;
   top: 0;
   object-fit: cover;
-  width: 100%;
-  height: 100%;
+  width: ${props => props.theme.sizes.dynamic[2]};
+  height: ${props => props.theme.sizes.dynamic[2]};
   pointer-events: none;
+
+  @media print, speech {
+    display: none;
+  }
 `
 
 export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
@@ -66,7 +72,13 @@ export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
       onMouseOver={handleHover(true)}
       onMouseOut={handleHover(false)}
     >
-      <StyledVideo active={isPlaying} ref={videoElement} src={src} loop />
+      <StyledVideo
+        playing={isPlaying}
+        ref={videoElement}
+        src={src}
+        loop
+        placeholder={placeholder}
+      />
       {placeholder && <VideoPlaceHolder src={placeholder} />}
     </VideoContainer>
   )

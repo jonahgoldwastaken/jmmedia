@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from '../../../theme'
 
 export const ItemHeading = styled.h3`
   position: absolute;

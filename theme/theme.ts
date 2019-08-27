@@ -1,0 +1,24 @@
+export const theme = {
+  fontSizes: ['1rem', '1.5rem', '2rem', '3rem', '4rem'],
+  colors: {
+    primary: 'white',
+    secondary: 'black',
+    tertiary: '#151515',
+    disabled: 'lightgrey',
+  },
+  space: ['0.5rem', '1rem', '1.5rem', '3rem', '6rem'],
+  sizes: {
+    static: ['20rem', '40rem', '80rem'],
+    dynamic: ['25%', '50%', '100%'],
+    height: ['30vh', '60vh', '80vh', '100vh'],
+  },
+  breakpoints: ['30rem', '60rem', '80rem'],
+  fonts: {
+    sans: "'Red Hat Display', sans-serif",
+    serif: '"Merriweather", sans-serif',
+  },
+  fontWeights: [400, 500, 700],
+  borderWidth: '0.2rem',
+  timing: '0.3s ease-in-out',
+  textShadow: '2px 2px 5px rgba(0, 0, 0, 0.75)',
+}

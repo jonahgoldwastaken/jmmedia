@@ -1,18 +1,21 @@
-import styled from 'styled-components'
 import HeaderHeading from './Heading'
 import HeaderNav, { NavLink } from './Nav'
+import { styled } from '../../theme'
 
 type HeaderProps = {
   active: number
 }
 
 const StyledHeader = styled.header`
-  padding-top: 1.5rem;
-  padding-bottom: 0;
-  background: #151515;
+  position: sticky;
+  top: 0;
+  padding-top: ${props => props.theme.space[2]};
+  background: ${props => props.theme.colors.tertiary};
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  z-index: 99;
 `
 
 export const Header: React.FunctionComponent<HeaderProps> = ({ active }) => {
@@ -23,10 +26,10 @@ export const Header: React.FunctionComponent<HeaderProps> = ({ active }) => {
         <NavLink active={active === 0} href="/">
           Film
         </NavLink>
-        <NavLink active={active === 1} href="/photography">
+        <NavLink disabled active={active === 1} href="/photography">
           Fotografie
         </NavLink>
-        <NavLink active={active === 2} href="/about">
+        <NavLink disabled active={active === 2} href="/about">
           Over mij
         </NavLink>
       </HeaderNav>

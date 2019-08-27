@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import { styled } from '../../theme'
 
 type HeroVideoProps = {
   src: string
@@ -9,8 +9,8 @@ const StyledVideo = styled.video`
   top: 0%;
   left: 0%;
   object-fit: cover;
-  height: 100%;
-  width: 100%;
+  height: ${props => props.theme.sizes.dynamic[2]};
+  width: ${props => props.theme.sizes.dynamic[2]};
   filter: brightness(0.5);
   z-index: 1;
 `
@@ -24,8 +24,8 @@ export const HeroImage = styled.img`
   top: 0%;
   left: 0%;
   object-fit: cover;
-  height: 100%;
-  width: 100%;
+  height: ${props => props.theme.sizes.dynamic[2]};
+  width: ${props => props.theme.sizes.dynamic[2]};
   filter: brightness(0.5);
   z-index: 1;
 `
