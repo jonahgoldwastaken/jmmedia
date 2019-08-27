@@ -4,7 +4,7 @@ import Hero, { HeroHeading, HeroVideo } from '../components/Hero'
 import List from '../components/List'
 import Popup from '../components/Popup'
 import { useState } from 'react'
-import { VideoItem } from '../typings/content'
+import { VideoItem } from '../types/content'
 import { videoData } from '../data/videodata'
 import ListItem, { ItemVideo, ItemHeading } from '../components/List/Item'
 

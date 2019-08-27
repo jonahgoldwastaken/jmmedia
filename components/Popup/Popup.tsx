@@ -1,7 +1,7 @@
 import { styled } from '../../theme'
 import { PopupOverlay } from './Overlay'
 import { CloseButton } from './CloseButton'
-import { VideoItem } from '../../typings/content'
+import { VideoItem } from '../../types/content'
 import { PopupVideo } from './Video'
 import { PopupHeading, PopupDescription, PopupData } from './Metadata'
 import { keyframes } from 'styled-components'
