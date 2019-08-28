@@ -1,5 +1,5 @@
 export const theme = {
-  fontSizes: ['1rem', '1.5rem', '2rem', '3rem', '4rem'],
+  fontSizes: ['1rem', '1.5rem', '2rem', '3rem', '4rem', '6rem'],
   colors: {
     primary: 'white',
     secondary: 'black',
@@ -19,6 +19,6 @@ export const theme = {
   },
   fontWeights: [400, 500, 700],
   borderWidth: '0.2rem',
-  timing: '0.3s ease-in-out',
+  timing: '0.3s cubic-bezier(.63,.27,0,1)',
   textShadow: '2px 2px 5px rgba(0, 0, 0, 0.75)',
 }

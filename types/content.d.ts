@@ -1,4 +1,5 @@
 export interface VideoItem {
+  id: number
   title: string
   videoEmbed: string
   placeholder: {
