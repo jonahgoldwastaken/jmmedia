@@ -9,6 +9,9 @@ const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700|Red+Hat+Display:400,500,700&display=swap');
   ${styledNormalize};
   ${styledSanitize};
+  body {
+    background: black;
+  }
 `
 
 class MyApp extends App {

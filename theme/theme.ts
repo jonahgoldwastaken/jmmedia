@@ -18,7 +18,10 @@ export const theme = {
     serif: '"Merriweather", sans-serif',
   },
   fontWeights: [400, 500, 700],
-  borderWidth: '0.2rem',
-  timing: '0.3s cubic-bezier(.63,.27,0,1)',
+  borderWidth: '0.3rem',
+  animation: {
+    timing: ['0.15s', '0.3s', '0.6s'],
+    curve: 'cubic-bezier(.63,.27,0,1)',
+  },
   textShadow: '2px 2px 5px rgba(0, 0, 0, 0.75)',
 }
