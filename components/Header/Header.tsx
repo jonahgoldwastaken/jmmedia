@@ -1,6 +1,7 @@
 import { styled } from '../../theme'
 
 const StyledHeader = styled.header`
+  position: relative;
   width: ${props => props.theme.sizes.dynamic[2]};
   height: ${props => props.theme.sizes.height[2]};
   display: flex;

@@ -1,3 +1,5 @@
 export * from './FadeIn'
+export * from './FadeOut'
 export * from './PopIn'
 export * from './RotateIn'
+export * from './VideoFade'

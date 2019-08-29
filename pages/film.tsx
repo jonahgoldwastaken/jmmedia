@@ -1,10 +1,17 @@
 import { PageContext } from '../components/Page'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Header, HeaderHeading, HeaderVideo } from '../components/Header'
 import { Background } from '../components/Common/Background'
 
 export default () => {
   const [isNavigating, setIsNavigating] = useState()
+  useEffect(
+    () =>
+      function() {
+        setIsNavigating(true)
+      },
+    []
+  )
   return (
     <PageContext.Provider value={{ isNavigating, setIsNavigating }}>
       <Background background="#011638">

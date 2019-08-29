@@ -1,6 +1,7 @@
 import { styled } from '../../theme'
-import { keyframes, css } from 'styled-components'
+import { keyframes } from 'styled-components'
 import { PageContext } from '../Page/Context'
+import { withTransition } from '../../utils/page-transitions'
 
 type StyledBackgroundProps = {
   background: string
@@ -24,18 +25,9 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
   width: ${props => props.theme.sizes.dynamic[2]};
   min-height: 100vh;
   background: ${props => props.background};
-  padding: 0 ${props => props.theme.space[4]};
-
-  ${props =>
-    props.isNavigating &&
-    css`
-      position: fixed;
-      animation: ${closeAnimation} ${props.theme.animation.timing[1]}
-        ${props.theme.animation.curve};
-    `}
 `
 
-export const Background: React.FunctionComponent<
+const BackgroundWithoutTransition: React.FunctionComponent<
   PageBackgroundProps
 > = props => (
   <PageContext.Consumer>
@@ -43,4 +35,13 @@ export const Background: React.FunctionComponent<
       <StyledBackground isNavigating={isNavigating} {...props} />
     )}
   </PageContext.Consumer>
+)
+export const Background = withTransition(
+  BackgroundWithoutTransition,
+  `
+    position: fixed;
+    animation: ${closeAnimation}
+      ${props => `${props.theme.animation.timing[1]}
+  ${props.theme.animation.curve}`};
+  `
 )

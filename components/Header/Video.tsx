@@ -1,30 +1,42 @@
 import { PageContext } from '../Page/Context'
-import { Video } from '../Common'
+import { Video, VideoElement } from '../Common'
 import { styled } from '../../theme'
-import { FadeIn } from '../Animations'
+import { VideoFade } from '../Animations'
+import { css } from 'styled-components'
 
 type HeaderVideoProps = {
   src: string
 }
 
-const HeaderVideoElement = styled(Video)`
+const HeaderVideoElement = styled(VideoElement)`
   opacity: 0;
-  animation: ${FadeIn}
-    ${props =>
-      `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
-    forwards;
+  ${props =>
+    props.loaded &&
+    css`
+      animation: ${VideoFade}
+        ${props =>
+          `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+        forwards;
+    `}
 `
 
-export const HeaderVideo: React.FunctionComponent<HeaderVideoProps> = props => (
+export const HeaderVideo: React.FunctionComponent<HeaderVideoProps> = ({
+  src,
+}) => (
   <PageContext.Consumer>
     {({ isNavigating }) => (
-      <HeaderVideoElement
-        autoPlay
-        muted
-        playsInline
-        isNavigating={isNavigating}
-        {...props}
-      />
+      <Video isNavigating={isNavigating} mayPlayVideo>
+        {props => (
+          <HeaderVideoElement
+            autoPlay
+            muted
+            loop
+            playsInline
+            src={src}
+            {...props}
+          />
+        )}
+      </Video>
     )}
   </PageContext.Consumer>
 )
