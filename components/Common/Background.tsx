@@ -1,5 +1,10 @@
 import { styled } from '../../theme'
-import { keyframes } from 'styled-components'
+import {
+  SlideOutDown,
+  SlideOutLeft,
+  SlideOutRight,
+  SlideOutUp,
+} from '../Animations'
 
 type StyledBackgroundProps = {
   background: string
@@ -9,14 +14,18 @@ type PageBackgroundProps = {
   background: string
 }
 
-const closeAnimation = keyframes`
-  from {
-    top: 0vh;
+const slideDirectionChooser = () => {
+  const randomNumber = Math.random()
+  if (randomNumber < 0.25) {
+    return SlideOutDown
+  } else if (randomNumber < 0.5) {
+    return SlideOutLeft
+  } else if (randomNumber < 0.75) {
+    return SlideOutRight
+  } else {
+    return SlideOutUp
   }
-  to {
-    top: 100vh;
-  }
-`
+}
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
   width: ${props => props.theme.sizes.dynamic[2]};
@@ -25,12 +34,15 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
 
   .page-transition-exit-active & {
     position: fixed;
-    animation: ${closeAnimation}
+    animation: ${() => slideDirectionChooser()}
       ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`};
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
+      forwards;
   }
 `
 
 export const Background: React.FunctionComponent<
   PageBackgroundProps
-> = props => <StyledBackground {...props} />
+> = props => {
+  return <StyledBackground {...props} />
+}

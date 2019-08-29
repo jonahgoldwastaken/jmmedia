@@ -12,12 +12,9 @@ const StyledVideo = styled(VideoElement)`
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
-  .page-transition-exit-active {
+  .page-transition-exit-active & {
     opacity: 0;
     filter: brightness(0.25) contrast(150%);
-    transition: all
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
   }
 `
 

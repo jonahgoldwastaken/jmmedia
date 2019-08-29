@@ -8,15 +8,19 @@ type HeaderVideoProps = {
 }
 
 const HeaderVideoElement = styled(VideoElement)`
-  opacity: 0;
-  ${props =>
-    props.loaded &&
-    css`
-      animation: ${VideoFade}
-        ${props =>
-          `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-        forwards;
-    `}
+  .page-transition-enter & {
+    opacity: 0;
+  }
+
+  .page-transition-enter-active & {
+    ${props =>
+      css`
+        animation: ${VideoFade}
+          ${props =>
+            `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+          forwards;
+      `}
+  }
 `
 
 export const HeaderVideo: React.FunctionComponent<HeaderVideoProps> = ({
