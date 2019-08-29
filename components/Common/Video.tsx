@@ -37,7 +37,7 @@ export const VideoElement = styled.video<VideoElementProps>`
     display: none;
   }
 
-  .page-transition-exit {
+  .page-transition-exit & {
     opacity: 1;
   }
 

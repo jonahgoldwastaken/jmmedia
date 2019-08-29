@@ -27,7 +27,7 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
     position: fixed;
     animation: ${closeAnimation}
       ${props =>
-        `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`};
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`};
   }
 `
 

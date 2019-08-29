@@ -1,6 +1,6 @@
 import { styled } from '../../../theme'
 import { Video, VideoElement } from '../../Common'
-import { NavContext } from './NavContext'
+import { NavContext } from './Context'
 
 const StyledVideo = styled(VideoElement)`
   filter: ${props =>

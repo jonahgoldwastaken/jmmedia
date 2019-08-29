@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { styled } from '../../../theme'
-import { NavContext } from './NavContext'
-import { NavAnchor } from './Anchor'
-import { NavItem } from './Item'
 import { NavList } from './List'
+import { NavContext } from './Context'
 import { NavVideo } from './Video'
+import { useRouter } from 'next/router'
 
 const StyledNav = styled.nav`
   margin: 0;
@@ -16,6 +15,21 @@ const StyledNav = styled.nav`
 export const HeroNav: React.FunctionComponent = ({ children }) => {
   const [currentVideo, setCurrentVideo] = useState('')
   const [mayPlay, setMayPlay] = useState(false)
+  const [activeLink, setActiveLink] = useState('')
+  const router = useRouter()
+
+  if (typeof window !== 'undefined') {
+    useEffect(() => {
+      router.beforePopState(({ url }) => {
+        if (url === activeLink) return false
+        setActiveLink(url)
+        return false
+      })
+      return function() {
+        router.beforePopState(() => true)
+      }
+    }, [])
+  }
 
   return (
     <NavContext.Provider
@@ -23,7 +37,8 @@ export const HeroNav: React.FunctionComponent = ({ children }) => {
         video: currentVideo,
         setVideo: setCurrentVideo,
         mayPlayVideo: mayPlay,
-        setMayPLayVideo: setMayPlay,
+        setMayPlayVideo: setMayPlay,
+        activeLink,
       }}
     >
       <NavVideo />

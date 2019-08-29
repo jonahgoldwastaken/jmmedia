@@ -2,7 +2,7 @@ import { keyframes } from 'styled-components'
 
 export const RotateInLeft = keyframes`
   from {
-    transform: translateX(-100%) rotateY(-90deg);
+    transform: translateX(-50%) rotateY(-90deg);
     opacity: 0;
   }
   to {
@@ -13,7 +13,7 @@ export const RotateInLeft = keyframes`
 
 export const RotateInRight = keyframes`
   from {
-    transform: translateX(100%) rotateY(90deg);
+    transform: translateX(50%) rotateY(90deg);
     opacity: 0;
   }
   to {
@@ -24,7 +24,7 @@ export const RotateInRight = keyframes`
 
 export const RotateInUp = keyframes`
   from {
-    transform: translateY(100%) rotateX(90deg);
+    transform: translateY(50%) rotateX(90deg);
     opacity: 0;
   }
   to {
@@ -35,7 +35,7 @@ export const RotateInUp = keyframes`
 
 export const RotateInDown = keyframes`
   from {
-    transform: translateY(-100%) rotateX(-90deg);
+    transform: translateY(-50%) rotateX(-90deg);
     opacity: 0;
   }
   to {

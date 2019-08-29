@@ -6,7 +6,7 @@ export const RotateOutRight = keyframes`
     opacity: 1;
   }
   to {
-    transform: translateX(-100%) rotateY(-90deg);
+    transform: translateX(-50%) rotateY(-90deg);
     opacity: 0;
   }
 `
@@ -17,7 +17,7 @@ export const RotateOutLeft = keyframes`
     opacity: 1;
   }
   to {
-    transform: translateX(100%) rotateY(90deg);
+    transform: translateX(50%) rotateY(90deg);
     opacity: 0;
   }
 `
@@ -28,7 +28,7 @@ export const RotateOutDown = keyframes`
     opacity: 1;
   }
   to {
-    transform: translateY(100%) rotateX(90deg);
+    transform: translateY(50%) rotateX(90deg);
     opacity: 0;
   }
 `
@@ -39,7 +39,7 @@ export const RotateOutUp = keyframes`
     opacity: 1;
   }
   to {
-    transform: translateY(-100%) rotateX(-90deg);
+    transform: translateY(-50%) rotateX(-90deg);
     opacity: 0;
   }
 `

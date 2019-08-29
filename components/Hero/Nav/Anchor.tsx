@@ -1,8 +1,7 @@
-import Link from 'next/link'
-import { useState } from 'react'
+import { Component, createRef, MouseEvent, RefObject } from 'react'
 import { css, keyframes } from 'styled-components'
 import theme, { styled } from '../../../theme'
-import { NavContext } from './NavContext'
+import { NavContext } from './Context'
 
 type positionData = {
   x: number
@@ -16,13 +15,21 @@ type StyledAnchorProps = {
   active?: boolean
   positionData: positionData
   pageColour: string
+  ref: RefObject<HTMLAnchorElement>
+  href?: string
 }
 
 type NavAnchorProps = {
   disabled?: boolean
-  href: string
+  href?: string
   bgVideo: string
   pageColour: string
+  onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => {}
+}
+
+type NavAnchorState = {
+  active: boolean
+  positionData: positionData
 }
 
 const clickAnimation = (props: any) => {
@@ -119,55 +126,70 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
   }
 `
 
-export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
-  href,
-  bgVideo,
-  pageColour,
-  disabled,
-  children,
-}) => {
-  const [active, setActive] = useState(false)
-  const [positionData, setPositionData] = useState()
+export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
+  static contextType = NavContext
+  anchorRef: RefObject<HTMLAnchorElement>
 
-  const clickHandler = (e: any) => {
+  constructor(props) {
+    super(props)
+    this.state = {
+      active: false,
+      positionData: undefined,
+    }
+    this.anchorRef = createRef<HTMLAnchorElement>()
+  }
+
+  clickHandler = (event: any) => {
+    const { disabled, onClick: nextLinkClick } = this.props
+    nextLinkClick(event)
+
     if (!disabled) {
-      setPositionData({
-        x: e.currentTarget.offsetLeft,
-        y: e.currentTarget.offsetTop,
-        width: e.currentTarget.offsetWidth,
-        height: e.currentTarget.offsetHeight,
+      this.setState({
+        positionData: {
+          x: this.anchorRef.current.offsetLeft,
+          y: this.anchorRef.current.offsetTop,
+          width: this.anchorRef.current.offsetWidth,
+          height: this.anchorRef.current.offsetHeight,
+        },
+        active: true,
       })
-      setActive(true)
     }
   }
 
-  return (
-    <>
-      <NavContext.Consumer>
-        {({ video, setVideo, setMayPLayVideo }) => {
-          const togglePlayback = (bool: boolean) => () => {
-            if (video !== bgVideo) setVideo(bgVideo)
-            setMayPLayVideo(bool)
-          }
-          return (
-            <>
-              <Link href={href}>
-                <StyledAnchor
-                  positionData={positionData}
-                  onClick={clickHandler}
-                  onMouseOver={togglePlayback(true)}
-                  onMouseOut={togglePlayback(false)}
-                  disabled={disabled}
-                  active={active}
-                  pageColour={pageColour}
-                >
-                  {children}
-                </StyledAnchor>
-              </Link>
-            </>
-          )
-        }}
-      </NavContext.Consumer>
-    </>
-  )
+  togglePlayback = (bool: boolean) => () => {
+    const { video, setMayPlayVideo, setVideo } = this.context
+    const { bgVideo } = this.props
+
+    if (video !== bgVideo) setVideo(bgVideo)
+    setMayPlayVideo(bool)
+  }
+
+  componentDidUpdate() {
+    const { href } = this.props
+    const { active } = this.state
+    const { activeLink } = this.context
+    if (activeLink === href && !active) {
+      this.anchorRef.current.click()
+    }
+  }
+
+  render() {
+    const { disabled, pageColour, children } = this.props
+    const { positionData, active } = this.state
+
+    return (
+      <StyledAnchor
+        ref={this.anchorRef}
+        positionData={positionData}
+        onClick={this.clickHandler}
+        onMouseOver={this.togglePlayback(true)}
+        onMouseOut={this.togglePlayback(false)}
+        disabled={disabled}
+        active={active}
+        pageColour={pageColour}
+      >
+        {children}
+      </StyledAnchor>
+    )
+  }
 }
