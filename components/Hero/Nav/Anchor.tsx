@@ -1,10 +1,8 @@
-import theme, { styled } from '../../../theme'
+import Link from 'next/link'
+import { useState } from 'react'
 import { css, keyframes } from 'styled-components'
+import theme, { styled } from '../../../theme'
 import { NavContext } from './NavContext'
-import { useRouter } from 'next/router'
-import { useState, useRef, useContext } from 'react'
-import { PageContext } from '../../Page'
-import navigate from '../../../utils/navigate'
 
 type positionData = {
   x: number
@@ -18,7 +16,6 @@ type StyledAnchorProps = {
   active?: boolean
   positionData: positionData
   pageColour: string
-  isNavigating: boolean
 }
 
 type NavAnchorProps = {
@@ -36,7 +33,7 @@ const clickAnimation = (props: any) => {
     theme.borderWidth
   });
       width: ${props.positionData.width}px;
-      height: ${theme.borderWidth};
+      height: ${props.theme.borderWidth};
       background: ${props.theme.colors.primary};
 
     }
@@ -74,13 +71,6 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
-  ${props =>
-    props.isNavigating &&
-    !props.active &&
-    css`
-      opacity: 0;
-    `}
-
   &:after {
     content: '';
     display: block;
@@ -100,20 +90,32 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
         bottom: 40%;
         background: ${props.theme.colors.disabled};
       `}
-
-    ${props =>
-      props.active &&
-      css`
-        position: fixed;
-        animation: ${clickAnimation} ${props.theme.animation.timing[2]}
-          ${props.theme.animation.curve} forwards;
-      `}
   }
 
   &:hover {
     &:after {
       width: 100%;
     }
+  }
+
+  .page-transition-exit & {
+    opacity: 1;
+  }
+
+  .page-transition-exit-active & {
+    ${props =>
+      props.active
+        ? css`
+            &:after {
+              position: fixed;
+              animation: ${() => clickAnimation(props)}
+                ${props.theme.animation.timing[2]}
+                ${props.theme.animation.curve} forwards;
+            }
+          `
+        : css`
+            opacity: 0;
+          `}
   }
 `
 
@@ -126,51 +128,46 @@ export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
 }) => {
   const [active, setActive] = useState(false)
   const [positionData, setPositionData] = useState()
-  const anchorRef: React.MutableRefObject<HTMLAnchorElement> = useRef()
-  const { setIsNavigating } = useContext(PageContext)
-  const router = useRouter()
 
-  const clickHandler = () => {
+  const clickHandler = (e: any) => {
     if (!disabled) {
       setPositionData({
-        x: anchorRef.current.offsetLeft,
-        y: anchorRef.current.offsetTop,
-        width: anchorRef.current.offsetWidth,
-        height: anchorRef.current.offsetHeight,
+        x: e.currentTarget.offsetLeft,
+        y: e.currentTarget.offsetTop,
+        width: e.currentTarget.offsetWidth,
+        height: e.currentTarget.offsetHeight,
       })
       setActive(true)
-      setIsNavigating(true)
-      navigate(`${href}`, 600)
     }
   }
 
   return (
-    <PageContext.Consumer>
-      {({ isNavigating }) => (
-        <NavContext.Consumer>
-          {({ video, setVideo, setMayPLayVideo }) => {
-            const togglePlayback = (bool: boolean) => () => {
-              if (video !== bgVideo) setVideo(bgVideo)
-              setMayPLayVideo(bool)
-            }
-            return (
-              <StyledAnchor
-                ref={anchorRef}
-                positionData={positionData}
-                onClick={clickHandler}
-                onMouseOver={togglePlayback(true)}
-                onMouseOut={togglePlayback(false)}
-                disabled={disabled}
-                active={active}
-                pageColour={pageColour}
-                isNavigating={isNavigating}
-              >
-                {children}
-              </StyledAnchor>
-            )
-          }}
-        </NavContext.Consumer>
-      )}
-    </PageContext.Consumer>
+    <>
+      <NavContext.Consumer>
+        {({ video, setVideo, setMayPLayVideo }) => {
+          const togglePlayback = (bool: boolean) => () => {
+            if (video !== bgVideo) setVideo(bgVideo)
+            setMayPLayVideo(bool)
+          }
+          return (
+            <>
+              <Link href={href}>
+                <StyledAnchor
+                  positionData={positionData}
+                  onClick={clickHandler}
+                  onMouseOver={togglePlayback(true)}
+                  onMouseOut={togglePlayback(false)}
+                  disabled={disabled}
+                  active={active}
+                  pageColour={pageColour}
+                >
+                  {children}
+                </StyledAnchor>
+              </Link>
+            </>
+          )
+        }}
+      </NavContext.Consumer>
+    </>
   )
 }

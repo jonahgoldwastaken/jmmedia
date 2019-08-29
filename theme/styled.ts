@@ -1,4 +1,7 @@
-import baseStyled, { ThemedStyledInterface } from 'styled-components'
+import baseStyled, {
+  ThemedStyledInterface,
+  createGlobalStyle as baseCreateGlobalStyle,
+} from 'styled-components'
 import { theme } from './theme'
 
 export type Theme = typeof theme

@@ -1,4 +1,3 @@
-import { PageContext } from '../Page/Context'
 import { Video, VideoElement } from '../Common'
 import { styled } from '../../theme'
 import { VideoFade } from '../Animations'
@@ -23,20 +22,16 @@ const HeaderVideoElement = styled(VideoElement)`
 export const HeaderVideo: React.FunctionComponent<HeaderVideoProps> = ({
   src,
 }) => (
-  <PageContext.Consumer>
-    {({ isNavigating }) => (
-      <Video isNavigating={isNavigating} mayPlayVideo>
-        {props => (
-          <HeaderVideoElement
-            autoPlay
-            muted
-            loop
-            playsInline
-            src={src}
-            {...props}
-          />
-        )}
-      </Video>
+  <Video mayPlayVideo>
+    {props => (
+      <HeaderVideoElement
+        autoPlay
+        muted
+        loop
+        playsInline
+        src={src}
+        {...props}
+      />
     )}
-  </PageContext.Consumer>
+  </Video>
 )

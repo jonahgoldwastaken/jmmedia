@@ -1,36 +1,26 @@
-import { css } from 'styled-components'
-import { styled } from '../../theme'
-import { PageContext } from '../Page'
+import theme, { styled } from '../../theme'
+import { RotateInDown, RotateOutDown } from '../Animations'
 import { Heading } from '../Common'
-import { RotateInDown } from '../Animations'
 
-type StyledHeadingProps = {
-  isNavigating: boolean
-}
-
-const StyledHeading = styled(Heading)<StyledHeadingProps>`
+export const HeroHeading = styled(Heading)`
   position: relative;
   z-index: 2;
   width: 100%;
   text-align: center;
-  animation: ${RotateInDown}
-    ${props =>
-      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-  transition: opacity
-    ${props =>
-      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
-  ${props =>
-    props.isNavigating &&
-    css`
-      opacity: 0;
-    `}
+  .page-transition-enter & {
+    opacity: 0;
+  }
+  .page-transition-enter-active & {
+    animation: ${RotateInDown} ${theme.animation.timing[1]}
+      ${theme.animation.curve} forwards;
+  }
+  .page-transition-exit & {
+    opacity: 1;
+  }
+  .page-transition-exit-active & {
+    opacity: 0;
+    animation: ${RotateOutDown} ${theme.animation.timing[1]}
+      ${theme.animation.curve} forwards;
+  }
 `
-
-export const HeroHeading: React.FunctionComponent = props => (
-  <PageContext.Consumer>
-    {({ isNavigating }) => (
-      <StyledHeading isNavigating={isNavigating} {...props} />
-    )}
-  </PageContext.Consumer>
-)

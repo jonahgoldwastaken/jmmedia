@@ -1,11 +1,8 @@
 import { styled } from '../../theme'
 import { keyframes } from 'styled-components'
-import { PageContext } from '../Page/Context'
-import { withTransition } from '../../utils/page-transitions'
 
 type StyledBackgroundProps = {
   background: string
-  isNavigating: boolean
 }
 
 type PageBackgroundProps = {
@@ -13,35 +10,27 @@ type PageBackgroundProps = {
 }
 
 const closeAnimation = keyframes`
-from {
-  top: 0vh;
-}
-to {
-  top: 100vh;
-}
+  from {
+    top: 0vh;
+  }
+  to {
+    top: 100vh;
+  }
 `
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
   width: ${props => props.theme.sizes.dynamic[2]};
   min-height: 100vh;
   background: ${props => props.background};
-`
 
-const BackgroundWithoutTransition: React.FunctionComponent<
-  PageBackgroundProps
-> = props => (
-  <PageContext.Consumer>
-    {({ isNavigating }) => (
-      <StyledBackground isNavigating={isNavigating} {...props} />
-    )}
-  </PageContext.Consumer>
-)
-export const Background = withTransition(
-  BackgroundWithoutTransition,
-  `
+  .page-transition-exit-active & {
     position: fixed;
     animation: ${closeAnimation}
-      ${props => `${props.theme.animation.timing[1]}
-  ${props.theme.animation.curve}`};
-  `
-)
+      ${props =>
+        `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`};
+  }
+`
+
+export const Background: React.FunctionComponent<
+  PageBackgroundProps
+> = props => <StyledBackground {...props} />

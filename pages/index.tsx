@@ -1,16 +1,12 @@
 import Head from 'next/head'
-import { useState } from 'react'
 import Hero, { HeroHeading } from '../components/Hero'
-import { PageContext } from '../components/Page'
 import HeroNav from '../components/Hero/Nav'
-import { NavItem } from '../components/Hero/Nav/Item'
 import { NavAnchor } from '../components/Hero/Nav/Anchor'
-import { registerTransitions } from '../utils/page-transitions'
+import { NavItem } from '../components/Hero/Nav/Item'
 
-const Index = () => {
-  const [isNavigating, setIsNavigating] = useState()
+export default () => {
   return (
-    <PageContext.Provider value={{ isNavigating, setIsNavigating }}>
+    <>
       <Head>
         <title>Jonah Meijers</title>
       </Head>
@@ -48,7 +44,6 @@ const Index = () => {
           </NavItem>
         </HeroNav>
       </Hero>
-    </PageContext.Provider>
+    </>
   )
 }
-export default registerTransitions(Index)
