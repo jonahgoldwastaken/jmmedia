@@ -1,7 +1,7 @@
 import { styled } from '../../theme'
 import { HeadingAnimation } from './Animations'
 
-export const PageHeading = styled.h1`
+export const Heading = styled.h1`
   margin-top: 0;
   font-family: ${props => props.theme.fonts.sans};
   font-size: ${props => props.theme.fontSizes[5]};

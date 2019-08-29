@@ -1,13 +1,14 @@
 import { css } from 'styled-components'
 import { styled } from '../../theme'
-import { PageContext, PageHeading } from '../Page'
+import { PageContext } from '../Page'
 import { HeroAnimation } from './Animation'
+import { Heading } from '../Common'
 
 type StyledHeadingProps = {
   isNavigating: boolean
 }
 
-const StyledHeading = styled(PageHeading)<StyledHeadingProps>`
+const StyledHeading = styled(Heading)<StyledHeadingProps>`
   position: relative;
   z-index: 2;
   width: 100%;

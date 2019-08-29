@@ -1,6 +1,6 @@
 import { styled } from '../../theme'
 import { keyframes, css } from 'styled-components'
-import { PageContext } from './Context'
+import { PageContext } from '../Page/Context'
 
 type StyledBackgroundProps = {
   background: string
@@ -21,10 +21,10 @@ to {
 `
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
-  width: 100%;
+  width: ${props => props.theme.sizes.dynamic[2]};
   min-height: 100vh;
   background: ${props => props.background};
-  padding: 0 30rem;
+  padding: 0 ${props => props.theme.space[4]};
 
   ${props =>
     props.isNavigating &&
@@ -35,7 +35,7 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
     `}
 `
 
-export const PageBackground: React.FunctionComponent<
+export const Background: React.FunctionComponent<
   PageBackgroundProps
 > = props => (
   <PageContext.Consumer>

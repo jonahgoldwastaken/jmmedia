@@ -1,0 +1,13 @@
+import { styled } from '../../theme'
+
+const StyledHeader = styled.header`
+  width: ${props => props.theme.sizes.dynamic[2]};
+  height: ${props => props.theme.sizes.height[2]};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+export const Header: React.FunctionComponent = props => (
+  <StyledHeader {...props} />
+)

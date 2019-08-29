@@ -1,20 +1,15 @@
+import { useRef, useState } from 'react'
 import { styled } from '../../../theme'
-import { NavContext } from './NavContext'
-import { useState, useRef } from 'react'
 import { PageContext } from '../../Page'
+import { Video } from '../../Common'
+import { NavContext } from './NavContext'
 
 type StyledVideoProps = {
   loaded: boolean
   isNavigating: boolean
 }
 
-const StyledVideo = styled.video<StyledVideoProps>`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
+const StyledVideo = styled(Video)<StyledVideoProps>`
   filter: ${props =>
     props.isNavigating
       ? `brightness(0.25) contrast(150%)`
@@ -25,11 +20,6 @@ const StyledVideo = styled.video<StyledVideoProps>`
   transition: all
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-  pointer-events: none;
-
-  @media speech {
-    display: none;
-  }
 `
 
 export const NavVideo = () => {
@@ -58,6 +48,8 @@ export const NavVideo = () => {
                 loaded={mayPlayVideo && canPlayVideo}
                 isNavigating={isNavigating}
                 autoPlay
+                playsInline
+                muted
                 loop
                 src={video}
               />
