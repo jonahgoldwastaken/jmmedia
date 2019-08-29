@@ -15,10 +15,8 @@ const HeaderVideoElement = styled(VideoElement)`
   .page-transition-enter-active & {
     ${props =>
       css`
-        animation: ${VideoFade}
-          ${props =>
-            `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-          forwards;
+        animation: ${VideoFade} ${props.theme.animation.timing[1]}
+          ${props.theme.animation.curve} forwards;
       `}
   }
 `

@@ -24,4 +24,8 @@ export const theme = {
     curve: 'cubic-bezier(.63,.27,0,1)',
   },
   textShadow: '2px 2px 5px rgba(0, 0, 0, 0.75)',
+  pageColours: {
+    '/': 'black',
+    '/film': 'white',
+  },
 }

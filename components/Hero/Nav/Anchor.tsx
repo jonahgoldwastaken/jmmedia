@@ -14,16 +14,14 @@ type StyledAnchorProps = {
   disabled?: boolean
   active?: boolean
   positionData: positionData
-  pageColour: string
   ref: RefObject<HTMLAnchorElement>
-  href?: string
+  href: string
 }
 
 type NavAnchorProps = {
   disabled?: boolean
   href?: string
   bgVideo: string
-  pageColour: string
   onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => {}
 }
 
@@ -56,7 +54,7 @@ const clickAnimation = (props: any) => {
       top: 0px;
       width: 100%;
       height: 100vh;
-      background: ${props.pageColour};
+      background: ${props.theme.pageColours[props.href]};
     }
   `
 }
@@ -174,11 +172,12 @@ export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
   }
 
   render() {
-    const { disabled, pageColour, children } = this.props
+    const { disabled, children, href } = this.props
     const { positionData, active } = this.state
 
     return (
       <StyledAnchor
+        href={href}
         ref={this.anchorRef}
         positionData={positionData}
         onClick={this.clickHandler}
@@ -186,7 +185,6 @@ export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
         onMouseOut={this.togglePlayback(false)}
         disabled={disabled}
         active={active}
-        pageColour={pageColour}
       >
         {children}
       </StyledAnchor>

@@ -7,11 +7,11 @@ import {
 } from '../Animations'
 
 type StyledBackgroundProps = {
-  background: string
+  route: string
 }
 
 type PageBackgroundProps = {
-  background: string
+  route: string
 }
 
 const slideDirectionChooser = () => {
@@ -30,7 +30,7 @@ const slideDirectionChooser = () => {
 const StyledBackground = styled.div<StyledBackgroundProps>`
   width: ${props => props.theme.sizes.dynamic[2]};
   min-height: 100vh;
-  background: ${props => props.background};
+  background: ${props => props.theme.pageColours[props.route]};
 
   .page-transition-exit-active & {
     position: fixed;

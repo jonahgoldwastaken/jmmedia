@@ -8,10 +8,9 @@ export default () => {
       <Head>
         <title>Films - Jonah Meijers</title>
       </Head>
-      <Background background="#011638">
+      <Background route="/film">
         <Header>
-          <HeaderHeading>Films van mij</HeaderHeading>
-          <HeaderVideo src="https://ak2.picdn.net/shutterstock/videos/1025003192/preview/stock-footage-indian-business-woman-team-leader-presenting-project-strategy-showing-ideas-on-whiteboard-in-office.mp4" />
+          <HeaderHeading dark>Film</HeaderHeading>
         </Header>
       </Background>
     </>
