@@ -1,8 +1,8 @@
 import { css } from 'styled-components'
 import { styled } from '../../theme'
 import { PageContext } from '../Page'
-import { HeroAnimation } from './Animation'
 import { Heading } from '../Common'
+import { RotateInDown } from '../Animations'
 
 type StyledHeadingProps = {
   isNavigating: boolean
@@ -13,7 +13,7 @@ const StyledHeading = styled(Heading)<StyledHeadingProps>`
   z-index: 2;
   width: 100%;
   text-align: center;
-  animation: ${HeroAnimation}
+  animation: ${RotateInDown}
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
   transition: opacity

@@ -1,5 +1,5 @@
 import { styled } from '../../../theme'
-import { NavAnimation } from './Animation'
+import { FadeIn } from '../../Animations'
 
 export const NavItem = styled.li`
   margin: 0;
@@ -8,21 +8,21 @@ export const NavItem = styled.li`
   display: inline-flex;
   &:nth-child(1) {
     justify-content: flex-start;
-    animation: ${NavAnimation}
+    animation: ${FadeIn}
       ${props => `${props.theme.animation.timing[1]} 
       ${props.theme.animation.curve}`}
       forwards;
   }
   &:nth-child(2) {
     justify-content: center;
-    animation: ${NavAnimation}
+    animation: ${FadeIn}
       ${props => `${props.theme.animation.timing[1]} 
       ${props.theme.animation.curve} ${props.theme.animation.timing[0]}`}
       forwards;
   }
   &:nth-child(3) {
     justify-content: flex-end;
-    animation: ${NavAnimation}
+    animation: ${FadeIn}
       ${props => `${props.theme.animation.timing[1]} 
       ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
       forwards;
