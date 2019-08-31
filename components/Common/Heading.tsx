@@ -7,6 +7,10 @@ export const Heading = styled.h1`
   font-size: ${props => props.theme.fontSizes[5]};
   color: ${props => props.theme.colors.primary};
 
+  @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
+    font-size: ${props => props.theme.fontSizes[3]};
+  }
+
   .page-transition-enter & {
     opacity: 0;
   }

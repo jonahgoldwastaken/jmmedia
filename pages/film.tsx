@@ -6,7 +6,7 @@ export default () => {
   return (
     <>
       <Head>
-        <title>Films - Jonah Meijers</title>
+        <title>Film - Jonah Meijers</title>
       </Head>
       <Background route="/film">
         <Header>

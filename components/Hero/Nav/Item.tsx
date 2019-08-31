@@ -6,6 +6,12 @@ export const NavItem = styled.li`
   flex: 1;
   display: inline-flex;
 
+  @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
+    &:not(:last-child) {
+      margin-bottom: ${props => props.theme.space[0]};
+    }
+  }
+
   &:nth-child(1) {
     justify-content: flex-start;
     .page-transition-enter-active & {

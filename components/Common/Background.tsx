@@ -4,6 +4,9 @@ import {
   SlideOutLeft,
   SlideOutRight,
   SlideOutUp,
+  CurtainCloseHorizontal,
+  CurtainCloseVertical,
+  ZoomOut,
 } from '../Animations'
 
 type StyledBackgroundProps = {
@@ -14,30 +17,33 @@ type PageBackgroundProps = {
   route: string
 }
 
-const slideDirectionChooser = () => {
-  const randomNumber = Math.random()
-  if (randomNumber < 0.25) {
-    return SlideOutDown
-  } else if (randomNumber < 0.5) {
-    return SlideOutLeft
-  } else if (randomNumber < 0.75) {
-    return SlideOutRight
-  } else {
-    return SlideOutUp
-  }
-}
+const closeAnimations = [
+  SlideOutDown,
+  SlideOutLeft,
+  SlideOutRight,
+  SlideOutUp,
+  CurtainCloseHorizontal,
+  CurtainCloseVertical,
+  ZoomOut,
+]
+
+const animationChooser = () =>
+  closeAnimations[Math.floor(Math.random() * closeAnimations.length)]
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
+  position: relative;
+  overflow-y: scroll;
+  height: ${props => props.theme.sizes.height[3]};
   width: ${props => props.theme.sizes.dynamic[2]};
-  min-height: 100vh;
   background: ${props => props.theme.pageColours[props.route]};
 
   .page-transition-exit-active & {
     position: fixed;
-    animation: ${() => slideDirectionChooser()}
+    animation: ${animationChooser}
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
       forwards;
+    transform-origin: center;
   }
 `
 

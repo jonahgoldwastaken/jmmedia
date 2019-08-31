@@ -30,8 +30,8 @@ type NavAnchorState = {
   positionData: positionData
 }
 
-const clickAnimation = (props: any) => {
-  return keyframes`
+const clickAnimationDesktop = (props: any) =>
+  keyframes`
     0% {
       left: ${props.positionData.x}px;
       top: calc(${props.positionData.y + props.positionData.height}px - ${
@@ -57,7 +57,33 @@ const clickAnimation = (props: any) => {
       background: ${props.theme.pageColours[props.href]};
     }
   `
-}
+
+const clickAnimationMobile = (props: any) => keyframes`
+    0% {
+      opacity: 0;
+      left: ${props.positionData.x}px;
+      top: ${props.positionData.y}px;
+      width: ${props.positionData.width}px;
+      height: ${props.positionData.height}px;
+      background: ${props.pageColour};
+    }
+    50% {
+      opacity: 1;
+      left: ${props.positionData.x}px;
+      top: ${props.positionData.y}px;
+      width: ${props.positionData.width}px;
+      height: ${props.positionData.height}px;
+      background: ${props.pageColour};
+    }
+    100% {
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100vh;
+      background: ${props.theme.pageColours[props.href]};
+    }
+
+`
 
 const StyledAnchor = styled.a<StyledAnchorProps>`
   position: relative;
@@ -97,9 +123,18 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
       `}
   }
 
-  &:hover {
+  @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
+    font-size: ${props => props.theme.fontSizes[2]};
     &:after {
-      width: 100%;
+      height: calc(${props => props.theme.borderWidth} / 1.5);
+    }
+  }
+
+  @media screen and (pointer: fine) {
+    &:hover {
+      &:after {
+        width: 100%;
+      }
     }
   }
 
@@ -113,9 +148,13 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
         ? css`
             &:after {
               position: fixed;
-              animation: ${() => clickAnimation(props)}
+              animation: ${clickAnimationDesktop}
                 ${props.theme.animation.timing[2]}
                 ${props.theme.animation.curve} forwards;
+
+              @media screen and (pointer: coarse) {
+                animation-name: ${clickAnimationMobile};
+              }
             }
           `
         : css`

@@ -8,4 +8,8 @@ export const NavList = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media screen and (max-width: ${props => props.theme.breakpoints[1]}) {
+    flex-direction: column;
+  }
 `
