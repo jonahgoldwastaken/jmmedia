@@ -98,9 +98,6 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   text-align: center;
   z-index: 0;
-  transition: all
-    ${props =>
-      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
   &:after {
     content: '';
@@ -111,7 +108,7 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
     height: ${props => props.theme.borderWidth};
     background: ${props => props.theme.colors.primary};
     z-index: 9999;
-    transition: all
+    transition: width
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
@@ -120,11 +117,13 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
       css`
         bottom: 40%;
         background: ${props.theme.colors.disabled};
+        box-shadow: none !important;
       `}
   }
 
   @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
     font-size: ${props => props.theme.fontSizes[2]};
+
     &:after {
       height: calc(${props => props.theme.borderWidth} / 1.5);
     }
@@ -132,8 +131,10 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
 
   @media screen and (pointer: fine) {
     &:hover {
+      text-shadow: ${props => props.theme.textShadow};
       &:after {
         width: 100%;
+        box-shadow: ${props => props.theme.textShadow};
       }
     }
   }

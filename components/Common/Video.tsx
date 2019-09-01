@@ -31,7 +31,7 @@ export const VideoElement = styled.video<VideoElementProps>`
   height: ${props => props.theme.sizes.dynamic[2]};
   object-fit: cover;
   pointer-events: none;
-  filter: brightness(0.25) contrast(100%);
+  filter: brightness(0.25);
 
   @media speech {
     display: none;
@@ -42,14 +42,10 @@ export const VideoElement = styled.video<VideoElementProps>`
   }
 
   .page-transition-exit-active & {
-    filter: brightness(0.25) contrast(150%);
     opacity: 0;
     transition: opacity
-        ${props =>
-          `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`},
-      filter
-        ${props =>
-          `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};
+      ${props =>
+        `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};
   }
 `
 

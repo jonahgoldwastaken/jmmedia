@@ -3,11 +3,11 @@ import { keyframes } from 'styled-components'
 export const CurtainCloseVertical = keyframes`
   from {
     top: 0%;
-    height: 100vh;
+    height: 100%;
   }
   to {
     top: 50%;
-    height: 0vh;
+    height: 0%;
   }
 `
 

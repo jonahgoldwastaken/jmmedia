@@ -8,6 +8,7 @@ import {
   CurtainCloseVertical,
   ZoomOut,
 } from '../Animations'
+import animationChooser from '../../utils/animationChooser'
 
 type StyledBackgroundProps = {
   route: string
@@ -22,13 +23,8 @@ const closeAnimations = [
   SlideOutLeft,
   SlideOutRight,
   SlideOutUp,
-  CurtainCloseHorizontal,
-  CurtainCloseVertical,
   ZoomOut,
 ]
-
-const animationChooser = () =>
-  closeAnimations[Math.floor(Math.random() * closeAnimations.length)]
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
   position: relative;
@@ -39,7 +35,7 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
 
   .page-transition-exit-active & {
     position: fixed;
-    animation: ${animationChooser}
+    animation: ${animationChooser(closeAnimations)}
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
       forwards;

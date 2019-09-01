@@ -3,19 +3,10 @@ import { Video, VideoElement } from '../../Common'
 import { NavContext } from './Context'
 
 const StyledVideo = styled(VideoElement)`
-  filter: ${props =>
-    props.loaded
-      ? 'brightness(0.25) contrast(100%)'
-      : 'brightness(0.25) contrast(150%)'};
   opacity: ${props => (props.loaded ? '1' : '0')};
-  transition: all
+  transition: opacity
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-
-  .page-transition-exit-active & {
-    opacity: 0;
-    filter: brightness(0.25) contrast(150%);
-  }
 `
 
 export const NavVideo: React.FunctionComponent = () => {
