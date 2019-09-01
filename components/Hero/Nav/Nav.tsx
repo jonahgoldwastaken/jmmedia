@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { styled } from '../../../theme'
 import { NavList } from './List'
 import { NavContext } from './Context'
-import { NavVideo } from './Video'
 import { useRouter } from 'next/router'
 
 const StyledNav = styled.nav`
@@ -13,8 +12,6 @@ const StyledNav = styled.nav`
 `
 
 export const HeroNav: React.FunctionComponent = ({ children }) => {
-  const [currentVideo, setCurrentVideo] = useState('')
-  const [mayPlay, setMayPlay] = useState(false)
   const [activeLink, setActiveLink] = useState('')
   const router = useRouter()
 
@@ -34,14 +31,9 @@ export const HeroNav: React.FunctionComponent = ({ children }) => {
   return (
     <NavContext.Provider
       value={{
-        video: currentVideo,
-        setVideo: setCurrentVideo,
-        mayPlayVideo: mayPlay,
-        setMayPlayVideo: setMayPlay,
         activeLink,
       }}
     >
-      <NavVideo />
       <StyledNav>
         <NavList>{children}</NavList>
       </StyledNav>

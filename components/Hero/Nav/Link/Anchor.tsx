@@ -1,7 +1,7 @@
 import { Component, createRef, MouseEvent, RefObject } from 'react'
 import { css, keyframes } from 'styled-components'
-import theme, { styled } from '../../../theme'
-import { NavContext } from './Context'
+import theme, { styled } from '../../../../theme'
+import { NavContext } from '../Context'
 
 type positionData = {
   x: number
@@ -21,8 +21,8 @@ type StyledAnchorProps = {
 type NavAnchorProps = {
   disabled?: boolean
   href?: string
-  bgVideo: string
   onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => {}
+  hoverHandler: any
 }
 
 type NavAnchorState = {
@@ -97,7 +97,7 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
     props.disabled ? props.theme.colors.disabled : props.theme.colors.primary};
   cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   text-align: center;
-  z-index: 0;
+  z-index: 2;
 
   &:after {
     content: '';
@@ -179,9 +179,9 @@ export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
 
   clickHandler = (event: any) => {
     const { disabled, onClick: nextLinkClick } = this.props
-    nextLinkClick(event)
 
     if (!disabled) {
+      nextLinkClick(event)
       this.setState({
         positionData: {
           x: this.anchorRef.current.offsetLeft,
@@ -194,14 +194,6 @@ export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
     }
   }
 
-  togglePlayback = (bool: boolean) => () => {
-    const { video, setMayPlayVideo, setVideo } = this.context
-    const { bgVideo } = this.props
-
-    if (video !== bgVideo) setVideo(bgVideo)
-    setMayPlayVideo(bool)
-  }
-
   componentDidUpdate() {
     const { href } = this.props
     const { active } = this.state
@@ -212,7 +204,7 @@ export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
   }
 
   render() {
-    const { disabled, children, href } = this.props
+    const { disabled, children, href, hoverHandler } = this.props
     const { positionData, active } = this.state
 
     return (
@@ -221,8 +213,8 @@ export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
         ref={this.anchorRef}
         positionData={positionData}
         onClick={this.clickHandler}
-        onMouseOver={this.togglePlayback(true)}
-        onMouseOut={this.togglePlayback(false)}
+        onMouseOver={() => hoverHandler(true)}
+        onMouseOut={() => hoverHandler(false)}
         disabled={disabled}
         active={active}
       >

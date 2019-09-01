@@ -1,7 +1,9 @@
-import { styled } from '../../../theme'
-import { FadeIn } from '../../Animations'
+import { styled } from '../../../../theme'
+import { FadeIn } from '../../../Animations'
 import { NavAnchor } from './Anchor'
 import Link from 'next/link'
+import { LinkVideo } from './Video'
+import { useState } from 'react'
 
 type NavLinkProps = {
   disabled?: boolean
@@ -57,11 +59,16 @@ const StyledListItem = styled.li`
 
 export const NavLink: React.FunctionComponent<NavLinkProps> = ({
   href,
+  bgVideo,
   ...props
-}) => (
-  <StyledListItem>
-    <Link href={href} passHref>
-      <NavAnchor {...props}></NavAnchor>
-    </Link>
-  </StyledListItem>
-)
+}) => {
+  const [isHovering, setIsHovering] = useState(false)
+  return (
+    <StyledListItem>
+      <Link href={href} passHref>
+        <NavAnchor hoverHandler={setIsHovering} {...props}></NavAnchor>
+      </Link>
+      <LinkVideo video={bgVideo} mayPlayVideo={isHovering} />
+    </StyledListItem>
+  )
+}
