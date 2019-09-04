@@ -56,6 +56,7 @@ export const NavLink: React.FunctionComponent<NavLinkProps> = ({
   ...props
 }) => {
   const [isHovering, setIsHovering] = useState(false)
+
   return (
     <StyledListItem>
       <Link href={href} passHref>

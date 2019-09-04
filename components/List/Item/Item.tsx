@@ -76,13 +76,13 @@ const StyledItem = styled.li<StyledItemProps>`
     props.active
       ? css`
           .page-transition-exit-active & {
-            display: block;
             position: fixed;
+            z-index: 1;
             left: ${props.positionData.x}px;
             top: ${props.positionData.y}px;
             width: ${props.positionData.width}px;
             height: ${props.positionData.height}px;
-            z-index: 1;
+            display: block;
             animation: ${clickAnimationDesktop}
               ${props.theme.animation.timing[1]} ${props.theme.animation.curve}
               ${props.theme.animation.timing[1]} forwards;

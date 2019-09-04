@@ -29,23 +29,25 @@ export const StyledBackground = styled.div<StyledBackgroundProps>`
   z-index: 2;
 
   .page-transition-enter-active & {
-    pointer-events: none;
+    * {
+      pointer-events: none;
+    }
   }
 
-  ${props =>
-    (props.route === '/' ||
-      props.route === '/film' ||
-      props.route === '/photography') &&
-    css`
-      .page-transition-exit-active & {
+  .page-transition-exit-active & {
+    ${props =>
+      (props.route === '/' ||
+        props.route === '/film' ||
+        props.route === '/photography') &&
+      css`
         position: fixed;
         animation: ${animationChooser(closeAnimations)}
           ${props =>
             `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
           forwards;
         transform-origin: center;
-      }
-    `}
+      `}
+  }
 `
 
 const TransititonBackground = styled.div<TransititonBackgroundProps>`
@@ -62,6 +64,7 @@ export const Background: React.FunctionComponent<
   PageBackgroundProps
 > = props => {
   const router = useRouter()
+
   return (
     <BackgroundContext.Provider value={{ currentPage: props.currentPage }}>
       <StyledBackground {...props} route={router.route} />
