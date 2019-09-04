@@ -1,9 +1,9 @@
+import Link from 'next/link'
+import { useState } from 'react'
 import { styled } from '../../../../theme'
 import { FadeIn } from '../../../Animations'
 import { NavAnchor } from './Anchor'
-import Link from 'next/link'
 import { LinkVideo } from './Video'
-import { useState } from 'react'
 
 type NavLinkProps = {
   disabled?: boolean

@@ -1,7 +1,7 @@
-import { Video, VideoElement } from '../Common'
+import { css } from 'styled-components'
 import { styled } from '../../theme'
 import { VideoFade } from '../Animations'
-import { css } from 'styled-components'
+import { VideoContainer, VideoElement } from '../Common'
 
 type HeaderVideoProps = {
   src: string
@@ -24,7 +24,7 @@ const HeaderVideoElement = styled(VideoElement)`
 export const HeaderVideo: React.FunctionComponent<HeaderVideoProps> = ({
   src,
 }) => (
-  <Video mayPlayVideo>
+  <VideoContainer mayPlayVideo>
     {props => (
       <HeaderVideoElement
         autoPlay
@@ -35,5 +35,5 @@ export const HeaderVideo: React.FunctionComponent<HeaderVideoProps> = ({
         {...props}
       />
     )}
-  </Video>
+  </VideoContainer>
 )

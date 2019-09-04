@@ -1,9 +1,9 @@
+import { NextRouter, withRouter } from 'next/router'
 import { Component, createRef, MouseEvent, RefObject } from 'react'
 import { css, keyframes } from 'styled-components'
 import theme, { styled } from '../../../../theme'
-import { NavContext } from '../Context'
 
-type positionData = {
+export type positionData = {
   x: number
   y: number
   width: number
@@ -23,6 +23,7 @@ type NavAnchorProps = {
   href?: string
   onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => {}
   hoverHandler: any
+  router?: NextRouter
 }
 
 type NavAnchorState = {
@@ -164,8 +165,7 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
   }
 `
 
-export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
-  static contextType = NavContext
+class NavAnchorWithoutRouter extends Component<NavAnchorProps, NavAnchorState> {
   anchorRef: RefObject<HTMLAnchorElement>
 
   constructor(props) {
@@ -195,10 +195,9 @@ export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
   }
 
   componentDidUpdate() {
-    const { href } = this.props
+    const { href, router } = this.props
     const { active } = this.state
-    const { activeLink } = this.context
-    if (activeLink === href && !active) {
+    if (router.route === href && !active) {
       this.anchorRef.current.click()
     }
   }
@@ -223,3 +222,4 @@ export class NavAnchor extends Component<NavAnchorProps, NavAnchorState> {
     )
   }
 }
+export const NavAnchor = withRouter(NavAnchorWithoutRouter)

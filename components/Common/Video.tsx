@@ -1,5 +1,5 @@
+import { MutableRefObject, ReactElement, useRef, useState } from 'react'
 import { styled } from '../../theme'
-import { useState, useRef, MutableRefObject, ReactElement } from 'react'
 
 export type VideoProps = {
   mayPlayVideo: boolean
@@ -49,7 +49,7 @@ export const VideoElement = styled.video<VideoElementProps>`
   }
 `
 
-export const Video = (props: VideoProps) => {
+export const VideoContainer = (props: VideoProps) => {
   const [canPlayVideo, setCanPlayVideo] = useState<boolean>(false)
   const videoRef: MutableRefObject<HTMLVideoElement> = useRef()
   const { mayPlayVideo, children } = props

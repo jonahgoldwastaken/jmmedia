@@ -1,29 +1,51 @@
+import Link from 'next/link'
+import { NextRouter, withRouter } from 'next/router'
+import { Component, createRef, RefObject } from 'react'
+import { css, keyframes } from 'styled-components'
 import { styled } from '../../../theme'
-import { ItemVideo } from './Video'
-import { ItemTitle } from './Title'
-import { Video, VideoElement } from '../../Common'
-import { useState } from 'react'
-import { ItemPlaceholder } from './Placholder'
-import {
-  CurtainOpenHorizontal,
-  CurtainOpenVertical,
-  CurtainCloseHorizontal,
-  CurtainCloseVertical,
-} from '../../Animations'
 import animationChooser from '../../../utils/animationChooser'
+import { CurtainCloseHorizontal, CurtainCloseVertical, CurtainOpenHorizontal, CurtainOpenVertical } from '../../Animations'
+import { VideoContainer } from '../../Common'
+import { positionData } from '../../Hero/Nav/Link/Anchor'
+import { ItemPlaceholder } from './Placholder'
+import { ItemTitle } from './Title'
+import { ItemVideo } from './Video'
 
 type StyledItemProps = {
   columns: number
   rows: number
+  active: boolean
+  positionData: positionData
+  href: string
 }
 
 type ItemProps = {
+  columns: number
+  rows: number
   vidSrc: string
+  href: string
+  router?: NextRouter
+}
+
+type ItemState = {
+  active: boolean
+  isHovering: boolean
+  positionData: positionData
 }
 
 const openAnimations = [CurtainOpenHorizontal, CurtainOpenVertical]
 
 const closeAnimation = [CurtainCloseHorizontal, CurtainCloseVertical]
+
+const clickAnimationDesktop = (props: any) =>
+  keyframes`
+    to {
+      left: 0px;
+      top: 0px;
+      width: 100%;
+      height: 100vh;
+    }
+  `
 
 const StyledItem = styled.li<StyledItemProps>`
   position: relative;
@@ -31,9 +53,6 @@ const StyledItem = styled.li<StyledItemProps>`
   padding: 0;
   grid-column-end: span ${props => props.columns};
   grid-row-end: span ${props => props.rows};
-  display: flex;
-  align-items: center;
-  justify-content: center;
 
   .page-transition-enter-active & {
     animation: ${animationChooser(openAnimations)}
@@ -41,38 +60,111 @@ const StyledItem = styled.li<StyledItemProps>`
         `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
       forwards;
   }
-  .page-transition-exit-active & {
-    animation: ${animationChooser(closeAnimation)}
-      ${props =>
-        `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
-      forwards;
-  }
+
+  ${props =>
+    props.active
+      ? css`
+          .page-transition-exit-active & {
+            display: block;
+            position: fixed;
+            left: ${props.positionData.x}px;
+            top: ${props.positionData.y}px;
+            width: ${props.positionData.width}px;
+            height: ${props.positionData.height}px;
+            z-index: 1;
+            animation: ${clickAnimationDesktop}
+              ${props.theme.animation.timing[1]} ${props.theme.animation.curve}
+              ${props.theme.animation.timing[1]} forwards;
+            background: ${props.theme.pageColours[props.href]};
+
+            img,
+            video {
+              opacity: 0;
+              transition: opacity ${props.theme.animation.timing[0]}
+                ${props.theme.animation.curve};
+            }
+          }
+        `
+      : css`
+          .page-transition-exit-active & {
+            animation: ${animationChooser(closeAnimation)}
+              ${props.theme.animation.timing[0]} ${props.theme.animation.curve}
+              forwards;
+          }
+        `}
 `
 
-export const ListItem: React.FunctionComponent<ItemProps & StyledItemProps> = ({
-  children,
-  vidSrc,
-  ...props
-}) => {
-  const [isHovering, setIsHovering] = useState(false)
-  const updateHoverState = (bool: boolean) => () => {
-    console.log('activated', bool)
-    setIsHovering(bool)
+const StyledAnchor = styled.a`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+class WithoutRouter extends Component<ItemProps, ItemState> {
+  itemRef: RefObject<HTMLLIElement>
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      isHovering: false,
+      active: false,
+      positionData: undefined,
+    }
+    this.itemRef = createRef<HTMLLIElement>()
   }
-  return (
-    <StyledItem
-      {...props}
-      onMouseOverCapture={updateHoverState(true)}
-      onMouseOutCapture={updateHoverState(false)}
-    >
-      <ItemPlaceholder
-        hovering={isHovering}
-        src="https://miro.medium.com/fit/c/256/256/1*KOiaTWFJoDphFszMOeA78Q.jpeg"
-      />
-      <Video mayPlayVideo={isHovering}>
-        {props => <ItemVideo muted loop src={vidSrc} {...props} />}
-      </Video>
-      <ItemTitle hovering={isHovering}>{children}</ItemTitle>
-    </StyledItem>
-  )
+
+  componentDidUpdate() {
+    const { router, href } = this.props
+    const { active } = this.state
+    if (router.route === href && !active) {
+      this.setState({
+        active: true,
+        positionData: {
+          x: this.itemRef.current.offsetLeft,
+          y: this.itemRef.current.offsetTop,
+          width: this.itemRef.current.offsetWidth,
+          height: this.itemRef.current.offsetHeight,
+        },
+      })
+    }
+  }
+
+  updateHoverState(bool: boolean) {
+    return () =>
+      this.setState({
+        isHovering: bool,
+      })
+  }
+
+  render() {
+    const { href, vidSrc, children } = this.props
+    const { active, isHovering, positionData } = this.state
+    return (
+      <StyledItem
+        {...this.props}
+        ref={this.itemRef}
+        onMouseOverCapture={this.updateHoverState(true)}
+        onMouseOutCapture={this.updateHoverState(false)}
+        positionData={positionData}
+        active={active}
+      >
+        <Link href={href}>
+          <StyledAnchor>
+            <ItemPlaceholder
+              hovering={isHovering}
+              src="https://miro.medium.com/fit/c/256/256/1*KOiaTWFJoDphFszMOeA78Q.jpeg"
+            />
+            <VideoContainer mayPlayVideo={isHovering}>
+              {props => <ItemVideo muted loop src={vidSrc} {...props} />}
+            </VideoContainer>
+            <ItemTitle hovering={isHovering}>{children}</ItemTitle>
+          </StyledAnchor>
+        </Link>
+      </StyledItem>
+    )
+  }
 }
+
+export const ListItem = withRouter(WithoutRouter)

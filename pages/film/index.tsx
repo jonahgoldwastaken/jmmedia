@@ -1,8 +1,8 @@
-import Header, { HeaderHeading } from '../components/Header'
-import { Background } from '../components/Common'
 import Head from 'next/head'
-import List from '../components/List/'
-import ListItem from '../components/List/Item/'
+import { Background } from '../../components/Common'
+import Header, { HeaderHeading } from '../../components/Header'
+import List from '../../components/List'
+import ListItem from '../../components/List/Item'
 
 export default () => {
   return (
@@ -16,11 +16,12 @@ export default () => {
         </Header>
         <List>
           <ListItem
+            href="/film/loriyiu"
             vidSrc="https://ak6.picdn.net/shutterstock/videos/27590086/preview/stock-footage-attractive-young-businesswoman-working-at-night-via-computer-at-office-with-closeup-of-hipster.mp4"
             columns={1}
             rows={1}
           >
-            Mooi flimpie
+            Lori Yiu
           </ListItem>
         </List>
       </Background>

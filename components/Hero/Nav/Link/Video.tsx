@@ -1,5 +1,5 @@
 import { styled } from '../../../../theme'
-import { Video, VideoElement } from '../../../Common'
+import { VideoContainer, VideoElement } from '../../../Common'
 
 type LinkVideoProps = {
   mayPlayVideo: boolean
@@ -19,10 +19,10 @@ export const LinkVideo: React.FunctionComponent<LinkVideoProps> = ({
   video,
 }) => {
   return (
-    <Video mayPlayVideo={mayPlayVideo}>
+    <VideoContainer mayPlayVideo={mayPlayVideo}>
       {props => (
         <StyledVideo autoPlay playsInline muted loop src={video} {...props} />
       )}
-    </Video>
+    </VideoContainer>
   )
 }

@@ -27,5 +27,6 @@ export const theme = {
   pageColours: {
     '/': 'black',
     '/film': 'white',
+    '/film/loriyiu': '#8954c7',
   },
 }

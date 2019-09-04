@@ -1,5 +1,4 @@
-import theme, { styled } from '../../theme'
-import { RotateInDown, RotateOutDown } from '../Animations'
+import { styled } from '../../theme'
 import { Heading } from '../Common'
 
 export const HeroHeading = styled(Heading)`
