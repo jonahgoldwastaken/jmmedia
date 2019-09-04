@@ -24,36 +24,29 @@ const StyledListItem = styled.li`
 
   &:nth-child(1) {
     justify-content: flex-start;
-    .page-transition-enter-active & {
-      animation: ${FadeIn}
-        ${props => `${props.theme.animation.timing[1]} 
-          ${props.theme.animation.curve} ${props.theme.animation.timing[0]}`}
-        forwards;
-    }
   }
 
   &:nth-child(2) {
     justify-content: center;
-    .page-transition-enter-active & {
-      animation: ${FadeIn}
-        ${props => `${props.theme.animation.timing[1]} 
-          ${props.theme.animation.curve}`}
-        forwards;
-    }
   }
 
   &:nth-child(3) {
     justify-content: flex-end;
-    .page-transition-enter-active & {
-      animation: ${FadeIn}
-        ${props => `${props.theme.animation.timing[1]} 
-          ${props.theme.animation.curve} ${props.theme.animation.timing[0]}`}
-        forwards;
-    }
   }
 
   .page-transition-enter & {
     opacity: 0;
+  }
+
+  .page-transition-enter-active & {
+    animation: ${FadeIn}
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+      forwards;
+    &:first-child,
+    &:last-child {
+      animation-delay: ${props => props.theme.animation.timing[0]};
+    }
   }
 `
 

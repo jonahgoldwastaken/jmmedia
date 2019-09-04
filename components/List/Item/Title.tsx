@@ -8,7 +8,7 @@ type ItemTitleProps = {
 
 const StyledHeading = styled.h2<ItemTitleProps>`
   position: relative;
-  z-index: 4;
+  z-index: 2;
   margin: 0;
   color: ${props => props.theme.colors.primary};
   font-family: ${props => props.theme.fonts.sans};

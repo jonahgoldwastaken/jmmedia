@@ -10,7 +10,7 @@ export default () => {
       <Head>
         <title>Film - Jonah Meijers</title>
       </Head>
-      <Background route="/film">
+      <Background currentPage="/film">
         <Header>
           <HeaderHeading dark>Film</HeaderHeading>
         </Header>
@@ -18,8 +18,8 @@ export default () => {
           <ListItem
             href="/film/loriyiu"
             vidSrc="https://ak6.picdn.net/shutterstock/videos/27590086/preview/stock-footage-attractive-young-businesswoman-working-at-night-via-computer-at-office-with-closeup-of-hipster.mp4"
-            columns={1}
-            rows={1}
+            columns={2}
+            rows={3}
           >
             Lori Yiu
           </ListItem>

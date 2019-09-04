@@ -20,8 +20,8 @@ type StyledAnchorProps = {
 
 type NavAnchorProps = {
   disabled?: boolean
-  href?: string
-  onClick?: (e: MouseEvent<HTMLAnchorElement, MouseEvent>) => {}
+  href: string
+  onClick?: (e: any) => {}
   hoverHandler: any
   router?: NextRouter
 }
@@ -88,17 +88,15 @@ const clickAnimationMobile = (props: any) => keyframes`
 
 const StyledAnchor = styled.a<StyledAnchorProps>`
   position: relative;
-  display: inline-block;
-  text-decoration: none;
+  z-index: 2;
   font-family: ${props => props.theme.fonts.sans};
   font-size: ${props => props.theme.fontSizes[3]};
   font-weight: ${props => props.theme.fontWeights[1]};
-  text-transform: uppercase;
-  color: ${props =>
-    props.disabled ? props.theme.colors.disabled : props.theme.colors.primary};
-  cursor: ${props => (props.disabled ? 'not-allowed' : 'pointer')};
   text-align: center;
-  z-index: 2;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: ${props => props.theme.colors.primary};
+  cursor: pointer;
 
   &:after {
     content: '';
@@ -108,18 +106,10 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
     width: 0%;
     height: ${props => props.theme.borderWidth};
     background: ${props => props.theme.colors.primary};
-    z-index: 9999;
+    z-index: 100;
     transition: width
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-
-    ${props =>
-      props.disabled &&
-      css`
-        bottom: 40%;
-        background: ${props.theme.colors.disabled};
-        box-shadow: none !important;
-      `}
   }
 
   @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
@@ -133,6 +123,7 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
   @media screen and (pointer: fine) {
     &:hover {
       text-shadow: ${props => props.theme.textShadow};
+
       &:after {
         width: 100%;
         box-shadow: ${props => props.theme.textShadow};
@@ -140,9 +131,18 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
     }
   }
 
-  .page-transition-exit & {
-    opacity: 1;
-  }
+  ${props =>
+    props.disabled &&
+    css`
+      color: ${props => props.theme.colors.disabled};
+      cursor: not-allowed;
+
+      &:after {
+        bottom: 40%;
+        background: ${props.theme.colors.disabled};
+        box-shadow: none !important;
+      }
+    `}
 
   .page-transition-exit-active & {
     ${props =>
@@ -161,6 +161,9 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
           `
         : css`
             opacity: 0;
+            transition: opacity
+              ${props =>
+                `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
           `}
   }
 `
@@ -177,11 +180,10 @@ class NavAnchorWithoutRouter extends Component<NavAnchorProps, NavAnchorState> {
     this.anchorRef = createRef<HTMLAnchorElement>()
   }
 
-  clickHandler = (event: any) => {
-    const { disabled, onClick: nextLinkClick } = this.props
-
-    if (!disabled) {
-      nextLinkClick(event)
+  componentDidUpdate() {
+    const { href, router, disabled } = this.props
+    const { active } = this.state
+    if (!disabled && router.route === href && !active) {
       this.setState({
         positionData: {
           x: this.anchorRef.current.offsetLeft,
@@ -194,28 +196,16 @@ class NavAnchorWithoutRouter extends Component<NavAnchorProps, NavAnchorState> {
     }
   }
 
-  componentDidUpdate() {
-    const { href, router } = this.props
-    const { active } = this.state
-    if (router.route === href && !active) {
-      this.anchorRef.current.click()
-    }
-  }
-
   render() {
-    const { disabled, children, href, hoverHandler } = this.props
-    const { positionData, active } = this.state
+    const { children, hoverHandler } = this.props
 
     return (
       <StyledAnchor
-        href={href}
         ref={this.anchorRef}
-        positionData={positionData}
-        onClick={this.clickHandler}
         onMouseOver={() => hoverHandler(true)}
         onMouseOut={() => hoverHandler(false)}
-        disabled={disabled}
-        active={active}
+        {...this.props}
+        {...this.state}
       >
         {children}
       </StyledAnchor>

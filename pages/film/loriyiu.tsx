@@ -8,13 +8,11 @@ export default () => (
     <Head>
       <title>Lori Yiu - Jonah Meijers</title>
     </Head>
-    <Background route="/film/loriyiu">
+    <Background currentPage="/film/loriyiu">
       <Header>
         <HeaderHeading>Integrale Eindpresentatie Lori Yiu</HeaderHeading>
       </Header>
-      <ContentSection route="/film/loriyiu" light>
-        hoi
-      </ContentSection>
+      <ContentSection light>hoi</ContentSection>
     </Background>
   </>
 )

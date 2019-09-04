@@ -30,7 +30,6 @@ export const VideoElement = styled.video<VideoElementProps>`
   width: ${props => props.theme.sizes.dynamic[2]};
   height: ${props => props.theme.sizes.dynamic[2]};
   object-fit: cover;
-  pointer-events: none;
   filter: brightness(0.25);
 
   @media speech {

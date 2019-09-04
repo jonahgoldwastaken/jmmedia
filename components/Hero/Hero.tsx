@@ -10,5 +10,9 @@ export const Hero = styled.main`
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    .page-transition-enter-active & {
+      pointer-events: none;
+    }
   }
 `

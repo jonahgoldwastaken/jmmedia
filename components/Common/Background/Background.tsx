@@ -1,18 +1,13 @@
-import { styled } from '../../theme'
-import animationChooser from '../../utils/animationChooser'
-import {
-  SlideOutDown,
-  SlideOutLeft,
-  SlideOutRight,
-  SlideOutUp,
-  ZoomOut,
-} from '../Animations'
-import { useRouter, NextRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { css } from 'styled-components'
+import { styled } from '../../../theme'
+import animationChooser from '../../../utils/animationChooser'
+import { SlideOutDown, SlideOutRight, ZoomOut } from '../../Animations'
+import { BackgroundContext } from './Context'
 
 type StyledBackgroundProps = {
+  currentPage: string
   route: string
-  router: NextRouter
 }
 
 type TransititonBackgroundProps = {
@@ -20,28 +15,27 @@ type TransititonBackgroundProps = {
 }
 
 type PageBackgroundProps = {
-  route: string
+  currentPage: string
 }
 
-const closeAnimations = [
-  SlideOutDown,
-  SlideOutLeft,
-  SlideOutRight,
-  SlideOutUp,
-  ZoomOut,
-]
+const closeAnimations = [SlideOutDown, SlideOutRight, ZoomOut]
 
 export const StyledBackground = styled.div<StyledBackgroundProps>`
   position: relative;
   overflow-y: scroll;
   height: ${props => props.theme.sizes.height[3]};
   width: ${props => props.theme.sizes.dynamic[2]};
-  background: ${props => props.theme.pageColours[props.route]};
+  background: ${props => props.theme.pageColours[props.currentPage]};
   z-index: 2;
+
+  .page-transition-enter-active & {
+    pointer-events: none;
+  }
+
   ${props =>
-    (props.router.route === '/' ||
-      props.router.route === '/film' ||
-      props.router.route === '/photography') &&
+    (props.route === '/' ||
+      props.route === '/film' ||
+      props.route === '/photography') &&
     css`
       .page-transition-exit-active & {
         position: fixed;
@@ -69,9 +63,9 @@ export const Background: React.FunctionComponent<
 > = props => {
   const router = useRouter()
   return (
-    <>
-      <StyledBackground {...props} router={router} />
+    <BackgroundContext.Provider value={{ currentPage: props.currentPage }}>
+      <StyledBackground {...props} route={router.route} />
       <TransititonBackground route={router.route} />
-    </>
+    </BackgroundContext.Provider>
   )
 }

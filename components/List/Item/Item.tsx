@@ -4,12 +4,18 @@ import { Component, createRef, RefObject } from 'react'
 import { css, keyframes } from 'styled-components'
 import { styled } from '../../../theme'
 import animationChooser from '../../../utils/animationChooser'
-import { CurtainCloseHorizontal, CurtainCloseVertical, CurtainOpenHorizontal, CurtainOpenVertical } from '../../Animations'
+import {
+  CurtainCloseHorizontal,
+  CurtainCloseVertical,
+  CurtainOpenHorizontal,
+  CurtainOpenVertical,
+} from '../../Animations'
 import { VideoContainer } from '../../Common'
 import { positionData } from '../../Hero/Nav/Link/Anchor'
 import { ItemPlaceholder } from './Placholder'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
+import { ItemAnchor } from './Anchor'
 
 type StyledItemProps = {
   columns: number
@@ -54,7 +60,12 @@ const StyledItem = styled.li<StyledItemProps>`
   grid-column-end: span ${props => props.columns};
   grid-row-end: span ${props => props.rows};
 
+  .page-transition-enter & {
+    opacity: 0;
+  }
+
   .page-transition-enter-active & {
+    opacity: 1;
     animation: ${animationChooser(openAnimations)}
       ${props =>
         `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
@@ -94,15 +105,7 @@ const StyledItem = styled.li<StyledItemProps>`
         `}
 `
 
-const StyledAnchor = styled.a`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-class WithoutRouter extends Component<ItemProps, ItemState> {
+class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
   itemRef: RefObject<HTMLLIElement>
 
   constructor(props) {
@@ -118,6 +121,7 @@ class WithoutRouter extends Component<ItemProps, ItemState> {
   componentDidUpdate() {
     const { router, href } = this.props
     const { active } = this.state
+
     if (router.route === href && !active) {
       this.setState({
         active: true,
@@ -140,18 +144,18 @@ class WithoutRouter extends Component<ItemProps, ItemState> {
 
   render() {
     const { href, vidSrc, children } = this.props
-    const { active, isHovering, positionData } = this.state
+    const { isHovering } = this.state
+
     return (
       <StyledItem
-        {...this.props}
         ref={this.itemRef}
         onMouseOverCapture={this.updateHoverState(true)}
         onMouseOutCapture={this.updateHoverState(false)}
-        positionData={positionData}
-        active={active}
+        {...this.props}
+        {...this.state}
       >
-        <Link href={href}>
-          <StyledAnchor>
+        <Link href={href} passHref>
+          <ItemAnchor>
             <ItemPlaceholder
               hovering={isHovering}
               src="https://miro.medium.com/fit/c/256/256/1*KOiaTWFJoDphFszMOeA78Q.jpeg"
@@ -160,11 +164,11 @@ class WithoutRouter extends Component<ItemProps, ItemState> {
               {props => <ItemVideo muted loop src={vidSrc} {...props} />}
             </VideoContainer>
             <ItemTitle hovering={isHovering}>{children}</ItemTitle>
-          </StyledAnchor>
+          </ItemAnchor>
         </Link>
       </StyledItem>
     )
   }
 }
 
-export const ListItem = withRouter(WithoutRouter)
+export const ListItem = withRouter(ListItemWithoutRouter)

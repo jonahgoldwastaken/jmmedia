@@ -1,6 +1,6 @@
 import { keyframes } from 'styled-components'
 
-export const SlideOutLeft = keyframes`
+export const SlideOutRight = keyframes`
   from {
     left: 0%;
   }
@@ -9,7 +9,7 @@ export const SlideOutLeft = keyframes`
   }
 `
 
-export const SlideOutRight = keyframes`
+export const SlideOutLeft = keyframes`
   from {
     left: 0%;
   }
