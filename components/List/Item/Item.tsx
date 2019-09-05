@@ -10,12 +10,12 @@ import {
   CurtainOpenHorizontal,
   CurtainOpenVertical,
 } from '../../Animations'
-import { VideoContainer } from '../../Common'
+import { BackgroundContext, VideoContainer } from '../../Common'
 import { positionData } from '../../Hero/Nav/Link/Anchor'
+import { ItemAnchor } from './Anchor'
 import { ItemPlaceholder } from './Placholder'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
-import { ItemAnchor } from './Anchor'
 
 type StyledItemProps = {
   columns: number
@@ -43,15 +43,14 @@ const openAnimations = [CurtainOpenHorizontal, CurtainOpenVertical]
 
 const closeAnimation = [CurtainCloseHorizontal, CurtainCloseVertical]
 
-const clickAnimationDesktop = (props: any) =>
-  keyframes`
+const clickAnimationDesktop = keyframes`
     to {
       left: 0px;
       top: 0px;
       width: 100%;
       height: 100vh;
     }
-  `
+`
 
 const StyledItem = styled.li<StyledItemProps>`
   position: relative;
@@ -59,18 +58,6 @@ const StyledItem = styled.li<StyledItemProps>`
   padding: 0;
   grid-column-end: span ${props => props.columns};
   grid-row-end: span ${props => props.rows};
-
-  .page-transition-enter & {
-    opacity: 0;
-  }
-
-  .page-transition-enter-active & {
-    opacity: 1;
-    animation: ${animationChooser(openAnimations)}
-      ${props =>
-        `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
-      forwards;
-  }
 
   ${props =>
     props.active
@@ -97,6 +84,18 @@ const StyledItem = styled.li<StyledItemProps>`
           }
         `
       : css`
+          .page-transition-enter & {
+            opacity: 0;
+          }
+
+          .page-transition-enter-active & {
+            opacity: 1;
+            animation: ${animationChooser(openAnimations)}
+              ${props =>
+                `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
+              forwards;
+          }
+
           .page-transition-exit-active & {
             animation: ${animationChooser(closeAnimation)}
               ${props.theme.animation.timing[0]} ${props.theme.animation.curve}
@@ -106,6 +105,8 @@ const StyledItem = styled.li<StyledItemProps>`
 `
 
 class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
+  static contextType = BackgroundContext
+  context!: React.ContextType<typeof BackgroundContext>
   itemRef: RefObject<HTMLLIElement>
 
   constructor(props) {
@@ -123,23 +124,28 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
     const { active } = this.state
 
     if (router.route === href && !active) {
+      const bounds = this.itemRef.current.getBoundingClientRect()
       this.setState({
         active: true,
         positionData: {
-          x: this.itemRef.current.offsetLeft,
-          y: this.itemRef.current.offsetTop,
-          width: this.itemRef.current.offsetWidth,
-          height: this.itemRef.current.offsetHeight,
+          x: bounds.left,
+          y: bounds.top,
+          width: bounds.width,
+          height: bounds.height,
         },
       })
     }
   }
 
   updateHoverState(bool: boolean) {
-    return () =>
+    const { router } = this.props
+    const { currentPage } = this.context
+
+    if (router.route === currentPage) {
       this.setState({
         isHovering: bool,
       })
+    }
   }
 
   render() {
@@ -149,8 +155,8 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
     return (
       <StyledItem
         ref={this.itemRef}
-        onMouseOverCapture={this.updateHoverState(true)}
-        onMouseOutCapture={this.updateHoverState(false)}
+        onMouseOverCapture={() => this.updateHoverState(true)}
+        onMouseOutCapture={() => this.updateHoverState(false)}
         {...this.props}
         {...this.state}
       >

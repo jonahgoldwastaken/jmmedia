@@ -20,9 +20,7 @@ export const LinkVideo: React.FunctionComponent<LinkVideoProps> = ({
 }) => {
   return (
     <VideoContainer mayPlayVideo={mayPlayVideo}>
-      {props => (
-        <StyledVideo autoPlay playsInline muted loop src={video} {...props} />
-      )}
+      {props => <StyledVideo playsInline muted loop src={video} {...props} />}
     </VideoContainer>
   )
 }

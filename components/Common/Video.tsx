@@ -1,19 +1,21 @@
 import { MutableRefObject, ReactElement, useRef, useState } from 'react'
 import { styled } from '../../theme'
 
-export type VideoProps = {
+type VideoContainerChildrenProps = {
+  onCanPlayThrough: () => void
+  onLoadStart: () => void
+  loaded: boolean
+  ref: MutableRefObject<HTMLVideoElement>
+}
+
+export type VideoContainerProps = {
   mayPlayVideo: boolean
   children: ({
     onCanPlayThrough,
     onLoadStart,
     loaded,
     ref,
-  }: {
-    onCanPlayThrough: () => void
-    onLoadStart: () => void
-    loaded: boolean
-    ref: MutableRefObject<HTMLVideoElement>
-  }) => ReactElement<'video'>
+  }: VideoContainerChildrenProps) => ReactElement<'video'>
 }
 
 export type VideoElementProps = {
@@ -48,7 +50,7 @@ export const VideoElement = styled.video<VideoElementProps>`
   }
 `
 
-export const VideoContainer = (props: VideoProps) => {
+export const VideoContainer = (props: VideoContainerProps) => {
   const [canPlayVideo, setCanPlayVideo] = useState<boolean>(false)
   const videoRef: MutableRefObject<HTMLVideoElement> = useRef()
   const { mayPlayVideo, children } = props
