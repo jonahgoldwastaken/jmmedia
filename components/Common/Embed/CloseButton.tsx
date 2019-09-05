@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { styled } from '../../../theme'
-import { PopInLeft } from '../../Animations'
+import { PopInLeft, PopOutRight } from '../../Animations'
 import { EmbedContext } from './Context'
 
 type StyledButtonProps = {
@@ -21,13 +21,18 @@ const StyledButton = styled.button<StyledButtonProps>`
   cursor: pointer;
 
   ${props =>
-    props.embedState === 'open' &&
-    css`
-      pointer-events: auto;
-      animation: ${PopInLeft} ${props.theme.animation.timing[1]}
-        ${props.theme.animation.curve} ${props.theme.animation.timing[1]}
-        forwards;
-    `}
+    props.embedState === 'open'
+      ? css`
+          pointer-events: auto;
+          animation: ${PopInLeft} ${props.theme.animation.timing[1]}
+            ${props.theme.animation.curve} ${props.theme.animation.timing[1]}
+            forwards;
+        `
+      : props.embedState === 'closed' &&
+        css`
+          animation: ${PopOutRight} ${props.theme.animation.timing[1]}
+            ${props.theme.animation.curve} forwards;
+        `}
 `
 
 export const EmbedCloseButton: React.FunctionComponent<any> = props => (
