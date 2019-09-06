@@ -1,7 +1,8 @@
 import { createContext } from 'react'
+import { EmbedState } from './Container'
 
 interface EmbedContext {
-  embedState: 'closed' | 'open' | 'unopened'
+  embedState: EmbedState
 }
 
 export const EmbedContext = createContext<EmbedContext>({

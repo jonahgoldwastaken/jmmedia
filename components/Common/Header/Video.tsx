@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
-import { styled } from '../../theme'
-import { VideoFade } from '../Animations'
-import { VideoContainer, VideoElement } from '../Common'
+import { styled } from '../../../theme'
+import { VideoFade } from '../../Animations'
+import { VideoContainer, VideoElement } from '..'
 
 type HeaderVideoProps = {
   src: string

@@ -1,22 +1,18 @@
 import Head from 'next/head'
 import { Background } from '../../components/Common'
+import {
+  Embed,
+  EmbedContainer,
+  OpenButton,
+} from '../../components/Common/Embed'
+import Header, { HeaderHeading } from '../../components/Common/Header'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionParagraph,
 } from '../../components/Section'
-import Header, { HeaderHeading } from '../../components/Header'
-import {
-  Embed,
-  EmbedContainer,
-  EmbedCloseButton,
-} from '../../components/Common/Embed'
-import { useState } from 'react'
 
 export default () => {
-  const [embedState, setEmbedState] = useState<'unopened' | 'open' | 'closed'>(
-    'unopened'
-  )
   return (
     <>
       <Head>
@@ -28,15 +24,7 @@ export default () => {
         </Header>
         <ContentSection dark>
           <SectionColumn column={2} span={4}>
-            <button
-              onClick={() =>
-                embedState === 'open'
-                  ? setEmbedState('closed')
-                  : setEmbedState('open')
-              }
-            >
-              Spelen kreng
-            </button>
+            <OpenButton>Spelen die handel</OpenButton>
           </SectionColumn>
         </ContentSection>
         <ContentSection light>
@@ -61,16 +49,13 @@ export default () => {
           <SectionColumn column={4} span={2}></SectionColumn>
         </ContentSection>
       </Background>
-      <EmbedContainer embedState={embedState}>
-        <EmbedCloseButton onClick={() => setEmbedState('closed')}>
-          sluiten kreng
-        </EmbedCloseButton>
+      <EmbedContainer>
         <Embed
           src="https://www.youtube.com/embed/SVP3KVp9CPY"
           frameBorder="0"
           allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
-        ></Embed>
+        />
       </EmbedContainer>
     </>
   )

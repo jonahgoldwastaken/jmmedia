@@ -1,11 +1,11 @@
-import { styled } from '../../../theme'
-import { FadeIn, RotateInDown, FadeOut } from '../../Animations'
-import { EmbedContext } from './Context'
-import { HTMLAttributes } from 'react'
 import { css } from 'styled-components'
+import { styled } from '../../../theme'
+import { FadeIn, FadeOut } from '../../Animations'
+import { EmbedContext } from './Context'
+import { EmbedState } from './Container'
 
 type StyledIframeProps = {
-  embedState: 'unopened' | 'open' | 'closed'
+  embedState: EmbedState
 }
 
 const StyledIframe = styled.iframe<StyledIframeProps>`

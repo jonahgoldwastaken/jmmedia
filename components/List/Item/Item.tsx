@@ -36,13 +36,10 @@ type ItemProps = {
 type ItemState = {
   active: boolean
   isHovering: boolean
-  positionData: positionData
 }
 
 const openAnimations = [CurtainOpenHorizontal, CurtainOpenVertical]
-
 const closeAnimation = [CurtainCloseHorizontal, CurtainCloseVertical]
-
 const clickAnimationDesktop = keyframes`
     to {
       left: 0px;
@@ -58,27 +55,32 @@ const StyledItem = styled.li<StyledItemProps>`
   padding: 0;
   grid-column-end: span ${props => props.columns};
   grid-row-end: span ${props => props.rows};
+  background: ${props => props.theme.pageColours[props.href]};
+
+  &:after {
+    content: '';
+    opacity: 0;
+    background: ${props => props.theme.pageColours[props.href]};
+  }
 
   ${props =>
     props.active
       ? css`
           .page-transition-exit-active & {
-            position: fixed;
-            z-index: 1;
-            left: ${props.positionData.x}px;
-            top: ${props.positionData.y}px;
-            width: ${props.positionData.width}px;
-            height: ${props.positionData.height}px;
-            display: block;
-            animation: ${clickAnimationDesktop}
-              ${props.theme.animation.timing[1]} ${props.theme.animation.curve}
-              ${props.theme.animation.timing[1]} forwards;
-            background: ${props.theme.pageColours[props.href]};
-
-            img,
-            video {
-              opacity: 0;
-              transition: opacity ${props.theme.animation.timing[0]}
+            &:after {
+              position: fixed;
+              z-index: 99;
+              opacity: 1;
+              left: ${props.positionData.x}px;
+              top: ${props.positionData.y}px;
+              width: ${props.positionData.width}px;
+              height: ${props.positionData.height}px;
+              display: block;
+              animation: ${clickAnimationDesktop}
+                ${props.theme.animation.timing[1]}
+                ${props.theme.animation.curve}
+                ${props.theme.animation.timing[1]} forwards;
+              transition: opacity ${props.theme.animation.timing[1]}
                 ${props.theme.animation.curve};
             }
           }
@@ -109,12 +111,24 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
   context!: React.ContextType<typeof BackgroundContext>
   itemRef: RefObject<HTMLLIElement>
 
+  get positionData(): positionData {
+    if (this.itemRef.current) {
+      const bounds = this.itemRef.current.getBoundingClientRect()
+
+      return {
+        x: bounds.left,
+        y: bounds.top,
+        width: bounds.width,
+        height: bounds.height,
+      }
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {
       isHovering: false,
       active: false,
-      positionData: undefined,
     }
     this.itemRef = createRef<HTMLLIElement>()
   }
@@ -124,15 +138,8 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
     const { active } = this.state
 
     if (router.route === href && !active) {
-      const bounds = this.itemRef.current.getBoundingClientRect()
       this.setState({
         active: true,
-        positionData: {
-          x: bounds.left,
-          y: bounds.top,
-          width: bounds.width,
-          height: bounds.height,
-        },
       })
     }
   }
@@ -157,6 +164,7 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
         ref={this.itemRef}
         onMouseOverCapture={() => this.updateHoverState(true)}
         onMouseOutCapture={() => this.updateHoverState(false)}
+        positionData={this.positionData}
         {...this.props}
         {...this.state}
       >
