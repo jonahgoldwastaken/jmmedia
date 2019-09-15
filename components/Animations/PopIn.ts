@@ -1,6 +1,6 @@
 import { keyframes } from 'styled-components'
 
-export const PopInLeft = keyframes`
+export const PopInRight = keyframes`
   from {
     transform: translateX(-25%);
     opacity: 0;
@@ -11,7 +11,7 @@ export const PopInLeft = keyframes`
   }
 `
 
-export const PopInRight = keyframes`
+export const PopInLeft = keyframes`
   from {
     transform: translateX(25%);
     opacity: 0;

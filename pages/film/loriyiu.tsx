@@ -1,16 +1,20 @@
 import Head from 'next/head'
-import { Background } from '../../components/Common'
+import { Background, NavButton } from '../../components/Common'
 import {
-  Embed,
-  EmbedContainer,
-  OpenButton,
-} from '../../components/Common/Embed'
-import Header, { HeaderHeading } from '../../components/Common/Header'
+  FilmCloseButton,
+  FilmDetails,
+  FilmEmbed,
+  FilmHero,
+  FilmPlayButton,
+  FilmTitle,
+} from '../../components/Project/Film'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionParagraph,
 } from '../../components/Section'
+import Link from 'next/link'
+import { FilmContext } from '../../components/Project/Film/Context'
 
 export default () => {
   return (
@@ -19,15 +23,24 @@ export default () => {
         <title>Lori Yiu - Jonah Meijers</title>
       </Head>
       <Background currentPage="/film/loriyiu">
-        <Header>
-          <HeaderHeading>Integrale Eindpresentatie Lori Yiu</HeaderHeading>
-        </Header>
+        <FilmHero>
+          <FilmContext.Consumer>
+            {({ state }) => (
+              <Link href="/film">
+                <NavButton hide={state === 'open'} icon="arrow-left" />
+              </Link>
+            )}
+          </FilmContext.Consumer>
+          <FilmTitle>Integrale eindpresentatie Lori Yiu</FilmTitle>
+          <FilmDetails>Concertvideo - 2019</FilmDetails>
+          <FilmEmbed
+            src="https://www.youtube.com/embed/SVP3KVp9CPY"
+            frameBorder="0"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          />
+        </FilmHero>
         <ContentSection dark>
-          <SectionColumn column={2} span={4}>
-            <OpenButton>Spelen die handel</OpenButton>
-          </SectionColumn>
-        </ContentSection>
-        <ContentSection light>
           <SectionColumn column={2} span={1}>
             <SectionHeading light>Concert als scriptie.</SectionHeading>
             <SectionParagraph light>
@@ -49,14 +62,6 @@ export default () => {
           <SectionColumn column={4} span={2}></SectionColumn>
         </ContentSection>
       </Background>
-      <EmbedContainer>
-        <Embed
-          src="https://www.youtube.com/embed/SVP3KVp9CPY"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
-      </EmbedContainer>
     </>
   )
 }

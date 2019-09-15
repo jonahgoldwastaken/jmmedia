@@ -1,4 +1,4 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimes, faPlay } from '@fortawesome/free-solid-svg-icons'
+import { faTimes, faPlay, faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTimes, faPlay)
+library.add(faTimes, faPlay, faArrowLeft)

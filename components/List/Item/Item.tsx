@@ -39,7 +39,7 @@ type ItemState = {
 }
 
 const openAnimations = [CurtainOpenHorizontal, CurtainOpenVertical]
-const closeAnimation = [CurtainCloseHorizontal, CurtainCloseVertical]
+const closeAnimations = [CurtainCloseHorizontal, CurtainCloseVertical]
 const clickAnimationDesktop = keyframes`
     to {
       left: 0px;
@@ -99,7 +99,7 @@ const StyledItem = styled.li<StyledItemProps>`
           }
 
           .page-transition-exit-active & {
-            animation: ${animationChooser(closeAnimation)}
+            animation: ${animationChooser(closeAnimations)}
               ${props.theme.animation.timing[0]} ${props.theme.animation.curve}
               forwards;
           }

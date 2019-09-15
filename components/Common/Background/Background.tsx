@@ -2,7 +2,13 @@ import { useRouter } from 'next/router'
 import { css } from 'styled-components'
 import { styled } from '../../../theme'
 import animationChooser from '../../../utils/animationChooser'
-import { SlideOutDown, SlideOutRight, ZoomOut } from '../../Animations'
+import {
+  SlideOutDown,
+  SlideOutRight,
+  ZoomOut,
+  SwipeOutDown,
+  SwipeOutRight,
+} from '../../Animations'
 import { BackgroundContext } from './Context'
 
 type StyledBackgroundProps = {
@@ -18,7 +24,13 @@ type PageBackgroundProps = {
   currentPage: string
 }
 
-const closeAnimations = [SlideOutDown, SlideOutRight, ZoomOut]
+const closeAnimations = [
+  SlideOutDown,
+  SlideOutRight,
+  SwipeOutDown,
+  SwipeOutRight,
+  ZoomOut,
+]
 
 export const StyledBackground = styled.div<StyledBackgroundProps>`
   position: relative;
@@ -27,12 +39,6 @@ export const StyledBackground = styled.div<StyledBackgroundProps>`
   width: ${props => props.theme.sizes.dynamic[2]};
   background: ${props => props.theme.pageColours[props.currentPage]};
   z-index: 2;
-
-  .page-transition-enter-active & {
-    * {
-      pointer-events: none;
-    }
-  }
 
   .page-transition-exit-active & {
     ${props =>

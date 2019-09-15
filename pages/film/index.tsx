@@ -1,8 +1,9 @@
 import Head from 'next/head'
-import { Background } from '../../components/Common'
+import { Background, NavButton } from '../../components/Common'
 import Header, { HeaderHeading } from '../../components/Common/Header'
 import List from '../../components/List'
 import ListItem from '../../components/List/Item'
+import Link from 'next/link'
 
 export default () => {
   return (
@@ -11,6 +12,9 @@ export default () => {
         <title>Film - Jonah Meijers</title>
       </Head>
       <Background currentPage="/film">
+        <Link href="/">
+          <NavButton colour="black" icon="arrow-left" />
+        </Link>
         <Header>
           <HeaderHeading dark>Film</HeaderHeading>
         </Header>
@@ -21,7 +25,7 @@ export default () => {
             columns={2}
             rows={3}
           >
-            Lori Yiu
+            Integrale eindpresentatie Lori Yiu
           </ListItem>
         </List>
       </Background>
