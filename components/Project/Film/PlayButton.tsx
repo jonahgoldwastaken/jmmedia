@@ -41,6 +41,13 @@ const StyledButton = styled.button<StyledButtonProps>`
         ${props.theme.animation.curve} forwards;
     `}
 
+    .page-transition-exit-active & {
+    opacity: 0;
+    transition: ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+      forwards;
+  }
+
   svg {
     transform: translate(9%, 2%);
     width: 1em !important;

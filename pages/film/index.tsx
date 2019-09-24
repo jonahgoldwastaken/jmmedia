@@ -13,7 +13,7 @@ export default () => {
       </Head>
       <Background currentPage="/film">
         <Link href="/">
-          <NavButton colour="black" icon="arrow-left" />
+          <NavButton colour="black" icon="home" />
         </Link>
         <Header>
           <HeaderHeading dark>Film</HeaderHeading>
@@ -21,7 +21,8 @@ export default () => {
         <List>
           <ListItem
             href="/film/loriyiu"
-            vidSrc="https://ak6.picdn.net/shutterstock/videos/27590086/preview/stock-footage-attractive-young-businesswoman-working-at-night-via-computer-at-office-with-closeup-of-hipster.mp4"
+            imgSrc="https://storage.googleapis.com/filmportfolio/films/loriyiu.png"
+            vidSrc="https://storage.googleapis.com/filmportfolio/films/loriyiupreview.mp4"
             columns={2}
             rows={3}
           >

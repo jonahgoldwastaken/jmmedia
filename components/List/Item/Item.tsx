@@ -29,6 +29,7 @@ type ItemProps = {
   columns: number
   rows: number
   vidSrc: string
+  imgSrc: string
   href: string
   router?: NextRouter
 }
@@ -156,7 +157,7 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
   }
 
   render() {
-    const { href, vidSrc, children } = this.props
+    const { href, vidSrc, imgSrc, children } = this.props
     const { isHovering } = this.state
 
     return (
@@ -170,10 +171,7 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
       >
         <Link href={href} passHref>
           <ItemAnchor>
-            <ItemPlaceholder
-              hovering={isHovering}
-              src="https://miro.medium.com/fit/c/256/256/1*KOiaTWFJoDphFszMOeA78Q.jpeg"
-            />
+            <ItemPlaceholder hovering={isHovering} src={imgSrc} />
             <VideoContainer mayPlayVideo={isHovering}>
               {props => <ItemVideo muted loop src={vidSrc} {...props} />}
             </VideoContainer>

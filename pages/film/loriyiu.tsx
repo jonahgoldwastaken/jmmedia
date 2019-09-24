@@ -1,29 +1,33 @@
+import fetch from 'isomorphic-fetch'
+import { NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { Background, NavButton } from '../../components/Common'
 import {
-  FilmCloseButton,
   FilmDetails,
-  FilmEmbed,
   FilmHero,
-  FilmPlayButton,
   FilmTitle,
+  Film,
 } from '../../components/Project/Film'
+import { FilmContext } from '../../components/Project/Film/Context'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionParagraph,
 } from '../../components/Section'
-import Link from 'next/link'
-import { FilmContext } from '../../components/Project/Film/Context'
 
-export default () => {
+// type LoriYiuProps = {
+//   film: string
+// }
+
+const LoriYiu: NextPage = props => {
   return (
     <>
       <Head>
         <title>Lori Yiu - Jonah Meijers</title>
       </Head>
       <Background currentPage="/film/loriyiu">
-        <FilmHero>
+        <FilmHero background="https://storage.googleapis.com/filmportfolio/films/loriyiu.png">
           <FilmContext.Consumer>
             {({ state }) => (
               <Link href="/film">
@@ -33,12 +37,7 @@ export default () => {
           </FilmContext.Consumer>
           <FilmTitle>Integrale eindpresentatie Lori Yiu</FilmTitle>
           <FilmDetails>Concertvideo - 2019</FilmDetails>
-          <FilmEmbed
-            src="https://www.youtube.com/embed/SVP3KVp9CPY"
-            frameBorder="0"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <Film src="https://storage.googleapis.com/filmportfolio/films/loriyiu.mp4"></Film>
         </FilmHero>
         <ContentSection dark>
           <SectionColumn column={2} span={1}>
@@ -65,3 +64,5 @@ export default () => {
     </>
   )
 }
+
+export default LoriYiu

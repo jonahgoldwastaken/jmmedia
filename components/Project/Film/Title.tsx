@@ -17,6 +17,7 @@ export const StyledHeading = styled(Heading)<StyledHeadingProps>`
   justify-self: start;
   align-self: end;
   font-size: ${props => props.theme.fontSizes[4]};
+  will-change: clip-path;
 
   .page-transition-enter & {
     opacity: 1;

@@ -19,6 +19,7 @@ export const StyledParagraph = styled.p<StyledParagraphProps>`
   font-weight: ${props => props.theme.fontWeights[1]};
   grid-row: 1;
   grid-column: 1;
+  will-change: clip-path;
 
   .page-transition-enter-active & {
     animation: ${SwipeInLeft}
