@@ -30,6 +30,7 @@ type ItemProps = {
   rows: number
   vidSrc: string
   imgSrc: string
+  imgAlt: string
   href: string
   router?: NextRouter
 }
@@ -157,7 +158,7 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
   }
 
   render() {
-    const { href, vidSrc, imgSrc, children } = this.props
+    const { href, vidSrc, imgSrc, imgAlt, children } = this.props
     const { isHovering } = this.state
 
     return (
@@ -171,7 +172,7 @@ class ListItemWithoutRouter extends Component<ItemProps, ItemState> {
       >
         <Link href={href} passHref>
           <ItemAnchor>
-            <ItemPlaceholder hovering={isHovering} src={imgSrc} />
+            <ItemPlaceholder alt={imgAlt} hovering={isHovering} src={imgSrc} />
             <VideoContainer mayPlayVideo={isHovering}>
               {props => <ItemVideo muted loop src={vidSrc} {...props} />}
             </VideoContainer>

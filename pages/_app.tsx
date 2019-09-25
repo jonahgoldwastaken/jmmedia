@@ -12,6 +12,8 @@ const GlobalStyle = createGlobalStyle`
   ${styledSanitize};
   body {
     background: black;
+    height: 100%;
+    overflow: hidden;
   }
 `
 

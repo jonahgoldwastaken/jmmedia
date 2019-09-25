@@ -21,10 +21,11 @@ export default () => {
         <List>
           <ListItem
             href="/film/loriyiu"
-            imgSrc="https://storage.googleapis.com/filmportfolio/films/loriyiu.png"
-            vidSrc="https://storage.googleapis.com/filmportfolio/films/loriyiupreview.mp4"
+            imgAlt="Lori Yiu achter de toetsen"
+            imgSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png"
+            vidSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/preview.mp4"
             columns={2}
-            rows={3}
+            rows={2}
           >
             Integrale eindpresentatie Lori Yiu
           </ListItem>

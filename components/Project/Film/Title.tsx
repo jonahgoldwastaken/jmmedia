@@ -8,7 +8,7 @@ type StyledHeadingProps = {
   filmState: 'unopened' | 'open' | 'closed'
 }
 
-export const StyledHeading = styled(Heading)<StyledHeadingProps>`
+const StyledHeading = styled(Heading)<StyledHeadingProps>`
   position: relative;
   z-index: 2;
   margin: ${props => props.theme.space[3]};

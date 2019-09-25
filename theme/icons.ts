@@ -7,7 +7,10 @@ import {
   faArrowRight,
   faEllipsisH,
   faHome,
+  faPhone,
+  faEnvelope,
 } from '@fortawesome/free-solid-svg-icons'
+import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
   faTimes,
@@ -16,5 +19,9 @@ library.add(
   faArrowLeft,
   faArrowRight,
   faEllipsisH,
-  faHome
+  faHome,
+  faPhone,
+  faEnvelope
 )
+
+library.add(faInstagram, faLinkedin)

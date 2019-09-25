@@ -14,20 +14,18 @@ import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionParagraph,
+  SectionImage,
 } from '../../components/Section'
+import { Footer, FooterHeading } from '../../components/Footer'
 
-// type LoriYiuProps = {
-//   film: string
-// }
-
-const LoriYiu: NextPage = props => {
+const LoriYiu: NextPage = () => {
   return (
     <>
       <Head>
         <title>Lori Yiu - Jonah Meijers</title>
       </Head>
       <Background currentPage="/film/loriyiu">
-        <FilmHero background="https://storage.googleapis.com/filmportfolio/films/loriyiu.png">
+        <FilmHero background="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (
               <Link href="/film">
@@ -37,10 +35,10 @@ const LoriYiu: NextPage = props => {
           </FilmContext.Consumer>
           <FilmTitle>Integrale eindpresentatie Lori Yiu</FilmTitle>
           <FilmDetails>Concertvideo - 2019</FilmDetails>
-          <Film src="https://storage.googleapis.com/filmportfolio/films/loriyiu.mp4"></Film>
+          <Film src="https://storage.googleapis.com/filmportfolio/film/loriyiu/film.mp4"></Film>
         </FilmHero>
-        <ContentSection dark>
-          <SectionColumn column={2} span={1}>
+        <ContentSection>
+          <SectionColumn column={[1, 2, 3]} span={[2, 2, 2]}>
             <SectionHeading light>Concert als scriptie.</SectionHeading>
             <SectionParagraph light>
               Lori Yiu gaf afgelopen schooljaar haar Integrale Eindpresentatie
@@ -58,8 +56,50 @@ const LoriYiu: NextPage = props => {
               overduidelijk te voelen waren.
             </SectionParagraph>
           </SectionColumn>
-          <SectionColumn column={4} span={2}></SectionColumn>
         </ContentSection>
+        <ContentSection dark>
+          <SectionColumn column={[1, 1, 2]} span={[1, 2, 2]}>
+            <SectionHeading light>Inspiratie en onderzoek</SectionHeading>
+            <SectionParagraph light>
+              Een van de vele inspiraties voor de stijl die Lori heeft
+              uitbedacht. De kleurrijke shows van Led Zeppelin hebben grote
+              invloed gehad op het kleurgebruik, de opzet van het podium en de
+              energie die de artiesten uitstralen tijdens het optreden. In hun
+              concertfilms wordt veel nadruk gelegd op het samenspel tussen de
+              artiesten van de band, waardoor iedereen een blik in de
+              schijnwerpers krijgt. Deze filmtechniek heb ik ook toegepast bij
+              de concertfilm van Lori, om de look &amp; feel compleet te maken.
+            </SectionParagraph>
+          </SectionColumn>
+          <SectionColumn column={[2, 3, 4]} span={[1, 2, 2]}>
+            <SectionImage
+              last
+              src="https://storage.googleapis.com/filmportfolio/film/loriyiu/ledzeppelin.png"
+              alt="Led Zeppelin die Dazed & Confused optreden tijdens hun concert in Madison Square Garden, 1975"
+            />
+          </SectionColumn>
+        </ContentSection>
+        <ContentSection light>
+          <SectionColumn column={[1, 1, 2]} span={[1, 2, 2]}>
+            <SectionImage
+              first
+              src="https://storage.googleapis.com/filmportfolio/film/loriyiu/moodboard.png"
+              alt="Moodboard om de look & feel van de integrale eindpresentatie in kaart te brengen"
+            />
+          </SectionColumn>
+          <SectionColumn column={[2, 3, 4]} span={[1, 2, 1]}>
+            <SectionHeading light>De look &amp; feel</SectionHeading>
+            <SectionParagraph light>
+              Samen met onder meer optredens van The Clash, Björk en meer
+              populaire artiesten uit de jaren '70/'80 heb ik inspiratie
+              opgedaan voor de manier waarop de video er uit zou moeten zien.
+              Door middel van een moodboard heb ik alle belangrijke
+              aandachtspunten bijeen gebracht en er een consistent concept uit
+              gecreëerd.
+            </SectionParagraph>
+          </SectionColumn>
+        </ContentSection>
+        <Footer>Ook een concertfilm laten maken?</Footer>
       </Background>
     </>
   )

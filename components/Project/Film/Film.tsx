@@ -19,16 +19,21 @@ const StyledVideo = styled(VideoElement)<StyledVideoProps>`
   transition: filter
     ${props =>
       `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};
+  object-fit: contain;
+  background: ${props => props.theme.colors.secondary};
+
   ${props =>
     props.filmState !== 'unopened' &&
     css`
       animation: ${FadeIn} ${props.theme.animation.timing[1]}
         ${props.theme.animation.curve} forwards;
     `}
+
   ${props =>
     props.filmState === 'closed' &&
     css`
       filter: brightness(0.25);
+      pointer-events: none;
     `};
 `
 export const Film: React.FunctionComponent<any> = props => (
@@ -40,7 +45,8 @@ export const Film: React.FunctionComponent<any> = props => (
           {moreProps => (
             <StyledVideo
               src={props.src}
-              controls
+              controls={state === 'open'}
+              playsInline
               filmState={state}
               {...moreProps}
             ></StyledVideo>

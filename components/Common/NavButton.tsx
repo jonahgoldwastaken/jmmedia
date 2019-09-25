@@ -17,19 +17,17 @@ type StyledButtonProps = {
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
+  all: unset;
   position: fixed;
-  top: ${props => props.theme.space[3]};
-  left: ${props => props.theme.space[3]};
+  top: ${props => props.theme.space[2]};
+  left: ${props => props.theme.space[2]};
   z-index: 9999;
-  background: none;
-  border: none;
   font-family: ${props => props.theme.fonts.sans};
-  font-size: ${props => props.theme.fontSizes[3]};
+  font-size: ${props => props.theme.fontSizes[1]};
   color: ${props =>
     !props.colour || props.colour === 'white'
       ? props.theme.colors.primary
       : props.theme.colors.secondary};
-  outline: none;
   cursor: pointer;
 
   ${props =>
@@ -46,24 +44,34 @@ const StyledButton = styled.button<StyledButtonProps>`
             ${props =>
               `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
             forwards;
-        `}
+
+          .page-transition-enter-active & {
+            animation: ${PopInRight}
+              ${props =>
+                `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+              forwards;
+          }
+
+          .page-transition-exit-active & {
+            animation: ${PopOutLeft}
+              ${props =>
+                `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+              forwards;
+          }
+        `};
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    font-size: ${props => props.theme.fontSizes[2]};
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    top: ${props => props.theme.space[3]};
+    left: ${props => props.theme.space[3]};
+    font-size: ${props => props.theme.fontSizes[3]};
+  }
 
   .page-transition-enter & {
     opacity: 0;
-  }
-
-  .page-transition-enter-active & {
-    animation: ${PopInRight}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
-
-  .page-transition-exit-active & {
-    animation: ${PopOutLeft}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
   }
 `
 

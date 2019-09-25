@@ -26,13 +26,15 @@ const StyledHeader = styled(Header)<StyledHeaderProps>`
   justify-content: initial;
   align-items: initial;
 
-  ${props =>
-    props.state === 'open' &&
-    css`
-      position: fixed;
-      top: 0;
-      left: 0;
-    `}
+  &:not(:only-child) {
+    transition: height
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+    height: ${props =>
+      props.state === 'open'
+        ? props.theme.sizes.height[3]
+        : props.theme.sizes.height[2]};
+  }
 
   .page-transition-enter & {
     opacity: 0;
@@ -40,6 +42,13 @@ const StyledHeader = styled(Header)<StyledHeaderProps>`
 
   .page-transition-enter-active & {
     opacity: 1;
+    transition: opacity
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+  }
+
+  .page-transition-exit-active & {
+    opacity: 0;
     transition: opacity
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};

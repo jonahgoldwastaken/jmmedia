@@ -16,13 +16,27 @@ type ContentSectionProps = {
 const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: 1fr;
+  padding: ${props => props.theme.space[2]};
+  grid-column-gap: ${props => props.theme.space[2]};
   background: ${props =>
     props.light
       ? lighten(0.1, props.theme.pageColours[props.currentPage])
       : props.dark
       ? darken(0.1, props.theme.pageColours[props.currentPage])
       : props.theme.pageColours[props.currentPage]};
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[0]}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    grid-template-columns: repeat(6, 1fr);
+  }
 
   .page-transition-enter-active & {
     position: relative;

@@ -7,7 +7,7 @@ type StyledParagraphProps = {
   filmState: 'unopened' | 'open' | 'closed'
 }
 
-export const StyledParagraph = styled.p<StyledParagraphProps>`
+const StyledParagraph = styled.p<StyledParagraphProps>`
   position: relative;
   z-index: 2;
   margin: ${props => props.theme.space[3]};

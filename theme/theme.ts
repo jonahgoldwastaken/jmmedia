@@ -12,7 +12,7 @@ export const theme = {
     dynamic: ['25%', '50%', '100%'],
     height: ['30vh', '60vh', '80vh', '100vh'],
   },
-  breakpoints: ['30rem', '60rem', '80rem'],
+  breakpoints: ['40rem', '60rem', '80rem'],
   fonts: {
     sans: "'Red Hat Display', sans-serif",
     serif: '"Merriweather", sans-serif',

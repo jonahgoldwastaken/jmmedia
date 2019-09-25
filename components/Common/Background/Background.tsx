@@ -32,11 +32,15 @@ const closeAnimations = [
   ZoomOut,
 ]
 
-export const StyledBackground = styled.div<StyledBackgroundProps>`
-  position: relative;
+const StyledBackground = styled.div<StyledBackgroundProps>`
+  position: fixed;
   overflow-y: scroll;
-  height: ${props => props.theme.sizes.height[3]};
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   width: ${props => props.theme.sizes.dynamic[2]};
+  height: ${props => props.theme.sizes.dynamic[2]};
   background: ${props => props.theme.pageColours[props.currentPage]};
   z-index: 2;
 
