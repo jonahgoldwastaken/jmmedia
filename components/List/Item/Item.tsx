@@ -55,9 +55,14 @@ const StyledItem = styled.li<StyledItemProps>`
   position: relative;
   margin: 0;
   padding: 0;
-  grid-column-end: span ${props => props.columns};
-  grid-row-end: span ${props => props.rows};
+  grid-column-end: span 1;
+  grid-row-end: span 1;
   background: ${props => props.theme.pageColours[props.href]};
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    grid-column-end: span ${props => props.columns};
+    grid-row-end: span ${props => props.rows};
+  }
 
   &:after {
     content: '';
