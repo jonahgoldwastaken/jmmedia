@@ -45,7 +45,9 @@ const StyledListItem = styled.li`
       forwards;
     &:first-child,
     &:last-child {
-      animation-delay: ${props => props.theme.animation.timing[0]};
+      @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+        animation-delay: ${props => props.theme.animation.timing[0]};
+      }
     }
   }
 `

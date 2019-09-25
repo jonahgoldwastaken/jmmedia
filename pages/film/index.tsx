@@ -4,6 +4,7 @@ import Header, { HeaderHeading } from '../../components/Common/Header'
 import List from '../../components/List'
 import ListItem from '../../components/List/Item'
 import Link from 'next/link'
+import Footer from '../../components/Footer'
 
 export default () => {
   return (
@@ -27,9 +28,10 @@ export default () => {
             columns={2}
             rows={2}
           >
-            Integrale eindpresentatie Lori Yiu
+            Concert Lori Yiu
           </ListItem>
         </List>
+        <Footer>Je eigen naam ook op de lijst?</Footer>
       </Background>
     </>
   )

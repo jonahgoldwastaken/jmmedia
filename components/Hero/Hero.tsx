@@ -1,6 +1,7 @@
 import { styled } from '../../theme'
 
 export const Hero = styled.main`
+  position: relative;
   width: ${props => props.theme.sizes.dynamic[2]};
   height: ${props => props.theme.sizes.height[3]};
   background: ${props => props.theme.colors.secondary};

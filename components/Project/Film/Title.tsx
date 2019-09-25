@@ -11,13 +11,19 @@ type StyledHeadingProps = {
 const StyledHeading = styled(Heading)<StyledHeadingProps>`
   position: relative;
   z-index: 2;
-  margin: ${props => props.theme.space[3]};
+  margin: ${props => props.theme.space[2]};
+  font-size: ${props => props.theme.fontSizes[3]};
   grid-row: 2 / span 1;
   grid-column: 1 / span 1;
   justify-self: start;
   align-self: end;
-  font-size: ${props => props.theme.fontSizes[4]};
   will-change: clip-path;
+  text-align: left;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    font-size: ${props => props.theme.fontSizes[4]};
+    margin: ${props => props.theme.space[3]};
+  }
 
   .page-transition-enter & {
     opacity: 1;

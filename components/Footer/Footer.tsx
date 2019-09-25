@@ -15,7 +15,7 @@ export const Footer: React.FunctionComponent = ({ children }) => (
   <StyledFooter>
     <FooterHeading>{children}</FooterHeading>
     <FooterParagraph>
-      Neem dan contact met met op via een van deze kanalen, dan maken we er wat
+      Neem dan contact met met op via een van deze kanalen en maken we er wat
       geweldigs van.
     </FooterParagraph>
     <FooterList>

@@ -7,8 +7,8 @@ type LinkVideoProps = {
 }
 
 const StyledVideo = styled(VideoElement)`
-  position: fixed;
-  opacity: ${props => (props.loaded ? '1' : '0')};
+  position: absolute;
+  opacity: ${props => (props.loaded ? '0.25' : '0')};
   transition: opacity
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};

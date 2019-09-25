@@ -47,10 +47,9 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
   .page-transition-exit-active & {
     ${props =>
       (props.route === '/' ||
-        props.route === '/film' ||
-        props.route === '/photography') &&
+        (props.currentPage !== '/' && props.route === '/film') ||
+        (props.currentPage !== '/' && props.route === '/photography')) &&
       css`
-        position: fixed;
         animation: ${animationChooser(closeAnimations)}
           ${props =>
             `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}

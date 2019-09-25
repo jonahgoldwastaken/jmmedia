@@ -10,7 +10,7 @@ type StyledParagraphProps = {
 const StyledParagraph = styled.p<StyledParagraphProps>`
   position: relative;
   z-index: 2;
-  margin: ${props => props.theme.space[3]};
+  margin: ${props => props.theme.space[2]};
   align-self: start;
   justify-self: end;
   font-size: ${props => props.theme.fontSizes[1]};
@@ -20,6 +20,10 @@ const StyledParagraph = styled.p<StyledParagraphProps>`
   grid-row: 1;
   grid-column: 1;
   will-change: clip-path;
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    margin: ${props => props.theme.space[3]};
+  }
 
   .page-transition-enter-active & {
     animation: ${SwipeInLeft}

@@ -16,7 +16,7 @@ import ContentSection, {
   SectionParagraph,
   SectionImage,
 } from '../../components/Section'
-import { Footer, FooterHeading } from '../../components/Footer'
+import Footer from '../../components/Footer'
 
 const LoriYiu: NextPage = () => {
   return (
@@ -33,7 +33,7 @@ const LoriYiu: NextPage = () => {
               </Link>
             )}
           </FilmContext.Consumer>
-          <FilmTitle>Integrale eindpresentatie Lori Yiu</FilmTitle>
+          <FilmTitle>Concert Lori Yiu</FilmTitle>
           <FilmDetails>Concertvideo - 2019</FilmDetails>
           <Film src="https://storage.googleapis.com/filmportfolio/film/loriyiu/film.mp4"></Film>
         </FilmHero>
@@ -42,8 +42,7 @@ const LoriYiu: NextPage = () => {
             <SectionHeading light>Concert als scriptie.</SectionHeading>
             <SectionParagraph light>
               Lori Yiu gaf afgelopen schooljaar haar Integrale Eindpresentatie
-              (IEP) op het conservatorium in Utrecht. De Integrale
-              Eindpresentatie is een cruciaal onderdeel van het afstudeertraject
+              (IEP). De IEP is een cruciaal onderdeel van het afstudeertraject
               van de opleiding muziekdocent op het Utrechts Conservatorium.
             </SectionParagraph>
             <SectionParagraph light>
@@ -52,7 +51,7 @@ const LoriYiu: NextPage = () => {
               tentoonstelde. Ik had het genoegen om dit belangrijke moment voor
               Lori vast te leggen als nét-echte concertfilm. Met meerdere
               camerahoeken, een lichte kleurcorrectie en meeslepende effecten
-              accentueert de film de passies en emoties die die avond
+              accentueert de film de passies en emoties die tijdens dit optreden
               overduidelijk te voelen waren.
             </SectionParagraph>
           </SectionColumn>
@@ -90,8 +89,8 @@ const LoriYiu: NextPage = () => {
           <SectionColumn column={[2, 3, 4]} span={[1, 2, 1]}>
             <SectionHeading light>De look &amp; feel</SectionHeading>
             <SectionParagraph light>
-              Samen met onder meer optredens van The Clash, Björk en meer
-              populaire artiesten uit de jaren '70/'80 heb ik inspiratie
+              Samen met onder meer optredens van The Clash, Björk en andere
+              populaire artiesten in soortgelijke stijlen heb ik inspiratie
               opgedaan voor de manier waarop de video er uit zou moeten zien.
               Door middel van een moodboard heb ik alle belangrijke
               aandachtspunten bijeen gebracht en er een consistent concept uit

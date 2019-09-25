@@ -28,7 +28,6 @@ type NavAnchorProps = {
 
 type NavAnchorState = {
   active: boolean
-  positionData: positionData
 }
 
 const clickAnimationDesktop = (props: any) =>
@@ -114,6 +113,7 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
 
   @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
     font-size: ${props => props.theme.fontSizes[2]};
+    margin-bottom: ${props => props.theme.space[0]};
 
     &:after {
       height: calc(${props => props.theme.borderWidth} / 1.5);
@@ -171,11 +171,23 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
 class NavAnchorWithoutRouter extends Component<NavAnchorProps, NavAnchorState> {
   anchorRef: RefObject<HTMLAnchorElement>
 
+  get positionData(): positionData {
+    if (this.anchorRef.current) {
+      const bounds = this.anchorRef.current.getBoundingClientRect()
+
+      return {
+        x: bounds.left,
+        y: bounds.top,
+        width: bounds.width,
+        height: bounds.height,
+      }
+    }
+  }
+
   constructor(props) {
     super(props)
     this.state = {
       active: false,
-      positionData: undefined,
     }
     this.anchorRef = createRef<HTMLAnchorElement>()
   }
@@ -185,12 +197,6 @@ class NavAnchorWithoutRouter extends Component<NavAnchorProps, NavAnchorState> {
     const { active } = this.state
     if (!disabled && router.route === href && !active) {
       this.setState({
-        positionData: {
-          x: this.anchorRef.current.offsetLeft,
-          y: this.anchorRef.current.offsetTop,
-          width: this.anchorRef.current.offsetWidth,
-          height: this.anchorRef.current.offsetHeight,
-        },
         active: true,
       })
     }
@@ -204,6 +210,7 @@ class NavAnchorWithoutRouter extends Component<NavAnchorProps, NavAnchorState> {
         ref={this.anchorRef}
         onMouseOver={() => hoverHandler(true)}
         onMouseOut={() => hoverHandler(false)}
+        positionData={this.positionData}
         {...this.props}
         {...this.state}
       >
