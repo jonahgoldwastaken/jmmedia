@@ -2,6 +2,10 @@ import { styled } from '../../theme'
 import { FadeIn, FadeOut } from '../Animations'
 
 export const FooterContactLink = styled.li`
+  .page-transition-enter & {
+    opacity: 0;
+  }
+
   .page-transition-enter-active & {
     animation: ${FadeIn}
       ${props =>

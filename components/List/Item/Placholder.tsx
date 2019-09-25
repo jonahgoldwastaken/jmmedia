@@ -13,7 +13,7 @@ export const ItemPlaceholder = styled.img<ItemPlaceholderProps>`
   height: ${props => props.theme.sizes.dynamic[2]};
   object-fit: cover;
   opacity: ${props => (props.hovering ? 0 : 1)};
-  filter: brightness(0.75);
+  filter: brightness(0.5);
   transition: opacity
     ${props =>
       `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};

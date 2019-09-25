@@ -36,17 +36,6 @@ export const VideoElement = styled.video<VideoElementProps>`
   @media speech {
     display: none;
   }
-
-  .page-transition-exit & {
-    opacity: 1;
-  }
-
-  .page-transition-exit-active & {
-    opacity: 0;
-    transition: opacity
-      ${props =>
-        `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};
-  }
 `
 
 export const VideoContainer = (props: VideoContainerProps) => {

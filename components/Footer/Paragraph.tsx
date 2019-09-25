@@ -7,6 +7,10 @@ export const FooterParagraph = styled.p`
   color: ${props => props.theme.colors.primary};
   text-align: center;
 
+  .page-transition-enter & {
+    opacity: 0;
+  }
+
   .page-transition-enter-active & {
     animation: ${RotateInDown}
       ${props =>

@@ -9,6 +9,28 @@ export const StyledFooter = styled.footer`
   padding: ${props => props.theme.space[3]};
   min-height: ${props => props.theme.sizes.static[1]};
   background: ${props => props.theme.colors.tertiary};
+
+  .page-transition-enter & {
+    opacity: 0;
+  }
+
+  .page-transition-enter-active & {
+    opacity: 1;
+    transition: opacity
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+  }
+
+  .page-transition-exit & {
+    opacity: 1;
+  }
+
+  .page-transition-exit-active & {
+    opacity: 0;
+    transition: opacity
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+  }
 `
 
 export const Footer: React.FunctionComponent = ({ children }) => (

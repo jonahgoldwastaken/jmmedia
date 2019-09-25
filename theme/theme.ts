@@ -28,5 +28,6 @@ export const theme = {
     '/': 'black',
     '/film': 'white',
     '/film/loriyiu': '#8954c7',
+    '/film/awakening': '#00b7f1',
   },
 }

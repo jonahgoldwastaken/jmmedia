@@ -10,6 +10,13 @@ type StyledButtonProps = {
 const StyledButton = styled(NavButton)<StyledButtonProps>`
   position: absolute;
   opacity: 0;
+  pointer-events: none;
+
+  ${props =>
+    props.filmState === 'open' &&
+    css`
+      pointer-events: auto;
+    `}
 
   ${props =>
     props.filmState === 'unopened' &&

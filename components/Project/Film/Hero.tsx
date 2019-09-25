@@ -6,6 +6,7 @@ import Header from '../../Common/Header'
 import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
 import { FilmCloseButton } from './CloseButton'
+import { FadeOut, FadeIn } from '../../Animations'
 
 type StyledHeaderProps = {
   background: string
@@ -41,17 +42,17 @@ const StyledHeader = styled(Header)<StyledHeaderProps>`
   }
 
   .page-transition-enter-active & {
-    opacity: 1;
-    transition: opacity
+    animation: ${FadeIn}
       ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+      forwards;
   }
 
   .page-transition-exit-active & {
-    opacity: 0;
-    transition: opacity
+    animation: ${FadeOut}
       ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+      forwards;
   }
 `
 

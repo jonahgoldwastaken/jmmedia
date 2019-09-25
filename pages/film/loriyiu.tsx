@@ -1,28 +1,27 @@
-import fetch from 'isomorphic-fetch'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { Background, NavButton } from '../../components/Common'
+import Footer from '../../components/Footer'
 import {
+  Film,
   FilmDetails,
   FilmHero,
   FilmTitle,
-  Film,
 } from '../../components/Project/Film'
 import { FilmContext } from '../../components/Project/Film/Context'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
-  SectionParagraph,
   SectionImage,
+  SectionParagraph,
 } from '../../components/Section'
-import Footer from '../../components/Footer'
 
 const LoriYiu: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Lori Yiu - Jonah Meijers</title>
+        <title>Concert Lori Yiu - Jonah Meijers</title>
       </Head>
       <Background currentPage="/film/loriyiu">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png">
@@ -35,7 +34,7 @@ const LoriYiu: NextPage = () => {
           </FilmContext.Consumer>
           <FilmTitle>Concert Lori Yiu</FilmTitle>
           <FilmDetails>Concertvideo - 2019</FilmDetails>
-          <Film src="https://storage.googleapis.com/filmportfolio/film/loriyiu/film.mp4"></Film>
+          <Film src="https://storage.googleapis.com/filmportfolio/film/loriyiu/film.mp4" />
         </FilmHero>
         <ContentSection>
           <SectionColumn column={[1, 2, 3]} span={[2, 2, 2]}>
@@ -98,7 +97,7 @@ const LoriYiu: NextPage = () => {
             </SectionParagraph>
           </SectionColumn>
         </ContentSection>
-        <Footer>Ook een concertfilm laten maken?</Footer>
+        <Footer>Binnenkort op tournee?</Footer>
       </Background>
     </>
   )
