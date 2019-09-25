@@ -7,7 +7,7 @@ import { FooterParagraph } from './Paragraph'
 
 export const StyledFooter = styled.footer`
   padding: ${props => props.theme.space[3]};
-  height: ${props => props.theme.sizes.static[1]};
+  min-height: ${props => props.theme.sizes.static[1]};
   background: ${props => props.theme.colors.tertiary};
 `
 
@@ -20,23 +20,27 @@ export const Footer: React.FunctionComponent = ({ children }) => (
     </FooterParagraph>
     <FooterList>
       <FooterContactLink>
-        <a href="tel:+31623267536">
+        <a target="_blank" href="tel:+31623267536">
           <FontAwesomeIcon icon="phone" />
+          <span>Geef een belletje</span>
         </a>
       </FooterContactLink>
       <FooterContactLink>
-        <a href="mailto:info@jonahmeijers.nl">
+        <a target="_blank" href="mailto:info@jonahmeijers.nl">
           <FontAwesomeIcon icon="envelope" />
+          <span>Stuur een mailtje</span>
         </a>
       </FooterContactLink>
       <FooterContactLink>
-        <a href="https://www.instagram.com/jonahgold.jpg">
+        <a target="_blank" href="https://www.instagram.com/jonahgold.jpg">
           <FontAwesomeIcon icon={['fab', 'instagram']} />
+          <span>Check mijn Instagram</span>
         </a>
       </FooterContactLink>
       <FooterContactLink>
-        <a href="https://www.linkedin.com/in/jonahmeijers/">
+        <a target="_blank" href="https://www.linkedin.com/in/jonahmeijers/">
           <FontAwesomeIcon icon={['fab', 'linkedin']} />
+          <span>Bekijk mijn LinkedIn</span>
         </a>
       </FooterContactLink>
     </FooterList>
