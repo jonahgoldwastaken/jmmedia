@@ -18,16 +18,16 @@ import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
 
 type StyledItemProps = {
-  columns: number
-  rows: number
+  columns: number[]
+  rows: number[]
   active: boolean
   positionData: positionData
   href: string
 }
 
 type ItemProps = {
-  columns: number
-  rows: number
+  columns: number[]
+  rows: number[]
   vidSrc: string
   imgSrc: string
   imgAlt: string
@@ -55,13 +55,21 @@ const StyledItem = styled.li<StyledItemProps>`
   position: relative;
   margin: 0;
   padding: 0;
-  grid-column-end: span 1;
-  grid-row-end: span 1;
   background: ${props => props.theme.pageColours[props.href]};
 
+  @media screen and (min-width: ${props => props.theme.breakpoints[0]}) {
+    grid-column-end: span ${props => props.columns[0]};
+    grid-row-end: span ${props => props.rows[0]};
+  }
+
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    grid-column-end: span ${props => props.columns};
-    grid-row-end: span ${props => props.rows};
+    grid-column-end: span ${props => props.columns[1]};
+    grid-row-end: span ${props => props.rows[1]};
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    grid-column-end: span ${props => props.columns[2]};
+    grid-row-end: span ${props => props.rows[2]};
   }
 
   &:after {

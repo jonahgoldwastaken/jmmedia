@@ -14,10 +14,10 @@ export default () => {
       </Head>
       <Background currentPage="/film">
         <Link href="/">
-          <NavButton colour="black" icon="home" />
+          <NavButton colour="white" icon="home" />
         </Link>
         <Header>
-          <HeaderHeading dark>Film</HeaderHeading>
+          <HeaderHeading>Film</HeaderHeading>
         </Header>
         <List>
           <ListItem
@@ -25,8 +25,8 @@ export default () => {
             imgAlt="Lori Yiu achter de toetsen"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/preview.mp4"
-            columns={3}
-            rows={2}
+            columns={[1, 2, 3]}
+            rows={[1, 1, 2]}
           >
             Concert Lori Yiu
           </ListItem>
@@ -35,8 +35,8 @@ export default () => {
             imgAlt="Awakening, sound of sleep logo"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/awakening/preview.mp4"
-            columns={3}
-            rows={2}
+            columns={[1, 2, 3]}
+            rows={[1, 1, 2]}
           >
             Awakening
           </ListItem>
