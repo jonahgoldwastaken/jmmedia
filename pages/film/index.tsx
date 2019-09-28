@@ -41,7 +41,7 @@ export default () => {
             Awakening
           </ListItem>
         </List>
-        <Footer>Zie jij jezelf hiertussen staan?</Footer>
+        <Footer>Filmproject op de agenda?</Footer>
       </Background>
     </>
   )

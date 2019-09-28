@@ -1,8 +1,8 @@
 import { css } from 'styled-components'
 import { styled } from '../../../theme'
-import { FadeIn, FadeOut } from '../../Animations'
+import { FadeIn } from '../../Animations'
+import { VideoContainer, VideoElement } from '../../Common'
 import { FilmContext } from './Context'
-import { VideoElement, VideoContainer } from '../../Common'
 import { FilmPlayButton } from './PlayButton'
 
 type StyledVideoProps = {

@@ -4,7 +4,7 @@ import { styled } from '../../theme'
 type VideoContainerChildrenProps = {
   onCanPlayThrough: () => void
   onLoadStart: () => void
-  loaded: boolean
+  playing: boolean
   ref: MutableRefObject<HTMLVideoElement>
 }
 
@@ -13,13 +13,13 @@ export type VideoContainerProps = {
   children: ({
     onCanPlayThrough,
     onLoadStart,
-    loaded,
+    playing,
     ref,
   }: VideoContainerChildrenProps) => ReactElement<'video'>
 }
 
 export type VideoElementProps = {
-  loaded: boolean
+  playing: boolean
   src: string
   onCanPlayThrough: () => void
   onLoadStart: () => void
@@ -53,7 +53,7 @@ export const VideoContainer = (props: VideoContainerProps) => {
   }
 
   return children({
-    loaded: mayPlayVideo && canPlayVideo,
+    playing: mayPlayVideo && canPlayVideo,
     onLoadStart: () => setCanPlayVideo(false),
     onCanPlayThrough: () => setCanPlayVideo(true),
     ref: videoRef,

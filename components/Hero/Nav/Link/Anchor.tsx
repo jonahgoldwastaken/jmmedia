@@ -1,33 +1,21 @@
-import { NextRouter, withRouter } from 'next/router'
-import { Component, createRef, MouseEvent, RefObject } from 'react'
+import Link from 'next/link'
+import { forwardRef, HTMLProps, RefObject } from 'react'
 import { css, keyframes } from 'styled-components'
+import { positionData } from '../../../../interfaces/positionData'
 import theme, { styled } from '../../../../theme'
-
-export type positionData = {
-  x: number
-  y: number
-  width: number
-  height: number
-}
+import { LinkWrapperContext } from '../../../Common/LinkWrapper'
 
 type StyledAnchorProps = {
   disabled?: boolean
   active?: boolean
   positionData: positionData
   ref: RefObject<HTMLAnchorElement>
-  href: string
+  href?: string
 }
 
 type NavAnchorProps = {
   disabled?: boolean
-  href: string
   onClick?: (e: any) => {}
-  hoverHandler: any
-  router?: NextRouter
-}
-
-type NavAnchorState = {
-  active: boolean
 }
 
 const clickAnimationDesktop = (props: any) =>
@@ -168,55 +156,37 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
   }
 `
 
-class NavAnchorWithoutRouter extends Component<NavAnchorProps, NavAnchorState> {
-  anchorRef: RefObject<HTMLAnchorElement>
+const RefAnchor = forwardRef<
+  HTMLAnchorElement,
+  NavAnchorProps & HTMLProps<HTMLAnchorElement>
+>(
+  //@ts-ignore
+  (props, ref) => <StyledAnchor {...props} ref={ref} />
+)
 
-  get positionData(): positionData {
-    if (this.anchorRef.current) {
-      const bounds = this.anchorRef.current.getBoundingClientRect()
+export const NavAnchor: React.FunctionComponent<NavAnchorProps> = props => {
+  return (
+    <LinkWrapperContext.Consumer>
+      {({ ref, href, active, disabled, positionData, setIsHovering }) => {
+        const contextItems = {
+          ref,
+          href,
+          active,
+          disabled,
+          positionData,
+        }
 
-      return {
-        x: bounds.left,
-        y: bounds.top,
-        width: bounds.width,
-        height: bounds.height,
-      }
-    }
-  }
-
-  constructor(props) {
-    super(props)
-    this.state = {
-      active: false,
-    }
-    this.anchorRef = createRef<HTMLAnchorElement>()
-  }
-
-  componentDidUpdate() {
-    const { href, router, disabled } = this.props
-    const { active } = this.state
-    if (!disabled && router.route === href && !active) {
-      this.setState({
-        active: true,
-      })
-    }
-  }
-
-  render() {
-    const { children, hoverHandler } = this.props
-
-    return (
-      <StyledAnchor
-        ref={this.anchorRef}
-        onMouseOver={() => hoverHandler(true)}
-        onMouseOut={() => hoverHandler(false)}
-        positionData={this.positionData}
-        {...this.props}
-        {...this.state}
-      >
-        {children}
-      </StyledAnchor>
-    )
-  }
+        return (
+          <Link href={href}>
+            <RefAnchor
+              onMouseOver={() => setIsHovering(true)}
+              onMouseOut={() => setIsHovering(false)}
+              {...contextItems}
+              {...props}
+            />
+          </Link>
+        )
+      }}
+    </LinkWrapperContext.Consumer>
+  )
 }
-export const NavAnchor = withRouter(NavAnchorWithoutRouter)

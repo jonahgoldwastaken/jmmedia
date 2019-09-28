@@ -1,10 +1,16 @@
 import { styled } from '../../../theme'
+import { LinkWrapperContext } from '../../Common/LinkWrapper'
 
-type ItemPlaceholderProps = {
+type StyledImgProps = {
   hovering: boolean
 }
 
-export const ItemPlaceholder = styled.img<ItemPlaceholderProps>`
+type ItemPlaceholderProps = {
+  src: string
+  alt: string
+}
+
+const StyledImg = styled.img<StyledImgProps>`
   position: absolute;
   z-index: 1;
   top: 0%;
@@ -22,3 +28,10 @@ export const ItemPlaceholder = styled.img<ItemPlaceholderProps>`
     display: none;
   }
 `
+export const ItemPlaceholder: React.FunctionComponent<
+  ItemPlaceholderProps
+> = props => (
+  <LinkWrapperContext.Consumer>
+    {({ isHovering }) => <StyledImg hovering={isHovering} {...props} />}
+  </LinkWrapperContext.Consumer>
+)

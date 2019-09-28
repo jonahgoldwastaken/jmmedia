@@ -1,6 +1,20 @@
-import { styled } from '../../../theme'
-import { VideoElement } from '../../Common'
+import { LinkWrapperContext } from '../../Common/LinkWrapper'
+import { VideoContainer, VideoElement } from '../../Common'
 
-export const ItemVideo = styled(VideoElement)`
-  filter: brightness(1);
-`
+type ItemVideoProps = {
+  video: string
+}
+
+export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
+  video,
+}) => (
+  <LinkWrapperContext.Consumer>
+    {({ isHovering }) => (
+      <VideoContainer mayPlayVideo={isHovering}>
+        {props => (
+          <VideoElement muted loop playsInline src={video} {...props} />
+        )}
+      </VideoContainer>
+    )}
+  </LinkWrapperContext.Consumer>
+)
