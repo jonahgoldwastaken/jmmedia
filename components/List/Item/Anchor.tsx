@@ -36,6 +36,7 @@ export const StyledAnchor = styled.a<StyledAnchorProps>`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  text-transform: uppercase;
   background: ${props => props.theme.pageColours[props.href]};
 
   &:after {
