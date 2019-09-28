@@ -1,5 +1,5 @@
-import { styled } from '../../theme'
 import { css } from 'styled-components'
+import { styled } from '../../theme'
 
 type SectionImageProps = {
   last?: boolean

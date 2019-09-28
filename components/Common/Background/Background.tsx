@@ -5,9 +5,9 @@ import animationChooser from '../../../utils/animationChooser'
 import {
   SlideOutDown,
   SlideOutRight,
-  ZoomOut,
   SwipeOutDown,
   SwipeOutRight,
+  ZoomOut,
 } from '../../Animations'
 import { BackgroundContext } from './Context'
 

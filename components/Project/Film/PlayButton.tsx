@@ -1,8 +1,8 @@
-import { styled } from '../../../theme'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { FilmContext } from './Context'
 import { css } from 'styled-components'
-import { ZoomOut, FadeOut, FadeIn } from '../../Animations'
+import { styled } from '../../../theme'
+import { FadeIn, FadeOut } from '../../Animations'
+import { FilmContext } from './Context'
 
 type StyledButtonProps = {
   filmState: 'unopened' | 'open' | 'closed'

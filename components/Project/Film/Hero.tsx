@@ -1,12 +1,11 @@
 import { rgba } from 'polished'
 import { useState } from 'react'
-import { css } from 'styled-components'
 import { styled } from '../../../theme'
+import { FadeIn, FadeOut } from '../../Animations'
 import Header from '../../Common/Header'
+import { FilmCloseButton } from './CloseButton'
 import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
-import { FilmCloseButton } from './CloseButton'
-import { FadeOut, FadeIn } from '../../Animations'
 
 type StyledHeaderProps = {
   background: string

@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { styled } from '../../../theme'
-import { RotateInDown, RotateOutDown } from '../../Animations'
+import { LinkWrapperContext } from '../../Common/LinkWrapper'
 
 type ItemTitleProps = {
   hovering: boolean
@@ -21,29 +21,14 @@ const StyledHeading = styled.h2<ItemTitleProps>`
     css`
       text-shadow: ${props.theme.textShadow};
     `};
-
-  .page-transition-enter & {
-    opacity: 0;
-  }
-
-  .page-transition-enter-active & {
-    animation: ${RotateInDown}
-      ${props =>
-        `${props.theme.animation.timing[0]} ${props.theme.animation.curve} ${props.theme.animation.timing[0]}`}
-      forwards;
-  }
-
-  .page-transition-exit-active & {
-    animation: ${RotateOutDown}
-      ${props =>
-        `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
-      forwards;
-  }
 `
 
-export const ItemTitle: React.FunctionComponent<ItemTitleProps> = ({
-  children,
-  ...props
-}) => {
-  return <StyledHeading {...props}>{children}</StyledHeading>
+export const ItemTitle: React.FunctionComponent = ({ children }) => {
+  return (
+    <LinkWrapperContext.Consumer>
+      {({ isHovering }) => (
+        <StyledHeading hovering={isHovering}>{children}</StyledHeading>
+      )}
+    </LinkWrapperContext.Consumer>
+  )
 }
