@@ -29,5 +29,6 @@ export const theme = {
     '/film': '#353535',
     '/film/loriyiu': '#8954c7',
     '/film/awakening': '#00b7f1',
+    '/film/haarlem': '#000000',
   },
 }

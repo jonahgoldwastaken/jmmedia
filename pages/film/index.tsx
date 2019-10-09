@@ -21,6 +21,16 @@ export default () => {
         </Header>
         <List>
           <ListItem
+            href="/film/haarlem"
+            imgAlt="Stationslogo Haarlem Centraal"
+            imgSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png"
+            vidSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/preview.mp4"
+            columns={[1, 2, 6]}
+            rows={[1, 1, 2]}
+          >
+            Haarlem
+          </ListItem>
+          <ListItem
             href="/film/loriyiu"
             imgAlt="Lori Yiu achter de toetsen"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png"

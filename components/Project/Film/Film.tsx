@@ -34,6 +34,9 @@ const StyledVideo = styled(VideoElement)<StyledVideoProps>`
     css`
       filter: brightness(0.25);
       pointer-events: none;
+      @media screen and (min-width: ${props.theme.breakpoints[2]}) {
+        object-fit: cover;
+      }
     `};
 `
 export const Film: React.FunctionComponent<any> = props => (
