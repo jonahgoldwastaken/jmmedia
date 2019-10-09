@@ -50,7 +50,7 @@ export const Haarlem: NextPage = () => {
             </SectionParagraph>
           </SectionColumn>
         </ContentSection>
-        <Footer>Onder de indruk?</Footer>
+        <Footer>Zelf een meeslepend idee?</Footer>
       </Background>
     </>
   )
