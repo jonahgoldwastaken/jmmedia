@@ -24,7 +24,10 @@ export default () => {
             >
               Film
             </NavLink>
-            <NavLink href="/#" bgVideo="" disabled>
+            <NavLink
+              href="/over"
+              bgVideo="https://storage.googleapis.com/filmportfolio/over/background.mp4"
+            >
               Over mij
             </NavLink>
           </HeroNav>
