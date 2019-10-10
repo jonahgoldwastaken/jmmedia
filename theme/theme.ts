@@ -31,5 +31,6 @@ export const theme = {
     '/film/loriyiu': '#8954c7',
     '/film/awakening': '#00b7f1',
     '/film/stop': '#ab4444',
+    '/film/plantapp': '#4be6af',
   },
 }
