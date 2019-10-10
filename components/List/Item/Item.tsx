@@ -22,11 +22,6 @@ type ItemProps = {
   router?: NextRouter
 }
 
-type ItemState = {
-  active: boolean
-  isHovering: boolean
-}
-
 const StyledItem = styled.li<StyledItemProps>`
   position: relative;
   margin: 0;
@@ -63,7 +58,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
         <Link href={href}>
           <ItemAnchor>
             <ItemPlaceholder alt={imgAlt} src={imgSrc} />
-            <ItemVideo video={vidSrc} />
+            <ItemVideo placeholder={imgSrc} video={vidSrc} />
             <ItemTitle>{children}</ItemTitle>
           </ItemAnchor>
         </Link>

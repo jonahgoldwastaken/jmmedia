@@ -41,11 +41,21 @@ export default () => {
             Concert Lori Yiu
           </ListItem>
           <ListItem
+            href="/film/plantapp"
+            imgAlt="PlantApp logo met acteur in de achtergrond"
+            imgSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png"
+            vidSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/preview.mp4"
+            columns={[1, 2, 1]}
+            rows={[1, 1, 2]}
+          >
+            PlantApp
+          </ListItem>
+          <ListItem
             href="/film/awakening"
             imgAlt="Awakening, sound of sleep logo"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/awakening/preview.mp4"
-            columns={[1, 2, 3]}
+            columns={[1, 2, 2]}
             rows={[1, 1, 2]}
           >
             Awakening
