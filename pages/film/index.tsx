@@ -21,14 +21,14 @@ export default () => {
         </Header>
         <List>
           <ListItem
-            href="/film/haarlem"
+            href="/film/stop"
             imgAlt="Stationslogo Haarlem Centraal"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/preview.mp4"
             columns={[1, 2, 6]}
             rows={[1, 1, 2]}
           >
-            Haarlem
+            Stop
           </ListItem>
           <ListItem
             href="/film/loriyiu"
