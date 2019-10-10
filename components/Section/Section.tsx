@@ -44,6 +44,10 @@ const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
     grid-template-columns: repeat(6, 1fr);
   }
 
+  .page-transition-enter & {
+    opacity: 0;
+  }
+
   .page-transition-enter-active & {
     position: relative;
     opacity: 1;
