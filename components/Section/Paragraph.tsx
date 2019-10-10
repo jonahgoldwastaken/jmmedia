@@ -2,6 +2,7 @@ import { styled } from '../../theme'
 
 type SectionParagraphProps = {
   light?: boolean
+  alignRight?: boolean
 }
 
 export const SectionParagraph = styled.p<SectionParagraphProps>`
@@ -11,6 +12,7 @@ export const SectionParagraph = styled.p<SectionParagraphProps>`
   line-height: 1.4;
   color: ${props =>
     props.light ? props.theme.colors.primary : props.theme.colors.secondary};
+  text-align: ${props => (props.alignRight ? 'right' : 'left')};
 
   &:last-child {
     margin-bottom: 0;

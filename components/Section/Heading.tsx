@@ -2,6 +2,7 @@ import { styled } from '../../theme'
 
 type SectionHeadingProps = {
   light?: boolean
+  alignRight?: boolean
 }
 
 export const SectionHeading = styled.h2<SectionHeadingProps>`
@@ -11,4 +12,5 @@ export const SectionHeading = styled.h2<SectionHeadingProps>`
   font-weight: ${props => props.theme.fontWeights[1]};
   color: ${props =>
     props.light ? props.theme.colors.primary : props.theme.colors.secondary};
+  text-align: ${props => (props.alignRight ? 'right' : 'left')};
 `

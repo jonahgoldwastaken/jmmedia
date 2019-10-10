@@ -26,6 +26,7 @@ export const theme = {
   textShadow: '2px 2px 5px rgba(0, 0, 0, 0.75)',
   pageColours: {
     '/': 'black',
+    '/over': '#353535',
     '/film': '#353535',
     '/film/loriyiu': '#8954c7',
     '/film/awakening': '#00b7f1',
