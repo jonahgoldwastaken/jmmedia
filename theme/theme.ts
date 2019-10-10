@@ -3,7 +3,7 @@ export const theme = {
   colors: {
     primary: 'white',
     secondary: 'black',
-    tertiary: '#353535',
+    tertiary: '#505050',
     disabled: 'lightgrey',
   },
   space: ['0.5rem', '1rem', '1.5rem', '3rem', '6rem'],
@@ -26,8 +26,8 @@ export const theme = {
   textShadow: '2px 2px 5px rgba(0, 0, 0, 0.75)',
   pageColours: {
     '/': 'black',
-    '/over': '#353535',
-    '/film': '#353535',
+    '/over': '#476060',
+    '/film': '#505050',
     '/film/loriyiu': '#8954c7',
     '/film/awakening': '#00b7f1',
     '/film/stop': '#ab4444',
