@@ -1,17 +1,12 @@
 import Link from 'next/link'
 import { forwardRef, HTMLProps, RefObject } from 'react'
 import { css, keyframes } from 'styled-components'
-import { positionData } from '../../../../interfaces/positionData'
 import theme, { styled } from '../../../../theme'
-import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
-import { Anchor } from '../../../Common/Link/Anchor'
+import { LinkWrapperContext } from '../../../Common/Link'
+import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
 
-type StyledAnchorProps = {
+type StyledAnchorProps = BaseAnchorProps & {
   disabled?: boolean
-  active?: boolean
-  positionData: positionData
-  ref: RefObject<HTMLAnchorElement>
-  href?: string
 }
 
 type NavAnchorProps = {

@@ -1,6 +1,6 @@
-import { forwardRef, HTMLProps, Ref } from 'react'
+import { rgba } from 'polished'
+import { forwardRef, HTMLProps } from 'react'
 import { css, keyframes } from 'styled-components'
-import { positionData } from '../../../interfaces/positionData'
 import { styled } from '../../../theme'
 import animationChooser from '../../../utils/animationChooser'
 import {
@@ -9,15 +9,10 @@ import {
   CurtainOpenHorizontal,
   CurtainOpenVertical,
 } from '../../Animations'
-import { LinkWrapperContext } from '../../Common/Link/Wrapper'
-import { rgba } from 'polished'
-import { Anchor } from '../../Common/Link/Anchor'
+import { LinkWrapperContext } from '../../Common/Link'
+import { Anchor, BaseAnchorProps } from '../../Common/Link/Anchor'
 
-type StyledAnchorProps = {
-  active: boolean
-  positionData: positionData
-  href: string
-  ref: Ref<HTMLAnchorElement>
+type StyledAnchorProps = BaseAnchorProps & {
   background: string
 }
 

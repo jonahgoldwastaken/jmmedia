@@ -1,4 +1,13 @@
 import { styled } from '../../../theme'
+import { Ref } from 'react'
+import { positionData } from '../../../interfaces/positionData'
+
+export type BaseAnchorProps = {
+  active: boolean
+  positionData: positionData
+  href: string
+  ref: Ref<HTMLAnchorElement>
+}
 
 export const Anchor = styled.a`
   font-family: ${props => props.theme.fonts.sans};

@@ -14,7 +14,7 @@ type StyledVideoProps = {
 const StyledVideo = styled(VideoElement)<StyledVideoProps>`
   position: relative;
   grid-row: 1 / span 2;
-  grid-column: 1 / span 1;
+  grid-column: 1;
   opacity: 0;
   filter: none;
   transition: filter

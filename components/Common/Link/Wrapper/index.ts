@@ -1,2 +1,2 @@
-export { LinkWrapper as default } from './LinkWrapper'
+export * from './LinkWrapper'
 export * from './Context'
