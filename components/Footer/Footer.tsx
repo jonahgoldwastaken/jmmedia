@@ -10,6 +10,10 @@ export const StyledFooter = styled.footer`
   min-height: ${props => props.theme.sizes.static[1]};
   background: ${props => props.theme.colors.tertiary};
 
+  @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
+    padding: ${props => props.theme.space[2]};
+  }
+
   .page-transition-enter & {
     opacity: 0;
   }
