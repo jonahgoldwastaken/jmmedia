@@ -29,7 +29,7 @@ export const FooterContactLink = styled.li`
 
     svg {
       display: block;
-      margin: 0 auto ${props => props.theme.space[1]};
+      margin: 0 auto ${props => props.theme.space[0]};
     }
 
     span {
@@ -39,9 +39,11 @@ export const FooterContactLink = styled.li`
       font-size: ${props => props.theme.fontSizes[1]};
       text-transform: uppercase;
       font-weight: ${props => props.theme.fontWeights[0]};
+
       @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-        font-size: ${props => props.theme.fontSizes[2]};
+        font-size: ${props => props.theme.fontSizes[1]};
       }
+
       &:after {
         content: '';
         display: block;

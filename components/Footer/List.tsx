@@ -2,7 +2,7 @@ import { styled } from '../../theme'
 
 export const FooterList = styled.ul`
   list-style: none;
-  margin: ${props => props.theme.space[4]} auto 0;
+  margin: ${props => props.theme.space[3]} auto 0;
   padding: 0;
   display: grid;
   grid-template-columns: auto;

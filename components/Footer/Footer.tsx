@@ -7,7 +7,6 @@ import { FooterParagraph } from './Paragraph'
 
 export const StyledFooter = styled.footer`
   padding: ${props => props.theme.space[3]};
-  min-height: ${props => props.theme.sizes.static[1]};
   background: ${props => props.theme.colors.tertiary};
 
   @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
