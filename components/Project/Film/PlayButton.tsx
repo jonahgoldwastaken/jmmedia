@@ -1,11 +1,12 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from 'styled-components'
+import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
 import { FadeIn, FadeOut } from '../../Animations'
 import { FilmContext } from './Context'
 
 type StyledButtonProps = {
-  filmState: 'unopened' | 'open' | 'closed'
+  filmState: filmState
 }
 
 const StyledButton = styled.button<StyledButtonProps>`

@@ -1,4 +1,5 @@
 import { css } from 'styled-components'
+import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
 import { FadeIn } from '../../Animations'
 import { VideoContainer, VideoElement } from '../../Common'
@@ -6,14 +7,14 @@ import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
 
 type StyledVideoProps = {
-  filmState: 'unopened' | 'open' | 'closed'
+  filmState: filmState
   src: string
 }
 
 const StyledVideo = styled(VideoElement)<StyledVideoProps>`
   position: relative;
   grid-row: 1 / span 2;
-  grid-column: 1 / span 1;
+  grid-column: 1;
   opacity: 0;
   filter: none;
   transition: filter

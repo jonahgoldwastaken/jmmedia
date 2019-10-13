@@ -1,6 +1,6 @@
 import { styled } from '../../../../theme'
 import { FadeIn } from '../../../Animations'
-import LinkWrapper from '../../../Common/LinkWrapper'
+import { LinkWrapper } from '../../../Common/Link'
 import { NavAnchor } from './Anchor'
 import { LinkVideo } from './Video'
 

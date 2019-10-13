@@ -42,25 +42,33 @@ export const Footer: React.FunctionComponent = ({ children }) => (
     </FooterParagraph>
     <FooterList>
       <FooterContactLink>
-        <a target="_blank" href="tel:+31623267536">
+        <a rel="noreferrer" target="_blank" href="tel:+31623267536">
           <FontAwesomeIcon icon="phone" />
           <span>Geef een belletje</span>
         </a>
       </FooterContactLink>
       <FooterContactLink>
-        <a target="_blank" href="mailto:info@jonahmeijers.nl">
+        <a rel="noreferrer" target="_blank" href="mailto:info@jonahmeijers.nl">
           <FontAwesomeIcon icon="envelope" />
           <span>Stuur een mailtje</span>
         </a>
       </FooterContactLink>
       <FooterContactLink>
-        <a target="_blank" href="https://www.instagram.com/jonahgold.jpg">
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href="https://www.instagram.com/jonahgold.jpg"
+        >
           <FontAwesomeIcon icon={['fab', 'instagram']} />
           <span>Check mijn Instagram</span>
         </a>
       </FooterContactLink>
       <FooterContactLink>
-        <a target="_blank" href="https://www.linkedin.com/in/jonahmeijers/">
+        <a
+          rel="noreferrer"
+          target="_blank"
+          href="https://www.linkedin.com/in/jonahmeijers/"
+        >
           <FontAwesomeIcon icon={['fab', 'linkedin']} />
           <span>Bekijk mijn LinkedIn</span>
         </a>

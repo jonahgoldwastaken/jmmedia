@@ -1,6 +1,6 @@
-import { forwardRef, HTMLProps, Ref } from 'react'
+import { rgba } from 'polished'
+import { forwardRef, HTMLProps } from 'react'
 import { css, keyframes } from 'styled-components'
-import { positionData } from '../../../interfaces/positionData'
 import { styled } from '../../../theme'
 import animationChooser from '../../../utils/animationChooser'
 import {
@@ -9,13 +9,11 @@ import {
   CurtainOpenHorizontal,
   CurtainOpenVertical,
 } from '../../Animations'
-import { LinkWrapperContext } from '../../Common/LinkWrapper'
+import { LinkWrapperContext } from '../../Common/Link'
+import { Anchor, BaseAnchorProps } from '../../Common/Link/Anchor'
 
-type StyledAnchorProps = {
-  active: boolean
-  positionData: positionData
-  href: string
-  ref: Ref<HTMLAnchorElement>
+type StyledAnchorProps = BaseAnchorProps & {
+  background: string
 }
 
 const openAnimations = [CurtainOpenHorizontal, CurtainOpenVertical]
@@ -29,18 +27,17 @@ const clickAnimationDesktop = keyframes`
     }
 `
 
-export const StyledAnchor = styled.a<StyledAnchorProps>`
+export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  background: ${props => props.theme.pageColours[props.href]};
+  font-size: ${props => props.theme.fontSizes[1]};
+  background: linear-gradient(${rgba('black', 0.5)}, ${rgba('black', 0.5)}),
+    url(${props => props.background}) no-repeat center/cover;
 
   &:after {
-    content: '';
     opacity: 0;
     background: ${props => props.theme.pageColours[props.href]};
   }
@@ -94,7 +91,9 @@ const RefAnchor = forwardRef<
   //@ts-ignore
 >((props, ref) => <StyledAnchor {...props} ref={ref} />)
 
-export const ItemAnchor: React.FunctionComponent = props => {
+export const ItemAnchor: React.FunctionComponent<{
+  background: string
+}> = props => {
   return (
     <LinkWrapperContext.Consumer>
       {({ active, ref, positionData, href, setIsHovering }) => {
@@ -107,8 +106,8 @@ export const ItemAnchor: React.FunctionComponent = props => {
 
         return (
           <RefAnchor
-            onMouseOver={() => setIsHovering(true)}
-            onMouseOut={() => setIsHovering(false)}
+            onMouseOverCapture={() => setIsHovering(true)}
+            onMouseOutCapture={() => setIsHovering(false)}
             {...contextItems}
             {...props}
           />

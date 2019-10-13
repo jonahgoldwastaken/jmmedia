@@ -11,7 +11,6 @@ export const LinkWrapper: React.FunctionComponent<ListLinkProps> = ({
   href,
   disabled,
   children,
-  ...props
 }) => {
   const [isHovering, setIsHovering] = useState(false)
   const [active, setActive] = useState(false)
