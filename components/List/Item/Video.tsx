@@ -15,7 +15,7 @@ export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
       <VideoContainer mayPlayVideo={isHovering}>
         {props => (
           <VideoElement
-            placeholder={placeholder}
+            poster={placeholder}
             muted
             loop
             playsInline
