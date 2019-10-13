@@ -1,10 +1,11 @@
 import { css } from 'styled-components'
+import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
-import { FilmContext } from './Context'
 import { NavButton } from '../../Common'
+import { FilmContext } from './Context'
 
 type StyledButtonProps = {
-  filmState: 'open' | 'unopened' | 'closed'
+  filmState: filmState
 }
 
 const StyledButton = styled(NavButton)<StyledButtonProps>`

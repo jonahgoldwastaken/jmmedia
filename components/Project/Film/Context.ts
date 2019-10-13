@@ -1,7 +1,8 @@
 import { createContext } from 'react'
+import { filmState } from '../../../interfaces/filmState'
 
 interface FilmContext {
-  state: 'unopened' | 'open' | 'closed'
+  state: filmState
   setState: any
 }
 

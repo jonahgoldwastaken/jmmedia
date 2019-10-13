@@ -1,5 +1,6 @@
 import { rgba } from 'polished'
 import { useState } from 'react'
+import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
 import { FadeIn, FadeOut } from '../../Animations'
 import Header from '../../Common/Header'
@@ -9,7 +10,7 @@ import { FilmPlayButton } from './PlayButton'
 
 type StyledHeaderProps = {
   background: string
-  state: 'open' | 'unopened' | 'closed'
+  state: filmState
 }
 
 type FilmHeroProps = {
@@ -59,9 +60,7 @@ export const FilmHero: React.FunctionComponent<FilmHeroProps> = ({
   children,
   ...props
 }) => {
-  const [filmState, setFilmState] = useState<'unopened' | 'open' | 'closed'>(
-    'unopened'
-  )
+  const [filmState, setFilmState] = useState<filmState>('unopened')
   return (
     <FilmContext.Provider value={{ state: filmState, setState: setFilmState }}>
       <StyledHeader state={filmState} {...props}>

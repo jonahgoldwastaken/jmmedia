@@ -1,4 +1,5 @@
 import { css } from 'styled-components'
+import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
 import { FadeIn } from '../../Animations'
 import { VideoContainer, VideoElement } from '../../Common'
@@ -6,7 +7,7 @@ import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
 
 type StyledVideoProps = {
-  filmState: 'unopened' | 'open' | 'closed'
+  filmState: filmState
   src: string
 }
 

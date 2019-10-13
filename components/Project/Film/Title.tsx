@@ -1,11 +1,12 @@
 import { css } from 'styled-components'
+import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
 import { SwipeInRight, SwipeOutLeft } from '../../Animations'
 import { Heading } from '../../Common'
 import { FilmContext } from './Context'
 
 type StyledHeadingProps = {
-  filmState: 'unopened' | 'open' | 'closed'
+  filmState: filmState
 }
 
 const StyledHeading = styled(Heading)<StyledHeadingProps>`
