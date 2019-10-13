@@ -29,6 +29,7 @@ const About: NextPage = () => {
             <SectionImage
               src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
               alt="Profielfoto Jonah Meijers"
+              first
             />
           </SectionColumn>
           <SectionColumn column={[1, 3, 4]} span={[2, 1, 1]}>
@@ -60,6 +61,7 @@ const About: NextPage = () => {
             <SectionImage
               src="https://storage.googleapis.com/filmportfolio/over/fotograferen.jpg"
               alt="Nachtfoto's maken bij de Thames"
+              last
             />
           </SectionColumn>
         </ContentSection>
