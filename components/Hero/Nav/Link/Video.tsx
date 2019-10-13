@@ -1,6 +1,6 @@
 import { styled } from '../../../../theme'
 import { VideoContainer, VideoElement } from '../../../Common'
-import { LinkWrapperContext } from '../../../Common/LinkWrapper'
+import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
 
 type LinkVideoProps = {
   video: string

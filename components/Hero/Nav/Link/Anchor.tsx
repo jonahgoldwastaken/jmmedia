@@ -3,7 +3,8 @@ import { forwardRef, HTMLProps, RefObject } from 'react'
 import { css, keyframes } from 'styled-components'
 import { positionData } from '../../../../interfaces/positionData'
 import theme, { styled } from '../../../../theme'
-import { LinkWrapperContext } from '../../../Common/LinkWrapper'
+import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
+import { Anchor } from '../../../Common/Link/Anchor'
 
 type StyledAnchorProps = {
   disabled?: boolean
@@ -73,21 +74,12 @@ const clickAnimationMobile = (props: any) => keyframes`
 
 `
 
-const StyledAnchor = styled.a<StyledAnchorProps>`
+const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   position: relative;
   z-index: 2;
-  font-family: ${props => props.theme.fonts.sans};
   font-size: ${props => props.theme.fontSizes[3]};
-  font-weight: ${props => props.theme.fontWeights[1]};
-  text-align: center;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: ${props => props.theme.colors.primary};
-  cursor: pointer;
 
   &:after {
-    content: '';
-    display: block;
     position: absolute;
     bottom: 0%;
     width: 0%;
@@ -109,13 +101,9 @@ const StyledAnchor = styled.a<StyledAnchorProps>`
   }
 
   @media screen and (pointer: fine) {
-    &:hover {
-      text-shadow: ${props => props.theme.textShadow};
-
-      &:after {
-        width: 100%;
-        box-shadow: ${props => props.theme.textShadow};
-      }
+    &:hover:after {
+      width: 100%;
+      box-shadow: ${props => props.theme.textShadow};
     }
   }
 

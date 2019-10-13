@@ -61,6 +61,7 @@ export const FilmHero: React.FunctionComponent<FilmHeroProps> = ({
   ...props
 }) => {
   const [filmState, setFilmState] = useState<filmState>('unopened')
+
   return (
     <FilmContext.Provider value={{ state: filmState, setState: setFilmState }}>
       <StyledHeader state={filmState} {...props}>

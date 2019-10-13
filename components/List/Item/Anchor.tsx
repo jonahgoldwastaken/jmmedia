@@ -9,8 +9,9 @@ import {
   CurtainOpenHorizontal,
   CurtainOpenVertical,
 } from '../../Animations'
-import { LinkWrapperContext } from '../../Common/LinkWrapper'
+import { LinkWrapperContext } from '../../Common/Link/Wrapper'
 import { rgba } from 'polished'
+import { Anchor } from '../../Common/Link/Anchor'
 
 type StyledAnchorProps = {
   active: boolean
@@ -31,19 +32,17 @@ const clickAnimationDesktop = keyframes`
     }
 `
 
-export const StyledAnchor = styled.a<StyledAnchorProps>`
+export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-decoration: none;
-  text-transform: uppercase;
+  font-size: ${props => props.theme.fontSizes[1]};
   background: linear-gradient(${rgba('black', 0.5)}, ${rgba('black', 0.5)}),
     url(${props => props.background}) no-repeat center/cover;
 
   &:after {
-    content: '';
     opacity: 0;
     background: ${props => props.theme.pageColours[props.href]};
   }

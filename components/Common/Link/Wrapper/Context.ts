@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, MutableRefObject } from 'react'
 import { createContext } from 'react'
-import { positionData } from '../../../interfaces/positionData'
+import { positionData } from '../../../../interfaces/positionData'
 
 interface LinkWrapperContext {
   isHovering: boolean

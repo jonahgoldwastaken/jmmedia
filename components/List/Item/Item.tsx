@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { NextRouter } from 'next/router'
 import { styled } from '../../../theme'
-import LinkWrapper from '../../Common/LinkWrapper'
+import LinkWrapper from '../../Common/Link/Wrapper'
 import { ItemAnchor } from './Anchor'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
