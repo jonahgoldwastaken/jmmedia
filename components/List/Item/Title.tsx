@@ -15,6 +15,7 @@ const StyledHeading = styled.h2<ItemTitleProps>`
   font-size: ${props => props.theme.fontSizes[2]};
   text-align: center;
   text-decoration: none;
+  pointer-events: none;
 
   ${props =>
     props.hovering &&

@@ -3,7 +3,6 @@ import { NextRouter } from 'next/router'
 import { styled } from '../../../theme'
 import LinkWrapper from '../../Common/LinkWrapper'
 import { ItemAnchor } from './Anchor'
-import { ItemPlaceholder } from './Placholder'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
 
@@ -17,7 +16,6 @@ type ItemProps = {
   rows: number[]
   vidSrc: string
   imgSrc: string
-  imgAlt: string
   href: string
   router?: NextRouter
 }
@@ -47,7 +45,6 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
   href,
   columns,
   rows,
-  imgAlt,
   imgSrc,
   vidSrc,
   children,
@@ -56,9 +53,8 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
     <LinkWrapper href={href}>
       <StyledItem columns={columns} rows={rows}>
         <Link href={href}>
-          <ItemAnchor>
-            <ItemPlaceholder alt={imgAlt} src={imgSrc} />
-            <ItemVideo placeholder={imgSrc} video={vidSrc} />
+          <ItemAnchor background={imgSrc}>
+            <ItemVideo video={vidSrc} />
             <ItemTitle>{children}</ItemTitle>
           </ItemAnchor>
         </Link>

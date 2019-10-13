@@ -10,12 +10,14 @@ import {
   CurtainOpenVertical,
 } from '../../Animations'
 import { LinkWrapperContext } from '../../Common/LinkWrapper'
+import { rgba } from 'polished'
 
 type StyledAnchorProps = {
   active: boolean
   positionData: positionData
   href: string
   ref: Ref<HTMLAnchorElement>
+  background: string
 }
 
 const openAnimations = [CurtainOpenHorizontal, CurtainOpenVertical]
@@ -37,7 +39,8 @@ export const StyledAnchor = styled.a<StyledAnchorProps>`
   align-items: center;
   text-decoration: none;
   text-transform: uppercase;
-  background: ${props => props.theme.pageColours[props.href]};
+  background: linear-gradient(${rgba('black', 0.5)}, ${rgba('black', 0.5)}),
+    url(${props => props.background}) no-repeat center/cover;
 
   &:after {
     content: '';
@@ -94,7 +97,9 @@ const RefAnchor = forwardRef<
   //@ts-ignore
 >((props, ref) => <StyledAnchor {...props} ref={ref} />)
 
-export const ItemAnchor: React.FunctionComponent = props => {
+export const ItemAnchor: React.FunctionComponent<{
+  background: string
+}> = props => {
   return (
     <LinkWrapperContext.Consumer>
       {({ active, ref, positionData, href, setIsHovering }) => {
@@ -107,8 +112,8 @@ export const ItemAnchor: React.FunctionComponent = props => {
 
         return (
           <RefAnchor
-            onMouseOver={() => setIsHovering(true)}
-            onMouseOut={() => setIsHovering(false)}
+            onMouseOverCapture={() => setIsHovering(true)}
+            onMouseOutCapture={() => setIsHovering(false)}
             {...contextItems}
             {...props}
           />
