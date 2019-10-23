@@ -26,10 +26,6 @@ const StyledListItem = styled.li`
   }
 
   &:nth-child(2) {
-    justify-content: center;
-  }
-
-  &:nth-child(3) {
     justify-content: flex-end;
   }
 
@@ -40,14 +36,8 @@ const StyledListItem = styled.li`
   .page-transition-enter-active & {
     animation: ${FadeIn}
       ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
       forwards;
-    &:first-child,
-    &:last-child {
-      @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-        animation-delay: ${props => props.theme.animation.timing[0]};
-      }
-    }
   }
 `
 

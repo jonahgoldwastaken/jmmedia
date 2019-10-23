@@ -13,11 +13,8 @@ export default () => {
       <Background currentPage="/">
         <Hero>
           <HeroHeading>Jonah Meijers</HeroHeading>
-          <HeroSubHeading>Gepassioneerde filmmaker en fotograaf</HeroSubHeading>
+          <HeroSubHeading>Gepassioneerde filmmaker</HeroSubHeading>
           <HeroNav>
-            <NavLink href="/#" bgVideo="" disabled>
-              Fotografie
-            </NavLink>
             <NavLink
               href="/film"
               bgVideo="https://storage.googleapis.com/filmportfolio/film/background.mp4"
