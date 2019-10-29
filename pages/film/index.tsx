@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import { Background, NavButton } from '../../components/Common'
+import Link from 'next/link'
+import { NavButton } from '../../components/Common'
+import Background from '../../components/Common/Background'
 import Header, { HeaderHeading } from '../../components/Common/Header'
+import Footer from '../../components/Footer'
 import List from '../../components/List'
 import ListItem from '../../components/List/Item'
-import Link from 'next/link'
-import Footer from '../../components/Footer'
 
 export default () => {
   return (

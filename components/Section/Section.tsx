@@ -8,7 +8,7 @@ import {
   SlideOutLeft,
   SlideOutRight,
 } from '../Animations'
-import { BackgroundContext } from '../Common'
+import { BackgroundContext } from '../Common/Background'
 
 type StyledSectionProps = {
   currentPage: string

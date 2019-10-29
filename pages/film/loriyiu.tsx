@@ -1,7 +1,8 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Background, NavButton } from '../../components/Common'
+import { NavButton } from '../../components/Common'
+import Background from '../../components/Common/Background'
 import Footer from '../../components/Footer'
 import {
   Film,
