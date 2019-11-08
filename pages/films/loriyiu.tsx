@@ -24,7 +24,7 @@ const LoriYiu: NextPage = () => {
       <Head>
         <title>Concert Lori Yiu - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film/loriyiu">
+      <Background currentPage="/films/loriyiu">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (

@@ -13,16 +13,16 @@ export default () => {
       <Head>
         <title>Film - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film">
+      <Background currentPage="/films">
         <Link href="/">
           <NavButton colour="white" icon="home" />
         </Link>
         <Header>
-          <HeaderHeading>Film</HeaderHeading>
+          <HeaderHeading>Films</HeaderHeading>
         </Header>
         <List>
           <ListItem
-            href="/film/stop"
+            href="/films/stop"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/preview.mp4"
             columns={[1, 2, 6]}
@@ -31,7 +31,7 @@ export default () => {
             Stop
           </ListItem>
           <ListItem
-            href="/film/loriyiu"
+            href="/films/loriyiu"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/preview.mp4"
             columns={[1, 2, 3]}
@@ -40,7 +40,7 @@ export default () => {
             Concert Lori Yiu
           </ListItem>
           <ListItem
-            href="/film/plantapp"
+            href="/films/plantapp"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/preview.mp4"
             columns={[1, 2, 1]}
@@ -49,7 +49,7 @@ export default () => {
             PlantApp
           </ListItem>
           <ListItem
-            href="/film/awakening"
+            href="/films/awakening"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/awakening/preview.mp4"
             columns={[1, 2, 2]}

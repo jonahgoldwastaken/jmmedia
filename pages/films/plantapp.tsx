@@ -23,7 +23,7 @@ const PlantApp: NextPage = () => {
       <Head>
         <title>PlantApp - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film/plantapp">
+      <Background currentPage="/films/plantapp">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (

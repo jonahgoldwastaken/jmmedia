@@ -23,7 +23,7 @@ export const Haarlem: NextPage = () => {
       <Head>
         <title>Stop - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film/stop">
+      <Background currentPage="/films/stop">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (

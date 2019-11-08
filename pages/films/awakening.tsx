@@ -24,7 +24,7 @@ const Awakening: NextPage = () => {
       <Head>
         <title>Awakening - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film/awakening">
+      <Background currentPage="/films/awakening">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (
