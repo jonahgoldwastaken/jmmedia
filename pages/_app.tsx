@@ -5,6 +5,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import styledSanitize from 'styled-sanitize'
 import theme from '../theme'
+import { logPageViews, initGA } from '../utils/analytics'
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Merriweather:400,700|Red+Hat+Display:400,500,700&display=swap');
@@ -18,6 +19,9 @@ const GlobalStyle = createGlobalStyle`
 `
 
 class MyApp extends App {
+  componentDidMount() {
+    if (typeof window !== 'undefined') logPageViews()
+  }
   render() {
     const { Component, pageProps, router } = this.props
     return (

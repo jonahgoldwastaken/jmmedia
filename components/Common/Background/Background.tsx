@@ -10,6 +10,8 @@ import {
   ZoomOut,
 } from '../../Animations'
 import { BackgroundContext } from './Context'
+import CookieConsent from 'react-cookie-consent'
+import { initGA } from '../../../utils/analytics'
 
 type StyledBackgroundProps = {
   currentPage: string
@@ -69,15 +71,36 @@ const TransititonBackground = styled.div<TransititonBackgroundProps>`
   background: ${props => props.theme.pageColours[props.route]};
 `
 
-export const Background: React.FunctionComponent<
-  PageBackgroundProps
-> = props => {
+export const Background: React.FunctionComponent<PageBackgroundProps> = props => {
   const router = useRouter()
 
   return (
     <BackgroundContext.Provider value={{ currentPage: props.currentPage }}>
       <StyledBackground {...props} route={router.route} />
       <TransititonBackground route={router.route} />
+      <CookieConsent
+        buttonText="Jazeker!"
+        declineButtonText="Nee bedankt"
+        enableDeclineButton
+        declineButtonStyle={{
+          background: '#b53333',
+          fontFamily: '"Red Hat Display", sans-serif',
+        }}
+        buttonStyle={{
+          color: '#fff',
+          background: '#33b533',
+          fontFamily: '"Red Hat Display", sans-serif',
+          fontWeight: 'bold',
+        }}
+        style={{
+          background: '#505050',
+          fontFamily: '"Red Hat Display", sans-serif',
+          fontWeight: 'bold',
+        }}
+        onAccept={() => initGA()}
+      >
+        Wij gebruiken cookies om deze website nog vetter te maken. Help je mee?
+      </CookieConsent>
     </BackgroundContext.Provider>
   )
 }
