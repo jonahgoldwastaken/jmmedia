@@ -10,7 +10,7 @@ import {
   FilmDetails,
   FilmHero,
   FilmTitle,
-} from '../../components/Project/Film'
+} from '../../components/Project'
 import ContentSection, {
   SectionColumn,
   SectionHeading,

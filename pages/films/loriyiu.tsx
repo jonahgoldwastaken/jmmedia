@@ -9,8 +9,8 @@ import {
   FilmDetails,
   FilmHero,
   FilmTitle,
-} from '../../components/Project/Film'
-import { FilmContext } from '../../components/Project/Film/Context'
+} from '../../components/Project'
+import { FilmContext } from '../../components/Project/Context'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
