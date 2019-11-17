@@ -1,7 +1,17 @@
 import { styled } from '../../theme'
 import { FadeIn, FadeOut } from '../Animations'
+import { logEvent } from '../../utils/analytics'
 
-export const FooterContactLink = styled.li`
+type StyledContactLink = {
+  onHover: () => void
+  onClick: () => void
+}
+
+type FooterContactLinkProps = {
+  type: 'phone' | 'mail' | 'instagram' | 'linkedin'
+}
+
+const StyledContactLink = styled.li<StyledContactLink>`
   .page-transition-enter & {
     opacity: 0;
   }
@@ -66,3 +76,16 @@ export const FooterContactLink = styled.li`
     }
   }
 `
+
+export const FooterContactLink: React.FunctionComponent<FooterContactLinkProps> = ({
+  type,
+  ...props
+}) => {
+  const LogHover = () => {
+    logEvent('Footer link hovers', `Hover over ${type}`)
+  }
+  const LogClick = () => {
+    logEvent('Footer link clicks', `Click on ${type}`)
+  }
+  return <StyledContactLink {...props} onHover={LogHover} onClick={LogClick} />
+}

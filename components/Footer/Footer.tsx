@@ -44,19 +44,19 @@ export const Footer: React.FunctionComponent = ({ children }) => (
       geweldigs van.
     </FooterParagraph>
     <FooterList>
-      <FooterContactLink>
+      <FooterContactLink type="phone">
         <a rel="noreferrer" target="_blank" href="tel:+31623267536">
           <FontAwesomeIcon icon="phone" />
           <span>Geef een belletje</span>
         </a>
       </FooterContactLink>
-      <FooterContactLink>
+      <FooterContactLink type="mail">
         <a rel="noreferrer" target="_blank" href="mailto:info@jonahmeijers.nl">
           <FontAwesomeIcon icon="envelope" />
           <span>Stuur een mailtje</span>
         </a>
       </FooterContactLink>
-      <FooterContactLink>
+      <FooterContactLink type="instagram">
         <a
           rel="noreferrer"
           target="_blank"
@@ -66,7 +66,7 @@ export const Footer: React.FunctionComponent = ({ children }) => (
           <span>Check mijn Instagram</span>
         </a>
       </FooterContactLink>
-      <FooterContactLink>
+      <FooterContactLink type="linkedin">
         <a
           rel="noreferrer"
           target="_blank"
