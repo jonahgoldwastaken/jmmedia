@@ -28,7 +28,7 @@ const Awakening: NextPage = () => {
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (
-              <Link href="/film">
+              <Link href="/films">
                 <NavButton hide={state === 'open'} icon="arrow-left" />
               </Link>
             )}
