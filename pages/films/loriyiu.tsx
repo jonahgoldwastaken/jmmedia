@@ -1,15 +1,16 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Background, NavButton } from '../../components/Common'
+import { NavButton } from '../../components/Common'
+import Background from '../../components/Common/Background'
 import Footer from '../../components/Footer'
 import {
   Film,
   FilmDetails,
   FilmHero,
   FilmTitle,
-} from '../../components/Project/Film'
-import { FilmContext } from '../../components/Project/Film/Context'
+} from '../../components/Project'
+import { FilmContext } from '../../components/Project/Context'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
@@ -23,11 +24,11 @@ const LoriYiu: NextPage = () => {
       <Head>
         <title>Concert Lori Yiu - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film/loriyiu">
+      <Background currentPage="/films/loriyiu">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (
-              <Link href="/film">
+              <Link href="/films">
                 <NavButton hide={state === 'open'} icon="arrow-left" />
               </Link>
             )}

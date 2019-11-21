@@ -27,10 +27,10 @@ export const theme = {
   pageColours: {
     '/': 'black',
     '/over': '#476060',
-    '/film': '#505050',
-    '/film/loriyiu': '#8954c7',
-    '/film/awakening': '#00b7f1',
-    '/film/stop': '#ab4444',
-    '/film/plantapp': '#4be6af',
+    '/films': '#505050',
+    '/films/loriyiu': '#8954c7',
+    '/films/awakening': '#00b7f1',
+    '/films/stop': '#ab4444',
+    '/films/plantapp': '#41bf92',
   },
 }

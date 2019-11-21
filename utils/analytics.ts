@@ -5,11 +5,13 @@ export const initGA = () => {
   console.log('Analytics initialised')
   ReactGA.initialize('UA-152045785-1')
 }
+
 export const logPageViews = () => {
   Router.events.on('routeChangeComplete', url => {
     logPageView()
   })
 }
+
 export const logPageView = () => {
   ReactGA.set({ page: window.location.pathname })
   ReactGA.pageview(window.location.pathname)

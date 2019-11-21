@@ -1,20 +1,21 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { Background, NavButton } from '../../components/Common'
+import Link from 'next/link'
+import { NavButton } from '../../components/Common'
+import Background from '../../components/Common/Background'
+import Footer from '../../components/Footer'
 import {
-  FilmHero,
+  Film,
   FilmContext,
   FilmDetails,
+  FilmHero,
   FilmTitle,
-  Film,
-} from '../../components/Project/Film'
-import Link from 'next/link'
+} from '../../components/Project'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionParagraph,
 } from '../../components/Section'
-import Footer from '../../components/Footer'
 
 const PlantApp: NextPage = () => {
   return (
@@ -22,11 +23,11 @@ const PlantApp: NextPage = () => {
       <Head>
         <title>PlantApp - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film/plantapp">
+      <Background currentPage="/films/plantapp">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (
-              <Link href="/film">
+              <Link href="/films">
                 <NavButton hide={state === 'open'} icon="arrow-left" />
               </Link>
             )}
@@ -35,12 +36,12 @@ const PlantApp: NextPage = () => {
           <FilmDetails>Productvideo - 2018</FilmDetails>
           <Film src="https://storage.googleapis.com/filmportfolio/film/plantapp/film.mp4" />
         </FilmHero>
-        <ContentSection dark>
+        <ContentSection>
           <SectionColumn column={[1, 2, 3]} span={[2, 2, 2]}>
-            <SectionHeading>
+            <SectionHeading light>
               Een app om je planten gezond te houden
             </SectionHeading>
-            <SectionParagraph>
+            <SectionParagraph light>
               PlantApp is de oplossing voor degenen die altijd vergeten op tijd
               hun planten water te geven. Dit doel moesten we duidelijk zien
               over te brengen in videovorm. De schoolopdracht bood ons keuze uit

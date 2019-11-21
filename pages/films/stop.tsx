@@ -1,7 +1,8 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { Background, NavButton } from '../../components/Common'
+import { NavButton } from '../../components/Common'
+import Background from '../../components/Common/Background'
 import Footer from '../../components/Footer'
 import {
   Film,
@@ -9,7 +10,7 @@ import {
   FilmDetails,
   FilmHero,
   FilmTitle,
-} from '../../components/Project/Film'
+} from '../../components/Project'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
@@ -22,11 +23,11 @@ export const Haarlem: NextPage = () => {
       <Head>
         <title>Stop - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film/stop">
+      <Background currentPage="/films/stop">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png">
           <FilmContext.Consumer>
             {({ state }) => (
-              <Link href="/film">
+              <Link href="/films">
                 <NavButton hide={state === 'open'} icon="arrow-left" />
               </Link>
             )}

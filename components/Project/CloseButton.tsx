@@ -1,8 +1,9 @@
 import { css } from 'styled-components'
-import { filmState } from '../../../interfaces/filmState'
-import { styled } from '../../../theme'
-import { NavButton } from '../../Common'
+import { filmState } from '../../interfaces/filmState'
+import { styled } from '../../theme'
+import { NavButton } from '../Common'
 import { FilmContext } from './Context'
+import { logEvent } from '../../utils/analytics'
 
 type StyledButtonProps = {
   filmState: filmState
@@ -35,9 +36,13 @@ export const FilmCloseButton: React.FunctionComponent = () => (
     {({ setState, state }) => (
       <StyledButton
         icon="times"
-        onClick={() =>
-          state === 'open' ? setState('closed') : setState('open')
-        }
+        onClick={() => {
+          setState('closed')
+          logEvent(
+            `Video plays on ${window.location.pathname}`,
+            `Stopped playing video`
+          )
+        }}
         hide={state !== 'open'}
         filmState={state}
       />

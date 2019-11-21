@@ -1,5 +1,4 @@
 import { styled } from '../../../../theme'
-import { FadeIn } from '../../../Animations'
 import { LinkWrapper } from '../../../Common/Link'
 import { NavAnchor } from './Anchor'
 import { LinkVideo } from './Video'
@@ -27,17 +26,6 @@ const StyledListItem = styled.li`
 
   &:nth-child(2) {
     justify-content: flex-end;
-  }
-
-  .page-transition-enter & {
-    opacity: 0;
-  }
-
-  .page-transition-enter-active & {
-    animation: ${FadeIn}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
-      forwards;
   }
 `
 

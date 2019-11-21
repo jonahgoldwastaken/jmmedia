@@ -43,30 +43,65 @@ const clickAnimationDesktop = (props: any) =>
   `
 
 const clickAnimationMobile = (props: any) => keyframes`
-    0% {
-      opacity: 0;
-      left: ${props.positionData.x}px;
-      top: ${props.positionData.y}px;
-      width: ${props.positionData.width}px;
-      height: ${props.positionData.height}px;
-      background: ${props.pageColour};
-    }
-    50% {
-      opacity: 1;
-      left: ${props.positionData.x}px;
-      top: ${props.positionData.y}px;
-      width: ${props.positionData.width}px;
-      height: ${props.positionData.height}px;
-      background: ${props.pageColour};
-    }
-    100% {
-      left: 0px;
-      top: 0px;
-      width: 100%;
-      height: 100vh;
-      background: ${props.theme.pageColours[props.href]};
-    }
+  0% {
+    opacity: 1;
+    left: ${props.positionData.x}px;
+    top: ${props.positionData.y + props.positionData.height}px;
+    width: ${props.positionData.width}px;
+    height: 0px;
+    background: ${props.pageColour};
+  }
+  50% {
+    opacity: 1;
+    left: ${props.positionData.x}px;
+    top: ${props.positionData.y}px;
+    width: ${props.positionData.width}px;
+    height: ${props.positionData.height}px;
+    background: ${props.pageColour};
+  }
+  100% {
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100vh;
+    background: ${props.theme.pageColours[props.href]};
+  }
+`
 
+const enterAnimation = keyframes`
+  0% {
+    color: transparent;
+  }
+  50% {
+    color: transparent;
+  }
+  51% {
+    color: white;
+  }
+  100%  {
+    color: white;
+  }
+`
+
+const enterAfterAnimation = keyframes`
+  0% {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+  }
+  50% {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  100% {
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 0%;
+  }
 `
 
 const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
@@ -114,6 +149,25 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
         box-shadow: none !important;
       }
     `}
+
+  .page-transition-enter & {
+    opacity: 0;
+  }
+
+  .page-transition-enter-active & {
+    color: transparent;
+    opacity: 1;
+    animation: ${enterAnimation}
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
+      forwards;
+    &::after {
+      animation: ${enterAfterAnimation}
+        ${props =>
+          `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
+        forwards;
+    }
+  }
 
   .page-transition-exit-active & {
     ${props =>

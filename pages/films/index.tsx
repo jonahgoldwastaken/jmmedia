@@ -1,10 +1,11 @@
 import Head from 'next/head'
-import { Background, NavButton } from '../../components/Common'
+import Link from 'next/link'
+import { NavButton } from '../../components/Common'
+import Background from '../../components/Common/Background'
 import Header, { HeaderHeading } from '../../components/Common/Header'
+import Footer from '../../components/Footer'
 import List from '../../components/List'
 import ListItem from '../../components/List/Item'
-import Link from 'next/link'
-import Footer from '../../components/Footer'
 
 export default () => {
   return (
@@ -12,25 +13,25 @@ export default () => {
       <Head>
         <title>Film - Jonah Meijers</title>
       </Head>
-      <Background currentPage="/film">
+      <Background currentPage="/films">
         <Link href="/">
           <NavButton colour="white" icon="home" />
         </Link>
         <Header>
-          <HeaderHeading>Film</HeaderHeading>
+          <HeaderHeading>Films</HeaderHeading>
         </Header>
         <List>
           <ListItem
-            href="/film/stop"
+            href="/films/stop"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/preview.mp4"
-            columns={[1, 2, 6]}
+            columns={[1, 2, 3]}
             rows={[1, 1, 2]}
           >
             Stop
           </ListItem>
           <ListItem
-            href="/film/loriyiu"
+            href="/films/loriyiu"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/preview.mp4"
             columns={[1, 2, 3]}
@@ -39,20 +40,20 @@ export default () => {
             Concert Lori Yiu
           </ListItem>
           <ListItem
-            href="/film/plantapp"
+            href="/films/plantapp"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/preview.mp4"
-            columns={[1, 2, 1]}
-            rows={[1, 1, 2]}
+            columns={[1, 2, 2]}
+            rows={[1, 1, 1]}
           >
             PlantApp
           </ListItem>
           <ListItem
-            href="/film/awakening"
+            href="/films/awakening"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/awakening/preview.mp4"
-            columns={[1, 2, 2]}
-            rows={[1, 1, 2]}
+            columns={[1, 2, 4]}
+            rows={[1, 1, 1]}
           >
             Awakening
           </ListItem>

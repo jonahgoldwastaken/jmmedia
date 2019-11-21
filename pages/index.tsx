@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Hero, { HeroHeading, HeroSubHeading } from '../components/Hero'
 import HeroNav, { NavLink } from '../components/Hero/Nav'
 import Footer from '../components/Footer'
-import { Background } from '../components/Common'
+import Background from '../components/Common/Background'
 
 export default () => {
   return (
@@ -16,10 +16,10 @@ export default () => {
           <HeroSubHeading>Gepassioneerde filmmaker</HeroSubHeading>
           <HeroNav>
             <NavLink
-              href="/film"
+              href="/films"
               bgVideo="https://storage.googleapis.com/filmportfolio/film/background.mp4"
             >
-              Film
+              Films
             </NavLink>
             <NavLink
               href="/over"
