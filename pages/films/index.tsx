@@ -25,7 +25,7 @@ export default () => {
             href="/films/stop"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/preview.mp4"
-            columns={[1, 2, 6]}
+            columns={[1, 2, 3]}
             rows={[1, 1, 2]}
           >
             Stop
@@ -43,8 +43,8 @@ export default () => {
             href="/films/plantapp"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/preview.mp4"
-            columns={[1, 2, 1]}
-            rows={[1, 1, 2]}
+            columns={[1, 2, 2]}
+            rows={[1, 1, 1]}
           >
             PlantApp
           </ListItem>
@@ -52,8 +52,8 @@ export default () => {
             href="/films/awakening"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/awakening/preview.mp4"
-            columns={[1, 2, 2]}
-            rows={[1, 1, 2]}
+            columns={[1, 2, 4]}
+            rows={[1, 1, 1]}
           >
             Awakening
           </ListItem>
