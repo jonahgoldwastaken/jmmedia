@@ -1,6 +1,6 @@
 import { styled } from '../../../theme'
 
-const StyledList = styled.ul`
+export const List = styled.ul`
   margin: 0 auto;
   padding: 0;
   width: ${props => props.theme.sizes.dynamic[2]};
@@ -22,5 +22,3 @@ const StyledList = styled.ul`
     grid-template-columns: repeat(6, 1fr);
   }
 `
-
-export const List: React.FunctionComponent = props => <StyledList {...props} />
