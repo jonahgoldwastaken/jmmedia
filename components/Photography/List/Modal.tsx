@@ -139,7 +139,6 @@ const CarouselStyles = {
       state.currentView.rotation === 'right'
     ) {
       styles.transform = 'rotate(90deg)'
-      styles.width = '100vh'
     }
     return styles
   },
