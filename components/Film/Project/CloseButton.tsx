@@ -1,9 +1,9 @@
 import { css } from 'styled-components'
-import { filmState } from '../../interfaces/filmState'
-import { styled } from '../../theme'
-import { NavButton } from '../Common'
+import { filmState } from '../../../interfaces/filmState'
+import { styled } from '../../../theme'
+import { NavButton } from '../../Common'
 import { FilmContext } from './Context'
-import { logEvent } from '../../utils/analytics'
+import { logEvent } from '../../../utils/analytics'
 
 type StyledButtonProps = {
   filmState: filmState

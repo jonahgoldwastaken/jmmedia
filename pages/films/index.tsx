@@ -4,8 +4,8 @@ import { NavButton } from '../../components/Common'
 import Background from '../../components/Common/Background'
 import Header, { HeaderHeading } from '../../components/Common/Header'
 import Footer from '../../components/Footer'
-import List from '../../components/List'
-import ListItem from '../../components/List/Item'
+import List from '../../components/Film/List'
+import ListItem from '../../components/Film/List/Item'
 
 export default () => {
   return (

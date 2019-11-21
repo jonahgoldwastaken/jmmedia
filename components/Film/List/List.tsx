@@ -1,4 +1,4 @@
-import { styled } from '../../theme'
+import { styled } from '../../../theme'
 
 const StyledList = styled.ul`
   margin: 0 auto;

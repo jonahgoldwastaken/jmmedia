@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
-import { filmState } from '../../interfaces/filmState'
-import { styled } from '../../theme'
-import { SwipeInLeft, SwipeOutRight } from '../Animations'
+import { filmState } from '../../../interfaces/filmState'
+import { styled } from '../../../theme'
+import { SwipeInLeft, SwipeOutRight } from '../../Animations'
 import { FilmContext } from './Context'
 
 type StyledParagraphProps = {
