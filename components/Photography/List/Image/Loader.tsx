@@ -5,17 +5,10 @@ const LoadingAnimation = keyframes`
   0% {
     top: 0%;
     height: 0%;
-    bottom: 100%;
-  }
-  50% {
-    top: 0%;
-    height: 100%;
-    bottom: 0%;
   }
   100% {
-    top: 100%;
-    height: 0%;
-    bottom: 0%;
+    top: 0%;
+    height: 100%;
   }
 `
 
@@ -34,7 +27,7 @@ const LoaderContainer = styled.div`
     animation: ${LoadingAnimation}
       ${props =>
         `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
-      infinite;
+      forwards;
   }
 `
 

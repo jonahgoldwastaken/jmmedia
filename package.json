@@ -34,6 +34,7 @@
     "react-ga": "^2.7.0",
     "react-html-parser": "^2.0.2",
     "react-images": "^1.0.0",
+    "react-inview-monitor": "^2.3.0",
     "react-photo-gallery": "^8.0.0",
     "react-shimmer": "^2.0.1",
     "styled-components": "^4.3.2",
@@ -43,7 +44,7 @@
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.35",
     "@types/node": "^12.7.3",
-    "@types/react": "^16.9.1",
+    "@types/react": "^16.9.11",
     "@types/styled-components": "^4.1.18",
     "babel-plugin-styled-components": "^1.10.6",
     "typescript": "^3.6.3"
