@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import Gallery from 'react-photo-gallery'
-import { Image } from './Image'
+import Image from './Image'
 import { ImageModal } from './Modal'
 
 const testPhotos = [

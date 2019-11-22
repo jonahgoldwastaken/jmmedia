@@ -1,5 +1,10 @@
-import { styled } from '../../../theme'
-import { CurtainOpenHorizontal, CurtainCloseHorizontal } from '../../Animations'
+import { styled } from '../../../../theme'
+import {
+  CurtainOpenHorizontal,
+  CurtainCloseHorizontal,
+} from '../../../Animations'
+import ShimmeredImage from 'react-shimmer'
+import { Loader } from './Loader'
 
 type ImageProps = {
   index: number
@@ -15,21 +20,14 @@ type ImageProps = {
   onClick: any
 }
 
-const ImgContainer = styled.img<ImageProps['photo']>`
+const ImgContainer = styled.div<ImageProps['photo']>`
   width: ${props => props.width}px;
   height: ${props => props.height}px;
   cursor: pointer;
 
-  .page-transition-enter & {
-    opacity: 0;
-  }
-
-  .page-transition-enter-active & {
-    opacity: 1;
-    animation: ${CurtainOpenHorizontal}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[0]}`}
-      forwards;
+  img {
+    width: 100%;
+    height: 100%;
   }
 
   .page-transition-exit-active & {
@@ -52,6 +50,8 @@ export const Image: React.FunctionComponent<ImageProps> = ({
         console.log('click!')
         onClick(e, { photo, index })
       }}
-    />
+    >
+      <ShimmeredImage src={photo.src} fallback={<Loader />} />
+    </ImgContainer>
   )
 }
