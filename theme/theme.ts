@@ -27,6 +27,7 @@ export const theme = {
   pageColours: {
     '/': 'black',
     '/over': '#476060',
+    '/fotografie': '#505050',
     '/films': '#505050',
     '/films/loriyiu': '#8954c7',
     '/films/awakening': '#00b7f1',

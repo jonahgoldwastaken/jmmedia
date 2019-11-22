@@ -1,5 +1,5 @@
 import { darken, lighten } from 'polished'
-import { styled } from '../../theme'
+import { styled } from '../../../theme'
 import {
   FadeIn,
   FadeOut,
@@ -7,8 +7,8 @@ import {
   SlideInRight,
   SlideOutLeft,
   SlideOutRight,
-} from '../Animations'
-import { BackgroundContext } from '../Common/Background'
+} from '../../Animations'
+import { BackgroundContext } from '../../Common/Background'
 
 type StyledSectionProps = {
   currentPage: string
@@ -88,9 +88,7 @@ const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
     }
   }
 `
-export const ContentSection: React.FunctionComponent<
-  ContentSectionProps
-> = props => (
+export const ContentSection: React.FunctionComponent<ContentSectionProps> = props => (
   <BackgroundContext.Consumer>
     {({ currentPage }) => (
       <StyledSection currentPage={currentPage} {...props} />

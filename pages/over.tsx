@@ -10,7 +10,7 @@ import ContentSection, {
   SectionHeading,
   SectionImage,
   SectionParagraph,
-} from '../components/Section'
+} from '../components/Film/Section'
 
 const About: NextPage = () => {
   return (

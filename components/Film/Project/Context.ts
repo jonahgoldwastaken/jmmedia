@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { filmState } from '../../interfaces/filmState'
+import { filmState } from '../../../interfaces/filmState'
 
 interface FilmContext {
   state: filmState

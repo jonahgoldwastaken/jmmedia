@@ -5,7 +5,7 @@ const StyledNav = styled.nav`
   margin: 0;
   padding: 0 ${props => props.theme.space[3]};
   width: 100%;
-  max-width: 60rem;
+  max-width: ${props => props.theme.sizes.static[2]};
 `
 
 export const HeroNav: React.FunctionComponent = ({ children }) => {

@@ -1,16 +1,16 @@
 import { rgba } from 'polished'
 import { forwardRef, HTMLProps } from 'react'
 import { css, keyframes } from 'styled-components'
-import { styled } from '../../../theme'
-import animationChooser from '../../../utils/animationChooser'
+import { styled } from '../../../../theme'
+import animationChooser from '../../../../utils/animationChooser'
 import {
   CurtainCloseHorizontal,
   CurtainCloseVertical,
   CurtainOpenHorizontal,
   CurtainOpenVertical,
-} from '../../Animations'
-import { LinkWrapperContext } from '../../Common/Link'
-import { Anchor, BaseAnchorProps } from '../../Common/Link/Anchor'
+} from '../../../Animations'
+import { LinkWrapperContext } from '../../../Common/Link'
+import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
 
 type StyledAnchorProps = BaseAnchorProps & {
   background: string

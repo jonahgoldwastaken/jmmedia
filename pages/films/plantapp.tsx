@@ -10,12 +10,12 @@ import {
   FilmDetails,
   FilmHero,
   FilmTitle,
-} from '../../components/Project'
+} from '../../components/Film/Project'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionParagraph,
-} from '../../components/Section'
+} from '../../components/Film/Section'
 
 const PlantApp: NextPage = () => {
   return (

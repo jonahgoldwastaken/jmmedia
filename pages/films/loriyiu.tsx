@@ -9,14 +9,14 @@ import {
   FilmDetails,
   FilmHero,
   FilmTitle,
-} from '../../components/Project'
-import { FilmContext } from '../../components/Project/Context'
+} from '../../components/Film/Project'
+import { FilmContext } from '../../components/Film/Project/Context'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionImage,
   SectionParagraph,
-} from '../../components/Section'
+} from '../../components/Film/Section'
 
 const LoriYiu: NextPage = () => {
   return (

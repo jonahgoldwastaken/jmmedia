@@ -16,6 +16,12 @@ export default () => {
           <HeroSubHeading>Gepassioneerde filmmaker</HeroSubHeading>
           <HeroNav>
             <NavLink
+              href="/fotografie"
+              bgVideo="https://storage.googleapis.com/filmportfolio/film/background.mp4"
+            >
+              Fotografie
+            </NavLink>
+            <NavLink
               href="/films"
               bgVideo="https://storage.googleapis.com/filmportfolio/film/background.mp4"
             >

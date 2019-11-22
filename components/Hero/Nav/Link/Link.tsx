@@ -25,6 +25,10 @@ const StyledListItem = styled.li`
   }
 
   &:nth-child(2) {
+    justify-content: center;
+  }
+
+  &:nth-child(3) {
     justify-content: flex-end;
   }
 `
