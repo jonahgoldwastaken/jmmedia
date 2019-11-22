@@ -14,8 +14,8 @@ export const theme = {
   },
   breakpoints: ['40rem', '60rem', '80rem'],
   fonts: {
-    sans: "'Red Hat Display', sans-serif",
-    serif: '"Merriweather", sans-serif',
+    display: "'Red Hat Display', sans-serif",
+    sans: 'Raleway, sans-serif',
   },
   fontWeights: [400, 500, 700],
   borderWidth: '0.3rem',

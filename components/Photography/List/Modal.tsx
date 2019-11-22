@@ -114,12 +114,12 @@ const CarouselStyles = {
   footer: (base, state) => {
     const styles = {
       ...base,
-      fontFamily: '"Red Hat Display", sans-serif',
+      fontFamily: theme.fonts.sans,
       background: '#505050 !important',
       padding: `${theme.space[2]} ${theme.space[3]}`,
       color: theme.colors.primary,
       fontSize: theme.fontSizes[1],
-      fontWeight: 'bold',
+      fontWeight: theme.fontWeights[2],
       transition: `all ${theme.animation.timing[0]} ${theme.animation.curve} !important`,
     }
     if (state.interactionIsIdle) {

@@ -16,7 +16,7 @@ const StyledParagraph = styled.p<StyledParagraphProps>`
   justify-self: end;
   font-size: ${props => props.theme.fontSizes[1]};
   color: ${props => props.theme.colors.primary};
-  font-family: ${props => props.theme.fonts.sans};
+  font-family: ${props => props.theme.fonts.display};
   font-weight: ${props => props.theme.fontWeights[1]};
   grid-row: 1;
   grid-column: 1;

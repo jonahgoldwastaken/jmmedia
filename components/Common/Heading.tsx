@@ -3,7 +3,7 @@ import { RotateInDown, RotateOutDown } from '../Animations'
 
 export const Heading = styled.h1`
   margin: 0 0 ${props => props.theme.space[3]};
-  font-family: ${props => props.theme.fonts.sans};
+  font-family: ${props => props.theme.fonts.display};
   font-size: ${props => props.theme.fontSizes[3]};
   color: ${props => props.theme.colors.primary};
   text-align: center;
