@@ -6,32 +6,31 @@ import { ImageModal } from './Modal'
 const testPhotos = [
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/afwas zweden.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/afwas-zweden.jpeg',
     width: 3,
     height: 2,
     title: 'Afwas die ligt te drogen op een houten plank in het bos.',
   },
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/big ben en de tower.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/big-ben-en-de-tower.jpeg',
     width: 3,
     height: 2,
     title: 'De big ben in de stijgers naast de tower bij nacht.',
   },
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/bloem macro.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/bloem-macro.jpeg',
     width: 3,
     height: 2,
     title: 'Macro shot van een paarse bloem.',
   },
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/boom met zon.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/boom-met-zon.jpeg',
     width: 2,
     height: 3,
     title: 'De zon die door de bomen in Zweden schemert.',
-    rotation: 'left',
   },
   {
     src: 'https://storage.googleapis.com/filmportfolio/fotografie/crea.jpeg',
@@ -47,16 +46,15 @@ const testPhotos = [
   },
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/klokkentoren st. pauls cathedral.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/klokkentoren-st.-pauls-cathedral.jpeg',
     width: 2,
     height: 3,
     title:
       'Foto van een van de klokkentorens van sint pauls kathedraal in Londen.',
-    rotation: 'left',
   },
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/koffie na houthakken.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/koffie-na-houthakken.jpeg',
     width: 3,
     height: 2,
     title:
@@ -64,21 +62,21 @@ const testPhotos = [
   },
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/leidse gracht.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/leidse-gracht.jpeg',
     width: 3,
     height: 2,
     title: 'Foto van een van de grachten in Leiden.',
   },
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/londen appartement.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/londen-appartement.jpeg',
     width: 3,
     height: 2,
     title: 'Foto van het uiterste puntje van een Londens appartement.',
   },
   {
     src:
-      'https://storage.googleapis.com/filmportfolio/fotografie/nachtfoto buslichten.jpeg',
+      'https://storage.googleapis.com/filmportfolio/fotografie/nachtfoto-buslichten.jpeg',
     width: 3,
     height: 2,
     title:
@@ -90,7 +88,6 @@ const testPhotos = [
     width: 2,
     height: 3,
     title: 'Silhouette van een kleien mannetje.',
-    rotation: 'right',
   },
   {
     src:
@@ -125,6 +122,7 @@ export const List: React.FunctionComponent = props => {
         onClick={openLightbox}
         renderImage={imageRenderer}
         margin={0}
+        targetRowHeight={400}
       />
       <ImageModal
         viewerIsOpen={viewerIsOpen}

@@ -132,14 +132,6 @@ const CarouselStyles = {
     const styles = {
       ...base,
     }
-    if (state.currentView.rotation && state.currentView.rotation === 'left') {
-      styles.transform = 'rotate(-90deg)'
-    } else if (
-      state.currentView.rotation &&
-      state.currentView.rotation === 'right'
-    ) {
-      styles.transform = 'rotate(90deg)'
-    }
     return styles
   },
   navigation: (base, state) => {
