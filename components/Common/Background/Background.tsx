@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import { css } from 'styled-components'
-import { styled } from '../../../theme'
+import theme, { styled } from '../../../theme'
 import animationChooser from '../../../utils/animationChooser'
 import {
   SlideOutDown,
@@ -84,17 +84,17 @@ export const Background: React.FunctionComponent<PageBackgroundProps> = props =>
         enableDeclineButton
         declineButtonStyle={{
           background: '#b53333',
-          fontFamily: '"Red Hat Display", sans-serif',
+          fontFamily: theme.fonts.display,
         }}
         buttonStyle={{
           color: '#fff',
           background: '#33b533',
-          fontFamily: '"Red Hat Display", sans-serif',
+          fontFamily: theme.fonts.display,
           fontWeight: 'bold',
         }}
         style={{
           background: '#505050',
-          fontFamily: '"Red Hat Display", sans-serif',
+          fontFamily: theme.fonts.sans,
           fontWeight: 'bold',
         }}
         onAccept={() => initGA()}
