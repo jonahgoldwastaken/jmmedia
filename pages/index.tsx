@@ -15,10 +15,7 @@ export default () => {
           <HeroHeading>Jonah Meijers</HeroHeading>
           <HeroSubHeading>Gepassioneerde filmmaker</HeroSubHeading>
           <HeroNav>
-            <NavLink
-              href="/fotografie"
-              bgVideo="https://storage.googleapis.com/filmportfolio/film/background.mp4"
-            >
+            <NavLink href="/fotografie" bgVideo="">
               Fotografie
             </NavLink>
             <NavLink
