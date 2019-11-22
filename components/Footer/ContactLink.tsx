@@ -45,7 +45,7 @@ const StyledContactLink = styled.li<StyledContactLink>`
       font-family: ${props => props.theme.fonts.sans};
       font-size: ${props => props.theme.fontSizes[1]};
       text-transform: uppercase;
-      font-weight: ${props => props.theme.fontWeights[0]};
+      font-weight: ${props => props.theme.fontWeights[1]};
 
       @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
         font-size: ${props => props.theme.fontSizes[1]};

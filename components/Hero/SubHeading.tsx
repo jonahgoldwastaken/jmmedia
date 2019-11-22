@@ -6,7 +6,7 @@ export const HeroSubHeading = styled.h2`
   z-index: 2;
   margin: ${props => props.theme.space[0]} 0 ${props => props.theme.space[4]};
   font-family: ${props => props.theme.fonts.sans};
-  font-weight: ${props => props.theme.fontWeights[1]};
+  font-weight: ${props => props.theme.fontWeights[0]};
   font-size: ${props => props.theme.fontSizes[2]};
   color: ${props => props.theme.colors.primary};
   text-align: center;
