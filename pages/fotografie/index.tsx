@@ -20,7 +20,7 @@ export default () => {
           <HeaderHeading>Fotografie</HeaderHeading>
         </Header>
         <List />
-        <Footer>Filmproject op de agenda?</Footer>
+        <Footer>Ook op de foto?</Footer>
       </Background>
     </>
   )
