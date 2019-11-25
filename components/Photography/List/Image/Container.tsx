@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { CurtainCloseHorizontal, SwipeInRight } from '../../../Animations'
+import { SwipeInRight, SwipeOutRight } from '../../../Animations'
 
 type ImgContainerProps = {
   inView?: boolean
@@ -39,7 +39,7 @@ export const ImgContainer = styled.div<ImgContainerProps>`
     `};
 
   .page-transition-exit-active & {
-    animation: ${CurtainCloseHorizontal}
+    animation: ${SwipeOutRight}
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
       forwards;
