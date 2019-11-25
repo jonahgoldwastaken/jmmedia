@@ -1,7 +1,9 @@
 import { keyframes, css } from 'styled-components'
 import { styled } from '../../../../theme'
-import { CurtainCloseHorizontal } from '../../../Animations'
+import { CurtainCloseHorizontal, SwipeInRight } from '../../../Animations'
 import InviewMonitor from 'react-inview-monitor'
+import { useState } from 'react'
+import { LoadingAnimater } from '../../../Common'
 
 type ListImageProps = {
   index: number
@@ -15,75 +17,41 @@ type ListImageProps = {
   top: any
   left: any
   onClick: any
+  loaded: boolean
 }
 
-const loadingAnimation = keyframes`
-  0% {
-    top: 0%;
-    height: 0%;
-  }
-  50% {
-    top: 0%;
-    height: 100%;
-  }
-  100% {
-    top: 100%;
-    height: 0%;
-  }
-`
+type ImgContainerProps = {
+  inView?: boolean
+  loaded: boolean
+}
 
-const displayAnimation = keyframes`
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-  }
-  51% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const ImgContainer = styled.div<ListImageProps['photo'] & { inView?: boolean }>`
+const ImgContainer = styled.div<ListImageProps['photo'] & ImgContainerProps>`
   position: relative;
   width: ${props => props.width}px;
   height: ${props => props.height}px;
   cursor: pointer;
 
   img {
+    position: relative;
+    z-index: 10;
     opacity: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 
   ${props =>
     props.inView &&
+    props.loaded &&
     css`
       img {
-        animation: ${displayAnimation}
+        opacity: 1;
+        animation: ${SwipeInRight}
           ${props =>
             `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
           forwards;
       }
-
-      &:after {
-        content: '';
-        position: absolute;
-        top: 0%;
-        left: 0%;
-        width: 100%;
-        height: 100%;
-        background: ${props => props.theme.colors.primary};
-        animation: ${loadingAnimation}
-          ${props =>
-            `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
-          forwards;
-      }
-    }
-  `}
+    `};
 
   .page-transition-exit-active & {
     animation: ${CurtainCloseHorizontal}
@@ -97,10 +65,17 @@ export const ListImage: React.FunctionComponent<ListImageProps> = ({
   index,
   onClick,
 }) => {
+  const [imageLoaded, setImageLoaded] = useState(false)
+
   return (
     <InviewMonitor childPropsInView={{ inView: true }} intoViewMargin="-10%">
-      <ImgContainer {...photo} onClick={e => onClick(e, { photo, index })}>
-        <img {...photo} />
+      <ImgContainer
+        {...photo}
+        loaded={imageLoaded}
+        onClick={e => onClick(e, { photo, index })}
+      >
+        <img {...photo} onLoad={() => setImageLoaded(true)} />
+        <LoadingAnimater loaded={imageLoaded} />
       </ImgContainer>
     </InviewMonitor>
   )

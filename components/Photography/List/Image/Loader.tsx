@@ -3,12 +3,12 @@ import { styled } from '../../../../theme'
 
 const LoadingAnimation = keyframes`
   0% {
-    top: 0%;
-    height: 0%;
+    left: 0%;
+    width: 0%;
   }
   100% {
-    top: 0%;
-    height: 100%;
+    left: 0%;
+    width: 100%;
   }
 `
 

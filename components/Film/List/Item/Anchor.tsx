@@ -71,14 +71,14 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
 
           .page-transition-enter-active & {
             opacity: 1;
-            animation: ${animationChooser(openAnimations)}
+            animation: ${CurtainOpenHorizontal}
               ${props =>
                 `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
               forwards;
           }
 
           .page-transition-exit-active & {
-            animation: ${animationChooser(closeAnimations)}
+            animation: ${CurtainCloseHorizontal}
               ${props.theme.animation.timing[0]} ${props.theme.animation.curve}
               forwards;
           }
