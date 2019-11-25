@@ -1,6 +1,6 @@
-import { keyframes, css } from 'styled-components'
-import { styled } from '../../theme'
 import { useState } from 'react'
+import { css, keyframes } from 'styled-components'
+import { styled } from '../../theme'
 
 type StyledDivProps = {
   show: boolean

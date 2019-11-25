@@ -1,11 +1,4 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  RefObject,
-  MutableRefObject,
-} from 'react'
-import Photo from '../../../interfaces/photo'
+import { createContext } from 'react'
 
 export interface ListContext {
   ref: React.RefObject<HTMLImageElement>

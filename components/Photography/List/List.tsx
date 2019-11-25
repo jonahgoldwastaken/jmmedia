@@ -1,4 +1,4 @@
-import { RefObject, useState, Component } from 'react'
+import { Component, RefObject } from 'react'
 import Gallery from 'react-photo-gallery'
 import { ListContext } from './Context'
 import Image from './Image'

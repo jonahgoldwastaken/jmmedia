@@ -3,9 +3,9 @@ import Link from 'next/link'
 import { NavButton } from '../../components/Common'
 import Background from '../../components/Common/Background'
 import Header, { HeaderHeading } from '../../components/Common/Header'
-import Footer from '../../components/Footer'
 import List from '../../components/Film/List'
 import ListItem from '../../components/Film/List/Item'
+import Footer from '../../components/Footer'
 
 export default () => {
   return (

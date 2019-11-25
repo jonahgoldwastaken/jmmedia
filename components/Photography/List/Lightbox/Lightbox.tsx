@@ -1,10 +1,10 @@
+import { useContext } from 'react'
+import { css } from 'styled-components'
 import Photo from '../../../../interfaces/photo'
 import { styled } from '../../../../theme'
+import { ListContext } from '../Context'
 import { LightboxBackground } from './Background'
 import { LightboxImage } from './Image'
-import { useContext, useMemo } from 'react'
-import { ListContext } from '../Context'
-import { css } from 'styled-components'
 
 type LightboxProps = {
   photos: {

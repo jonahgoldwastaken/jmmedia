@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
+import CookieConsent from 'react-cookie-consent'
 import { css } from 'styled-components'
 import theme, { styled } from '../../../theme'
+import { initGA } from '../../../utils/analytics'
 import animationChooser from '../../../utils/animationChooser'
 import {
   SlideOutDown,
@@ -10,8 +12,6 @@ import {
   ZoomOut,
 } from '../../Animations'
 import { BackgroundContext } from './Context'
-import CookieConsent from 'react-cookie-consent'
-import { initGA } from '../../../utils/analytics'
 
 type StyledBackgroundProps = {
   currentPage: string

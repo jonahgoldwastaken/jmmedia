@@ -1,5 +1,5 @@
+import { css } from 'styled-components'
 import { styled } from '../../../../theme'
-import { keyframes, css } from 'styled-components'
 
 type LightboxBackgroundProps = {
   open?: boolean

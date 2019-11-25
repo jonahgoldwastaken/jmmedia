@@ -1,4 +1,4 @@
 export * from './Heading'
-export * from './Video'
-export * from './NavButton'
 export * from './LoadingAnimater'
+export * from './NavButton'
+export * from './Video'
