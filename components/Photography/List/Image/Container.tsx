@@ -8,13 +8,14 @@ type ImgContainerProps = {
   width: number
   height: number
   title: string
+  active: boolean
 }
 
 export const ImgContainer = styled.div<ImgContainerProps>`
   position: relative;
   width: ${props => props.width}px;
   height: ${props => props.height}px;
-  cursor: pointer;
+  cursor: zoom-in;
 
   img {
     position: relative;
@@ -30,7 +31,7 @@ export const ImgContainer = styled.div<ImgContainerProps>`
     props.loaded &&
     css`
       img {
-        opacity: 1;
+        opacity: ${props.active ? '0' : '1'};
         animation: ${SwipeInRight}
           ${props =>
             `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}

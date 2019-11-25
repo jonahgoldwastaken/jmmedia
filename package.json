@@ -34,7 +34,6 @@
     "react-dom": "^16.12.0",
     "react-ga": "^2.7.0",
     "react-html-parser": "^2.0.2",
-    "react-images": "^1.0.0",
     "react-intersection-observer": "^8.25.1",
     "react-photo-gallery": "^8.0.0",
     "react-shimmer": "^2.0.1",

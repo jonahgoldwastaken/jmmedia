@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { LinkWrapperContext } from './Context'
 
 export type ListLinkProps = {
-  href: string
+  href?: string
   disabled?: boolean
 }
 

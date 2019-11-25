@@ -21,7 +21,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   position: fixed;
   top: ${props => props.theme.space[2]};
   left: ${props => props.theme.space[2]};
-  z-index: 9999;
+  z-index: 999;
   font-family: ${props => props.theme.fonts.sans};
   font-size: ${props => props.theme.fontSizes[1]};
   color: ${props =>

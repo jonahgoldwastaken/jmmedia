@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { LoadingAnimater } from '../../../Common'
+import { ListContext } from '../Context'
 import { ImgContainer } from './Container'
 
 type ListImageProps = {
@@ -21,24 +22,42 @@ type ListImageProps = {
 export const ListImage: React.FunctionComponent<ListImageProps> = ({
   photo,
   index,
-  onClick,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
-  const [ref, inView] = useInView({
+  const [inViewRef, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   })
+  const imgRef = useRef<HTMLImageElement>()
 
   return (
-    <ImgContainer
-      {...photo}
-      loaded={imageLoaded}
-      inView={inView}
-      onClick={e => onClick(e, { photo, index })}
-      ref={ref}
-    >
-      <img {...photo} onLoad={() => setImageLoaded(true)} />
-      <LoadingAnimater loaded={imageLoaded} />
-    </ImgContainer>
+    <ListContext.Consumer>
+      {({ currentIndex, setState, lightboxAnimating }) => (
+        <ImgContainer
+          {...photo}
+          loaded={imageLoaded}
+          inView={inView}
+          onMouseOver={() =>
+            !lightboxAnimating &&
+            setState({
+              ref: imgRef,
+            })
+          }
+          onClick={() =>
+            setState({
+              ref: imgRef,
+              currentIndex: index,
+              lightboxOpen: true,
+              lightboxAnimating: true,
+            })
+          }
+          ref={inViewRef}
+          active={currentIndex === index}
+        >
+          <img {...photo} ref={imgRef} onLoad={() => setImageLoaded(true)} />
+          <LoadingAnimater loaded={imageLoaded} />
+        </ImgContainer>
+      )}
+    </ListContext.Consumer>
   )
 }

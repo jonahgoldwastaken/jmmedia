@@ -1,7 +1,8 @@
-import { useCallback, useState } from 'react'
+import { RefObject, useState, Component } from 'react'
 import Gallery from 'react-photo-gallery'
+import { ListContext } from './Context'
 import Image from './Image'
-import { ImageModal } from './Modal'
+import Lightbox from './Lightbox'
 
 const testPhotos = {
   small: [
@@ -202,34 +203,41 @@ const imageRenderer = props => {
   return <Image {...props} />
 }
 
-export const List: React.FunctionComponent = props => {
-  const [currentImage, setCurrentImage] = useState(0)
-  const [viewerIsOpen, setViewerIsOpen] = useState(false)
+type ListState = {
+  lightboxOpen: boolean
+  lightboxAnimating: boolean
+  currentIndex: number
+  ref: RefObject<HTMLImageElement>
+}
 
-  const openLightbox = useCallback((event, { photo, index }) => {
-    setCurrentImage(index)
-    setViewerIsOpen(true)
-  }, [])
-
-  const closeLightbox = () => {
-    setCurrentImage(0)
-    setViewerIsOpen(false)
+export class List extends Component<{}, ListState> {
+  state = {
+    lightboxOpen: undefined,
+    lightboxAnimating: undefined,
+    currentIndex: undefined,
+    ref: undefined,
   }
-  return (
-    <>
-      <Gallery
-        photos={testPhotos.small}
-        onClick={openLightbox}
-        renderImage={imageRenderer}
-        margin={0}
-        targetRowHeight={400}
-      />
-      <ImageModal
-        viewerIsOpen={viewerIsOpen}
-        closeHandler={closeLightbox}
-        currentImage={currentImage}
-        photos={testPhotos.large}
-      />
-    </>
-  )
+
+  render() {
+    const { currentIndex, lightboxOpen, lightboxAnimating, ref } = this.state
+    return (
+      <ListContext.Provider
+        value={{
+          currentIndex: currentIndex,
+          ref,
+          lightboxOpen,
+          lightboxAnimating,
+          setState: this.setState.bind(this),
+        }}
+      >
+        <Gallery
+          photos={testPhotos.small}
+          renderImage={imageRenderer}
+          margin={0}
+          targetRowHeight={400}
+        />
+        <Lightbox photos={testPhotos} index={currentIndex} />
+      </ListContext.Provider>
+    )
+  }
 }
