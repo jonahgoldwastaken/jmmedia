@@ -48,7 +48,6 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   ${props =>
     props.loaded &&
     props.inView &&
-    !props.active &&
     css`
       opacity: 1;
       animation: ${SwipeInRight}
@@ -61,8 +60,8 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
     props.active
       ? css`
           .page-transition-exit & {
-            opacity: 1;
             position: static;
+            animation: none;
           }
 
           .page-transition-exit-active & {

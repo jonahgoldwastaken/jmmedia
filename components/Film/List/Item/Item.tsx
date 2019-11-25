@@ -11,12 +11,10 @@ import { ItemVideo } from './Video'
 
 type StyledItemProps = {
   columns: number[]
-  rows: number[]
 }
 
 type ItemProps = {
   columns: number[]
-  rows: number[]
   vidSrc: string
   imgSrc: string
   href: string
@@ -27,27 +25,24 @@ const StyledItem = styled.li<StyledItemProps>`
   position: relative;
   margin: 0;
   padding: 0;
+  grid-row-end: span 1;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[0]}) {
     grid-column-end: span ${props => props.columns[0]};
-    grid-row-end: span ${props => props.rows[0]};
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     grid-column-end: span ${props => props.columns[1]};
-    grid-row-end: span ${props => props.rows[1]};
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
     grid-column-end: span ${props => props.columns[2]};
-    grid-row-end: span ${props => props.rows[2]};
   }
 `
 
 export const ListItem: React.FunctionComponent<ItemProps> = ({
   href,
   columns,
-  rows,
   imgSrc,
   vidSrc,
   children,
@@ -60,7 +55,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
 
   return (
     <LinkWrapper href={href}>
-      <StyledItem ref={ref} columns={columns} rows={rows}>
+      <StyledItem ref={ref} columns={columns}>
         <Link href={href}>
           <ItemAnchor inView={inView} loaded={videoLoaded} background={imgSrc}>
             <ItemVideo onLoad={() => setVideoLoaded(true)} video={vidSrc} />

@@ -26,7 +26,6 @@ export default () => {
             imgSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/preview.mp4"
             columns={[1, 2, 3]}
-            rows={[1, 1, 2]}
           >
             Stop
           </ListItem>
@@ -35,7 +34,6 @@ export default () => {
             imgSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/preview.mp4"
             columns={[1, 2, 3]}
-            rows={[1, 1, 2]}
           >
             Concert Lori Yiu
           </ListItem>
@@ -44,7 +42,6 @@ export default () => {
             imgSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/preview.mp4"
             columns={[1, 2, 2]}
-            rows={[1, 1, 1]}
           >
             PlantApp
           </ListItem>
@@ -53,7 +50,6 @@ export default () => {
             imgSrc="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/awakening/preview.mp4"
             columns={[1, 2, 4]}
-            rows={[1, 1, 1]}
           >
             Awakening
           </ListItem>
