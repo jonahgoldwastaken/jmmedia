@@ -1,5 +1,5 @@
-import { styled } from '../../../theme'
 import { Heading } from '..'
+import { styled } from '../../../theme'
 
 type HeaderHeadingProps = {
   dark?: boolean

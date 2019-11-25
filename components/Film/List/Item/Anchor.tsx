@@ -2,32 +2,34 @@ import { rgba } from 'polished'
 import { forwardRef, HTMLProps } from 'react'
 import { css, keyframes } from 'styled-components'
 import { styled } from '../../../../theme'
-import animationChooser from '../../../../utils/animationChooser'
-import {
-  CurtainCloseHorizontal,
-  CurtainCloseVertical,
-  CurtainOpenHorizontal,
-  CurtainOpenVertical,
-} from '../../../Animations'
+import { SwipeInRight, SwipeOutRight } from '../../../Animations'
 import { LinkWrapperContext } from '../../../Common/Link'
 import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
 
 type StyledAnchorProps = BaseAnchorProps & {
   background: string
+  loaded: boolean
+  inView?: boolean
 }
 
-const openAnimations = [CurtainOpenHorizontal, CurtainOpenVertical]
-const closeAnimations = [CurtainCloseHorizontal, CurtainCloseVertical]
+type ItemAnchorProps = {
+  background: string
+  loaded: boolean
+  inView?: boolean
+}
+
 const clickAnimationDesktop = keyframes`
-    to {
-      left: 0px;
-      top: 0px;
-      width: 100%;
-      height: 100vh;
-    }
+  to {
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100vh;
+  }
 `
 
 export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
+  position: relative;
+  z-index: 10;
   width: 100%;
   height: 100%;
   display: flex;
@@ -36,6 +38,7 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   font-size: ${props => props.theme.fontSizes[1]};
   background: linear-gradient(${rgba('black', 0.5)}, ${rgba('black', 0.5)}),
     url(${props => props.background}) no-repeat center/cover;
+  opacity: 0;
 
   &:after {
     opacity: 0;
@@ -43,8 +46,24 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   }
 
   ${props =>
+    props.loaded &&
+    props.inView &&
+    css`
+      opacity: 1;
+      animation: ${SwipeInRight}
+        ${props =>
+          `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+        forwards;
+    `}
+
+  ${props =>
     props.active
       ? css`
+          .page-transition-exit & {
+            position: static;
+            animation: none;
+          }
+
           .page-transition-exit-active & {
             &:after {
               position: fixed;
@@ -65,22 +84,9 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
           }
         `
       : css`
-          .page-transition-enter & {
-            opacity: 0;
-          }
-
-          .page-transition-enter-active & {
-            opacity: 1;
-            animation: ${animationChooser(openAnimations)}
-              ${props =>
-                `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`}
-              forwards;
-          }
-
           .page-transition-exit-active & {
-            animation: ${animationChooser(closeAnimations)}
-              ${props.theme.animation.timing[0]} ${props.theme.animation.curve}
-              forwards;
+            animation: ${SwipeOutRight} ${props.theme.animation.timing[1]}
+              ${props.theme.animation.curve} forwards;
           }
         `}
 `
@@ -91,9 +97,7 @@ const RefAnchor = forwardRef<
   //@ts-ignore
 >((props, ref) => <StyledAnchor {...props} ref={ref} />)
 
-export const ItemAnchor: React.FunctionComponent<{
-  background: string
-}> = props => {
+export const ItemAnchor: React.FunctionComponent<ItemAnchorProps> = props => {
   return (
     <LinkWrapperContext.Consumer>
       {({ active, ref, positionData, href, setIsHovering }) => {

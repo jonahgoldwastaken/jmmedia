@@ -1,18 +1,18 @@
 import { library } from '@fortawesome/fontawesome-svg-core'
+import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import {
-  faTimes,
-  faPlay,
-  faPause,
   faArrowLeft,
   faArrowRight,
+  faCompress,
   faEllipsisH,
-  faHome,
-  faPhone,
   faEnvelope,
   faExpand,
-  faCompress,
+  faHome,
+  faPause,
+  faPhone,
+  faPlay,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons'
-import { faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 
 library.add(
   faTimes,

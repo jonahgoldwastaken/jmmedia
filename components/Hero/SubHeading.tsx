@@ -1,5 +1,5 @@
 import { styled } from '../../theme'
-import { RotateOutDown, RotateInDown } from '../Animations'
+import { RotateInDown, RotateOutDown } from '../Animations'
 
 export const HeroSubHeading = styled.h2`
   position: relative;

@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { NavButton } from '../../components/Common'
 import Background from '../../components/Common/Background'
-import Footer from '../../components/Footer'
 import {
   Film,
   FilmDetails,
@@ -17,6 +16,7 @@ import ContentSection, {
   SectionImage,
   SectionParagraph,
 } from '../../components/Film/Section'
+import Footer from '../../components/Footer'
 
 const LoriYiu: NextPage = () => {
   return (

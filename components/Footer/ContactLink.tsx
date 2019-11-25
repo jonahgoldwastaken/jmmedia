@@ -1,6 +1,6 @@
 import { styled } from '../../theme'
-import { FadeIn, FadeOut } from '../Animations'
 import { logEvent } from '../../utils/analytics'
+import { FadeIn, FadeOut } from '../Animations'
 
 type StyledContactLink = {}
 

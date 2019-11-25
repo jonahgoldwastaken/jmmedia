@@ -1,8 +1,8 @@
-import { styled } from '../../theme'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { PopInRight, PopOutLeft } from '../Animations'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from 'styled-components'
+import { styled } from '../../theme'
+import { PopInRight, PopOutLeft } from '../Animations'
 
 type NavButtonProps = {
   onClick?: () => any
@@ -21,7 +21,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   position: fixed;
   top: ${props => props.theme.space[2]};
   left: ${props => props.theme.space[2]};
-  z-index: 9999;
+  z-index: 999;
   font-family: ${props => props.theme.fonts.sans};
   font-size: ${props => props.theme.fontSizes[1]};
   color: ${props =>

@@ -4,13 +4,13 @@ import Link from 'next/link'
 import { NavButton } from '../components/Common'
 import Background from '../components/Common/Background'
 import Header, { HeaderHeading } from '../components/Common/Header'
-import Footer from '../components/Footer'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionImage,
   SectionParagraph,
 } from '../components/Film/Section'
+import Footer from '../components/Footer'
 
 const About: NextPage = () => {
   return (

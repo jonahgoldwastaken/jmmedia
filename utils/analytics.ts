@@ -1,5 +1,5 @@
-import ReactGA from 'react-ga'
 import Router from 'next/router'
+import ReactGA from 'react-ga'
 
 export const initGA = () => {
   console.log('Analytics initialised')

@@ -8,7 +8,7 @@ export const theme = {
   },
   space: ['0.5rem', '1rem', '1.5rem', '3rem', '6rem'],
   sizes: {
-    static: ['20rem', '40rem', '80rem'],
+    static: ['25rem', '50rem', '80rem'],
     dynamic: ['25%', '50%', '100%'],
     height: ['30vh', '60vh', '80vh', '100vh'],
   },

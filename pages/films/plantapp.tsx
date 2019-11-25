@@ -3,7 +3,6 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { NavButton } from '../../components/Common'
 import Background from '../../components/Common/Background'
-import Footer from '../../components/Footer'
 import {
   Film,
   FilmContext,
@@ -16,6 +15,7 @@ import ContentSection, {
   SectionHeading,
   SectionParagraph,
 } from '../../components/Film/Section'
+import Footer from '../../components/Footer'
 
 const PlantApp: NextPage = () => {
   return (

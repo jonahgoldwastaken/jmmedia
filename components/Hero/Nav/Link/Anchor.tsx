@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { forwardRef, HTMLProps, RefObject } from 'react'
+import { forwardRef, HTMLProps } from 'react'
 import { css, keyframes } from 'styled-components'
 import theme, { styled } from '../../../../theme'
 import { LinkWrapperContext } from '../../../Common/Link'

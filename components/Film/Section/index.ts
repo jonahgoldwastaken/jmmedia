@@ -1,5 +1,5 @@
-export { ContentSection as default } from './Section'
-export * from './Heading'
 export * from './Column'
-export * from './Paragraph'
+export * from './Heading'
 export * from './Image'
+export * from './Paragraph'
+export { ContentSection as default } from './Section'

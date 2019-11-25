@@ -2,9 +2,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
+import { logEvent } from '../../../utils/analytics'
 import { FadeIn, FadeOut } from '../../Animations'
 import { FilmContext } from './Context'
-import { logEvent } from '../../../utils/analytics'
 
 type StyledButtonProps = {
   filmState: filmState
