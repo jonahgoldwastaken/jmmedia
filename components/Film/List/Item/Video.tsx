@@ -4,6 +4,7 @@ import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
 
 type ItemVideoProps = {
   video: string
+  onLoad: any
 }
 
 const ItemVideoElement = styled(VideoElement)`
@@ -15,12 +16,20 @@ const ItemVideoElement = styled(VideoElement)`
 
 export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
   video,
+  onLoad,
 }) => (
   <LinkWrapperContext.Consumer>
     {({ isHovering }) => (
       <VideoContainer mayPlayVideo={isHovering}>
         {props => (
-          <ItemVideoElement muted loop playsInline src={video} {...props} />
+          <ItemVideoElement
+            onLoadedData={onLoad}
+            muted
+            loop
+            playsInline
+            src={video}
+            {...props}
+          />
         )}
       </VideoContainer>
     )}

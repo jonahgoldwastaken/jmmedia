@@ -5,6 +5,8 @@ import { LinkWrapper } from '../../../Common/Link'
 import { ItemAnchor } from './Anchor'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
+import { useState } from 'react'
+import { LoadingAnimater } from '../../../Common'
 
 type StyledItemProps = {
   columns: number[]
@@ -49,15 +51,18 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
   vidSrc,
   children,
 }) => {
+  const [videoLoaded, setVideoLoaded] = useState(false)
+
   return (
     <LinkWrapper href={href}>
       <StyledItem columns={columns} rows={rows}>
         <Link href={href}>
-          <ItemAnchor background={imgSrc}>
-            <ItemVideo video={vidSrc} />
+          <ItemAnchor loaded={videoLoaded} background={imgSrc}>
+            <ItemVideo onLoad={() => setVideoLoaded(true)} video={vidSrc} />
             <ItemTitle>{children}</ItemTitle>
           </ItemAnchor>
         </Link>
+        <LoadingAnimater loaded={videoLoaded} />
       </StyledItem>
     </LinkWrapper>
   )

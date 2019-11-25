@@ -12,16 +12,13 @@ type LoadingAnimaterProps = {
 
 const loadingAnimation = keyframes`
   0% {
-    left: 0%;
-    width: 0%;
+    clip-path: inset(0 100% 0 0);
   }
   50% {
-    left: 0%;
-    width: 100%;
+    clip-path: inset(0 0 0 0);
   }
   100% {
-    left: 100%;
-    width: 0%;
+    clip-path: inset(0 0 0 100%);
   }
 `
 
@@ -35,7 +32,7 @@ const StyledDiv = styled.div<StyledDivProps>`
   animation: ${loadingAnimation}
     ${props =>
       `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
-    infinite alternate forwards;
+    infinite forwards;
 
   ${props =>
     !props.show &&
