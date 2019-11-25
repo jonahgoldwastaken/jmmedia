@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import InviewMonitor from 'react-inview-monitor'
+import { useInView } from 'react-intersection-observer'
 import { LoadingAnimater } from '../../../Common'
 import { ImgContainer } from './Container'
 
@@ -24,17 +24,21 @@ export const ListImage: React.FunctionComponent<ListImageProps> = ({
   onClick,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  })
 
   return (
-    <InviewMonitor childPropsInView={{ inView: true }} intoViewMargin="-10%">
-      <ImgContainer
-        {...photo}
-        loaded={imageLoaded}
-        onClick={e => onClick(e, { photo, index })}
-      >
-        <img {...photo} onLoad={() => setImageLoaded(true)} />
-        <LoadingAnimater loaded={imageLoaded} />
-      </ImgContainer>
-    </InviewMonitor>
+    <ImgContainer
+      {...photo}
+      loaded={imageLoaded}
+      inView={inView}
+      onClick={e => onClick(e, { photo, index })}
+      ref={ref}
+    >
+      <img {...photo} onLoad={() => setImageLoaded(true)} />
+      <LoadingAnimater loaded={imageLoaded} />
+    </ImgContainer>
   )
 }

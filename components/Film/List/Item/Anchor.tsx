@@ -2,23 +2,20 @@ import { rgba } from 'polished'
 import { forwardRef, HTMLProps } from 'react'
 import { css, keyframes } from 'styled-components'
 import { styled } from '../../../../theme'
-import {
-  CurtainCloseHorizontal,
-  CurtainOpenHorizontal,
-  SwipeInRight,
-  SwipeOutRight,
-} from '../../../Animations'
+import { SwipeInRight, SwipeOutRight } from '../../../Animations'
 import { LinkWrapperContext } from '../../../Common/Link'
 import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
 
 type StyledAnchorProps = BaseAnchorProps & {
   background: string
   loaded: boolean
+  inView?: boolean
 }
 
 type ItemAnchorProps = {
   background: string
   loaded: boolean
+  inView?: boolean
 }
 
 const clickAnimationDesktop = keyframes`
@@ -50,6 +47,7 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
 
   ${props =>
     props.loaded &&
+    props.inView &&
     !props.active &&
     css`
       opacity: 1;

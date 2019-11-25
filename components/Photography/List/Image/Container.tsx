@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { SwipeInRight, SwipeOutRight } from '../../../Animations'
 
 type ImgContainerProps = {
-  inView?: boolean
+  inView: boolean
   loaded: boolean
   src: string
   width: number

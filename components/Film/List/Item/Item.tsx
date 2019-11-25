@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import { NextRouter } from 'next/router'
+import { useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 import { styled } from '../../../../theme'
+import { LoadingAnimater } from '../../../Common'
 import { LinkWrapper } from '../../../Common/Link'
 import { ItemAnchor } from './Anchor'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
-import { useState } from 'react'
-import { LoadingAnimater } from '../../../Common'
 
 type StyledItemProps = {
   columns: number[]
@@ -52,12 +53,16 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
   children,
 }) => {
   const [videoLoaded, setVideoLoaded] = useState(false)
+  const [ref, inView] = useInView({
+    threshold: 0.1,
+    triggerOnce: true,
+  })
 
   return (
     <LinkWrapper href={href}>
-      <StyledItem columns={columns} rows={rows}>
+      <StyledItem ref={ref} columns={columns} rows={rows}>
         <Link href={href}>
-          <ItemAnchor loaded={videoLoaded} background={imgSrc}>
+          <ItemAnchor inView={inView} loaded={videoLoaded} background={imgSrc}>
             <ItemVideo onLoad={() => setVideoLoaded(true)} video={vidSrc} />
             <ItemTitle>{children}</ItemTitle>
           </ItemAnchor>

@@ -5,7 +5,8 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import styledSanitize from 'styled-sanitize'
 import theme from '../theme'
-import { logPageViews, initGA } from '../utils/analytics'
+import { logPageViews } from '../utils/analytics'
+require('intersection-observer')
 
 const GlobalStyle = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700|Red+Hat+Display:400,500,700&display=swap');
