@@ -47,12 +47,10 @@ export const ListImage: React.FunctionComponent<ListImageProps> = ({
             setState({
               ref: imgRef,
               currentIndex: index,
-              lightboxOpen: true,
-              lightboxAnimating: true,
             })
           }
           ref={inViewRef}
-          active={currentIndex === index}
+          active={lightboxAnimating && currentIndex === index}
         >
           <img {...photo} ref={imgRef} onLoad={() => setImageLoaded(true)} />
           <LoadingAnimater loaded={imageLoaded} />
