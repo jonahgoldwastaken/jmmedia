@@ -1,0 +1,47 @@
+import styled, { css } from 'styled-components'
+import { CurtainCloseHorizontal, SwipeInRight } from '../../../Animations'
+
+type ImgContainerProps = {
+  inView?: boolean
+  loaded: boolean
+  src: string
+  width: number
+  height: number
+  title: string
+}
+
+export const ImgContainer = styled.div<ImgContainerProps>`
+  position: relative;
+  width: ${props => props.width}px;
+  height: ${props => props.height}px;
+  cursor: pointer;
+
+  img {
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  ${props =>
+    props.inView &&
+    props.loaded &&
+    css`
+      img {
+        opacity: 1;
+        animation: ${SwipeInRight}
+          ${props =>
+            `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
+          forwards;
+      }
+    `};
+
+  .page-transition-exit-active & {
+    animation: ${CurtainCloseHorizontal}
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+      forwards;
+  }
+`
