@@ -4,13 +4,7 @@ import { css } from 'styled-components'
 import theme, { styled } from '../../../theme'
 import { initGA } from '../../../utils/analytics'
 import animationChooser from '../../../utils/animationChooser'
-import {
-  SlideOutDown,
-  SlideOutRight,
-  SwipeOutDown,
-  SwipeOutRight,
-  ZoomOut,
-} from '../../Animations'
+import { SlideOutDown, SlideOutRight, SwipeOutDown, SwipeOutRight, ZoomOut } from '../../Animations'
 import { BackgroundContext } from './Context'
 
 type StyledBackgroundProps = {

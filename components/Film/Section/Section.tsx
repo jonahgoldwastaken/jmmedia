@@ -1,13 +1,6 @@
 import { darken, lighten } from 'polished'
 import { styled } from '../../../theme'
-import {
-  FadeIn,
-  FadeOut,
-  SlideInLeft,
-  SlideInRight,
-  SlideOutLeft,
-  SlideOutRight,
-} from '../../Animations'
+import { FadeIn, FadeOut, SlideInLeft, SlideInRight, SlideOutLeft, SlideOutRight } from '../../Animations'
 import { BackgroundContext } from '../../Common/Background'
 
 type StyledSectionProps = {
