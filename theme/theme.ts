@@ -4,6 +4,7 @@ export const theme = {
     primary: 'white',
     secondary: 'black',
     tertiary: '#505050',
+    loading: '#c8c8c8',
     disabled: 'lightgrey',
   },
   space: ['0.5rem', '1rem', '1.5rem', '3rem', '6rem'],

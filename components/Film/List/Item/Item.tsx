@@ -8,6 +8,7 @@ import { LinkWrapper } from '../../../Common/Link'
 import { ItemAnchor } from './Anchor'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
+import { ItemImage } from './Image'
 
 type StyledItemProps = {
   columns: number[]
@@ -48,6 +49,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
   children,
 }) => {
   const [videoLoaded, setVideoLoaded] = useState(false)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const [ref, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
@@ -57,7 +59,8 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
     <LinkWrapper href={href}>
       <StyledItem ref={ref} columns={columns}>
         <Link href={href}>
-          <ItemAnchor inView={inView} loaded={videoLoaded} background={imgSrc}>
+          <ItemAnchor inView={inView} loaded={videoLoaded && imageLoaded}>
+            <ItemImage onLoad={() => setImageLoaded(true)} src={imgSrc} />
             <ItemVideo onLoad={() => setVideoLoaded(true)} video={vidSrc} />
             <ItemTitle>{children}</ItemTitle>
           </ItemAnchor>
