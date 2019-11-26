@@ -6,9 +6,9 @@ import { styled } from '../../../../theme'
 import { LoadingAnimater } from '../../../Common'
 import { LinkWrapper } from '../../../Common/Link'
 import { ItemAnchor } from './Anchor'
+import { ItemImage } from './Image'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
-import { ItemImage } from './Image'
 
 type StyledItemProps = {
   columns: number[]
