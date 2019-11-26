@@ -7,13 +7,11 @@ import { LinkWrapperContext } from '../../../Common/Link'
 import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
 
 type StyledAnchorProps = BaseAnchorProps & {
-  background: string
   loaded: boolean
   inView?: boolean
 }
 
 type ItemAnchorProps = {
-  background: string
   loaded: boolean
   inView?: boolean
 }
@@ -36,8 +34,6 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   justify-content: center;
   align-items: center;
   font-size: ${props => props.theme.fontSizes[1]};
-  background: linear-gradient(${rgba('black', 0.5)}, ${rgba('black', 0.5)}),
-    url(${props => props.background}) no-repeat center/cover;
   opacity: 0;
 
   &:after {
