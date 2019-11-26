@@ -6,7 +6,6 @@ type LightboxImageProps = {
   positionData: positionData
   open: boolean
   index: number
-  fallback: string
 }
 
 export const LightboxImage = styled.img<LightboxImageProps>`
@@ -16,7 +15,6 @@ export const LightboxImage = styled.img<LightboxImageProps>`
   width: ${props => (props.positionData ? props.positionData.width : '0')}px;
   height: ${props => (props.positionData ? props.positionData.height : '0')}px;
   object-fit: contain;
-  background: url(${props => props.fallback}) no-repeat center/contain;
 
   ${props =>
     typeof props.index !== 'undefined'

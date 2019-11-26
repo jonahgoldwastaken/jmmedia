@@ -70,7 +70,6 @@ export const Lightbox: React.FunctionComponent<LightboxProps> = ({
           positionData={positionData()}
           src={photos.large[index] && photos.large[index].src}
           alt={photos.large[index] && photos.large[index].title}
-          fallback={photos.small[index] && photos.small[index].src}
           onLoad={() => {
             setState({
               lightboxOpen: true,
