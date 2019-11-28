@@ -1,9 +1,9 @@
-import { RefObject, PureComponent } from 'react'
+import { PureComponent, RefObject } from 'react'
 import Gallery from 'react-photo-gallery'
 import { ListContext } from './Context'
 import Image from './Image'
-import Lightbox from './Lightbox'
 import { ListImageCallbacks } from './Image/Image'
+import Lightbox from './Lightbox'
 
 const testPhotos = {
   small: [
@@ -255,7 +255,6 @@ export class List extends PureComponent<{}, ListState> {
 
   render() {
     const { currentIndex, lightboxOpen, lightboxAnimating, ref } = this.state
-    console.log(currentIndex)
 
     return (
       <ListContext.Provider

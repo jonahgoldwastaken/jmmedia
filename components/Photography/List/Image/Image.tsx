@@ -1,8 +1,11 @@
-import { useRef, useState, RefObject } from 'react'
+import { RefObject, useContext, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { css } from 'styled-components'
+import { styled } from '../../../../theme'
+import { SwipeInRight, SwipeOutRight } from '../../../Animations'
 import { LoadingAnimater } from '../../../Common'
 import { ListContext } from '../Context'
-import { ImgContainer } from './Container'
+import { ImageContainer } from './Container'
 
 export type ListImageCallbacks = {
   setRef: (ref: RefObject<any>) => void
@@ -24,6 +27,38 @@ type ListImageProps = {
   loaded: boolean
 } & ListImageCallbacks
 
+type ImageProps = {
+  inView: boolean
+  loading: boolean
+  active: boolean
+}
+
+const Image = styled.img<ImageProps>`
+  display: block;
+  position: relative;
+  z-index: 10;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: zoom-in;
+
+  ${props =>
+    props.inView &&
+    props.loading &&
+    css`
+      opacity: ${props.active ? '0' : '1'};
+      animation: ${SwipeInRight} ${props.theme.animation.timing[2]}
+        ${props.theme.animation.curve} forwards;
+    `};
+
+  .page-transition-exit-active & {
+    animation: ${SwipeOutRight}
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+      forwards;
+  }
+`
+
 export const ListImage: React.FunctionComponent<ListImageProps> = ({
   photo,
   index,
@@ -36,23 +71,21 @@ export const ListImage: React.FunctionComponent<ListImageProps> = ({
     triggerOnce: true,
   })
   const imgRef = useRef<HTMLImageElement>()
+  const { currentIndex, lightboxAnimating } = useContext(ListContext)
 
   return (
-    <ListContext.Consumer>
-      {({ currentIndex, lightboxAnimating }) => (
-        <ImgContainer
-          {...photo}
-          loaded={imageLoaded}
-          inView={inView}
-          onMouseOver={() => !lightboxAnimating && setRef(imgRef)}
-          onClick={() => clickHandler(imgRef, index)}
-          ref={inViewRef}
-          active={lightboxAnimating && currentIndex === index}
-        >
-          <img {...photo} ref={imgRef} onLoad={() => setImageLoaded(true)} />
-          <LoadingAnimater loaded={imageLoaded} />
-        </ImgContainer>
-      )}
-    </ListContext.Consumer>
+    <ImageContainer {...photo} ref={inViewRef}>
+      <Image
+        {...photo}
+        loading={imageLoaded}
+        inView={inView}
+        ref={imgRef}
+        onMouseOver={() => !lightboxAnimating && setRef(imgRef)}
+        onClick={() => clickHandler(imgRef, index)}
+        active={lightboxAnimating && currentIndex === index}
+        onLoad={() => setImageLoaded(true)}
+      />
+      <LoadingAnimater loaded={imageLoaded} />
+    </ImageContainer>
   )
 }
