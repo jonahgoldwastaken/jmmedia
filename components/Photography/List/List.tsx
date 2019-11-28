@@ -1,8 +1,9 @@
-import { Component, RefObject } from 'react'
+import { RefObject, PureComponent } from 'react'
 import Gallery from 'react-photo-gallery'
 import { ListContext } from './Context'
 import Image from './Image'
 import Lightbox from './Lightbox'
+import { ListImageCallbacks } from './Image/Image'
 
 const testPhotos = {
   small: [
@@ -199,8 +200,8 @@ const testPhotos = {
   ],
 }
 
-const imageRenderer = props => {
-  return <Image {...props} />
+const imageRenderer = (callbacks: ListImageCallbacks) => props => {
+  return <Image {...props} {...callbacks} />
 }
 
 type ListState = {
@@ -210,7 +211,7 @@ type ListState = {
   ref: RefObject<HTMLImageElement>
 }
 
-export class List extends Component<{}, ListState> {
+export class List extends PureComponent<{}, ListState> {
   state = {
     lightboxOpen: undefined,
     lightboxAnimating: undefined,
@@ -218,8 +219,44 @@ export class List extends Component<{}, ListState> {
     ref: undefined,
   }
 
+  setRef = (ref: RefObject<any>) => {
+    this.setState({ ref })
+  }
+
+  imageClickHandler = (ref: RefObject<any>, index: number) => {
+    this.setState({ ref, currentIndex: index })
+  }
+
+  lightboxClickHandler = () => {
+    this.setState({
+      lightboxOpen: false,
+      lightboxAnimating: true,
+    })
+  }
+
+  lightboxOnLoad = () => {
+    this.setState({
+      lightboxOpen: true,
+      lightboxAnimating: true,
+    })
+  }
+
+  lightboxOnTransitionEnd = () => {
+    if (this.state.lightboxOpen)
+      this.setState({
+        lightboxAnimating: false,
+      })
+    else
+      this.setState({
+        lightboxAnimating: false,
+        currentIndex: undefined,
+      })
+  }
+
   render() {
     const { currentIndex, lightboxOpen, lightboxAnimating, ref } = this.state
+    console.log(currentIndex)
+
     return (
       <ListContext.Provider
         value={{
@@ -227,16 +264,25 @@ export class List extends Component<{}, ListState> {
           ref,
           lightboxOpen,
           lightboxAnimating,
-          setState: this.setState.bind(this),
+          photos: testPhotos,
         }}
       >
         <Gallery
           photos={testPhotos.small}
-          renderImage={imageRenderer}
+          renderImage={imageRenderer({
+            setRef: this.setRef,
+            clickHandler: this.imageClickHandler,
+          })}
           margin={0}
           targetRowHeight={400}
         />
-        <Lightbox photos={testPhotos} index={currentIndex} />
+        {typeof currentIndex !== 'undefined' && (
+          <Lightbox
+            lightboxClickHandler={this.lightboxClickHandler}
+            lightboxOnLoad={this.lightboxOnLoad}
+            lightboxOnTransitionEnd={this.lightboxOnTransitionEnd}
+          />
+        )}
       </ListContext.Provider>
     )
   }

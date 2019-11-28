@@ -7,11 +7,9 @@ import { LightboxBackground } from './Background'
 import { LightboxImage } from './Image'
 
 type LightboxProps = {
-  photos: {
-    large: Photo[]
-    small: Photo[]
-  }
-  index: number
+  lightboxClickHandler: () => void
+  lightboxOnLoad: () => void
+  lightboxOnTransitionEnd: () => void
 }
 
 type LightboxContainerProps = {
@@ -38,9 +36,11 @@ export const LightboxContainer = styled.div<LightboxContainerProps>`
 `
 
 export const Lightbox: React.FunctionComponent<LightboxProps> = ({
-  photos,
+  lightboxClickHandler,
+  lightboxOnLoad,
+  lightboxOnTransitionEnd,
 }) => {
-  const { ref, currentIndex: index, lightboxOpen: open, setState } = useContext<
+  const { ref, currentIndex: index, lightboxOpen: open, photos } = useContext<
     ListContext
   >(ListContext)
   const positionData = () => {
@@ -58,34 +58,15 @@ export const Lightbox: React.FunctionComponent<LightboxProps> = ({
 
   return (
     <>
-      <LightboxContainer
-        onClickCapture={() =>
-          setState({ lightboxOpen: false, lightboxAnimating: true })
-        }
-        open={open}
-      >
+      <LightboxContainer onClickCapture={lightboxClickHandler} open={open}>
         <LightboxImage
           index={index}
           open={open}
           positionData={positionData()}
-          src={photos.large[index] && photos.large[index].src}
-          alt={photos.large[index] && photos.large[index].title}
-          onLoad={() => {
-            setState({
-              lightboxOpen: true,
-              lightboxAnimating: true,
-            })
-          }}
-          onTransitionEnd={() =>
-            !open
-              ? setState({
-                  currentIndex: undefined,
-                  lightboxAnimating: false,
-                })
-              : setState({
-                  lightboxAnimating: false,
-                })
-          }
+          src={photos.large[index].src}
+          alt={photos.large[index].title}
+          onLoad={lightboxOnLoad}
+          onTransitionEnd={lightboxOnTransitionEnd}
         />
       </LightboxContainer>
       <LightboxBackground open={open} />

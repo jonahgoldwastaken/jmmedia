@@ -7,20 +7,19 @@ type LightboxBackgroundProps = {
 
 export const LightboxBackground = styled.div<LightboxBackgroundProps>`
   position: fixed;
-  top: 0;
+  top: -100vh;
   left: 0;
   width: 100%;
   height: 100vh;
   z-index: 1000;
   background: ${props => props.theme.colors.secondary};
-  clip-path: inset(0 0 100% 0);
-  transition: clip-path
+  transition: top
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
   ${props =>
     props.open &&
     css`
-      clip-path: inset(0 0 0 0);
+      top: 0;
     `}
 `
