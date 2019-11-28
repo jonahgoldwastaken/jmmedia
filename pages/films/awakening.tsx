@@ -1,6 +1,7 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
+import { useContext } from 'react'
 import { NavButton } from '../../components/Common'
 import Background from '../../components/Common/Background'
 import {
@@ -19,6 +20,8 @@ import ContentSection, {
 import Footer from '../../components/Footer'
 
 const Awakening: NextPage = () => {
+  const { state } = useContext(FilmContext)
+
   return (
     <>
       <Head>
@@ -26,13 +29,9 @@ const Awakening: NextPage = () => {
       </Head>
       <Background currentPage="/films/awakening">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png">
-          <FilmContext.Consumer>
-            {({ state }) => (
-              <Link href="/films">
-                <NavButton hide={state === 'open'} icon="arrow-left" />
-              </Link>
-            )}
-          </FilmContext.Consumer>
+          <Link href="/films">
+            <NavButton hide={state === 'open'} icon="arrow-left" />
+          </Link>
           <FilmTitle>Awakening</FilmTitle>
           <FilmDetails>Productvideo - 2017</FilmDetails>
           <Film src="https://storage.googleapis.com/filmportfolio/film/awakening/film.mp4" />

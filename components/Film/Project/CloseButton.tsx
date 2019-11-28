@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
@@ -31,21 +32,20 @@ const StyledButton = styled(NavButton)<StyledButtonProps>`
   }
 `
 
-export const FilmCloseButton: React.FunctionComponent = () => (
-  <FilmContext.Consumer>
-    {({ setState, state }) => (
-      <StyledButton
-        icon="times"
-        onClick={() => {
-          setState('closed')
-          logEvent(
-            `Video plays on ${window.location.pathname}`,
-            `Stopped playing video`
-          )
-        }}
-        hide={state !== 'open'}
-        filmState={state}
-      />
-    )}
-  </FilmContext.Consumer>
-)
+export const FilmCloseButton: React.FunctionComponent = () => {
+  const { setState, state } = useContext(FilmContext)
+  return (
+    <StyledButton
+      icon="times"
+      onClick={() => {
+        setState('closed')
+        logEvent(
+          `Video plays on ${window.location.pathname}`,
+          `Stopped playing video`
+        )
+      }}
+      hide={state !== 'open'}
+      filmState={state}
+    />
+  )
+}

@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
@@ -54,8 +55,8 @@ const StyledParagraph = styled.p<StyledParagraphProps>`
         ${props.theme.animation.curve} forwards;
     `}
 `
-export const FilmDetails: React.FunctionComponent = props => (
-  <FilmContext.Consumer>
-    {({ state }) => <StyledParagraph filmState={state} {...props} />}
-  </FilmContext.Consumer>
-)
+export const FilmDetails: React.FunctionComponent = props => {
+  const { state } = useContext(FilmContext)
+
+  return <StyledParagraph filmState={state} {...props} />
+}

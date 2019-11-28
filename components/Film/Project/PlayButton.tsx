@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useContext } from 'react'
 import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
@@ -58,21 +59,18 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `
 
-export const FilmPlayButton: React.FunctionComponent = () => (
-  <FilmContext.Consumer>
-    {({ setState, state }) => (
-      <StyledButton
-        onClick={() => {
-          logEvent(
-            `Video plays on ${window.location.pathname}`,
-            `Playing video`
-          )
-          setState('open')
-        }}
-        filmState={state}
-      >
-        <FontAwesomeIcon icon="play" />
-      </StyledButton>
-    )}
-  </FilmContext.Consumer>
-)
+export const FilmPlayButton: React.FunctionComponent = () => {
+  const { setState, state } = useContext(FilmContext)
+
+  return (
+    <StyledButton
+      onClick={() => {
+        logEvent(`Video plays on ${window.location.pathname}`, `Playing video`)
+        setState('open')
+      }}
+      filmState={state}
+    >
+      <FontAwesomeIcon icon="play" />
+    </StyledButton>
+  )
+}

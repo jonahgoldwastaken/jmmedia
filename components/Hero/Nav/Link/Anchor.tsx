@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { forwardRef, HTMLProps } from 'react'
+import { forwardRef, HTMLProps, useContext } from 'react'
 import { css, keyframes } from 'styled-components'
 import theme, { styled } from '../../../../theme'
 import { LinkWrapperContext } from '../../../Common/Link'
@@ -202,28 +202,30 @@ const RefAnchor = forwardRef<
 )
 
 export const NavAnchor: React.FunctionComponent<NavAnchorProps> = props => {
-  return (
-    <LinkWrapperContext.Consumer>
-      {({ ref, href, active, disabled, positionData, setIsHovering }) => {
-        const contextItems = {
-          ref,
-          href,
-          active,
-          disabled,
-          positionData,
-        }
+  const {
+    ref,
+    href,
+    active,
+    disabled,
+    positionData,
+    setIsHovering,
+  } = useContext(LinkWrapperContext)
+  const contextItems = {
+    ref,
+    href,
+    active,
+    disabled,
+    positionData,
+  }
 
-        return (
-          <Link href={href}>
-            <RefAnchor
-              onMouseOver={() => setIsHovering(true)}
-              onMouseOut={() => setIsHovering(false)}
-              {...contextItems}
-              {...props}
-            />
-          </Link>
-        )
-      }}
-    </LinkWrapperContext.Consumer>
+  return (
+    <Link href={href}>
+      <RefAnchor
+        onMouseOver={() => setIsHovering(true)}
+        onMouseOut={() => setIsHovering(false)}
+        {...contextItems}
+        {...props}
+      />
+    </Link>
   )
 }
