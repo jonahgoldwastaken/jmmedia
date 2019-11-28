@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { styled } from '../../../../theme'
 import { VideoContainer, VideoElement } from '../../../Common'
 import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
@@ -17,21 +18,21 @@ const ItemVideoElement = styled(VideoElement)`
 export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
   video,
   onLoad,
-}) => (
-  <LinkWrapperContext.Consumer>
-    {({ isHovering }) => (
-      <VideoContainer mayPlayVideo={isHovering}>
-        {props => (
-          <ItemVideoElement
-            onLoadedData={onLoad}
-            muted
-            loop
-            playsInline
-            src={video}
-            {...props}
-          />
-        )}
-      </VideoContainer>
-    )}
-  </LinkWrapperContext.Consumer>
-)
+}) => {
+  const { isHovering } = useContext(LinkWrapperContext)
+
+  return (
+    <VideoContainer mayPlayVideo={isHovering}>
+      {props => (
+        <ItemVideoElement
+          onLoadedData={onLoad}
+          muted
+          loop
+          playsInline
+          src={video}
+          {...props}
+        />
+      )}
+    </VideoContainer>
+  )
+}

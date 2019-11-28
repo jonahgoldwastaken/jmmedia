@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
@@ -40,23 +41,23 @@ const StyledVideo = styled(VideoElement)<StyledVideoProps>`
       }
     `};
 `
-export const Film: React.FunctionComponent<any> = props => (
-  <>
-    <FilmPlayButton />
-    <FilmContext.Consumer>
-      {({ state }) => (
-        <VideoContainer mayPlayVideo={state === 'open'}>
-          {moreProps => (
-            <StyledVideo
-              src={props.src}
-              controls={state === 'open'}
-              playsInline
-              filmState={state}
-              {...moreProps}
-            ></StyledVideo>
-          )}
-        </VideoContainer>
-      )}
-    </FilmContext.Consumer>
-  </>
-)
+export const Film: React.FunctionComponent<any> = props => {
+  const { state } = useContext(FilmContext)
+
+  return (
+    <>
+      <FilmPlayButton />
+      <VideoContainer mayPlayVideo={state === 'open'}>
+        {moreProps => (
+          <StyledVideo
+            src={props.src}
+            controls={state === 'open'}
+            playsInline
+            filmState={state}
+            {...moreProps}
+          ></StyledVideo>
+        )}
+      </VideoContainer>
+    </>
+  )
+}

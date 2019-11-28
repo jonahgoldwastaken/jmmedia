@@ -1,4 +1,4 @@
-import { forwardRef, HTMLProps } from 'react'
+import { forwardRef, HTMLProps, useContext } from 'react'
 import { css, keyframes } from 'styled-components'
 import { styled } from '../../../../theme'
 import { SwipeInRight, SwipeOutRight } from '../../../Animations'
@@ -93,25 +93,22 @@ const RefAnchor = forwardRef<
 >((props, ref) => <StyledAnchor {...props} ref={ref} />)
 
 export const ItemAnchor: React.FunctionComponent<ItemAnchorProps> = props => {
-  return (
-    <LinkWrapperContext.Consumer>
-      {({ active, ref, positionData, href, setIsHovering }) => {
-        const contextItems = {
-          active,
-          ref,
-          positionData,
-          href,
-        }
+  const { active, ref, positionData, href, setIsHovering } = useContext(
+    LinkWrapperContext
+  )
+  const contextItems = {
+    active,
+    ref,
+    positionData,
+    href,
+  }
 
-        return (
-          <RefAnchor
-            onMouseOverCapture={() => setIsHovering(true)}
-            onMouseOutCapture={() => setIsHovering(false)}
-            {...contextItems}
-            {...props}
-          />
-        )
-      }}
-    </LinkWrapperContext.Consumer>
+  return (
+    <RefAnchor
+      onMouseOverCapture={() => setIsHovering(true)}
+      onMouseOutCapture={() => setIsHovering(false)}
+      {...contextItems}
+      {...props}
+    />
   )
 }

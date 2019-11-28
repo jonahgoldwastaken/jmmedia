@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
@@ -53,8 +54,8 @@ const StyledHeading = styled(Heading)<StyledHeadingProps>`
     `}
 `
 
-export const FilmTitle: React.FunctionComponent = props => (
-  <FilmContext.Consumer>
-    {({ state }) => <StyledHeading filmState={state} {...props} />}
-  </FilmContext.Consumer>
-)
+export const FilmTitle: React.FunctionComponent = props => {
+  const { state } = useContext(FilmContext)
+
+  return <StyledHeading filmState={state} {...props} />
+}
