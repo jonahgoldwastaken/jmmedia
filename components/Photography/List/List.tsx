@@ -1,4 +1,4 @@
-import { PureComponent, RefObject } from 'react'
+import { RefObject, useState } from 'react'
 import Gallery from 'react-photo-gallery'
 import { ListContext } from './Context'
 import Image from './Image'
@@ -204,85 +204,62 @@ const imageRenderer = (callbacks: ListImageCallbacks) => props => {
   return <Image {...props} {...callbacks} />
 }
 
-type ListState = {
-  lightboxOpen: boolean
-  lightboxAnimating: boolean
-  currentIndex: number
-  ref: RefObject<HTMLImageElement>
-}
+export const List: React.FunctionComponent = () => {
+  const [lightboxOpen, setLightboxOpen] = useState<boolean>(undefined)
+  const [lightboxAnimating, setLightboxAnimating] = useState<boolean>(undefined)
+  const [currentIndex, setCurrentIndex] = useState<number>(undefined)
+  const [ref, setRef] = useState<RefObject<any>>(undefined)
 
-export class List extends PureComponent<{}, ListState> {
-  state = {
-    lightboxOpen: undefined,
-    lightboxAnimating: undefined,
-    currentIndex: undefined,
-    ref: undefined,
+  const setImageRef = (ref: RefObject<any>) => {
+    if (typeof currentIndex === 'number') setRef(ref)
   }
 
-  setRef = (ref: RefObject<any>) => {
-    this.setState({ ref })
+  const imageClickHandler = (ref: RefObject<any>, index: number) => {
+    setRef(ref)
+    setCurrentIndex(index)
   }
 
-  imageClickHandler = (ref: RefObject<any>, index: number) => {
-    this.setState({ ref, currentIndex: index })
+  const lightboxClickHandler = () => {
+    setLightboxOpen(false)
+    setLightboxAnimating(true)
   }
 
-  lightboxClickHandler = () => {
-    this.setState({
-      lightboxOpen: false,
-      lightboxAnimating: true,
-    })
+  const lightboxOnLoad = () => {
+    setLightboxOpen(true)
+    setLightboxAnimating(true)
   }
 
-  lightboxOnLoad = () => {
-    this.setState({
-      lightboxOpen: true,
-      lightboxAnimating: true,
-    })
+  const lightboxOnTransitionEnd = () => {
+    setLightboxAnimating(false)
+    if (!lightboxOpen) setCurrentIndex(undefined)
   }
 
-  lightboxOnTransitionEnd = () => {
-    if (this.state.lightboxOpen)
-      this.setState({
-        lightboxAnimating: false,
-      })
-    else
-      this.setState({
-        lightboxAnimating: false,
-        currentIndex: undefined,
-      })
-  }
-
-  render() {
-    const { currentIndex, lightboxOpen, lightboxAnimating, ref } = this.state
-
-    return (
-      <ListContext.Provider
-        value={{
-          currentIndex: currentIndex,
-          ref,
-          lightboxOpen,
-          lightboxAnimating,
-          photos: testPhotos,
-        }}
-      >
-        <Gallery
-          photos={testPhotos.small}
-          renderImage={imageRenderer({
-            setRef: this.setRef,
-            clickHandler: this.imageClickHandler,
-          })}
-          margin={0}
-          targetRowHeight={400}
+  return (
+    <ListContext.Provider
+      value={{
+        currentIndex,
+        ref,
+        lightboxOpen,
+        lightboxAnimating,
+        photos: testPhotos,
+      }}
+    >
+      <Gallery
+        photos={testPhotos.small}
+        renderImage={imageRenderer({
+          setRef: setImageRef,
+          clickHandler: imageClickHandler,
+        })}
+        margin={0}
+        targetRowHeight={400}
+      />
+      {typeof currentIndex !== 'undefined' && (
+        <Lightbox
+          lightboxClickHandler={lightboxClickHandler}
+          lightboxOnLoad={lightboxOnLoad}
+          lightboxOnTransitionEnd={lightboxOnTransitionEnd}
         />
-        {typeof currentIndex !== 'undefined' && (
-          <Lightbox
-            lightboxClickHandler={this.lightboxClickHandler}
-            lightboxOnLoad={this.lightboxOnLoad}
-            lightboxOnTransitionEnd={this.lightboxOnTransitionEnd}
-          />
-        )}
-      </ListContext.Provider>
-    )
-  }
+      )}
+    </ListContext.Provider>
+  )
 }
