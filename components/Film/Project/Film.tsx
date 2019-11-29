@@ -3,7 +3,7 @@ import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
 import { FadeIn } from '../../Animations'
-import { VideoContainer, VideoElement } from '../../Common'
+import Video, { useVideo } from '../../Common/Video'
 import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
 
@@ -12,7 +12,7 @@ type StyledVideoProps = {
   src: string
 }
 
-const StyledVideo = styled(VideoElement)<StyledVideoProps>`
+const StyledVideo = styled(Video)<StyledVideoProps>`
   position: relative;
   grid-row: 1 / span 2;
   grid-column: 1;
@@ -43,21 +43,21 @@ const StyledVideo = styled(VideoElement)<StyledVideoProps>`
 `
 export const Film: React.FunctionComponent<any> = props => {
   const { state } = useContext(FilmContext)
+  const [playing, ref, setCanPlayVideo] = useVideo(state === 'open')
 
   return (
     <>
       <FilmPlayButton />
-      <VideoContainer mayPlayVideo={state === 'open'}>
-        {moreProps => (
-          <StyledVideo
-            src={props.src}
-            controls={state === 'open'}
-            playsInline
-            filmState={state}
-            {...moreProps}
-          ></StyledVideo>
-        )}
-      </VideoContainer>
+      <StyledVideo
+        src={props.src}
+        controls={state === 'open'}
+        playsInline
+        filmState={state}
+        ref={ref}
+        playing={playing}
+        onLoadStart={() => setCanPlayVideo(false)}
+        onLoadedData={() => setCanPlayVideo(true)}
+      ></StyledVideo>
     </>
   )
 }
