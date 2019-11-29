@@ -1,12 +1,8 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
-import { useContext } from 'react'
-import { NavButton } from '../../components/Common'
 import Background from '../../components/Common/Background'
 import {
   Film,
-  FilmContext,
   FilmDetails,
   FilmHero,
   FilmTitle,
@@ -19,8 +15,6 @@ import ContentSection, {
 import Footer from '../../components/Footer'
 
 const PlantApp: NextPage = () => {
-  const { state } = useContext(FilmContext)
-
   return (
     <>
       <Head>
@@ -28,9 +22,6 @@ const PlantApp: NextPage = () => {
       </Head>
       <Background currentPage="/films/plantapp">
         <FilmHero background="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png">
-          <Link href="/films">
-            <NavButton hide={state === 'open'} icon="arrow-left" />
-          </Link>
           <FilmTitle>PlantApp</FilmTitle>
           <FilmDetails>Productvideo - 2018</FilmDetails>
           <Film src="https://storage.googleapis.com/filmportfolio/film/plantapp/film.mp4" />
