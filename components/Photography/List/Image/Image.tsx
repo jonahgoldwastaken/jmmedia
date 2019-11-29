@@ -28,8 +28,7 @@ type ListImageProps = {
 } & ListImageCallbacks
 
 type ImageProps = {
-  inView: boolean
-  loading: boolean
+  loaded: boolean
   active: boolean
 }
 
@@ -43,8 +42,7 @@ const Image = styled.img<ImageProps>`
   cursor: zoom-in;
 
   ${props =>
-    props.inView &&
-    props.loading &&
+    props.loaded &&
     css`
       opacity: ${props.active ? '0' : '1'};
       animation: ${SwipeInRight} ${props.theme.animation.timing[2]}
@@ -75,17 +73,20 @@ export const ListImage: React.FunctionComponent<ListImageProps> = ({
 
   return (
     <ImageContainer {...photo} ref={inViewRef}>
-      <Image
-        {...photo}
-        loading={imageLoaded}
-        inView={inView}
-        ref={imgRef}
-        onMouseOver={() => !lightboxAnimating && setRef(imgRef)}
-        onClick={() => clickHandler(imgRef, index)}
-        active={lightboxAnimating && currentIndex === index}
-        onLoad={() => setImageLoaded(true)}
-      />
-      <LoadingAnimater loaded={imageLoaded} />
+      {inView && (
+        <>
+          <Image
+            {...photo}
+            loaded={imageLoaded}
+            ref={imgRef}
+            onMouseOver={() => !lightboxAnimating && setRef(imgRef)}
+            onClick={() => clickHandler(imgRef, index)}
+            active={lightboxAnimating && currentIndex === index}
+            onLoad={() => setImageLoaded(true)}
+          />
+          <LoadingAnimater loaded={imageLoaded} />
+        </>
+      )}
     </ImageContainer>
   )
 }
