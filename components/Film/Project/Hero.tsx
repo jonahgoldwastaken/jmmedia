@@ -7,6 +7,8 @@ import Header from '../../Common/Header'
 import { FilmCloseButton } from './CloseButton'
 import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
+import { NavButton } from '../../Common'
+import Link from 'next/link'
 
 type StyledHeaderProps = {
   background: string
@@ -66,6 +68,9 @@ export const FilmHero: React.FunctionComponent<FilmHeroProps> = ({
     <FilmContext.Provider value={{ state: filmState, setState: setFilmState }}>
       <StyledHeader state={filmState} {...props}>
         {children}
+        <Link href="/films">
+          <NavButton hide={filmState === 'open'} icon="arrow-left" />
+        </Link>
         <FilmCloseButton />
         <FilmPlayButton />
       </StyledHeader>
