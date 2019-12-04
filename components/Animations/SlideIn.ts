@@ -20,16 +20,16 @@ export const SlideInLeft = keyframes`
 
 export const SlideInDown = keyframes`
   from {
-    bottom: 100vh;
+    top: -100%;
   }
   to {
-    bottom: 0vh;
+    top: 0vh;
   }
 `
 
 export const SlideInUp = keyframes`
   from {
-    top: 100vh;
+    top: 100%;
   }
   to {
     top: 0vh;

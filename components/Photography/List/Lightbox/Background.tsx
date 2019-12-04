@@ -1,13 +1,14 @@
 import { css } from 'styled-components'
 import { styled } from '../../../../theme'
+import { SlideInDown } from '../../../Animations'
 
 type LightboxBackgroundProps = {
-  open?: boolean
+  closing?: boolean
 }
 
 export const LightboxBackground = styled.div<LightboxBackgroundProps>`
   position: fixed;
-  top: -100vh;
+  top: ${props => (props.closing ? '-100%' : '0')};
   left: 0;
   width: 100%;
   height: 100vh;
@@ -17,9 +18,7 @@ export const LightboxBackground = styled.div<LightboxBackgroundProps>`
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
-  ${props =>
-    props.open &&
-    css`
-      top: 0;
-    `}
+  animation: ${SlideInDown}
+    ${props =>
+      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 `
