@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { css } from 'styled-components'
 import { styled } from '../../../../theme'
 import { ListContext } from '../Context'
 import { LightboxBackground } from './Background'
@@ -23,15 +22,6 @@ export const LightboxContainer = styled.div<LightboxContainerProps>`
   height: 100vh;
   z-index: 1001;
   cursor: zoom-out;
-
-  ${props =>
-    props.open
-      ? css`
-          pointer-events: auto;
-        `
-      : css`
-          pointer-events: none;
-        `}
 `
 
 export const Lightbox: React.FunctionComponent<LightboxProps> = ({
@@ -39,9 +29,13 @@ export const Lightbox: React.FunctionComponent<LightboxProps> = ({
   lightboxOnLoad,
   lightboxOnTransitionEnd,
 }) => {
-  const { ref, currentIndex: index, lightboxOpen: open, photos } = useContext<
-    ListContext
-  >(ListContext)
+  const {
+    ref,
+    currentIndex: index,
+    lightboxOpen: open,
+    photos,
+    lightboxAnimating,
+  } = useContext<ListContext>(ListContext)
   const positionData = () => {
     if (ref && ref.current) {
       const bounds = ref.current.getBoundingClientRect()
@@ -62,13 +56,21 @@ export const Lightbox: React.FunctionComponent<LightboxProps> = ({
           index={index}
           open={open}
           positionData={positionData()}
+          src={photos.small[index].src}
+          small
+          animating={lightboxAnimating}
+        />
+        <LightboxImage
+          index={index}
+          open={open}
+          positionData={positionData()}
           src={photos.large[index].src}
           alt={photos.large[index].title}
           onLoad={lightboxOnLoad}
           onTransitionEnd={lightboxOnTransitionEnd}
         />
       </LightboxContainer>
-      <LightboxBackground open={open} />
+      <LightboxBackground closing={lightboxAnimating && !open} />
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { css } from 'styled-components'
+import { css, keyframes } from 'styled-components'
 import { positionData } from '../../../../interfaces/positionData'
 import { styled } from '../../../../theme'
 
@@ -6,7 +6,15 @@ type LightboxImageProps = {
   positionData: positionData
   open: boolean
   index: number
+  small?: boolean
+  animating?: boolean
 }
+
+const borderFade = keyframes`
+  to: {
+    border-width: 0;
+  }
+`
 
 export const LightboxImage = styled.img<LightboxImageProps>`
   position: fixed;
@@ -24,7 +32,6 @@ export const LightboxImage = styled.img<LightboxImageProps>`
             opacity 0s;
         `
       : css`
-          pointer-events: none;
           opacity: 0;
         `}
 
@@ -35,5 +42,20 @@ export const LightboxImage = styled.img<LightboxImageProps>`
       left: 0;
       width: 100%;
       height: 100vh;
+      border-width: 0px;
     `}
+
+    ${props =>
+      props.small &&
+      css`
+        display: ${(props.open || props.animating) && 'none'};
+        border: ${props => props.theme.borderWidth} solid
+          ${props => props.theme.colors.primary};
+        animation: ${borderFade} ${props.theme.animation.timing[0]}
+          ${props.theme.animation.curve} forwards;
+
+        @media print and speech {
+          display: none;
+        }
+      `}
 `

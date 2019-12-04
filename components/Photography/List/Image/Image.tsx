@@ -30,6 +30,8 @@ type ListImageProps = {
 type ImageProps = {
   loaded: boolean
   active: boolean
+  width: number
+  height: number
 }
 
 const Image = styled.img<ImageProps>`
@@ -40,6 +42,22 @@ const Image = styled.img<ImageProps>`
   width: 100%;
   height: 100%;
   cursor: zoom-in;
+  border: 0px solid ${props => props.theme.colors.primary};
+  transition: border
+    ${props =>
+      `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};
+
+  &:hover,
+  &:focus {
+    border-width: ${props => props.theme.borderWidth};
+  }
+
+  .page-transition-exit-active & {
+    animation: ${SwipeOutRight}
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
+      forwards;
+  }
 
   ${props =>
     props.loaded &&
@@ -48,13 +66,6 @@ const Image = styled.img<ImageProps>`
       animation: ${SwipeInRight} ${props.theme.animation.timing[2]}
         ${props.theme.animation.curve} forwards;
     `};
-
-  .page-transition-exit-active & {
-    animation: ${SwipeOutRight}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
 `
 
 export const ListImage: React.FunctionComponent<ListImageProps> = ({
