@@ -1,5 +1,5 @@
 import { styled } from '../../theme'
-import { RotateInDown, RotateOutDown } from '../Animations'
+import { RotateInDown } from '../Animations'
 
 export const HeroSubHeading = styled.h2`
   position: relative;
@@ -8,7 +8,7 @@ export const HeroSubHeading = styled.h2`
   font-family: ${props => props.theme.fonts.sans};
   font-weight: ${props => props.theme.fontWeights[0]};
   font-size: ${props => props.theme.fontSizes[2]};
-  color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colours.lightText};
   text-align: center;
 
   @media screen and (max-width: ${props => props.theme.breakpoints[1]}) {
@@ -24,13 +24,6 @@ export const HeroSubHeading = styled.h2`
     animation: ${RotateInDown}
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[0]}`}
-      forwards;
-  }
-
-  .page-transition-exit-active & {
-    animation: ${RotateOutDown}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
       forwards;
   }
 `

@@ -29,7 +29,7 @@ class MyApp extends App {
       <>
         <GlobalStyle />
         <ThemeProvider theme={theme}>
-          <PageTransition timeout={600} classNames="page-transition">
+          <PageTransition timeout={400} classNames="page-transition">
             <Component {...pageProps} key={router.route} />
           </PageTransition>
         </ThemeProvider>

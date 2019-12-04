@@ -1,7 +1,7 @@
 import { darken, lighten } from 'polished'
 import { useContext } from 'react'
 import { styled } from '../../../theme'
-import { FadeIn, FadeOut, SlideInLeft, SlideInRight, SlideOutLeft, SlideOutRight } from '../../Animations'
+import { FadeIn, SlideInLeft, SlideInRight } from '../../Animations'
 import { BackgroundContext } from '../../Common/Background'
 
 type StyledSectionProps = {
@@ -17,7 +17,7 @@ const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  padding: ${props => props.theme.space[2]};
+  padding: ${props => `${props.theme.space[3]} ${props.theme.space[2]}`};
   grid-column-gap: ${props => props.theme.space[2]};
   background: ${props =>
     props.light
@@ -62,26 +62,8 @@ const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
         forwards;
     }
   }
-
-  .page-transition-exit-active & {
-    position: relative;
-    animation: ${SlideOutRight}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-
-    &:nth-child(odd) {
-      animation-name: ${SlideOutLeft};
-    }
-
-    * {
-      animation: ${FadeOut}
-        ${props =>
-          `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-        forwards;
-    }
-  }
 `
+
 export const ContentSection: React.FunctionComponent<ContentSectionProps> = props => {
   const { currentPage } = useContext(BackgroundContext)
 

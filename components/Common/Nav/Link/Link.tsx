@@ -1,5 +1,5 @@
 import { styled } from '../../../../theme'
-import { LinkWrapper } from '../../../Common/Link'
+import { LinkWrapper } from '../../Link'
 import { NavAnchor } from './Anchor'
 import { LinkVideo } from './Video'
 
@@ -11,8 +11,10 @@ type NavLinkProps = {
 
 const StyledListItem = styled.li`
   margin: 0;
+  height: 100%;
   flex: 1;
-  display: inline-flex;
+  display: flex;
+  align-items: center;
 
   @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
     &:not(:last-child) {

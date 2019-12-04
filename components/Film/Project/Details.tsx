@@ -16,7 +16,7 @@ const StyledParagraph = styled.p<StyledParagraphProps>`
   align-self: start;
   justify-self: end;
   font-size: ${props => props.theme.fontSizes[1]};
-  color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colours.lightText};
   font-family: ${props => props.theme.fonts.display};
   font-weight: ${props => props.theme.fontWeights[1]};
   grid-row: 1;
@@ -29,13 +29,6 @@ const StyledParagraph = styled.p<StyledParagraphProps>`
 
   .page-transition-enter-active & {
     animation: ${SwipeInLeft}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
-
-  .page-transition-exit-active & {
-    animation: ${SwipeOutRight}
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
       forwards;

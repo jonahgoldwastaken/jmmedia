@@ -1,17 +1,24 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { keyframes } from 'styled-components'
 import { styled } from '../../theme'
 import { FooterContactLink } from './ContactLink'
 import { FooterHeading } from './Heading'
 import { FooterList } from './List'
 import { FooterParagraph } from './Paragraph'
 
-export const StyledFooter = styled.footer`
-  padding: ${props => props.theme.space[3]};
-  background: ${props => props.theme.colors.tertiary};
-
-  @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
-    padding: ${props => props.theme.space[2]};
+const footerAnimation = keyframes`
+  from {
+    transform: translateY(100%);
+  } to {
+    transform: translateY(0%);
   }
+`
+
+export const StyledFooter = styled.footer`
+  position: sticky;
+  top: 100vh;
+  padding: ${props => props.theme.space[3]};
+  background: ${props => props.theme.colours.tertiary};
 
   .page-transition-enter & {
     opacity: 0;
@@ -19,20 +26,10 @@ export const StyledFooter = styled.footer`
 
   .page-transition-enter-active & {
     opacity: 1;
-    transition: opacity
+    animation: ${footerAnimation}
       ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-  }
-
-  .page-transition-exit & {
-    opacity: 1;
-  }
-
-  .page-transition-exit-active & {
-    opacity: 0;
-    transition: opacity
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+        `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
+      forwards;
   }
 `
 

@@ -1,7 +1,7 @@
 import { forwardRef, HTMLProps, useContext } from 'react'
 import { css, keyframes } from 'styled-components'
 import { styled } from '../../../../theme'
-import { SwipeInRight, SwipeOutRight } from '../../../Animations'
+import { SwipeInRight } from '../../../Animations'
 import { LinkWrapperContext } from '../../../Common/Link'
 import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
 
@@ -52,38 +52,31 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
     `}
 
   ${props =>
-    props.active
-      ? css`
-          .page-transition-exit & {
-            position: static;
-            animation: none;
-          }
+    props.active &&
+    css`
+      .page-transition-exit & {
+        position: static;
+        animation: none;
+      }
 
-          .page-transition-exit-active & {
-            &:after {
-              position: fixed;
-              z-index: 99;
-              opacity: 1;
-              left: ${props.positionData.x}px;
-              top: ${props.positionData.y}px;
-              width: ${props.positionData.width}px;
-              height: ${props.positionData.height}px;
-              display: block;
-              animation: ${clickAnimationDesktop}
-                ${props.theme.animation.timing[1]}
-                ${props.theme.animation.curve}
-                ${props.theme.animation.timing[1]} forwards;
-              transition: opacity ${props.theme.animation.timing[1]}
-                ${props.theme.animation.curve};
-            }
-          }
-        `
-      : css`
-          .page-transition-exit-active & {
-            animation: ${SwipeOutRight} ${props.theme.animation.timing[1]}
-              ${props.theme.animation.curve} forwards;
-          }
-        `}
+      .page-transition-exit-active & {
+        &:after {
+          position: fixed;
+          z-index: 99;
+          opacity: 1;
+          left: ${props.positionData.x}px;
+          top: ${props.positionData.y}px;
+          width: ${props.positionData.width}px;
+          height: ${props.positionData.height}px;
+          display: block;
+          animation: ${clickAnimationDesktop} ${props.theme.animation.timing[1]}
+            ${props.theme.animation.curve} ${props.theme.animation.timing[1]}
+            forwards;
+          transition: opacity ${props.theme.animation.timing[1]}
+            ${props.theme.animation.curve};
+        }
+      }
+    `}
 `
 
 const RefAnchor = forwardRef<

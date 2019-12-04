@@ -15,7 +15,7 @@ export const Anchor = styled.a`
   text-decoration: none;
   text-transform: uppercase;
   text-align: center;
-  color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colours.lightText};
   cursor: pointer;
 
   &:after {

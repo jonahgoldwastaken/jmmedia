@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { styled } from '../../../../theme'
-import { LinkWrapperContext } from '../../../Common/Link'
-import Video, { useVideo } from '../../../Common/Video'
 import useMedia from 'use-media'
+import { styled } from '../../../../theme'
+import { LinkWrapperContext } from '../../Link'
+import Video, { useVideo } from '../../Video'
 
 type LinkVideoProps = {
   video: string
@@ -14,17 +14,6 @@ const StyledVideo = styled(Video)`
   transition: opacity
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-
-  .page-transition-exit & {
-    opacity: 1;
-  }
-
-  .page-transition-exit-active & {
-    opacity: 0;
-    transition: opacity
-      ${props =>
-        `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};
-  }
 `
 
 export const LinkVideo: React.FunctionComponent<LinkVideoProps> = ({

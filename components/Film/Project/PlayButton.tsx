@@ -17,7 +17,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   left: 50%;
   transform: translate(-50%, -50%);
   padding: ${props => props.theme.space[2]};
-  background: ${props => props.theme.colors.primary};
+  background: ${props => props.theme.colours.lightText};
   mix-blend-mode: screen;
   border: none;
   border-radius: 50%;
@@ -25,7 +25,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   line-height: 1;
   text-align: center;
   outline: none;
-  color: ${props => props.theme.colors.secondary};
+  color: ${props => props.theme.colours.darkText};
   cursor: pointer;
   z-index: 3;
 
@@ -43,13 +43,6 @@ const StyledButton = styled.button<StyledButtonProps>`
       animation: ${FadeIn} ${props.theme.animation.timing[1]}
         ${props.theme.animation.curve} forwards;
     `}
-
-    .page-transition-exit-active & {
-    opacity: 0;
-    transition: ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
 
   svg {
     transform: translate(9%, 2%);

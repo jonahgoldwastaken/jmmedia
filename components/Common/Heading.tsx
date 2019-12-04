@@ -1,11 +1,11 @@
 import { styled } from '../../theme'
-import { RotateInDown, RotateOutDown } from '../Animations'
+import { RotateInDown } from '../Animations'
 
 export const Heading = styled.h1`
   margin: 0 0 ${props => props.theme.space[3]};
   font-family: ${props => props.theme.fonts.display};
   font-size: ${props => props.theme.fontSizes[3]};
-  color: ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colours.lightText};
   text-align: center;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
@@ -18,13 +18,6 @@ export const Heading = styled.h1`
 
   .page-transition-enter-active & {
     animation: ${RotateInDown}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
-
-  .page-transition-exit-active & {
-    animation: ${RotateOutDown}
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
       forwards;

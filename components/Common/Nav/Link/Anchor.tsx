@@ -2,11 +2,13 @@ import Link from 'next/link'
 import { forwardRef, HTMLProps, useContext } from 'react'
 import { css, keyframes } from 'styled-components'
 import theme, { styled } from '../../../../theme'
-import { LinkWrapperContext } from '../../../Common/Link'
-import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
+import { BackgroundContext } from '../../Background'
+import { LinkWrapperContext } from '../../Link'
+import { Anchor, BaseAnchorProps } from '../../Link/Anchor'
 
 type StyledAnchorProps = BaseAnchorProps & {
   disabled?: boolean
+  currentPage?: string
 }
 
 type NavAnchorProps = {
@@ -23,7 +25,7 @@ const clickAnimationDesktop = (props: any) =>
   });
       width: ${props.positionData.width}px;
       height: ${props.theme.borderWidth};
-      background: ${props.theme.colors.primary};
+      background: ${props.theme.colours.primary};
 
     }
     50% {
@@ -114,8 +116,8 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
     bottom: 0%;
     width: 0%;
     height: ${props => props.theme.borderWidth};
-    background: ${props => props.theme.colors.primary};
-    z-index: 100;
+    background: ${props => props.theme.colours.lightText};
+    z-index: 10000;
     transition: width
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
@@ -140,13 +142,23 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   ${props =>
     props.disabled &&
     css`
-      color: ${props => props.theme.colors.disabled};
+      color: ${props => props.theme.colours.disabled};
       cursor: not-allowed;
 
       &:after {
         bottom: 40%;
-        background: ${props.theme.colors.disabled};
+        background: ${props.theme.colours.disabled};
         box-shadow: none !important;
+      }
+    `}
+
+  ${props =>
+    props.currentPage &&
+    css`
+      font-weight: ${props => props.theme.fontWeights[2]};
+      cursor: default;
+      &:after {
+        width: 100%;
       }
     `}
 
@@ -169,39 +181,37 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
     }
   }
 
-  .page-transition-exit-active & {
-    ${props =>
-      props.active
-        ? css`
-            &:after {
-              position: fixed;
-              animation: ${clickAnimationDesktop}
-                ${props.theme.animation.timing[2]}
-                ${props.theme.animation.curve} forwards;
+  ${props =>
+    props.currentPage === '/' &&
+    props.active &&
+    css`
+      .page-transition-exit-active & {
+        &:after {
+          box-shadow: none;
+          position: fixed;
+          animation: ${clickAnimationDesktop} ${props.theme.animation.timing[2]}
+            ${props.theme.animation.curve} forwards;
 
-              @media screen and (pointer: coarse) {
-                animation-name: ${clickAnimationMobile};
-              }
-            }
-          `
-        : css`
-            opacity: 0;
-            transition: opacity
-              ${props =>
-                `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-          `}
-  }
+          @media screen and (pointer: coarse) {
+            animation-name: ${clickAnimationMobile};
+          }
+        }
+      }
+    `}
 `
 
 const RefAnchor = forwardRef<
   HTMLAnchorElement,
-  NavAnchorProps & HTMLProps<HTMLAnchorElement>
->(
+  StyledAnchorProps & HTMLProps<HTMLAnchorElement>
+>((props, ref) => {
+  console.log(props.href, props.disabled)
   //@ts-ignore
-  (props, ref) => <StyledAnchor {...props} ref={ref} />
-)
+  return <StyledAnchor {...props} ref={ref} />
+})
 
-export const NavAnchor: React.FunctionComponent<NavAnchorProps> = props => {
+export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
+  ...props
+}) => {
   const {
     ref,
     href,
@@ -210,22 +220,37 @@ export const NavAnchor: React.FunctionComponent<NavAnchorProps> = props => {
     positionData,
     setIsHovering,
   } = useContext(LinkWrapperContext)
+  const { currentPage } = useContext(BackgroundContext)
   const contextItems = {
     ref,
-    href,
     active,
-    disabled,
     positionData,
   }
 
   return (
-    <Link href={href}>
-      <RefAnchor
-        onMouseOver={() => setIsHovering(true)}
-        onMouseOut={() => setIsHovering(false)}
-        {...contextItems}
-        {...props}
-      />
-    </Link>
+    <>
+      {currentPage === href ? (
+        <RefAnchor
+          onMouseOver={() => setIsHovering(true)}
+          onMouseOut={() => setIsHovering(false)}
+          href={undefined}
+          currentPage={currentPage}
+          {...contextItems}
+          {...props}
+          active={false}
+        />
+      ) : (
+        <Link href={href}>
+          <RefAnchor
+            onMouseOver={() => setIsHovering(true)}
+            onMouseOut={() => setIsHovering(false)}
+            {...contextItems}
+            {...props}
+            href={href}
+            disabled={disabled}
+          />
+        </Link>
+      )}
+    </>
   )
 }

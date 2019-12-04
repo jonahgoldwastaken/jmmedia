@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { NavButton } from '../../components/Common'
 import Background from '../../components/Common/Background'
 import Header, { HeaderHeading } from '../../components/Common/Header'
 import List from '../../components/Film/List'
 import ListItem from '../../components/Film/List/Item'
 import Footer from '../../components/Footer'
+import Nav from '../../components/Common/Nav'
 
 export default () => {
   return (
@@ -14,9 +14,6 @@ export default () => {
         <title>Film - Jonah Meijers</title>
       </Head>
       <Background currentPage="/films">
-        <Link href="/">
-          <NavButton colour="white" icon="home" />
-        </Link>
         <Header>
           <HeaderHeading>Films</HeaderHeading>
         </Header>

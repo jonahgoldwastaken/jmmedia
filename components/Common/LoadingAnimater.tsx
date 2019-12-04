@@ -28,7 +28,7 @@ const StyledDiv = styled.div<StyledDivProps>`
   left: 0%;
   width: 100%;
   height: 100%;
-  background: ${props => props.theme.colors.loading};
+  background: ${props => props.theme.colours.loading};
   animation: ${loadingAnimation}
     ${props =>
       `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}

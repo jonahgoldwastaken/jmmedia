@@ -48,7 +48,6 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
   vidSrc,
   children,
 }) => {
-  const [videoLoaded, setVideoLoaded] = useState(false)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [inViewRef, inView] = useInView({
     threshold: 0.1,
@@ -60,14 +59,14 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
       <StyledItem ref={inViewRef} columns={columns}>
         {inView && (
           <Link href={href}>
-            <ItemAnchor inView={inView} loaded={videoLoaded && imageLoaded}>
+            <ItemAnchor inView={inView} loaded={imageLoaded}>
               <ItemImage onLoad={() => setImageLoaded(true)} src={imgSrc} />
-              <ItemVideo onLoad={() => setVideoLoaded(true)} video={vidSrc} />
+              <ItemVideo video={vidSrc} />
               <ItemTitle>{children}</ItemTitle>
             </ItemAnchor>
           </Link>
         )}
-        <LoadingAnimater loaded={videoLoaded} />
+        <LoadingAnimater loaded={imageLoaded} />
       </StyledItem>
     </LinkWrapper>
   )

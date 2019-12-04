@@ -1,16 +1,12 @@
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import CookieConsent from 'react-cookie-consent'
 import { css } from 'styled-components'
 import theme, { styled } from '../../../theme'
-import { initGA, disableGA } from '../../../utils/analytics'
+import { disableGA, initGA } from '../../../utils/analytics'
 import animationChooser from '../../../utils/animationChooser'
-import {
-  SlideOutDown,
-  SlideOutRight,
-  SwipeOutDown,
-  SwipeOutRight,
-  ZoomOut,
-} from '../../Animations'
+import { SwipeOutDown, SwipeOutRight } from '../../Animations'
+import Nav, { NavButton } from '../Nav'
 import { BackgroundContext } from './Context'
 
 type StyledBackgroundProps = {
@@ -26,13 +22,7 @@ type PageBackgroundProps = {
   currentPage: string
 }
 
-const closeAnimations = [
-  SlideOutDown,
-  SlideOutRight,
-  SwipeOutDown,
-  SwipeOutRight,
-  ZoomOut,
-]
+const closeAnimations = [SwipeOutDown, SwipeOutRight]
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
   position: fixed;
@@ -50,11 +40,12 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
     ${props =>
       (props.route === '/' ||
         (props.currentPage !== '/' && props.route === '/films') ||
-        (props.currentPage !== '/' && props.route === '/fotografie')) &&
+        (props.currentPage !== '/' && props.route === '/fotografie') ||
+        (props.currentPage !== '/' && props.route === '/over')) &&
       css`
         animation: ${animationChooser(closeAnimations)}
           ${props =>
-            `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
+            `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
           forwards;
         transform-origin: center;
       `}
@@ -71,12 +62,26 @@ const TransititonBackground = styled.div<TransititonBackgroundProps>`
   background: ${props => props.theme.pageColours[props.route]};
 `
 
-export const Background: React.FunctionComponent<PageBackgroundProps> = props => {
+export const Background: React.FunctionComponent<PageBackgroundProps> = ({
+  children,
+  ...props
+}) => {
   const router = useRouter()
+  const [navOpen, setNavOpen] = useState(false)
 
   return (
-    <BackgroundContext.Provider value={{ currentPage: props.currentPage }}>
-      <StyledBackground {...props} route={router.route} />
+    <BackgroundContext.Provider
+      value={{ currentPage: props.currentPage, setNavOpen, navOpen }}
+    >
+      <StyledBackground {...props} route={router.route}>
+        {props.currentPage !== '/' && (
+          <>
+            <NavButton />
+            <Nav />
+          </>
+        )}
+        {children}
+      </StyledBackground>
       <TransititonBackground route={router.route} />
       <CookieConsent
         buttonText="Jazeker!"
