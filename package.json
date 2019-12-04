@@ -37,7 +37,8 @@
     "react-shimmer": "^2.0.1",
     "styled-components": "^4.3.2",
     "styled-normalize": "^8.0.6",
-    "styled-sanitize": "^1.1.2"
+    "styled-sanitize": "^1.1.2",
+    "use-media": "^1.4.0"
   },
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.35",

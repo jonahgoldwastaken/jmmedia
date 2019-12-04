@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { styled } from '../../../../theme'
 import { LinkWrapperContext } from '../../../Common/Link'
 import Video, { useVideo } from '../../../Common/Video'
+import useMedia from 'use-media'
 
 type LinkVideoProps = {
   video: string
@@ -31,17 +32,22 @@ export const LinkVideo: React.FunctionComponent<LinkVideoProps> = ({
 }) => {
   const { isHovering } = useContext(LinkWrapperContext)
   const [playing, ref, setCanPlayVideo] = useVideo(isHovering)
+  const isMobile = useMedia({ pointer: 'coarse' })
 
   return (
-    <StyledVideo
-      playsInline
-      muted
-      loop
-      src={video}
-      playing={playing}
-      ref={ref}
-      onLoadStart={() => setCanPlayVideo(false)}
-      onLoadedData={() => setCanPlayVideo(true)}
-    />
+    <>
+      {!isMobile && (
+        <StyledVideo
+          playsInline
+          muted
+          loop
+          src={video}
+          playing={playing}
+          ref={ref}
+          onLoadStart={() => setCanPlayVideo(false)}
+          onLoadedData={() => setCanPlayVideo(true)}
+        />
+      )}
+    </>
   )
 }
