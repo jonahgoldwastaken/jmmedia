@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import { styled } from '../../../../theme'
-import { LinkWrapperContext } from '../../../Common/Link'
-import Video, { useVideo } from '../../../Common/Video'
 import useMedia from 'use-media'
+import { styled } from '../../../../theme'
+import { LinkWrapperContext } from '../../Link'
+import Video, { useVideo } from '../../Video'
 
 type LinkVideoProps = {
   video: string

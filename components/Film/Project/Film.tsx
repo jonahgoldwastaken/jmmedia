@@ -22,7 +22,7 @@ const StyledVideo = styled(Video)<StyledVideoProps>`
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
   object-fit: contain;
-  background: ${props => props.theme.colors.secondary};
+  background: ${props => props.theme.colours.secondary};
 
   ${props =>
     props.filmState !== 'unopened' &&

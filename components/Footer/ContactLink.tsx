@@ -1,6 +1,5 @@
 import { styled } from '../../theme'
 import { logEvent } from '../../utils/analytics'
-import { FadeIn, FadeOut } from '../Animations'
 
 type StyledContactLink = {}
 
@@ -9,20 +8,9 @@ type FooterContactLinkProps = {
 }
 
 const StyledContactLink = styled.li<StyledContactLink>`
-  .page-transition-enter & {
-    opacity: 0;
-  }
-
-  .page-transition-enter-active & {
-    animation: ${FadeIn}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
-
   a {
     display: block;
-    color: ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colours.lightText};
     font-size: ${props => props.theme.fontSizes[2]};
     text-decoration: none;
     text-align: center;
@@ -51,7 +39,7 @@ const StyledContactLink = styled.li<StyledContactLink>`
         bottom: 0%;
         width: 0%;
         height: calc(${props => props.theme.borderWidth} / 2);
-        background: ${props => props.theme.colors.primary};
+        background: ${props => props.theme.colours.primary};
         z-index: 100;
         transition: width
           ${props =>

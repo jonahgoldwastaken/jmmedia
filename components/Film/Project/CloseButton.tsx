@@ -3,14 +3,14 @@ import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
 import { logEvent } from '../../../utils/analytics'
-import { NavButton } from '../../Common'
+import { Button } from '../../Common'
 import { FilmContext } from './Context'
 
 type StyledButtonProps = {
   filmState: filmState
 }
 
-const StyledButton = styled(NavButton)<StyledButtonProps>`
+const StyledButton = styled(Button)<StyledButtonProps>`
   position: absolute;
   opacity: 0;
   pointer-events: none;

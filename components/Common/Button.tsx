@@ -26,8 +26,8 @@ const StyledButton = styled.button<StyledButtonProps>`
   font-size: ${props => props.theme.fontSizes[1]};
   color: ${props =>
     !props.colour || props.colour === 'white'
-      ? props.theme.colors.primary
-      : props.theme.colors.secondary};
+      ? props.theme.colours.lightText
+      : props.theme.colours.darkText};
   cursor: pointer;
 
   ${props =>
@@ -68,7 +68,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   }
 `
 
-export const NavButton: React.FunctionComponent<NavButtonProps> = ({
+export const Button: React.FunctionComponent<NavButtonProps> = ({
   icon,
   ...props
 }) => (

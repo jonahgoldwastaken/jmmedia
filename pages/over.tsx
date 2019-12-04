@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
-import { NavButton } from '../components/Common'
+import { Button } from '../components/Common'
 import Background from '../components/Common/Background'
 import Header, { HeaderHeading } from '../components/Common/Header'
 import ContentSection, {
@@ -20,7 +20,7 @@ const About: NextPage = () => {
       </Head>
       <Background currentPage="/over">
         <Link href="/">
-          <NavButton colour="white" icon="home" />
+          <Button colour="white" icon="home" />
         </Link>
         <Header>
           <HeaderHeading>Over mij</HeaderHeading>

@@ -11,7 +11,7 @@ export const SectionParagraph = styled.p<SectionParagraphProps>`
   font-size: ${props => props.theme.fontSizes[0]};
   line-height: 1.5;
   color: ${props =>
-    props.light ? props.theme.colors.primary : props.theme.colors.secondary};
+    props.light ? props.theme.colours.lightText : props.theme.colours.darkText};
   text-align: ${props => (props.alignRight ? 'right' : 'left')};
 
   &:last-child {

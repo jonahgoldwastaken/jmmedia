@@ -1,7 +1,7 @@
 import { forwardRef, HTMLProps, useContext } from 'react'
 import { css, keyframes } from 'styled-components'
 import { styled } from '../../../../theme'
-import { SwipeInRight, SwipeOutRight } from '../../../Animations'
+import { SwipeInRight } from '../../../Animations'
 import { LinkWrapperContext } from '../../../Common/Link'
 import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
 

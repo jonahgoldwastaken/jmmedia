@@ -1,18 +1,8 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Background from '../../components/Common/Background'
-import {
-  Film,
-  FilmDetails,
-  FilmHero,
-  FilmTitle,
-} from '../../components/Film/Project'
-import ContentSection, {
-  SectionColumn,
-  SectionHeading,
-  SectionImage,
-  SectionParagraph,
-} from '../../components/Film/Section'
+import { Film, FilmDetails, FilmHero, FilmTitle } from '../../components/Film/Project'
+import ContentSection, { SectionColumn, SectionHeading, SectionImage, SectionParagraph } from '../../components/Film/Section'
 import Footer from '../../components/Footer'
 
 const Awakening: NextPage = () => {

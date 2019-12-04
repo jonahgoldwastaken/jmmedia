@@ -2,7 +2,7 @@ import { RefObject, useContext, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { css } from 'styled-components'
 import { styled } from '../../../../theme'
-import { SwipeInRight, SwipeOutRight } from '../../../Animations'
+import { SwipeInRight } from '../../../Animations'
 import { LoadingAnimater } from '../../../Common'
 import { ListContext } from '../Context'
 import { ImageContainer } from './Container'
@@ -47,7 +47,7 @@ const Image = styled.img<ImageProps>`
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
   @media (pointer: fine) {
-    border: 0px solid ${props => props.theme.colors.primary};
+    border: 0px solid ${props => props.theme.colours.primary};
 
     &:hover,
     &:focus {

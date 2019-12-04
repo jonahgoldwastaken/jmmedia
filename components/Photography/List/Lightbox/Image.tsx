@@ -50,7 +50,7 @@ export const LightboxImage = styled.img<LightboxImageProps>`
       css`
         display: ${(props.open || props.animating) && 'none'};
         border: ${props => props.theme.borderWidth} solid
-          ${props => props.theme.colors.primary};
+          ${props => props.theme.colours.primary};
         animation: ${borderFade} ${props.theme.animation[1]}
           ${props.theme.animation.curve} forwards;
 
