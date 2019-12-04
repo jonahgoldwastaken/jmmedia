@@ -1,15 +1,31 @@
 import Router from 'next/router'
 import ReactGA from 'react-ga'
 
+const setAnalyticsSetting = (value: string) => {
+  localStorage.setItem('_analytics', value)
+}
+
+const getAnalyticsSetting = () => {
+  return JSON.parse(localStorage.getItem('_analytics'))
+}
+
 export const initGA = () => {
   console.log('Analytics initialised')
+  setAnalyticsSetting('true')
   ReactGA.initialize('UA-152045785-1')
 }
 
+export const disableGA = () => {
+  setAnalyticsSetting('false')
+}
+
 export const logPageViews = () => {
-  Router.events.on('routeChangeComplete', url => {
-    logPageView()
-  })
+  if (typeof localStorage !== 'undefined') {
+    if (getAnalyticsSetting())
+      Router.events.on('routeChangeComplete', url => {
+        logPageView()
+      })
+  }
 }
 
 export const logPageView = () => {
