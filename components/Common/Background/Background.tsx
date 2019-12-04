@@ -2,9 +2,15 @@ import { useRouter } from 'next/router'
 import CookieConsent from 'react-cookie-consent'
 import { css } from 'styled-components'
 import theme, { styled } from '../../../theme'
-import { initGA } from '../../../utils/analytics'
+import { initGA, disableGA } from '../../../utils/analytics'
 import animationChooser from '../../../utils/animationChooser'
-import { SlideOutDown, SlideOutRight, SwipeOutDown, SwipeOutRight, ZoomOut } from '../../Animations'
+import {
+  SlideOutDown,
+  SlideOutRight,
+  SwipeOutDown,
+  SwipeOutRight,
+  ZoomOut,
+} from '../../Animations'
 import { BackgroundContext } from './Context'
 
 type StyledBackgroundProps = {
@@ -92,6 +98,7 @@ export const Background: React.FunctionComponent<PageBackgroundProps> = props =>
           fontWeight: 'bold',
         }}
         onAccept={() => initGA()}
+        onDecline={() => disableGA()}
       >
         Wij gebruiken cookies om deze website nog vetter te maken. Help je mee?
       </CookieConsent>
