@@ -49,13 +49,6 @@ const StyledHeader = styled(Header)<StyledHeaderProps>`
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
       forwards;
   }
-
-  .page-transition-exit-active & {
-    animation: ${FadeOut}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
 `
 
 export const FilmHero: React.FunctionComponent<FilmHeroProps> = ({

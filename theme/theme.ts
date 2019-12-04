@@ -1,5 +1,5 @@
 export const theme = {
-  fontSizes: ['1rem', '1.5rem', '2rem', '3rem', '4rem', '6rem'],
+  fontSizes: ['1rem', '1.5rem', '2rem', '2.5rem', '3rem', '4rem'],
   colors: {
     primary: 'white',
     secondary: 'black',
@@ -7,9 +7,9 @@ export const theme = {
     loading: '#c8c8c8',
     disabled: 'lightgrey',
   },
-  space: ['0.5rem', '1rem', '1.5rem', '3rem', '6rem'],
+  space: ['0.25rem', '0.5rem', '1rem', '2rem', '2.5rem'],
   sizes: {
-    static: ['25rem', '50rem', '80rem'],
+    static: ['25rem', '50rem', '80rem', '120rem'],
     dynamic: ['25%', '50%', '100%'],
     height: ['30vh', '60vh', '80vh', '100vh'],
   },
@@ -21,7 +21,7 @@ export const theme = {
   fontWeights: [400, 500, 700],
   borderWidth: '0.3rem',
   animation: {
-    timing: ['0.15s', '0.3s', '0.6s'],
+    timing: ['0.1s', '0.2s', '0.4s'],
     curve: 'cubic-bezier(.63,.27,0,1)',
   },
   textShadow: '2px 2px 5px rgba(0, 0, 0, 0.75)',

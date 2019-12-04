@@ -26,11 +26,4 @@ export const HeroSubHeading = styled.h2`
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[0]}`}
       forwards;
   }
-
-  .page-transition-exit-active & {
-    animation: ${RotateOutDown}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
 `

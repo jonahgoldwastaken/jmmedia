@@ -34,13 +34,6 @@ const StyledParagraph = styled.p<StyledParagraphProps>`
       forwards;
   }
 
-  .page-transition-exit-active & {
-    animation: ${SwipeOutRight}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
-
   ${props =>
     props.filmState === 'open' &&
     css`

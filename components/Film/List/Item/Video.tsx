@@ -13,7 +13,7 @@ const ItemVideoElement = styled(Video)`
   opacity: ${props => (props.playing ? '1' : '0')};
   transition: opacity
     ${props =>
-      `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};
+      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
   @media (pointer: coarse) {
     display: none;

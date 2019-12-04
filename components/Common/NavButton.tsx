@@ -51,13 +51,6 @@ const StyledButton = styled.button<StyledButtonProps>`
                 `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
               forwards;
           }
-
-          .page-transition-exit-active & {
-            animation: ${PopOutLeft}
-              ${props =>
-                `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-              forwards;
-          }
         `};
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {

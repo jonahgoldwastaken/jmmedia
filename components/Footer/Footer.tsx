@@ -9,8 +9,8 @@ export const StyledFooter = styled.footer`
   padding: ${props => props.theme.space[3]};
   background: ${props => props.theme.colors.tertiary};
 
-  @media screen and (max-width: ${props => props.theme.breakpoints[2]}) {
-    padding: ${props => props.theme.space[2]};
+  @media screen and (max-width: ${props => props.theme.breakpoints[1]}) {
+    padding: ${props => props.theme.space[3]};
   }
 
   .page-transition-enter & {
@@ -19,17 +19,6 @@ export const StyledFooter = styled.footer`
 
   .page-transition-enter-active & {
     opacity: 1;
-    transition: opacity
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-  }
-
-  .page-transition-exit & {
-    opacity: 1;
-  }
-
-  .page-transition-exit-active & {
-    opacity: 0;
     transition: opacity
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};

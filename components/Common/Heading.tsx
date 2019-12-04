@@ -22,11 +22,4 @@ export const Heading = styled.h1`
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
       forwards;
   }
-
-  .page-transition-exit-active & {
-    animation: ${RotateOutDown}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
 `

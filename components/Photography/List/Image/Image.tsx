@@ -44,7 +44,7 @@ const Image = styled.img<ImageProps>`
   cursor: zoom-in;
   transition: border
     ${props =>
-      `${props.theme.animation.timing[0]} ${props.theme.animation.curve}`};
+      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
   @media (pointer: fine) {
     border: 0px solid ${props => props.theme.colors.primary};
@@ -53,13 +53,6 @@ const Image = styled.img<ImageProps>`
     &:focus {
       border-width: ${props => props.theme.borderWidth};
     }
-  }
-
-  .page-transition-exit-active & {
-    animation: ${SwipeOutRight}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
   }
 
   ${props =>

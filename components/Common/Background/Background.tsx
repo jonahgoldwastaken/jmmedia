@@ -26,13 +26,7 @@ type PageBackgroundProps = {
   currentPage: string
 }
 
-const closeAnimations = [
-  SlideOutDown,
-  SlideOutRight,
-  SwipeOutDown,
-  SwipeOutRight,
-  ZoomOut,
-]
+const closeAnimations = [SwipeOutDown, SwipeOutRight]
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
   position: fixed;
@@ -54,7 +48,7 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
       css`
         animation: ${animationChooser(closeAnimations)}
           ${props =>
-            `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
+            `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
           forwards;
         transform-origin: center;
       `}

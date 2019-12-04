@@ -35,10 +35,6 @@ const StyledHeading = styled(Heading)<StyledHeadingProps>`
     animation-name: ${SwipeInRight};
   }
 
-  .page-transition-exit-active & {
-    animation-name: ${SwipeOutLeft};
-  }
-
   ${props =>
     props.filmState === 'open' &&
     css`

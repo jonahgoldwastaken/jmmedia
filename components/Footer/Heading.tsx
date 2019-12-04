@@ -10,6 +10,6 @@ export const FooterHeading = styled(Heading)`
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-    font-size: ${props => props.theme.fontSizes[4]};
+    font-size: ${props => props.theme.fontSizes[3]};
   }
 `

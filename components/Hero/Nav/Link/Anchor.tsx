@@ -171,25 +171,18 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
 
   .page-transition-exit-active & {
     ${props =>
-      props.active
-        ? css`
-            &:after {
-              position: fixed;
-              animation: ${clickAnimationDesktop}
-                ${props.theme.animation.timing[2]}
-                ${props.theme.animation.curve} forwards;
+      props.active &&
+      css`
+        &:after {
+          position: fixed;
+          animation: ${clickAnimationDesktop} ${props.theme.animation.timing[2]}
+            ${props.theme.animation.curve} forwards;
 
-              @media screen and (pointer: coarse) {
-                animation-name: ${clickAnimationMobile};
-              }
-            }
-          `
-        : css`
-            opacity: 0;
-            transition: opacity
-              ${props =>
-                `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-          `}
+          @media screen and (pointer: coarse) {
+            animation-name: ${clickAnimationMobile};
+          }
+        }
+      `}
   }
 `
 

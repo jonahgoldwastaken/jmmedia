@@ -20,13 +20,6 @@ const StyledContactLink = styled.li<StyledContactLink>`
       forwards;
   }
 
-  .page-transition-exit-active & {
-    animation: ${FadeOut}
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-      forwards;
-  }
-
   a {
     display: block;
     color: ${props => props.theme.colors.primary};
@@ -43,12 +36,12 @@ const StyledContactLink = styled.li<StyledContactLink>`
       position: relative;
       display: inline-block;
       font-family: ${props => props.theme.fonts.sans};
-      font-size: ${props => props.theme.fontSizes[1]};
+      font-size: ${props => props.theme.fontSizes[0]};
       text-transform: uppercase;
       font-weight: ${props => props.theme.fontWeights[1]};
 
       @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-        font-size: ${props => props.theme.fontSizes[1]};
+        font-size: ${props => props.theme.fontSizes[0]};
       }
 
       &:after {
