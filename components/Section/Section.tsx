@@ -1,8 +1,8 @@
 import { darken, lighten } from 'polished'
 import { useContext } from 'react'
-import { styled } from '../../../theme'
-import { FadeIn, SlideInLeft, SlideInRight } from '../../Animations'
-import { BackgroundContext } from '../../Common/Background'
+import { styled } from '../../theme'
+import { FadeIn, SlideInLeft, SlideInRight } from '../Animations'
+import { BackgroundContext } from '../Common/Background'
 
 type StyledSectionProps = {
   currentPage: string
