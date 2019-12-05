@@ -7,8 +7,17 @@ import {
   faPlay,
   faTimes,
   faHamburger,
+  faCompress,
 } from '@fortawesome/free-solid-svg-icons'
 
-library.add(faTimes, faPlay, faPause, faPhone, faEnvelope, faHamburger)
+library.add(
+  faTimes,
+  faPlay,
+  faPause,
+  faPhone,
+  faEnvelope,
+  faHamburger,
+  faCompress
+)
 
 library.add(faInstagram, faLinkedin)

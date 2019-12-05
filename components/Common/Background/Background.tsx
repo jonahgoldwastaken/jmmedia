@@ -82,14 +82,20 @@ const TransititonBackground = styled.div<TransititonBackgroundProps>`
 export const Background: React.FunctionComponent<PageBackgroundProps> = props => {
   const { route } = useRouter()
   const [navOpen, setNavOpen] = useState(false)
+  const [showNavButton, setShowNavButton] = useState(true)
 
   return (
     <BackgroundContext.Provider
-      value={{ currentPage: props.currentPage, setNavOpen, navOpen }}
+      value={{
+        currentPage: props.currentPage,
+        setNavOpen,
+        navOpen,
+        setShowNavButton,
+      }}
     >
       {props.currentPage !== '/' && (
         <>
-          <NavButton />
+          {showNavButton && <NavButton />}
           <Nav />
         </>
       )}
