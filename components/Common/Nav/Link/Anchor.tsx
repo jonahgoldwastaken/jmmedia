@@ -9,6 +9,7 @@ import { Anchor, BaseAnchorProps } from '../../Link/Anchor'
 type StyledAnchorProps = BaseAnchorProps & {
   disabled?: boolean
   currentPage?: string
+  current?: boolean
 }
 
 type NavAnchorProps = {
@@ -153,7 +154,7 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
     `}
 
   ${props =>
-    props.currentPage &&
+    props.current &&
     css`
       font-weight: ${props => props.theme.fontWeights[2]};
       cursor: default;
@@ -204,14 +205,21 @@ const RefAnchor = forwardRef<
   HTMLAnchorElement,
   StyledAnchorProps & HTMLProps<HTMLAnchorElement>
 >((props, ref) => {
-  console.log(props.href, props.disabled)
-  //@ts-ignore
-  return <StyledAnchor {...props} ref={ref} />
+  const { setNavOpen } = useContext(BackgroundContext)
+  return (
+    //@ts-ignore
+    <StyledAnchor
+      {...props}
+      onClick={e => {
+        setNavOpen(false)
+        props.onClick(e)
+      }}
+      ref={ref}
+    />
+  )
 })
 
-export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
-  ...props
-}) => {
+export const NavAnchor: React.FunctionComponent<NavAnchorProps> = props => {
   const {
     ref,
     href,
@@ -225,6 +233,7 @@ export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
     ref,
     active,
     positionData,
+    currentPage,
   }
 
   return (
@@ -234,7 +243,7 @@ export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
           onMouseOver={() => setIsHovering(true)}
           onMouseOut={() => setIsHovering(false)}
           href={undefined}
-          currentPage={currentPage}
+          current
           {...contextItems}
           {...props}
           active={false}

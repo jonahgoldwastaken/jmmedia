@@ -1,8 +1,17 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Background from '../../components/Common/Background'
-import { Film, FilmDetails, FilmHero, FilmTitle } from '../../components/Film/Project'
-import ContentSection, { SectionColumn, SectionHeading, SectionParagraph } from '../../components/Film/Section'
+import {
+  Film,
+  FilmDetails,
+  FilmHero,
+  FilmTitle,
+} from '../../components/Film/Project'
+import ContentSection, {
+  SectionColumn,
+  SectionHeading,
+  SectionParagraph,
+} from '../../components/Section'
 import Footer from '../../components/Footer'
 
 const PlantApp: NextPage = () => {

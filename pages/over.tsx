@@ -9,7 +9,7 @@ import ContentSection, {
   SectionHeading,
   SectionImage,
   SectionParagraph,
-} from '../components/Film/Section'
+} from '../components/Section'
 import Footer from '../components/Footer'
 
 const About: NextPage = () => {
@@ -19,9 +19,6 @@ const About: NextPage = () => {
         <title>Over mij - Jonah Meijers</title>
       </Head>
       <Background currentPage="/over">
-        <Link href="/">
-          <Button colour="white" icon="home" />
-        </Link>
         <Header>
           <HeaderHeading>Over mij</HeaderHeading>
         </Header>

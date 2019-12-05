@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import useMedia from 'use-media'
 import { styled } from '../../../../theme'
 import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
@@ -6,14 +6,10 @@ import Video, { useVideo } from '../../../Common/Video'
 
 type ItemVideoProps = {
   video: string
+  onLoadedData: any
 }
 
 const ItemVideoElement = styled(Video)`
-  opacity: ${props => (props.playing ? '1' : '0')};
-  transition: opacity
-    ${props =>
-      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-
   @media (pointer: coarse) {
     display: none;
   }
@@ -21,10 +17,15 @@ const ItemVideoElement = styled(Video)`
 
 export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
   video,
+  onLoadedData,
 }) => {
   const { isHovering } = useContext(LinkWrapperContext)
   const [playing, ref, setCanPlayVideo] = useVideo(isHovering)
   const isMobile = useMedia({ pointer: 'coarse' })
+
+  useEffect(() => {
+    if (isMobile) onLoadedData()
+  }, [isMobile])
 
   return (
     <>
@@ -37,7 +38,10 @@ export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
           playing={playing}
           ref={ref}
           onLoadStart={() => setCanPlayVideo(false)}
-          onLoadedData={() => setCanPlayVideo(true)}
+          onLoadedData={e => {
+            setCanPlayVideo(true)
+            onLoadedData(e)
+          }}
         />
       )}
     </>
