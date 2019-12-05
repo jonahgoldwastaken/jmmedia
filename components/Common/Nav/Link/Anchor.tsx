@@ -9,6 +9,7 @@ import { Anchor, BaseAnchorProps } from '../../Link/Anchor'
 type StyledAnchorProps = BaseAnchorProps & {
   disabled?: boolean
   currentPage?: string
+  current?: boolean
 }
 
 type NavAnchorProps = {
@@ -153,7 +154,7 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
     `}
 
   ${props =>
-    props.currentPage &&
+    props.current &&
     css`
       font-weight: ${props => props.theme.fontWeights[2]};
       cursor: default;
@@ -224,6 +225,7 @@ export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
     ref,
     active,
     positionData,
+    currentPage,
   }
 
   return (
@@ -233,7 +235,7 @@ export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
           onMouseOver={() => setIsHovering(true)}
           onMouseOut={() => setIsHovering(false)}
           href={undefined}
-          currentPage={currentPage}
+          current
           {...contextItems}
           {...props}
           active={false}
