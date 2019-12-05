@@ -43,6 +43,7 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
     top
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+  will-change: height, top;
 
   ${props =>
     props.navOpen &&

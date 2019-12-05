@@ -27,6 +27,8 @@ const StyledNav = styled.nav<StyledNavProps>`
       z-index: 3;
       transition: height ${props.theme.animation.timing[1]}
         ${props.theme.animation.curve};
+      will-change: height;
+
       ${!props.open &&
         css`
           @media print, speech {
