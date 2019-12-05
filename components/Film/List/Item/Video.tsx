@@ -1,4 +1,4 @@
-import { useContext, HTMLAttributes, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import useMedia from 'use-media'
 import { styled } from '../../../../theme'
 import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
