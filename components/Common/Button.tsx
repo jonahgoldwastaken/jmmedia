@@ -29,29 +29,7 @@ const StyledButton = styled.button<StyledButtonProps>`
       ? props.theme.colours.lightText
       : props.theme.colours.darkText};
   cursor: pointer;
-
-  ${props =>
-    props.hide
-      ? css`
-          animation: ${PopOutLeft}
-            ${props =>
-              `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-            forwards;
-          pointer-events: none;
-        `
-      : css`
-          animation: ${PopInRight}
-            ${props =>
-              `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-            forwards;
-
-          .page-transition-enter-active & {
-            animation: ${PopInRight}
-              ${props =>
-                `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-              forwards;
-          }
-        `};
+  display: ${props => (props.hide ? 'none' : 'block')};
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     font-size: ${props => props.theme.fontSizes[2]};
@@ -61,10 +39,6 @@ const StyledButton = styled.button<StyledButtonProps>`
     top: ${props => props.theme.space[3]};
     left: ${props => props.theme.space[3]};
     font-size: ${props => props.theme.fontSizes[3]};
-  }
-
-  .page-transition-enter & {
-    opacity: 0;
   }
 `
 
