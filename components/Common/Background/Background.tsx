@@ -12,10 +12,12 @@ import { BackgroundContext } from './Context'
 type StyledBackgroundProps = {
   currentPage: string
   route: string
+  navOpen: boolean
 }
 
 type TransititonBackgroundProps = {
   route: string
+  navOpen: boolean
 }
 
 type PageBackgroundProps = {
@@ -35,6 +37,21 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
   height: ${props => props.theme.sizes.dynamic[2]};
   background: ${props => props.theme.pageColours[props.currentPage]};
   z-index: 2;
+  transition: height
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`},
+    top
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+
+  ${props =>
+    props.navOpen &&
+    css`
+      top: ${props.theme.sizes.static[0]};
+      height: calc(
+        ${props.theme.sizes.dynamic[2]} - ${props.theme.sizes.static[0]}
+      );
+    `}
 
   .page-transition-exit-active & {
     ${props =>
@@ -45,7 +62,7 @@ const StyledBackground = styled.div<StyledBackgroundProps>`
       css`
         animation: ${animationChooser(closeAnimations)}
           ${props =>
-            `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
+            `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
           forwards;
         transform-origin: center;
       `}
@@ -62,27 +79,22 @@ const TransititonBackground = styled.div<TransititonBackgroundProps>`
   background: ${props => props.theme.pageColours[props.route]};
 `
 
-export const Background: React.FunctionComponent<PageBackgroundProps> = ({
-  children,
-  ...props
-}) => {
-  const router = useRouter()
+export const Background: React.FunctionComponent<PageBackgroundProps> = props => {
+  const { route } = useRouter()
   const [navOpen, setNavOpen] = useState(false)
 
   return (
     <BackgroundContext.Provider
       value={{ currentPage: props.currentPage, setNavOpen, navOpen }}
     >
-      <StyledBackground {...props} route={router.route}>
-        {props.currentPage !== '/' && (
-          <>
-            <NavButton />
-            <Nav />
-          </>
-        )}
-        {children}
-      </StyledBackground>
-      <TransititonBackground route={router.route} />
+      {props.currentPage !== '/' && (
+        <>
+          <NavButton />
+          <Nav />
+        </>
+      )}
+      <StyledBackground {...props} navOpen={navOpen} route={route} />
+      <TransititonBackground navOpen={navOpen} route={route} />
       <CookieConsent
         buttonText="Jazeker!"
         declineButtonText="Nee bedankt"

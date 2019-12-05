@@ -205,13 +205,21 @@ const RefAnchor = forwardRef<
   HTMLAnchorElement,
   StyledAnchorProps & HTMLProps<HTMLAnchorElement>
 >((props, ref) => {
-  //@ts-ignore
-  return <StyledAnchor {...props} ref={ref} />
+  const { setNavOpen } = useContext(BackgroundContext)
+  return (
+    //@ts-ignore
+    <StyledAnchor
+      {...props}
+      onClick={e => {
+        setNavOpen(false)
+        props.onClick(e)
+      }}
+      ref={ref}
+    />
+  )
 })
 
-export const NavAnchor: React.FunctionComponent<NavAnchorProps> = ({
-  ...props
-}) => {
+export const NavAnchor: React.FunctionComponent<NavAnchorProps> = props => {
   const {
     ref,
     href,
