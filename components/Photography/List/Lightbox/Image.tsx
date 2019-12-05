@@ -41,7 +41,7 @@ export const LightboxImage = styled.img<LightboxImageProps>`
     ${props =>
       props.small &&
       css`
-        display: ${(props.open || props.animating) && 'none'};
+        display: ${props.open || props.animating ? 'none' : 'block'};
 
         @media print and speech {
           display: none;
