@@ -204,7 +204,6 @@ const RefAnchor = forwardRef<
   HTMLAnchorElement,
   StyledAnchorProps & HTMLProps<HTMLAnchorElement>
 >((props, ref) => {
-  console.log(props.href, props.disabled)
   //@ts-ignore
   return <StyledAnchor {...props} ref={ref} />
 })
