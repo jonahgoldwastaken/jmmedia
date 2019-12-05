@@ -1,7 +1,7 @@
 import { darken, lighten } from 'polished'
 import { useContext } from 'react'
 import { styled } from '../../theme'
-import { FadeIn, SlideInLeft, SlideInRight } from '../Animations'
+import { SwipeInLeft, SwipeInRight } from '../Animations'
 import { BackgroundContext } from '../Common/Background'
 
 type StyledSectionProps = {
@@ -45,21 +45,13 @@ const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
   .page-transition-enter-active & {
     position: relative;
     opacity: 1;
-    animation: ${SlideInLeft}
+    animation: ${SwipeInRight}
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
       forwards;
 
     &:nth-child(odd) {
-      animation-name: ${SlideInRight};
-    }
-
-    * {
-      opacity: 0;
-      animation: ${FadeIn}
-        ${props =>
-          `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[0]}`}
-        forwards;
+      animation-name: ${SwipeInLeft};
     }
   }
 `
