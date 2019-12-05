@@ -5,8 +5,8 @@ type VideoProps = {
   playing: boolean
   src: string
   ref: MutableRefObject<HTMLVideoElement>
-  onLoadedData: () => void
-  onLoadStart: () => void
+  onLoadedData: (e?: any) => void
+  onLoadStart: (e?: any) => void
 }
 
 export const Video = styled.video<VideoProps>`
