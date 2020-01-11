@@ -47,7 +47,7 @@ const Image = styled.img<ImageProps>`
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
   @media (pointer: fine) {
-    border: 0px solid ${props => props.theme.colours.primary};
+    border: 0px solid ${props => props.theme.colours.lightText};
 
     &:hover,
     &:focus {
