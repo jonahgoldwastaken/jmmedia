@@ -58,13 +58,16 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
     <LinkWrapper href={href}>
       <StyledItem ref={inViewRef} columns={columns}>
         {inView && (
-          <Link href={href}>
-            <ItemAnchor inView={inView} loaded={imageLoaded}>
-              <ItemImage onLoad={() => setImageLoaded(true)} src={imgSrc} />
-              <ItemVideo video={vidSrc} />
-              <ItemTitle>{children}</ItemTitle>
-            </ItemAnchor>
-          </Link>
+          <>
+            <Link href={href}>
+              <ItemAnchor inView={inView} loaded={imageLoaded}>
+                <ItemImage onLoad={() => setImageLoaded(true)} src={imgSrc} />
+                <ItemVideo video={vidSrc} />
+                <ItemTitle>{children}</ItemTitle>
+              </ItemAnchor>
+            </Link>
+            <LoadingAnimator loaded={imageLoaded} />
+          </>
         )}
       </StyledItem>
     </LinkWrapper>

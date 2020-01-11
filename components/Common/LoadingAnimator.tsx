@@ -31,7 +31,7 @@ const StyledDiv = styled.div<StyledDivProps>`
   background: ${props => props.theme.colours.loading};
   animation: ${loadingAnimation}
     ${props =>
-      `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
+      `calc(${props.theme.animation.timing[2]} * 2) ${props.theme.animation.curve}`}
     infinite forwards;
 
   ${props =>

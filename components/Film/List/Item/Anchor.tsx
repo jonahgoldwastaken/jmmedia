@@ -60,7 +60,7 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
     props.inView &&
     css`
       opacity: 1;
-      animation: ${SwipeInRight} ${props.theme.animation.timing[1]}
+      animation: ${SwipeInRight} ${props.theme.animation.timing[2]}
         ${props.theme.animation.curve} forwards;
     `}
 
