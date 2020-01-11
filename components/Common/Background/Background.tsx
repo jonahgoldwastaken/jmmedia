@@ -5,17 +5,16 @@ import { css } from 'styled-components'
 import theme, { styled } from '../../../theme'
 import { disableGA, initGA } from '../../../utils/analytics'
 import animationChooser from '../../../utils/animationChooser'
-import { SwipeOutDown, SwipeOutRight } from '../../Animations'
+import { SwipeInDown, SwipeInRight } from '../../Animations'
 import Nav, { NavButton } from '../Nav'
 import { BackgroundContext } from './Context'
 
 type StyledBackgroundProps = {
   currentPage: string
-  route: string
-  navOpen: boolean
 }
 
 type TransititonBackgroundProps = {
+  currentPage: string
   route: string
   navOpen: boolean
 }
@@ -24,50 +23,9 @@ type PageBackgroundProps = {
   currentPage: string
 }
 
-const closeAnimations = [SwipeOutDown, SwipeOutRight]
-
 const StyledBackground = styled.div<StyledBackgroundProps>`
-  position: fixed;
-  overflow-y: scroll;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: ${props => props.theme.sizes.dynamic[2]};
-  height: ${props => props.theme.sizes.dynamic[2]};
+  overflow-x: hidden;
   background: ${props => props.theme.pageColours[props.currentPage]};
-  z-index: 2;
-  transition: height
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`},
-    top
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-  will-change: height, top;
-
-  ${props =>
-    props.navOpen &&
-    css`
-      top: ${props.theme.sizes.static[0]};
-      height: calc(
-        ${props.theme.sizes.dynamic[2]} - ${props.theme.sizes.static[0]}
-      );
-    `}
-
-  .page-transition-exit-active & {
-    ${props =>
-      (props.route === '/' ||
-        (props.currentPage !== '/' && props.route === '/films') ||
-        (props.currentPage !== '/' && props.route === '/fotografie') ||
-        (props.currentPage !== '/' && props.route === '/over')) &&
-      css`
-        animation: ${animationChooser(closeAnimations)}
-          ${props =>
-            `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
-          forwards;
-        transform-origin: center;
-      `}
-  }
 `
 
 const TransititonBackground = styled.div<TransititonBackgroundProps>`
@@ -76,8 +34,24 @@ const TransititonBackground = styled.div<TransititonBackgroundProps>`
   left: 0;
   right: 0;
   bottom: 0;
-  z-index: 0;
+  z-index: 999;
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
   background: ${props => props.theme.pageColours[props.route]};
+
+  ${props =>
+    (props.route === '/' ||
+      (props.currentPage !== '/' && props.route === '/films') ||
+      (props.currentPage !== '/' && props.route === '/fotografie') ||
+      (props.currentPage !== '/' && props.route === '/over')) &&
+    css`
+      .page-transition-exit-active & {
+        animation: ${SwipeInRight} ${props.theme.animation.timing[1]}
+          ${props.theme.animation.curve} ${props.theme.animation.timing[1]}
+          forwards;
+        transform-origin: center;
+      }
+    `}
 `
 
 export const Background: React.FunctionComponent<PageBackgroundProps> = props => {
@@ -100,8 +74,12 @@ export const Background: React.FunctionComponent<PageBackgroundProps> = props =>
           <Nav />
         </>
       )}
-      <StyledBackground {...props} navOpen={navOpen} route={route} />
-      <TransititonBackground navOpen={navOpen} route={route} />
+      <StyledBackground {...props} />
+      <TransititonBackground
+        currentPage={props.currentPage}
+        navOpen={navOpen}
+        route={route}
+      />
       <CookieConsent
         buttonText="Jazeker!"
         declineButtonText="Nee bedankt"

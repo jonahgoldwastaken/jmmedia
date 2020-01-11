@@ -13,9 +13,7 @@ const GlobalStyle = createGlobalStyle`
   ${styledNormalize};
   ${styledSanitize};
   body {
-    background: black;
     height: 100%;
-    overflow: hidden;
   }
 `
 
