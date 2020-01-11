@@ -6,7 +6,7 @@ type StyledDivProps = {
   show: boolean
 }
 
-type LoadingAnimaterProps = {
+type LoadingAnimatorProps = {
   loaded: boolean
 }
 
@@ -31,7 +31,7 @@ const StyledDiv = styled.div<StyledDivProps>`
   background: ${props => props.theme.colours.loading};
   animation: ${loadingAnimation}
     ${props =>
-      `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
+      `calc(${props.theme.animation.timing[2]} * 2) ${props.theme.animation.curve}`}
     infinite forwards;
 
   ${props =>
@@ -42,7 +42,7 @@ const StyledDiv = styled.div<StyledDivProps>`
     `}
 `
 
-export const LoadingAnimater: React.FunctionComponent<LoadingAnimaterProps> = ({
+export const LoadingAnimator: React.FunctionComponent<LoadingAnimatorProps> = ({
   loaded,
 }) => {
   const [showAnimation, setShowAnimation] = useState(true)

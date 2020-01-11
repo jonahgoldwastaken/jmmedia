@@ -19,7 +19,7 @@ const clickAnimationDesktop = keyframes`
   to {
     left: 0px;
     top: 0px;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
   }
 `
@@ -29,13 +29,28 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   z-index: 10;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
   font-size: ${props => props.theme.fontSizes[1]};
   opacity: 0;
 
+  @media (pointer: fine) {
+    transition: border
+      ${props =>
+        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+    border: 0px solid ${props => props.theme.pageColours[props.href]};
+
+    &:hover,
+    &:focus {
+      border-width: ${props => props.theme.borderWidth};
+    }
+  }
+
   &:after {
+    content: '';
     opacity: 0;
     background: ${props => props.theme.pageColours[props.href]};
   }
@@ -45,10 +60,8 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
     props.inView &&
     css`
       opacity: 1;
-      animation: ${SwipeInRight}
-        ${props =>
-          `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`}
-        forwards;
+      animation: ${SwipeInRight} ${props.theme.animation.timing[2]}
+        ${props.theme.animation.curve} forwards;
     `}
 
   ${props =>
