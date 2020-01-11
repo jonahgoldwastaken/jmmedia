@@ -62,7 +62,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
             <Link href={href}>
               <ItemAnchor inView={inView} loaded={imageLoaded}>
                 <ItemImage onLoad={() => setImageLoaded(true)} src={imgSrc} />
-                <ItemVideo video={vidSrc} />
+                <ItemVideo video={vidSrc} poster={imgSrc} />
                 <ItemTitle>{children}</ItemTitle>
               </ItemAnchor>
             </Link>

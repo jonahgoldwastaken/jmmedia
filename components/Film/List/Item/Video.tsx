@@ -6,6 +6,7 @@ import Video, { useVideo } from '../../../Common/Video'
 
 type ItemVideoProps = {
   video: string
+  poster: string
 }
 
 const ItemVideoElement = styled(Video)`
@@ -22,6 +23,7 @@ const ItemVideoElement = styled(Video)`
 
 export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
   video,
+  poster,
 }) => {
   const { isHovering } = useContext(LinkWrapperContext)
   const [playing, ref, setCanPlayVideo] = useVideo(isHovering)
@@ -36,6 +38,7 @@ export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
           playsInline
           src={video}
           playing={playing}
+          poster={poster}
           ref={ref}
           onLoadStart={() => setCanPlayVideo(false)}
           onLoadedData={e => {
