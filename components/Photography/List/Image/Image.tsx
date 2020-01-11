@@ -3,7 +3,7 @@ import { useInView } from 'react-intersection-observer'
 import { css } from 'styled-components'
 import { styled } from '../../../../theme'
 import { SwipeInRight } from '../../../Animations'
-import { LoadingAnimater } from '../../../Common'
+import { LoadingAnimator } from '../../../Common'
 import { ListContext } from '../Context'
 import { ImageContainer } from './Container'
 
@@ -91,7 +91,7 @@ export const ListImage: React.FunctionComponent<ListImageProps> = ({
             active={lightboxAnimating && currentIndex === index}
             onLoad={() => setImageLoaded(true)}
           />
-          <LoadingAnimater loaded={imageLoaded} />
+          <LoadingAnimator loaded={imageLoaded} />
         </>
       )}
     </ImageContainer>

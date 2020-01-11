@@ -3,7 +3,7 @@ import { NextRouter } from 'next/router'
 import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { styled } from '../../../../theme'
-import { LoadingAnimater } from '../../../Common'
+import { LoadingAnimator } from '../../../Common'
 import { LinkWrapper } from '../../../Common/Link'
 import { ItemAnchor } from './Anchor'
 import { ItemImage } from './Image'
@@ -70,7 +70,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
             </ItemAnchor>
           </Link>
         )}
-        <LoadingAnimater loaded={imageLoaded && videoLoaded} />
+        <LoadingAnimator loaded={imageLoaded && videoLoaded} />
       </StyledItem>
     </LinkWrapper>
   )

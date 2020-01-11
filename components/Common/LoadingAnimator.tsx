@@ -6,7 +6,7 @@ type StyledDivProps = {
   show: boolean
 }
 
-type LoadingAnimaterProps = {
+type LoadingAnimatorProps = {
   loaded: boolean
 }
 
@@ -42,7 +42,7 @@ const StyledDiv = styled.div<StyledDivProps>`
     `}
 `
 
-export const LoadingAnimater: React.FunctionComponent<LoadingAnimaterProps> = ({
+export const LoadingAnimator: React.FunctionComponent<LoadingAnimatorProps> = ({
   loaded,
 }) => {
   const [showAnimation, setShowAnimation] = useState(true)
