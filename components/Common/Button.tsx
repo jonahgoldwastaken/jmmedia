@@ -16,7 +16,7 @@ type StyledButtonProps = {
 
 const StyledButton = styled.button<StyledButtonProps>`
   all: unset;
-  position: fixed;
+  position: absolute;
   top: ${props => props.theme.space[2]};
   left: ${props => props.theme.space[2]};
   z-index: 999;

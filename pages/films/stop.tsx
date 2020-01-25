@@ -21,10 +21,13 @@ export const Haarlem: NextPage = () => {
         <title>Stop - Jonah Meijers</title>
       </Head>
       <Background currentPage="/films/stop">
-        <FilmHero background="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png">
+        <FilmHero>
           <FilmTitle>Stop</FilmTitle>
           <FilmDetails>Conceptvideo - 2019</FilmDetails>
-          <Film src="https://storage.googleapis.com/filmportfolio/film/haarlem/film.mp4" />
+          <Film
+            poster="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png"
+            src="https://storage.googleapis.com/filmportfolio/film/haarlem/film.mp4"
+          />
         </FilmHero>
         <ContentSection>
           <SectionColumn column={[1, 2, 3]} span={[2, 2, 2]}>

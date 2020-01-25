@@ -14,18 +14,6 @@ const ItemVideoElement = styled(Video)`
   grid-row: 1 / span 1;
   width: 100%;
   height: 100%;
-  filter: brightness(1);
-  transition: filter
-    ${props =>
-      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-
-  @media (pointer: coarse) {
-    display: none;
-  }
-
-  &:not(:hover) {
-    filter: brightness(0.5);
-  }
 `
 
 export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({

@@ -22,10 +22,13 @@ const LoriYiu: NextPage = () => {
         <title>Concert Lori Yiu - Jonah Meijers</title>
       </Head>
       <Background currentPage="/films/loriyiu">
-        <FilmHero background="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png">
+        <FilmHero>
           <FilmTitle>Concert Lori Yiu</FilmTitle>
           <FilmDetails>Concertvideo - 2019</FilmDetails>
-          <Film src="https://storage.googleapis.com/filmportfolio/film/loriyiu/film.mp4" />
+          <Film
+            poster="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png"
+            src="https://storage.googleapis.com/filmportfolio/film/loriyiu/film.mp4"
+          />
         </FilmHero>
         <ContentSection>
           <SectionColumn column={[1, 2, 3]} span={[2, 2, 2]}>

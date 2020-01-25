@@ -16,32 +16,21 @@ const StyledVideo = styled(Video)<StyledVideoProps>`
   position: relative;
   grid-row: 1 / span 2;
   grid-column: 1;
-  opacity: 0;
-  filter: none;
-  transition: filter
-    ${props =>
-      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
   object-fit: contain;
   background: ${props => props.theme.colours.darkText};
+  filter: brightness(1) !important;
 
   ${props =>
-    props.filmState !== 'unopened' &&
+    (props.filmState === 'closed' || props.filmState === 'unopened') &&
     css`
-      animation: ${FadeIn} ${props.theme.animation.timing[1]}
-        ${props.theme.animation.curve} forwards;
-    `}
-
-  ${props =>
-    props.filmState === 'closed' &&
-    css`
-      filter: brightness(0.25);
+      filter: brightness(0.25) !important;
       pointer-events: none;
       @media screen and (min-width: ${props.theme.breakpoints[2]}) {
         object-fit: cover;
       }
     `};
 `
-export const Film: React.FunctionComponent<any> = props => {
+export const Film: React.FunctionComponent<any> = ({ src, poster }) => {
   const { state } = useContext(FilmContext)
   const [playing, ref, setCanPlayVideo] = useVideo(state === 'open')
 
@@ -49,11 +38,12 @@ export const Film: React.FunctionComponent<any> = props => {
     <>
       <FilmPlayButton />
       <StyledVideo
-        src={props.src}
+        src={src}
         controls={state === 'open'}
         playsInline
         filmState={state}
         ref={ref}
+        poster={poster}
         playing={playing}
         onLoadStart={() => setCanPlayVideo(false)}
         onLoadedData={() => setCanPlayVideo(true)}

@@ -21,10 +21,13 @@ const PlantApp: NextPage = () => {
         <title>PlantApp - Jonah Meijers</title>
       </Head>
       <Background currentPage="/films/plantapp">
-        <FilmHero background="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png">
+        <FilmHero>
           <FilmTitle>PlantApp</FilmTitle>
           <FilmDetails>Productvideo - 2018</FilmDetails>
-          <Film src="https://storage.googleapis.com/filmportfolio/film/plantapp/film.mp4" />
+          <Film
+            poster="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png"
+            src="https://storage.googleapis.com/filmportfolio/film/plantapp/film.mp4"
+          />
         </FilmHero>
         <ContentSection>
           <SectionColumn column={[1, 2, 3]} span={[2, 2, 2]}>
