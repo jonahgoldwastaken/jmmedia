@@ -2,14 +2,14 @@ import Link from 'next/link'
 import { NextRouter } from 'next/router'
 import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import useMedia from 'use-media'
 import { styled } from '../../../../theme'
 import { LoadingAnimator } from '../../../Common'
 import { LinkWrapper } from '../../../Common/Link'
 import { ItemAnchor } from './Anchor'
+import { ItemImage } from './Image'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
-import useMedia from 'use-media'
-import { ItemImage } from './Image'
 
 type StyledItemProps = {
   columns: number[]

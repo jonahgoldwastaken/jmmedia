@@ -1,4 +1,3 @@
-import { rgba } from 'polished'
 import { useState } from 'react'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'

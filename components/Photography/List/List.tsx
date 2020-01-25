@@ -1,11 +1,10 @@
 import { RefObject, useState } from 'react'
 import Gallery from 'react-photo-gallery'
-import { styled } from '../../../theme'
+import List from '../../Common/List'
 import { ListContext } from './Context'
 import Image from './Image'
 import { ListImageCallbacks } from './Image/Image'
 import Lightbox from './Lightbox'
-import List from '../../Common/List'
 
 const testPhotos = {
   small: [
