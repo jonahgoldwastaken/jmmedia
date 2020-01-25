@@ -1,11 +1,7 @@
 import { styled } from '../../../theme'
+import List from '../../Common/List'
 
-export const List = styled.ul`
-  margin: 0 auto;
-  padding: 0;
-  width: ${props => props.theme.sizes.dynamic[2]};
-  max-width: ${props => props.theme.sizes.static[3]};
-  list-style: none;
+export const FilmList = styled(List)`
   display: grid;
   grid-template-columns: 1fr;
   grid-auto-rows: ${props => props.theme.sizes.static[0]};
