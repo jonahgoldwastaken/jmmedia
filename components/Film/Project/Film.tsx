@@ -22,7 +22,7 @@ const StyledVideo = styled(Video)<StyledVideoProps>`
   ${props =>
     (props.filmState === 'closed' || props.filmState === 'unopened') &&
     css`
-      filter: brightness(0.25) !important;
+      filter: brightness(0.5) !important;
       pointer-events: none;
       @media screen and (min-width: ${props.theme.breakpoints[2]}) {
         object-fit: cover;
