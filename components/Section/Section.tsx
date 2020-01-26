@@ -17,7 +17,7 @@ const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
   width: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  padding: ${props => `${props.theme.space[3]} ${props.theme.space[2]}`};
+  padding: ${props => props.theme.space[2]};
   grid-column-gap: ${props => props.theme.space[2]};
   background: ${props =>
     props.light
@@ -32,6 +32,7 @@ const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     grid-template-columns: repeat(4, 1fr);
+    padding: ${props => `${props.theme.space[3]} ${props.theme.space[2]}`};
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {

@@ -24,9 +24,7 @@ const StyledVideo = styled(Video)<StyledVideoProps>`
     css`
       filter: brightness(0.5) !important;
       pointer-events: none;
-      @media screen and (min-width: ${props.theme.breakpoints[2]}) {
-        object-fit: cover;
-      }
+      object-fit: cover;
     `};
 `
 export const Film: React.FunctionComponent<any> = ({ src, poster }) => {

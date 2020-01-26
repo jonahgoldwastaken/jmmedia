@@ -1,16 +1,14 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
-import Link from 'next/link'
-import { Button } from '../components/Common'
 import Background from '../components/Common/Background'
 import Header, { HeaderHeading } from '../components/Common/Header'
+import Footer from '../components/Footer'
 import ContentSection, {
   SectionColumn,
   SectionHeading,
   SectionImage,
   SectionParagraph,
 } from '../components/Section'
-import Footer from '../components/Footer'
 
 const About: NextPage = () => {
   return (

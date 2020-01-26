@@ -32,7 +32,7 @@ export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
       playing={playing}
       ref={ref}
       onLoadStart={() => setCanPlayVideo(false)}
-      onLoadedData={e => {
+      onLoadedData={() => {
         setCanPlayVideo(true)
         onLoadedData()
       }}
