@@ -23,7 +23,6 @@ type PageBackgroundProps = {
 }
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
-  overflow-x: hidden;
   background: ${props => props.theme.pageColours[props.currentPage]};
 `
 

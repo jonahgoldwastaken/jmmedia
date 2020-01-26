@@ -10,6 +10,6 @@ interface BackgroundContext {
 export const BackgroundContext = createContext<BackgroundContext>({
   currentPage: '/',
   navOpen: false,
-  setNavOpen: undefined,
-  setShowNavButton: undefined,
+  setNavOpen: () => {},
+  setShowNavButton: () => {},
 })

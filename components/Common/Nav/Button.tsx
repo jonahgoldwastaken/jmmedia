@@ -10,7 +10,7 @@ const StyledButton = styled(Button)`
   }
 `
 
-export const NavButton: React.FunctionComponent = props => {
+export const NavButton: React.FunctionComponent = () => {
   const { setNavOpen, navOpen } = useContext(BackgroundContext)
 
   return (

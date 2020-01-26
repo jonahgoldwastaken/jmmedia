@@ -4,7 +4,7 @@ import { styled } from '../../../theme'
 type VideoProps = {
   playing: boolean
   src: string
-  ref: MutableRefObject<HTMLVideoElement>
+  ref: MutableRefObject<HTMLVideoElement | undefined>
   onLoadedData: (e?: any) => void
   onLoadStart: (e?: any) => void
   poster?: string

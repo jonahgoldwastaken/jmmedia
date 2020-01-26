@@ -1,6 +1,6 @@
 import { colours } from './colours'
 
-export const pageColours = {
+export const pageColours: any = {
   '/': colours.darkText,
   '/over': colours.quaternary,
   '/fotografie': colours.secondary,

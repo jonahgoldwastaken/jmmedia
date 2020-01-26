@@ -1,14 +1,20 @@
-import { Dispatch, MutableRefObject, SetStateAction, useRef, useState } from 'react'
+import {
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+  useRef,
+  useState,
+} from 'react'
 
 export const useVideo = (
   mayPlayVideo: boolean
 ): [
   boolean,
-  MutableRefObject<HTMLVideoElement>,
+  MutableRefObject<HTMLVideoElement | undefined>,
   Dispatch<SetStateAction<boolean>>
 ] => {
   const [canPlayVideo, setCanPlayVideo] = useState<boolean>(false)
-  const videoRef: MutableRefObject<HTMLVideoElement> = useRef()
+  const videoRef = useRef<HTMLVideoElement>()
 
   if (videoRef.current) {
     if (!mayPlayVideo || !canPlayVideo) {

@@ -4,8 +4,8 @@ import { styled } from '../../../theme'
 
 export type BaseAnchorProps = {
   active: boolean
-  positionData: positionData
-  href: string
+  positionData: positionData | undefined
+  href: string | undefined
   ref: Ref<HTMLAnchorElement>
 }
 

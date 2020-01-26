@@ -6,7 +6,11 @@ const setAnalyticsSetting = (value: string) => {
 }
 
 const getAnalyticsSetting = () => {
-  return JSON.parse(localStorage.getItem('_analytics'))
+  const val = localStorage.getItem('_analytics')
+  if (typeof val === 'string') {
+    return JSON.parse(val)
+  }
+  return false
 }
 
 export const initGA = () => {
@@ -22,7 +26,7 @@ export const disableGA = () => {
 export const logPageViews = () => {
   if (typeof localStorage !== 'undefined') {
     if (getAnalyticsSetting())
-      Router.events.on('routeChangeComplete', url => {
+      Router.events.on('routeChangeComplete', () => {
         logPageView()
       })
   }

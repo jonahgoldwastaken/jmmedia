@@ -42,9 +42,9 @@ export const LinkWrapper: React.FunctionComponent<ListLinkProps> = ({
         setIsHovering,
         ref,
         setActive,
-        disabled,
+        disabled: disabled || false,
         positionData: getPositionData(),
-        href,
+        href: href || '',
       }}
     >
       {children}
