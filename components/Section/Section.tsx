@@ -1,6 +1,6 @@
 import { darken, lighten } from 'polished'
 import { useContext } from 'react'
-import { styled } from '../../theme'
+import styled from 'styled-components'
 import { SwipeInLeft, SwipeInRight } from '../Animations'
 import { BackgroundContext } from '../Common/Background'
 

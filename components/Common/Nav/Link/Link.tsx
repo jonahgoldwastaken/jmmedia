@@ -1,4 +1,4 @@
-import { styled } from '../../../../theme'
+import styled from 'styled-components'
 import { LinkWrapper } from '../../Link'
 import { NavAnchor } from './Anchor'
 import { LinkVideo } from './Video'

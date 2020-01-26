@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 import { positionData } from '../../../../interfaces/positionData'
-import { styled } from '../../../../theme'
+import styled from 'styled-components'
 
 type LightboxImageProps = {
   positionData: positionData

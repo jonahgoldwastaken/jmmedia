@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { keyframes } from 'styled-components'
-import { styled } from '../../theme'
+import styled from 'styled-components'
 import { FooterContactLink } from './ContactLink'
 import { FooterHeading } from './Heading'
 import { FooterList } from './List'

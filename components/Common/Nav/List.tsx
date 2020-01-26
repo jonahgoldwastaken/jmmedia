@@ -1,4 +1,4 @@
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 
 export const NavList = styled.ul`
   display: block;

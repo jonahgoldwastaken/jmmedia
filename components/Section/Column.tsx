@@ -1,4 +1,4 @@
-import { styled } from '../../theme'
+import styled from 'styled-components'
 
 type SectionColumnProps = {
   column: number[]

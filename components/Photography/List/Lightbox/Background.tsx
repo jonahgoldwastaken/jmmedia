@@ -1,4 +1,4 @@
-import { styled } from '../../../../theme'
+import styled from 'styled-components'
 import { SlideInDown } from '../../../Animations'
 
 type LightboxBackgroundProps = {

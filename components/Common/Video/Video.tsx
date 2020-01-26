@@ -1,5 +1,5 @@
 import { MutableRefObject } from 'react'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 
 type VideoProps = {
   playing: boolean

@@ -8,12 +8,15 @@ import theme from '../theme'
 import { logPageViews } from '../utils/analytics'
 require('intersection-observer')
 
-const GlobalStyle = createGlobalStyle`
+const NonCriticalCSS = createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700|Red+Hat+Display:400,500,700&display=swap');
+`
+
+const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
   ${styledSanitize};
   body {
-    height: 100%;
+    min-height: 100vh;
   }
 `
 
@@ -26,7 +29,7 @@ class MyApp extends App {
     const { Component, pageProps, router } = this.props
     return (
       <>
-        <GlobalStyle />
+        <CriticalCSS />
         <ThemeProvider theme={theme}>
           <PageTransition
             skipInitialTransition
@@ -36,6 +39,7 @@ class MyApp extends App {
             <Component {...pageProps} key={router.route} />
           </PageTransition>
         </ThemeProvider>
+        <NonCriticalCSS />
       </>
     )
   }

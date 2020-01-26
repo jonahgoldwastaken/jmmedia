@@ -1,6 +1,6 @@
 import { Ref } from 'react'
 import { positionData } from '../../../interfaces/positionData'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 
 export type BaseAnchorProps = {
   active: boolean
