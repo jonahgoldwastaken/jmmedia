@@ -25,6 +25,7 @@ type PageBackgroundProps = {
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
   background: ${props => props.theme.pageColours[props.currentPage]};
+  min-height: 100vh;
 `
 
 const TransititonBackground = styled.div<TransititonBackgroundProps>`
