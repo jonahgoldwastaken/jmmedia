@@ -1,2 +1,2 @@
-export { List as default } from './List';
+export { FilmList as default } from './List';
 

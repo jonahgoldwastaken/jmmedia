@@ -1,4 +1,3 @@
-import { rgba } from 'polished'
 import { useState } from 'react'
 import { filmState } from '../../../interfaces/filmState'
 import { styled } from '../../../theme'
@@ -9,17 +8,12 @@ import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
 
 type StyledHeaderProps = {
-  background: string
   state: filmState
 }
 
-type FilmHeroProps = {
-  background: string
-}
+type FilmHeroProps = {}
 
 const StyledHeader = styled(Header)<StyledHeaderProps>`
-  background: linear-gradient(${rgba('black', 0.75)}, ${rgba('black', 0.75)}),
-    url(${props => props.background}) no-repeat center/cover;
   height: ${props => props.theme.sizes.height[3]};
   width: ${props => props.theme.sizes.dynamic[2]};
   display: grid;

@@ -1,12 +1,11 @@
-import { useContext, useEffect } from 'react'
-import useMedia from 'use-media'
+import { useContext } from 'react'
 import { styled } from '../../../../theme'
 import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
 import Video, { useVideo } from '../../../Common/Video'
 
 type ItemVideoProps = {
   video: string
-  poster: string
+  onLoadedData: any
 }
 
 const ItemVideoElement = styled(Video)`
@@ -15,37 +14,28 @@ const ItemVideoElement = styled(Video)`
   grid-row: 1 / span 1;
   width: 100%;
   height: 100%;
-
-  @media (pointer: coarse) {
-    display: none;
-  }
 `
 
 export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
   video,
-  poster,
+  onLoadedData,
 }) => {
   const { isHovering } = useContext(LinkWrapperContext)
   const [playing, ref, setCanPlayVideo] = useVideo(isHovering)
-  const isMobile = useMedia({ pointer: 'coarse' })
 
   return (
-    <>
-      {!isMobile && (
-        <ItemVideoElement
-          muted
-          loop
-          playsInline
-          src={video}
-          playing={playing}
-          poster={poster}
-          ref={ref}
-          onLoadStart={() => setCanPlayVideo(false)}
-          onLoadedData={e => {
-            setCanPlayVideo(true)
-          }}
-        />
-      )}
-    </>
+    <ItemVideoElement
+      muted
+      loop
+      playsInline
+      src={video}
+      playing={playing}
+      ref={ref}
+      onLoadStart={() => setCanPlayVideo(false)}
+      onLoadedData={e => {
+        setCanPlayVideo(true)
+        onLoadedData()
+      }}
+    />
   )
 }

@@ -1,6 +1,6 @@
 import { RefObject, useState } from 'react'
 import Gallery from 'react-photo-gallery'
-import { styled } from '../../../theme'
+import List from '../../Common/List'
 import { ListContext } from './Context'
 import Image from './Image'
 import { ListImageCallbacks } from './Image/Image'
@@ -205,13 +205,7 @@ const imageRenderer = (callbacks: ListImageCallbacks) => props => {
   return <Image {...props} {...callbacks} />
 }
 
-const PhotographyList = styled.div`
-  margin: 0 auto;
-  width: ${props => props.theme.sizes.dynamic[2]};
-  max-width: ${props => props.theme.sizes.static[3]};
-`
-
-export const List: React.FunctionComponent = () => {
+export const PhotographyList: React.FunctionComponent = () => {
   const [lightboxOpen, setLightboxOpen] = useState<boolean>(undefined)
   const [lightboxAnimating, setLightboxAnimating] = useState<boolean>(undefined)
   const [currentIndex, setCurrentIndex] = useState<number>(undefined)
@@ -251,7 +245,7 @@ export const List: React.FunctionComponent = () => {
         photos: testPhotos,
       }}
     >
-      <PhotographyList>
+      <List as="div">
         <Gallery
           photos={testPhotos.small}
           renderImage={imageRenderer({
@@ -261,7 +255,7 @@ export const List: React.FunctionComponent = () => {
           margin={0}
           targetRowHeight={400}
         />
-      </PhotographyList>
+      </List>
       {typeof currentIndex !== 'undefined' && (
         <Lightbox
           lightboxClickHandler={lightboxClickHandler}

@@ -7,6 +7,7 @@ type VideoProps = {
   ref: MutableRefObject<HTMLVideoElement>
   onLoadedData: (e?: any) => void
   onLoadStart: (e?: any) => void
+  poster?: string
 }
 
 export const Video = styled.video<VideoProps>`
@@ -16,6 +17,14 @@ export const Video = styled.video<VideoProps>`
   width: ${props => props.theme.sizes.dynamic[2]};
   height: ${props => props.theme.sizes.dynamic[2]};
   object-fit: cover;
+  filter: brightness(1);
+  transition: filter
+    ${props =>
+      `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
+
+  &:not(:hover) {
+    filter: brightness(0.75);
+  }
 
   @media speech {
     display: none;

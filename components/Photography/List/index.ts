@@ -1,2 +1,2 @@
-export { List as default } from './List';
+export { PhotographyList as default } from './List';
 

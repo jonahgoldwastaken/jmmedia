@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { NextRouter } from 'next/router'
 import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import useMedia from 'use-media'
 import { styled } from '../../../../theme'
 import { LoadingAnimator } from '../../../Common'
 import { LinkWrapper } from '../../../Common/Link'
@@ -48,11 +49,12 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
   vidSrc,
   children,
 }) => {
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [mediaLoaded, setMediaLoaded] = useState(false)
   const [inViewRef, inView] = useInView({
     threshold: 0.1,
     triggerOnce: true,
   })
+  const isMobile = useMedia({ pointer: 'coarse' })
 
   return (
     <LinkWrapper href={href}>
@@ -60,13 +62,19 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
         {inView && (
           <>
             <Link href={href}>
-              <ItemAnchor inView={inView} loaded={imageLoaded}>
-                <ItemImage onLoad={() => setImageLoaded(true)} src={imgSrc} />
-                <ItemVideo video={vidSrc} poster={imgSrc} />
+              <ItemAnchor inView={inView} loaded={mediaLoaded}>
+                {isMobile ? (
+                  <ItemImage src={imgSrc} onLoad={() => setMediaLoaded(true)} />
+                ) : (
+                  <ItemVideo
+                    video={vidSrc}
+                    onLoadedData={() => setMediaLoaded(true)}
+                  />
+                )}
                 <ItemTitle>{children}</ItemTitle>
               </ItemAnchor>
             </Link>
-            <LoadingAnimator loaded={imageLoaded} />
+            <LoadingAnimator loaded={mediaLoaded} />
           </>
         )}
       </StyledItem>

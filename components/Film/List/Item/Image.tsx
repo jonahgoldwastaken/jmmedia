@@ -1,5 +1,5 @@
+import { useContext } from 'react'
 import { styled } from '../../../../theme'
-import { useContext, HTMLAttributes } from 'react'
 import { LinkWrapperContext } from '../../../Common/Link'
 
 type StyledImageProps = {

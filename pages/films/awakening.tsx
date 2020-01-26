@@ -22,10 +22,13 @@ const Awakening: NextPage = () => {
         <title>Awakening - Jonah Meijers</title>
       </Head>
       <Background currentPage="/films/awakening">
-        <FilmHero background="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png">
+        <FilmHero>
           <FilmTitle>Awakening</FilmTitle>
           <FilmDetails>Productvideo - 2017</FilmDetails>
-          <Film src="https://storage.googleapis.com/filmportfolio/film/awakening/film.mp4" />
+          <Film
+            poster="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png"
+            src="https://storage.googleapis.com/filmportfolio/film/awakening/film.mp4"
+          />
         </FilmHero>
         <ContentSection>
           <SectionColumn column={[1, 2, 2]} span={[1, 1, 2]}>

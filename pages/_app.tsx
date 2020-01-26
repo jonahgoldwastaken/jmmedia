@@ -21,6 +21,7 @@ class MyApp extends App {
   componentDidMount() {
     if (typeof window !== 'undefined') logPageViews()
   }
+
   render() {
     const { Component, pageProps, router } = this.props
     return (
