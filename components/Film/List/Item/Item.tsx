@@ -67,6 +67,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
                   <ItemImage src={imgSrc} onLoad={() => setMediaLoaded(true)} />
                 ) : (
                   <ItemVideo
+                    poster={imgSrc}
                     video={vidSrc}
                     onLoadedData={() => setMediaLoaded(true)}
                   />
