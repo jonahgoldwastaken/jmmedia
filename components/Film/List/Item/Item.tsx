@@ -3,7 +3,7 @@ import { NextRouter } from 'next/router'
 import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import useMedia from 'use-media'
-import { styled } from '../../../../theme'
+import styled from 'styled-components'
 import { LoadingAnimator } from '../../../Common'
 import { LinkWrapper } from '../../../Common/Link'
 import { ItemAnchor } from './Anchor'
@@ -67,6 +67,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
                   <ItemImage src={imgSrc} onLoad={() => setMediaLoaded(true)} />
                 ) : (
                   <ItemVideo
+                    poster={imgSrc}
                     video={vidSrc}
                     onLoadedData={() => setMediaLoaded(true)}
                   />

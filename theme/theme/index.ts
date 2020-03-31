@@ -1,3 +1,4 @@
+import { DefaultTheme } from 'styled-components'
 import { animation } from './animation'
 import { borderWidth } from './borderWidth'
 import { breakpoints } from './breakpoints'
@@ -10,7 +11,7 @@ import { sizes } from './sizes'
 import { space } from './space'
 import { textShadow } from './textShadow'
 
-export const theme = {
+export const theme: DefaultTheme = {
   colours,
   fontSizes,
   space,

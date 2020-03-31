@@ -1,4 +1,4 @@
-import { styled } from '../../../../theme'
+import styled from 'styled-components'
 
 const StyledHeading = styled.h2`
   grid-column: 1 / span 1;

@@ -1,4 +1,4 @@
-import { styled } from '../../theme'
+import styled from 'styled-components'
 
 export const FooterParagraph = styled.p`
   font-size: ${props => props.theme.fontSizes[0]};

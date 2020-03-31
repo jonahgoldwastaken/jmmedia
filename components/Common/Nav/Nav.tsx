@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { css } from 'styled-components'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 import { BackgroundContext } from '../Background'
 import NavLink from './Link'
 import { NavList } from './List'

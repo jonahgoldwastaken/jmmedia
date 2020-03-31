@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { Button } from '..'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 import { BackgroundContext } from '../Background'
 
 const StyledButton = styled(Button)`
@@ -10,7 +10,7 @@ const StyledButton = styled(Button)`
   }
 `
 
-export const NavButton: React.FunctionComponent = props => {
+export const NavButton: React.FunctionComponent = () => {
   const { setNavOpen, navOpen } = useContext(BackgroundContext)
 
   return (

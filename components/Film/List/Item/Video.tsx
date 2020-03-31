@@ -1,11 +1,12 @@
 import { useContext } from 'react'
-import { styled } from '../../../../theme'
+import styled from 'styled-components'
 import { LinkWrapperContext } from '../../../Common/Link/Wrapper'
 import Video, { useVideo } from '../../../Common/Video'
 
 type ItemVideoProps = {
   video: string
   onLoadedData: any
+  poster: string
 }
 
 const ItemVideoElement = styled(Video)`
@@ -19,6 +20,7 @@ const ItemVideoElement = styled(Video)`
 export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
   video,
   onLoadedData,
+  poster,
 }) => {
   const { isHovering } = useContext(LinkWrapperContext)
   const [playing, ref, setCanPlayVideo] = useVideo(isHovering)
@@ -29,10 +31,11 @@ export const ItemVideo: React.FunctionComponent<ItemVideoProps> = ({
       loop
       playsInline
       src={video}
+      poster={poster}
       playing={playing}
       ref={ref}
       onLoadStart={() => setCanPlayVideo(false)}
-      onLoadedData={e => {
+      onLoadedData={() => {
         setCanPlayVideo(true)
         onLoadedData()
       }}

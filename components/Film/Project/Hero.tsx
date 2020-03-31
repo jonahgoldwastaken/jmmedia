@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { filmState } from '../../../interfaces/filmState'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 import { FadeIn } from '../../Animations'
 import Header from '../../Common/Header'
 import { FilmCloseButton } from './CloseButton'
@@ -15,11 +15,11 @@ type FilmHeroProps = {}
 
 const StyledHeader = styled(Header)<StyledHeaderProps>`
   height: ${props => props.theme.sizes.height[3]};
-  width: ${props => props.theme.sizes.dynamic[2]};
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  justify-content: initial;
-  align-items: initial;
+  width: ${props => props.theme.sizes.dynamic[2]} !important;
+  display: grid !important;
+  grid-template-rows: 1fr 1fr !important;
+  justify-content: initial !important;
+  align-items: initial !important;
 
   &:not(:only-child) {
     transition: height

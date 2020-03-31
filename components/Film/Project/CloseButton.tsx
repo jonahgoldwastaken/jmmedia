@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 import { logEvent } from '../../../utils/analytics'
 import { Button } from '../../Common'
 import { BackgroundContext } from '../../Common/Background'

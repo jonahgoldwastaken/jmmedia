@@ -1,10 +1,11 @@
 import Link from 'next/link'
 import { forwardRef, HTMLProps, useContext } from 'react'
-import { css, keyframes } from 'styled-components'
-import theme, { styled } from '../../../../theme'
+import styled, { css, keyframes } from 'styled-components'
+import theme from '../../../../theme'
 import { BackgroundContext } from '../../Background'
 import { LinkWrapperContext } from '../../Link'
 import { Anchor, BaseAnchorProps } from '../../Link/Anchor'
+import { RotateInDown } from '../../../Animations'
 
 type StyledAnchorProps = BaseAnchorProps & {
   disabled?: boolean
@@ -71,42 +72,6 @@ const clickAnimationMobile = (props: any) => keyframes`
   }
 `
 
-const enterAnimation = keyframes`
-  0% {
-    color: transparent;
-  }
-  50% {
-    color: transparent;
-  }
-  51% {
-    color: white;
-  }
-  100%  {
-    color: white;
-  }
-`
-
-const enterAfterAnimation = keyframes`
-  0% {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 0;
-  }
-  50% {
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  100% {
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 0%;
-  }
-`
-
 const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   position: relative;
   z-index: 2;
@@ -168,35 +133,35 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   }
 
   .page-transition-enter-active & {
-    color: transparent;
-    opacity: 1;
-    animation: ${enterAnimation}
+    animation: ${RotateInDown}
       ${props =>
         `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
       forwards;
-    &::after {
-      animation: ${enterAfterAnimation}
-        ${props =>
-          `${props.theme.animation.timing[1]} ${props.theme.animation.curve} ${props.theme.animation.timing[1]}`}
-        forwards;
-    }
   }
 
   ${props =>
     props.currentPage === '/' &&
-    props.active &&
     css`
       .page-transition-exit-active & {
-        &:after {
-          box-shadow: none;
-          position: fixed;
-          animation: ${clickAnimationDesktop} ${props.theme.animation.timing[2]}
-            ${props.theme.animation.curve} forwards;
+        ${props.active
+          ? css`
+              &:after {
+                box-shadow: none;
+                position: fixed;
+                animation: ${clickAnimationDesktop}
+                  ${props.theme.animation.timing[2]}
+                  ${props.theme.animation.curve} forwards;
 
-          @media screen and (pointer: coarse) {
-            animation-name: ${clickAnimationMobile};
-          }
-        }
+                @media screen and (pointer: coarse) {
+                  animation-name: ${clickAnimationMobile};
+                }
+              }
+            `
+          : css`
+              opacity: 0;
+              transition: opacity ${props.theme.animation.timing[0]}
+                ${props.theme.animation.curve};
+            `}
       }
     `}
 `
@@ -204,7 +169,7 @@ const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
 const RefAnchor = forwardRef<
   HTMLAnchorElement,
   StyledAnchorProps & HTMLProps<HTMLAnchorElement>
->((props, ref) => {
+>(({ onClick, ...props }, ref) => {
   const { setNavOpen } = useContext(BackgroundContext)
   return (
     //@ts-ignore
@@ -212,7 +177,7 @@ const RefAnchor = forwardRef<
       {...props}
       onClick={e => {
         setNavOpen(false)
-        props.onClick(e)
+        onClick && onClick(e)
       }}
       ref={ref}
     />

@@ -1,4 +1,4 @@
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 
 const StyledHeader = styled.header`
   position: relative;

@@ -1,4 +1,4 @@
-import { styled } from '../../theme'
+import styled from 'styled-components'
 import { Heading } from '../Common'
 
 export const HeroHeading = styled(Heading)`

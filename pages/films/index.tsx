@@ -1,11 +1,9 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import Background from '../../components/Common/Background'
 import Header, { HeaderHeading } from '../../components/Common/Header'
 import List from '../../components/Film/List'
 import ListItem from '../../components/Film/List/Item'
 import Footer from '../../components/Footer'
-import Nav from '../../components/Common/Nav'
 
 export default () => {
   return (

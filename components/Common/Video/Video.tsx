@@ -1,10 +1,10 @@
 import { MutableRefObject } from 'react'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 
 type VideoProps = {
   playing: boolean
   src: string
-  ref: MutableRefObject<HTMLVideoElement>
+  ref: MutableRefObject<HTMLVideoElement | undefined>
   onLoadedData: (e?: any) => void
   onLoadStart: (e?: any) => void
   poster?: string

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import useMedia from 'use-media'
-import { styled } from '../../../../theme'
+import styled from 'styled-components'
 import { LinkWrapperContext } from '../../Link'
 import Video, { useVideo } from '../../Video'
 

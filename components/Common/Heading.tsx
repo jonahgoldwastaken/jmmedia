@@ -1,4 +1,4 @@
-import { styled } from '../../theme'
+import styled from 'styled-components'
 import { RotateInDown } from '../Animations'
 
 export const Heading = styled.h1`

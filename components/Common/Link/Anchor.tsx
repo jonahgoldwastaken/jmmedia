@@ -1,11 +1,11 @@
 import { Ref } from 'react'
 import { positionData } from '../../../interfaces/positionData'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 
 export type BaseAnchorProps = {
   active: boolean
-  positionData: positionData
-  href: string
+  positionData: positionData | undefined
+  href: string | undefined
   ref: Ref<HTMLAnchorElement>
 }
 

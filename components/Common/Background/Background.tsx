@@ -2,11 +2,12 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import CookieConsent from 'react-cookie-consent'
 import { css } from 'styled-components'
-import theme, { styled } from '../../../theme'
+import styled from 'styled-components'
 import { disableGA, initGA } from '../../../utils/analytics'
 import { SwipeInRight } from '../../Animations'
 import Nav, { NavButton } from '../Nav'
 import { BackgroundContext } from './Context'
+import theme from '../../../theme'
 
 type StyledBackgroundProps = {
   currentPage: string
@@ -23,8 +24,8 @@ type PageBackgroundProps = {
 }
 
 const StyledBackground = styled.div<StyledBackgroundProps>`
-  overflow-x: hidden;
   background: ${props => props.theme.pageColours[props.currentPage]};
+  min-height: 100vh;
 `
 
 const TransititonBackground = styled.div<TransititonBackgroundProps>`

@@ -1,18 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { keyframes } from 'styled-components'
-import { styled } from '../../theme'
+import styled from 'styled-components'
 import { FooterContactLink } from './ContactLink'
 import { FooterHeading } from './Heading'
 import { FooterList } from './List'
 import { FooterParagraph } from './Paragraph'
-
-const footerAnimation = keyframes`
-  from {
-    transform: translateY(100%);
-  } to {
-    transform: translateY(0%);
-  }
-`
 
 export const StyledFooter = styled.footer`
   position: sticky;
@@ -26,10 +17,9 @@ export const StyledFooter = styled.footer`
 
   .page-transition-enter-active & {
     opacity: 1;
-    animation: ${footerAnimation}
+    transition: opacity
       ${props =>
-        `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`}
-      forwards;
+        `${props.theme.animation.timing[2]} ${props.theme.animation.curve}`};
   }
 `
 

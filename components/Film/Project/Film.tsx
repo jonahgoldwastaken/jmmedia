@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
-import { styled } from '../../../theme'
+import styled from 'styled-components'
 import Video, { useVideo } from '../../Common/Video'
 import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
@@ -24,9 +24,7 @@ const StyledVideo = styled(Video)<StyledVideoProps>`
     css`
       filter: brightness(0.5) !important;
       pointer-events: none;
-      @media screen and (min-width: ${props.theme.breakpoints[2]}) {
-        object-fit: cover;
-      }
+      object-fit: cover;
     `};
 `
 export const Film: React.FunctionComponent<any> = ({ src, poster }) => {

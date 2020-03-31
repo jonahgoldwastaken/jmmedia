@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { styled } from '../../../../theme'
+import styled from 'styled-components'
 import { ListContext } from '../Context'
 import { LightboxBackground } from './Background'
 import { LightboxImage } from './Image'

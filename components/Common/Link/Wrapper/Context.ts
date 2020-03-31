@@ -1,4 +1,9 @@
-import { createContext, Dispatch, MutableRefObject, SetStateAction } from 'react'
+import {
+  createContext,
+  Dispatch,
+  MutableRefObject,
+  SetStateAction,
+} from 'react'
 import { positionData } from '../../../../interfaces/positionData'
 
 interface LinkWrapperContext {
@@ -7,16 +12,16 @@ interface LinkWrapperContext {
   active: boolean
   setActive: Dispatch<SetStateAction<boolean>>
   disabled: boolean
-  positionData: positionData
-  ref: MutableRefObject<any>
+  positionData: positionData | undefined
+  ref: MutableRefObject<any> | undefined
   href: string
 }
 
 export const LinkWrapperContext = createContext<LinkWrapperContext>({
   isHovering: false,
-  setIsHovering: undefined,
+  setIsHovering: () => {},
   active: false,
-  setActive: undefined,
+  setActive: () => {},
   disabled: false,
   positionData: undefined,
   ref: undefined,
