@@ -2,7 +2,6 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { FadeIn } from '../../Animations'
-import Header from '../../Common/Header'
 import { FilmCloseButton } from './CloseButton'
 import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
@@ -13,7 +12,7 @@ type StyledHeaderProps = {
 
 type FilmHeroProps = {}
 
-const StyledHeader = styled(Header)<StyledHeaderProps>`
+const StyledHeader = styled.header<StyledHeaderProps>`
   height: ${props => props.theme.sizes.height[3]};
   width: ${props => props.theme.sizes.dynamic[2]} !important;
   display: grid !important;
