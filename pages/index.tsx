@@ -16,6 +16,7 @@ export default () => {
             href="/films/voorstellen"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/voorstellen/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/voorstellen/preview.mov"
+            year="2020"
           >
             Even Voorstellen
           </ListItem>
@@ -23,6 +24,7 @@ export default () => {
             href="/films/stop"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/haarlem/preview.mp4"
+            year="2019"
           >
             Stop
           </ListItem>
@@ -30,6 +32,7 @@ export default () => {
             href="/films/loriyiu"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/loriyiu/preview.mp4"
+            year="2019"
           >
             Concert Lori Yiu
           </ListItem>
@@ -37,6 +40,7 @@ export default () => {
             href="/films/plantapp"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/plantapp/preview.mp4"
+            year="2018"
           >
             PlantApp
           </ListItem>
@@ -44,6 +48,7 @@ export default () => {
             href="/films/awakening"
             imgSrc="https://storage.googleapis.com/filmportfolio/film/awakening/placeholder.png"
             vidSrc="https://storage.googleapis.com/filmportfolio/film/awakening/preview.mp4"
+            year="2017"
           >
             Awakening
           </ListItem>
