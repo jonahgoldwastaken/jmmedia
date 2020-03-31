@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { NextRouter } from 'next/router'
 import { useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import useMedia from 'use-media'
 import styled from 'styled-components'
+import useMedia from 'use-media'
 import { LoadingAnimator } from '../../../Common'
 import { LinkWrapper } from '../../../Common/Link'
 import { ItemAnchor } from './Anchor'
@@ -11,12 +11,9 @@ import { ItemImage } from './Image'
 import { ItemTitle } from './Title'
 import { ItemVideo } from './Video'
 
-type StyledItemProps = {
-  columns: number[]
-}
+type StyledItemProps = {}
 
 type ItemProps = {
-  columns: number[]
   vidSrc: string
   imgSrc: string
   href: string
@@ -27,24 +24,10 @@ const StyledItem = styled.li<StyledItemProps>`
   position: relative;
   margin: 0;
   padding: 0;
-  grid-row-end: span 1;
-
-  @media screen and (min-width: ${props => props.theme.breakpoints[0]}) {
-    grid-column-end: span ${props => props.columns[0]};
-  }
-
-  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    grid-column-end: span ${props => props.columns[1]};
-  }
-
-  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-    grid-column-end: span ${props => props.columns[2]};
-  }
 `
 
 export const ListItem: React.FunctionComponent<ItemProps> = ({
   href,
-  columns,
   imgSrc,
   vidSrc,
   children,
@@ -58,7 +41,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
 
   return (
     <LinkWrapper href={href}>
-      <StyledItem ref={inViewRef} columns={columns}>
+      <StyledItem ref={inViewRef}>
         {inView && (
           <>
             <Link href={href}>

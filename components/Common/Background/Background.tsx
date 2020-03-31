@@ -1,13 +1,10 @@
 import { useRouter } from 'next/router'
-import { useState } from 'react'
 import CookieConsent from 'react-cookie-consent'
-import { css } from 'styled-components'
 import styled from 'styled-components'
-import { disableGA, initGA } from '../../../utils/analytics'
-import { SwipeInRight } from '../../Animations'
-import Nav, { NavButton } from '../Nav'
-import { BackgroundContext } from './Context'
 import theme from '../../../theme'
+import { disableGA, initGA } from '../../../utils/analytics'
+import Header from '../Header'
+import { BackgroundContext } from './Context'
 
 type StyledBackgroundProps = {
   currentPage: string
@@ -16,7 +13,6 @@ type StyledBackgroundProps = {
 type TransititonBackgroundProps = {
   currentPage: string
   route: string
-  navOpen: boolean
 }
 
 type PageBackgroundProps = {
@@ -38,48 +34,20 @@ const TransititonBackground = styled.div<TransititonBackgroundProps>`
   clip-path: inset(0 100% 0 0);
   pointer-events: none;
   background: ${props => props.theme.pageColours[props.route]};
-
-  ${props =>
-    (props.route === '/' ||
-      (props.currentPage !== '/' && props.route === '/films') ||
-      (props.currentPage !== '/' && props.route === '/fotografie') ||
-      (props.currentPage !== '/' && props.route === '/over')) &&
-    css`
-      .page-transition-exit-active & {
-        animation: ${SwipeInRight} ${props.theme.animation.timing[1]}
-          ${props.theme.animation.curve} ${props.theme.animation.timing[1]}
-          forwards;
-        transform-origin: center;
-      }
-    `}
 `
 
 export const Background: React.FunctionComponent<PageBackgroundProps> = props => {
   const { route } = useRouter()
-  const [navOpen, setNavOpen] = useState(false)
-  const [showNavButton, setShowNavButton] = useState(true)
 
   return (
     <BackgroundContext.Provider
       value={{
         currentPage: props.currentPage,
-        setNavOpen,
-        navOpen,
-        setShowNavButton,
       }}
     >
-      {props.currentPage !== '/' && (
-        <>
-          {showNavButton && <NavButton />}
-          <Nav />
-        </>
-      )}
+      <Header />
       <StyledBackground {...props} />
-      <TransititonBackground
-        currentPage={props.currentPage}
-        navOpen={navOpen}
-        route={route}
-      />
+      <TransititonBackground currentPage={props.currentPage} route={route} />
       <CookieConsent
         buttonText="Jazeker!"
         declineButtonText="Nee bedankt"

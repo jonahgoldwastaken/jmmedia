@@ -1,7 +1,6 @@
 import { useContext } from 'react'
-import { css } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
-import styled from 'styled-components'
 import { SwipeInLeft, SwipeOutRight } from '../../Animations'
 import { FilmContext } from './Context'
 

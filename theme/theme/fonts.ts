@@ -1,4 +1,4 @@
 export const fonts = {
-  display: "'Red Hat Display', sans-serif",
+  display: 'pragmatica-extended, sans-serif',
   sans: 'Raleway, sans-serif',
 }

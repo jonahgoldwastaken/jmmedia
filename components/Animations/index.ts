@@ -13,4 +13,3 @@ export * from './SwipeOut'
 export * from './VideoFade'
 export * from './WipeIn'
 export * from './ZoomOut'
-

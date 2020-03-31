@@ -1,9 +1,9 @@
 import { colours } from './colours'
 
 export const pageColours: any = {
-  '/': colours.darkText,
-  '/over': colours.quaternary,
-  '/fotografie': colours.secondary,
+  '/': colours.primary,
+  '/over': colours.primary,
+  '/fotografie': colours.primary,
   '/films': colours.primary,
   '/films/loriyiu': '#8954c7',
   '/films/awakening': '#00b7f1',
