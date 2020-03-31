@@ -9,6 +9,28 @@ const testPhotos = {
   small: [
     {
       src:
+        'https://storage.googleapis.com/filmportfolio/fotografie/klein/tisja.jpg',
+      title:
+        'Tisja die uit het raam kijkt terwijl ze binnen vastzit vanwege het Coronavirus.',
+    },
+    {
+      src:
+        'https://storage.googleapis.com/filmportfolio/fotografie/klein/boris.jpg',
+      title: 'Een Cairne Terrier die op de bank ligt.',
+    },
+    {
+      src:
+        'https://storage.googleapis.com/filmportfolio/fotografie/klein/wilhelminabrug.jpg',
+      title:
+        'Een lampenbol aan ketting bij de Oude Haven met de Wilhelminabrug in de achtergrond.',
+    },
+    {
+      src:
+        'https://storage.googleapis.com/filmportfolio/fotografie/klein/erasmusbrug.jpg',
+      title: 'De Erasmusbrug in de ochtendmist.',
+    },
+    {
+      src:
         'https://storage.googleapis.com/filmportfolio/fotografie/klein/afwas-zweden.jpeg',
       title: 'Afwas die ligt te drogen op een houten plank in het bos.',
     },
@@ -77,6 +99,28 @@ const testPhotos = {
     },
   ],
   large: [
+    {
+      src:
+        'https://storage.googleapis.com/filmportfolio/fotografie/groot/tisja.jpg',
+      title:
+        'Tisja die uit het raam kijkt terwijl ze binnen vastzit vanwege het Coronavirus.',
+    },
+    {
+      src:
+        'https://storage.googleapis.com/filmportfolio/fotografie/groot/boris.jpg',
+      title: 'Een Cairne Terrier die op de bank ligt.',
+    },
+    {
+      src:
+        'https://storage.googleapis.com/filmportfolio/fotografie/groot/wilhelminabrug.jpg',
+      title:
+        'Een lampenbol aan ketting bij de Oude Haven met de Wilhelminabrug in de achtergrond.',
+    },
+    {
+      src:
+        'https://storage.googleapis.com/filmportfolio/fotografie/groot/erasmusbrug.jpg',
+      title: 'De Erasmusbrug in de ochtendmist.',
+    },
     {
       src:
         'https://storage.googleapis.com/filmportfolio/fotografie/groot/afwas-zweden.jpeg',
