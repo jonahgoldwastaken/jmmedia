@@ -1,6 +1,5 @@
 import { forwardRef, HTMLProps, useContext } from 'react'
-import { css, keyframes } from 'styled-components'
-import styled from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 import { SwipeInRight } from '../../../Animations'
 import { LinkWrapperContext } from '../../../Common/Link'
 import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
@@ -25,11 +24,12 @@ const clickAnimationDesktop = keyframes`
 `
 
 export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
-  position: relative;
-  z-index: 10;
-  width: 100%;
-  height: 100%;
   display: grid;
+  position: relative;
+  min-width: 32rem;
+  min-height: 18rem;
+  margin-bottom: 2.5rem;
+  z-index: 10;
   justify-content: center;
   align-items: center;
   grid-template-rows: 1fr;
@@ -38,15 +38,6 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   opacity: 0;
 
   @media (pointer: fine) {
-    transition: border
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-    border: 0px solid ${props => props.theme.pageColours[props.href]};
-
-    &:hover,
-    &:focus {
-      border-width: ${props => props.theme.borderWidth};
-    }
   }
 
   &:after {

@@ -8,10 +8,6 @@ import theme from '../theme'
 import { logPageViews } from '../utils/analytics'
 require('intersection-observer')
 
-const NonCriticalCSS = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700|Red+Hat+Display:400,500,700&display=swap');
-`
-
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
   ${styledSanitize};
@@ -39,7 +35,7 @@ class MyApp extends App {
             <Component {...pageProps} key={router.route} />
           </PageTransition>
         </ThemeProvider>
-        <NonCriticalCSS />
+        <link rel="stylesheet" href="https://use.typekit.net/qpj1zjq.css" />
       </>
     )
   }

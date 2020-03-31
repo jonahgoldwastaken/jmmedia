@@ -1,7 +1,6 @@
 import { RefObject, useContext, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import { css } from 'styled-components'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { SwipeInRight } from '../../../Animations'
 import { LoadingAnimator } from '../../../Common'
 import { ListContext } from '../Context'

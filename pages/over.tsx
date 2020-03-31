@@ -1,7 +1,6 @@
 import { NextPage } from 'next'
 import Head from 'next/head'
 import Background from '../components/Common/Background'
-import Header, { HeaderHeading } from '../components/Common/Header'
 import Footer from '../components/Footer'
 import ContentSection, {
   SectionColumn,
@@ -17,9 +16,6 @@ const About: NextPage = () => {
         <title>Over mij - Jonah Meijers</title>
       </Head>
       <Background currentPage="/over">
-        <Header>
-          <HeaderHeading>Over mij</HeaderHeading>
-        </Header>
         <ContentSection light>
           <SectionColumn column={[1, 1, 2]} span={[2, 2, 2]}>
             <SectionImage

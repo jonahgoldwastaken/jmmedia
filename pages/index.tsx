@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Background from '../components/Common/Background'
 import Footer from '../components/Footer'
 import Hero, { HeroHeading, HeroSubHeading } from '../components/Hero'
-import Nav from '../components/Common/Nav'
+import Nav from '../components/Common/Header/Nav'
 
 export default () => {
   return (

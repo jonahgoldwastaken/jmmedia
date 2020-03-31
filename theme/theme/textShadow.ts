@@ -1,1 +1,1 @@
-export const textShadow = '2px 2px 3px rgba(0, 0, 0, 0.5)'
+export const textShadow = '3px 0px 0px rgb(0,0,0)'

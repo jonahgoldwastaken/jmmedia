@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { filmState } from '../../../interfaces/filmState'
 import styled from 'styled-components'
+import { filmState } from '../../../interfaces/filmState'
 import { FadeIn } from '../../Animations'
 import Header from '../../Common/Header'
 import { FilmCloseButton } from './CloseButton'
