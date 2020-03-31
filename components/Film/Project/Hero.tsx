@@ -2,7 +2,6 @@ import { useState } from 'react'
 import styled from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
 import { FadeIn } from '../../Animations'
-import { FilmCloseButton } from './CloseButton'
 import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'
 
@@ -13,22 +12,12 @@ type StyledHeaderProps = {
 type FilmHeroProps = {}
 
 const StyledHeader = styled.header<StyledHeaderProps>`
-  height: ${props => props.theme.sizes.height[3]};
+  height: ${props => props.theme.sizes.height[2]};
   width: ${props => props.theme.sizes.dynamic[2]} !important;
   display: grid !important;
   grid-template-rows: 1fr 1fr !important;
   justify-content: initial !important;
   align-items: initial !important;
-
-  &:not(:only-child) {
-    transition: height
-      ${props =>
-        `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
-    height: ${props =>
-      props.state === 'open'
-        ? props.theme.sizes.height[3]
-        : props.theme.sizes.height[2]};
-  }
 
   .page-transition-enter & {
     opacity: 0;
@@ -52,7 +41,6 @@ export const FilmHero: React.FunctionComponent<FilmHeroProps> = ({
     <FilmContext.Provider value={{ state: filmState, setState: setFilmState }}>
       <StyledHeader state={filmState} {...props}>
         {children}
-        <FilmCloseButton />
         <FilmPlayButton />
       </StyledHeader>
     </FilmContext.Provider>

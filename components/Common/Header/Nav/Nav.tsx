@@ -20,7 +20,7 @@ export const Nav: React.FunctionComponent = () => {
     <StyledNav currentPage={currentPage}>
       <NavList>
         <NavLink href="/fotografie">Fotografie</NavLink>
-        <NavLink href="/films">Films</NavLink>
+        <NavLink href="/">Films</NavLink>
         <NavLink href="/over">Over mij</NavLink>
       </NavList>
     </StyledNav>

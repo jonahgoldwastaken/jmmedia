@@ -38,19 +38,17 @@ const Image = styled.img<ImageProps>`
   position: relative;
   z-index: 10;
   opacity: 0;
-  width: 100%;
-  height: 100%;
+  max-width: 32rem;
+  margin-bottom: 2.5rem;
   cursor: zoom-in;
-  transition: border
+  filter: brightness(1);
+  transition: filter
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
   @media (pointer: fine) {
-    border: 0px solid ${props => props.theme.colours.lightText};
-
-    &:hover,
-    &:focus {
-      border-width: ${props => props.theme.borderWidth};
+    &:not(:hover) {
+      filter: brightness(0.75);
     }
   }
 

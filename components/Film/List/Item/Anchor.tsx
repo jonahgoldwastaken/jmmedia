@@ -1,5 +1,5 @@
 import { forwardRef, HTMLProps, useContext } from 'react'
-import styled, { css, keyframes } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { SwipeInRight } from '../../../Animations'
 import { LinkWrapperContext } from '../../../Common/Link'
 import { Anchor, BaseAnchorProps } from '../../../Common/Link/Anchor'
@@ -13,15 +13,6 @@ type ItemAnchorProps = {
   loaded: boolean
   inView?: boolean
 }
-
-const clickAnimationDesktop = keyframes`
-  to {
-    left: 0px;
-    top: 0px;
-    width: 100vw;
-    height: 100vh;
-  }
-`
 
 export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   display: grid;
@@ -37,9 +28,6 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
   font-size: ${props => props.theme.fontSizes[1]};
   opacity: 0;
 
-  @media (pointer: fine) {
-  }
-
   &:after {
     content: '';
     opacity: 0;
@@ -53,33 +41,6 @@ export const StyledAnchor = styled(Anchor)<StyledAnchorProps>`
       opacity: 1;
       animation: ${SwipeInRight} ${props.theme.animation.timing[2]}
         ${props.theme.animation.curve} forwards;
-    `}
-
-  ${props =>
-    props.active &&
-    css`
-      .page-transition-exit & {
-        position: static;
-        animation: none;
-      }
-
-      .page-transition-exit-active & {
-        &:after {
-          position: fixed;
-          z-index: 99;
-          opacity: 1;
-          left: ${props.positionData.x}px;
-          top: ${props.positionData.y}px;
-          width: ${props.positionData.width}px;
-          height: ${props.positionData.height}px;
-          display: block;
-          animation: ${clickAnimationDesktop} ${props.theme.animation.timing[1]}
-            ${props.theme.animation.curve} ${props.theme.animation.timing[1]}
-            forwards;
-          transition: opacity ${props.theme.animation.timing[1]}
-            ${props.theme.animation.curve};
-        }
-      }
     `}
 `
 

@@ -1,4 +1,4 @@
-import { PageTransition } from 'next-page-transitions'
+// import { PageTransition } from 'next-page-transitions'
 import App from 'next/app'
 import React from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
@@ -27,13 +27,13 @@ class MyApp extends App {
       <>
         <CriticalCSS />
         <ThemeProvider theme={theme}>
-          <PageTransition
+          {/* <PageTransition
             skipInitialTransition
             timeout={400}
             classNames="page-transition"
-          >
-            <Component {...pageProps} key={router.route} />
-          </PageTransition>
+          > */}
+          <Component {...pageProps} key={router.route} />
+          {/* </PageTransition> */}
         </ThemeProvider>
         <link rel="stylesheet" href="https://use.typekit.net/qpj1zjq.css" />
       </>
