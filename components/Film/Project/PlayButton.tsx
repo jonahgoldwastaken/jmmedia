@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useContext } from 'react'
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
+import styled from 'styled-components'
 import { logEvent } from '../../../utils/analytics'
 import { FadeIn, FadeOut } from '../../Animations'
+import { BackgroundContext } from '../../Common/Background'
 import { FilmContext } from './Context'
 
 type StyledButtonProps = {
@@ -53,11 +55,13 @@ const StyledButton = styled.button<StyledButtonProps>`
 
 export const FilmPlayButton: React.FunctionComponent = () => {
   const { setState, state } = useContext(FilmContext)
+  const { setShowNavButton } = useContext(BackgroundContext)
 
   return (
     <StyledButton
       onClick={() => {
         logEvent(`Video plays on ${window.location.pathname}`, `Playing video`)
+        setShowNavButton(false)
         setState('open')
       }}
       filmState={state}

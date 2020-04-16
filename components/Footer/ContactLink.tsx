@@ -11,7 +11,7 @@ const StyledContactLink = styled.li<StyledContactLink>`
   a {
     display: block;
     color: ${props => props.theme.colours.lightText};
-    font-size: ${props => props.theme.fontSizes[3]};
+    font-size: ${props => props.theme.fontSizes[2]};
     text-decoration: none;
     text-align: center;
 
@@ -24,12 +24,12 @@ const StyledContactLink = styled.li<StyledContactLink>`
       position: relative;
       display: inline-block;
       font-family: ${props => props.theme.fonts.sans};
-      font-size: ${props => props.theme.fontSizes[2]};
+      font-size: ${props => props.theme.fontSizes[0]};
       text-transform: uppercase;
       font-weight: ${props => props.theme.fontWeights[1]};
 
       @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-        font-size: ${props => props.theme.fontSizes[1]};
+        font-size: ${props => props.theme.fontSizes[0]};
       }
 
       &:after {
