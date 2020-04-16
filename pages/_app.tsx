@@ -1,4 +1,4 @@
-// import { PageTransition } from 'next-page-transitions'
+import { PageTransition } from 'next-page-transitions'
 import App from 'next/app'
 import React from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
@@ -7,6 +7,10 @@ import styledSanitize from 'styled-sanitize'
 import theme from '../theme'
 import { logPageViews } from '../utils/analytics'
 require('intersection-observer')
+
+const NonCriticalCSS = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,700|Red+Hat+Display:400,500,700&display=swap');
+`
 
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
@@ -27,15 +31,15 @@ class MyApp extends App {
       <>
         <CriticalCSS />
         <ThemeProvider theme={theme}>
-          {/* <PageTransition
+          <PageTransition
             skipInitialTransition
             timeout={400}
             classNames="page-transition"
-          > */}
-          <Component {...pageProps} key={router.route} />
-          {/* </PageTransition> */}
+          >
+            <Component {...pageProps} key={router.route} />
+          </PageTransition>
         </ThemeProvider>
-        <link rel="stylesheet" href="https://use.typekit.net/qpj1zjq.css" />
+        <NonCriticalCSS />
       </>
     )
   }

@@ -1,6 +1,7 @@
 import { useContext } from 'react'
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
 import { filmState } from '../../../interfaces/filmState'
+import styled from 'styled-components'
 import Video, { useVideo } from '../../Common/Video'
 import { FilmContext } from './Context'
 import { FilmPlayButton } from './PlayButton'

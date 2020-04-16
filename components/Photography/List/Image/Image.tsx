@@ -1,6 +1,7 @@
 import { RefObject, useContext, useRef, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
-import styled, { css } from 'styled-components'
+import { css } from 'styled-components'
+import styled from 'styled-components'
 import { SwipeInRight } from '../../../Animations'
 import { LoadingAnimator } from '../../../Common'
 import { ListContext } from '../Context'
@@ -38,17 +39,19 @@ const Image = styled.img<ImageProps>`
   position: relative;
   z-index: 10;
   opacity: 0;
-  max-width: 32rem;
-  margin-bottom: 2.5rem;
+  width: 100%;
+  height: 100%;
   cursor: zoom-in;
-  filter: brightness(1);
-  transition: filter
+  transition: border
     ${props =>
       `${props.theme.animation.timing[1]} ${props.theme.animation.curve}`};
 
   @media (pointer: fine) {
-    &:not(:hover) {
-      filter: brightness(0.75);
+    border: 0px solid ${props => props.theme.colours.lightText};
+
+    &:hover,
+    &:focus {
+      border-width: ${props => props.theme.borderWidth};
     }
   }
 

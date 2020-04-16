@@ -1,1 +1,1 @@
-export const fontWeights = [400, 500, 700, 800]
+export const fontWeights = [400, 500, 700]

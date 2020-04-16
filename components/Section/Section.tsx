@@ -1,3 +1,4 @@
+import { darken, lighten } from 'polished'
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { SwipeInLeft, SwipeInRight } from '../Animations'
@@ -13,10 +14,30 @@ type ContentSectionProps = {
 }
 
 const StyledSection = styled.section<StyledSectionProps & ContentSectionProps>`
-  margin: 0 auto;
-  width: ${props => props.theme.sizes.static[0]};
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
   padding: ${props => props.theme.space[2]};
-  background: ${props => props.theme.pageColours[props.currentPage]};
+  grid-column-gap: ${props => props.theme.space[2]};
+  background: ${props =>
+    props.light
+      ? lighten(0.1, props.theme.pageColours[props.currentPage])
+      : props.dark
+      ? darken(0.1, props.theme.pageColours[props.currentPage])
+      : props.theme.pageColours[props.currentPage]};
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[0]}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    grid-template-columns: repeat(4, 1fr);
+    padding: ${props => `${props.theme.space[3]} ${props.theme.space[2]}`};
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    grid-template-columns: repeat(6, 1fr);
+  }
 
   .page-transition-enter & {
     opacity: 0;
