@@ -28,11 +28,11 @@ const StyledSubheading = styled.h3`
   text-align: left;
 `
 
-export const ItemTitle: React.FunctionComponent<any> = ({ children, year }) => {
+export const ItemTitle: React.FunctionComponent = ({ children }) => {
   return (
     <StyledContainer>
       <StyledHeading>{children}</StyledHeading>
-      <StyledSubheading>{year}</StyledSubheading>
+      <StyledSubheading>2019</StyledSubheading>
     </StyledContainer>
   )
 }

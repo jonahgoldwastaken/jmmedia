@@ -17,7 +17,6 @@ type ItemProps = {
   vidSrc: string
   imgSrc: string
   href: string
-  year: string
   router?: NextRouter
 }
 
@@ -31,7 +30,6 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
   href,
   imgSrc,
   vidSrc,
-  year,
   children,
 }) => {
   const [mediaLoaded, setMediaLoaded] = useState(false)
@@ -57,7 +55,7 @@ export const ListItem: React.FunctionComponent<ItemProps> = ({
                     onLoadedData={() => setMediaLoaded(true)}
                   />
                 )}
-                <ItemTitle year={year}>{children}</ItemTitle>
+                <ItemTitle>{children}</ItemTitle>
               </ItemAnchor>
             </Link>
             <LoadingAnimator loaded={mediaLoaded} />
