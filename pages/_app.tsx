@@ -4,7 +4,8 @@ import React from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import styledSanitize from 'styled-sanitize'
-import theme from '../theme'
+import useMedia from 'use-media'
+import { darkTheme, lightTheme } from '../theme'
 import { logPageViews } from '../utils/analytics'
 require('intersection-observer')
 
@@ -27,18 +28,33 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, router } = this.props
+    const darkMode: boolean = useMedia('prefers-color-scheme: dark')
     return (
       <>
         <CriticalCSS />
-        <ThemeProvider theme={theme}>
-          <PageTransition
-            skipInitialTransition
-            timeout={400}
-            classNames="page-transition"
-          >
-            <Component {...pageProps} key={router.route} />
-          </PageTransition>
-        </ThemeProvider>
+        {darkMode ? (
+          <ThemeProvider theme={darkTheme}>
+            {' '}
+            <PageTransition
+              skipInitialTransition
+              timeout={400}
+              classNames="page-transition"
+            >
+              <Component {...pageProps} key={router.route} />
+            </PageTransition>
+          </ThemeProvider>
+        ) : (
+          <ThemeProvider theme={lightTheme}>
+            {' '}
+            <PageTransition
+              skipInitialTransition
+              timeout={400}
+              classNames="page-transition"
+            >
+              <Component {...pageProps} key={router.route} />
+            </PageTransition>
+          </ThemeProvider>
+        )}
         <NonCriticalCSS />
       </>
     )

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Background from '../../components/Common/Background'
-import Header, { HeaderHeading } from '../../components/Common/Header'
+import Header, { HeaderHeading } from '../../components/Header'
 import Footer from '../../components/Footer'
 import List from '../../components/Photography/List'
 

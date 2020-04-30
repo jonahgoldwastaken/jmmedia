@@ -20,10 +20,6 @@
   },
   "homepage": "https://github.com/theonejonahgold/filmportfolio#readme",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.25",
-    "@fortawesome/free-brands-svg-icons": "^5.11.2",
-    "@fortawesome/free-solid-svg-icons": "^5.11.2",
-    "@fortawesome/react-fontawesome": "^0.1.4",
     "intersection-observer": "^0.7.0",
     "next": "^9.3.3",
     "next-page-transitions": "^1.0.0-beta.2",

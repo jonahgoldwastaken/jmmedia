@@ -7,40 +7,28 @@ declare module 'styled-components' {
       primary: string
       secondary: string
       tertiary: string
-      quaternary: string
-      lightText: string
-      darkText: string
-      loading: string
-      disabled: string
+      primaries: {
+        white: string
+        orange: string
+        black: string
+        yellow: string
+        grey: string
+      }
+    }
+    logo: string
+    spacing: string[]
+    heights: string[]
+    widths: string[]
+    breakpoints: string[]
+    fontFamilies: {
+      heading: string
+      running: string
     }
     fontSizes: string[]
-    space: string[]
-    sizes: {
-      static: string[]
-      dynamic: string[]
-      height: string[]
-    }
-    breakpoints: string[]
-    fonts: {
-      display: string
-      sans: string
-    }
     fontWeights: number[]
-    borderWidth: string
-    textShadow: string
     animation: {
       timing: string[]
       curve: string
-    }
-    pageColours: {
-      '/': string
-      '/over': string
-      '/fotografie': string
-      '/films': string
-      '/films/loriyiu': string
-      '/films/awakening': string
-      '/films/stop': string
-      '/films/plantapp': string
     }
   }
 }
