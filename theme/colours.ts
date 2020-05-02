@@ -2,7 +2,7 @@ const primaries = {
   orange: '#E56D1D',
   black: '#1C1C1C',
   grey: '#404040',
-  yellow: 'F4D02E',
+  yellow: '#F4D02E',
   white: '#FFF',
 }
 
