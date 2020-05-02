@@ -1,19 +1,24 @@
-import styled from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
+import { useContext } from 'react'
 
 type LogoProps = {
   size?: 'large' | 'small'
 }
 
 const SmallLogo = styled.img`
-  height: 3.5rem;
+  width: 6.8125rem;
 `
 
 const LargeLogo = styled.img`
-  height: 7rem;
+  width: 13.375rem;
 `
 
-export const Logo: React.FunctionComponent<LogoProps> = ({ size }) => {
-  if (typeof size !== 'undefined' && size === 'large')
-    return <SmallLogo img={} alt="JM Logo" />
-  return <LargeLogo img={} alt="JM Logo" />
+export const Logo: React.FunctionComponent<LogoProps> = props => {
+  const themeContext = useContext(ThemeContext)
+  const size = props.size || 'small'
+  return size === 'small' ? (
+    <SmallLogo src={themeContext.logo} alt="JM Logo" />
+  ) : (
+    <LargeLogo src={themeContext.logo} alt="JM Logo" />
+  )
 }

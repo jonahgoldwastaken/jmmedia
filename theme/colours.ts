@@ -9,13 +9,13 @@ const primaries = {
 export const colours = {
   dark: {
     primary: primaries.yellow,
-    secondary: primaries.grey,
-    tertiary: primaries.white,
+    secondary: primaries.white,
+    tertiary: primaries.grey,
   },
   light: {
     primary: primaries.orange,
-    secondary: primaries.white,
-    tertiary: primaries.black,
+    secondary: primaries.black,
+    tertiary: primaries.white,
   },
   primaries,
 }
