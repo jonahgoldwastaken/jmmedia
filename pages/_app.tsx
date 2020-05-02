@@ -13,11 +13,15 @@ const CriticalCSS = createGlobalStyle`
   ${styledSanitize};
   body {
     min-height: 100vh;
+    max-width: 64rem;
+    margin: auto;
+    background: ${props => props.theme.colours.tertiary};
   }
 `
 
 const MyApp = ({ Component, pageProps, router }) => {
   const darkMode: boolean = useMedia('prefers-color-scheme: dark')
+  const theme = darkMode ? darkTheme : lightTheme
 
   useEffect(() => {
     if (typeof window !== 'undefined') logPageViews()
@@ -25,30 +29,16 @@ const MyApp = ({ Component, pageProps, router }) => {
 
   return (
     <>
-      <CriticalCSS />
-      {darkMode ? (
-        <ThemeProvider theme={darkTheme}>
-          {' '}
-          <PageTransition
-            skipInitialTransition
-            timeout={400}
-            classNames="page-transition"
-          >
-            <Component {...pageProps} key={router.route} />
-          </PageTransition>
-        </ThemeProvider>
-      ) : (
-        <ThemeProvider theme={lightTheme}>
-          {' '}
-          <PageTransition
-            skipInitialTransition
-            timeout={400}
-            classNames="page-transition"
-          >
-            <Component {...pageProps} key={router.route} />
-          </PageTransition>
-        </ThemeProvider>
-      )}
+      <ThemeProvider theme={theme}>
+        <CriticalCSS />{' '}
+        <PageTransition
+          skipInitialTransition
+          timeout={400}
+          classNames="page-transition"
+        >
+          <Component {...pageProps} key={router.route} />
+        </PageTransition>
+      </ThemeProvider>
       <link
         rel="stylesheet"
         type="text/css"
