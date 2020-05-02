@@ -5,5 +5,6 @@ export const Header = styled.header`
   padding: ${props => props.theme.spacing[1]};
   position: relative;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 `

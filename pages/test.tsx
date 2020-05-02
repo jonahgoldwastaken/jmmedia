@@ -1,10 +1,10 @@
 import { Logo } from '../components/Logo'
 import Header from '../components/Header'
-import { Paragraph } from '../components/Text'
+import { HeaderNav } from '../components/Header/HeaderNav/HeaderNav'
 
 export default () => (
   <Header>
     <Logo size="small" />
-    <Paragraph>Je moeder is een plopkoek</Paragraph>
+    <HeaderNav />
   </Header>
 )
