@@ -14,8 +14,12 @@ const CriticalCSS = createGlobalStyle`
   body {
     min-height: 100vh;
     max-width: 64rem;
+    padding: ${props => props.theme.spacing[0]};
     margin: auto;
     background: ${props => props.theme.colours.tertiary};
+    @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+      padding: ${props => props.theme.spacing[1]};
+    }
   }
 `
 
