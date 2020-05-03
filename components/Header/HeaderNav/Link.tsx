@@ -14,7 +14,7 @@ const StyledAnchor = styled.a`
   font-weight: ${props => props.theme.fontWeights[2]};
 `
 
-export const NavLink: React.FunctionComponent<NavLinkProps> = ({
+export const HeaderNavLink: React.FunctionComponent<NavLinkProps> = ({
   href,
   children,
 }) => (

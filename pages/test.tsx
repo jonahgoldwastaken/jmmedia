@@ -1,16 +1,16 @@
-import { Logo } from '../components/Logo'
-import Header from '../components/Header'
-import { HeaderNav } from '../components/Header/HeaderNav/HeaderNav'
-import Image from '../components/Image'
-import { HeadingOne } from '../components/Text/Headings'
-import { List } from '../components/Portfolio/List/List'
 import { CoverImage } from '../components/CoverImage'
+import { Footer } from '../components/Footer/Footer'
+import Header from '../components/Header'
+import Image from '../components/Image'
+import { Logo } from '../components/Logo'
+import { List } from '../components/Portfolio/List/List'
+import { HeadingOne } from '../components/Text/Headings'
+import { FooterLink } from '../components/Footer/Link'
 
 export default () => (
   <>
     <Header>
       <Logo size="small" />
-      <HeaderNav />
     </Header>
     <HeadingOne>Je moeder is een plopkoek</HeadingOne>
     <Image
@@ -24,5 +24,16 @@ export default () => (
       Je moeder is een plopkoek
     </CoverImage>
     <List />
+    <Footer>
+      <FooterLink colour="primary" href="plopkoek">
+        Hoi
+      </FooterLink>
+      <FooterLink colour="secondary" href="plopkoek">
+        Hoi
+      </FooterLink>
+      <FooterLink colour="primary" href="plopkoek">
+        Hoi
+      </FooterLink>
+    </Footer>
   </>
 )

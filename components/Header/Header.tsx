@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { HeaderNav } from './HeaderNav'
 
-export const Header = styled.header`
+const StyledHeader = styled.header`
   background: ${props => props.theme.colours.tertiary};
   padding: 0 0 ${props => props.theme.spacing[1]};
   display: flex;
@@ -12,3 +13,9 @@ export const Header = styled.header`
     }
   }
 `
+export const Header: React.FunctionComponent = ({ children }) => (
+  <StyledHeader>
+    {children}
+    <HeaderNav />
+  </StyledHeader>
+)

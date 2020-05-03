@@ -1,13 +1,14 @@
 import styled from 'styled-components'
 import { BaseHeading } from '../Text/Headings/BaseHeading'
+import { primaries } from '../../types/primaries'
 
 type CoverImageContainerProps = {
-  colour: 'grey' | 'white' | 'orange' | 'yellow'
+  colour: primaries
   width?: number
 }
 
 type CoverImageTextProps = {
-  colour: 'grey' | 'white' | 'orange' | 'yellow'
+  colour: primaries
 }
 
 type CoverImageProps = {
