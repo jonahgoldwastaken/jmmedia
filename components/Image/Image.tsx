@@ -2,8 +2,10 @@ import styled from 'styled-components'
 import { BaseRunning } from '../Text'
 
 type ImageProps = {
+  noQuote?: boolean
   src: string
   alt?: string
+  width?: 'third' | 'half' | 'full'
 }
 
 type StyledImageProps = {
@@ -47,9 +49,13 @@ const ImageQuote = styled.q`
   }
 `
 
-export const Image: React.FunctionComponent<ImageProps> = ({ src, alt }) => (
+export const Image: React.FunctionComponent<ImageProps> = ({
+  alt,
+  noQuote,
+  ...props
+}) => (
   <Container>
-    <StyledImage src={src} alt={alt} />
-    {alt && <ImageQuote>{alt}</ImageQuote>}
+    <StyledImage alt={alt} {...props} />
+    {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
   </Container>
 )

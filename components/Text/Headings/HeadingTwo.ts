@@ -9,4 +9,9 @@ export const HeadingTwo = styled.h2<HeadingProps>`
     props.colour
       ? props.theme.colours[props.colour]
       : props.theme.colours.secondary};
+  ${props => props.centre && 'text-align: center'};
+
+  + p {
+    margin-top: -${props => props.theme.spacing[1]};
+  }
 `

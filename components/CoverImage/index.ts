@@ -1,1 +1,1 @@
-export * from './CoverImage'
+export { CoverImage as default } from './CoverImage'

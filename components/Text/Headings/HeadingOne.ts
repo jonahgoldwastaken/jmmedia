@@ -1,11 +1,7 @@
 import styled from 'styled-components'
 import { BaseHeading, HeadingProps } from './BaseHeading'
 
-type HeadingOneProps = {
-  centre?: boolean
-}
-
-export const HeadingOne = styled.h1<HeadingProps & HeadingOneProps>`
+export const HeadingOne = styled.h1<HeadingProps>`
   ${BaseHeading};
   margin: ${props => props.theme.spacing[1]} 0;
   font-size: ${props => props.theme.fontSizes[4]};
@@ -15,4 +11,8 @@ export const HeadingOne = styled.h1<HeadingProps & HeadingOneProps>`
       ? props.theme.colours[props.colour]
       : props.theme.colours.secondary};
   ${props => props.centre && 'text-align: center'};
+
+  img {
+    margin-top: -0.65rem;
+  }
 `

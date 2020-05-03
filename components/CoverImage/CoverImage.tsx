@@ -1,10 +1,14 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { BaseHeading } from '../Text/Headings/BaseHeading'
 import { primaries } from '../../types/primaries'
 
 type CoverImageContainerProps = {
   colour: primaries
-  width?: number
+  transform?: {
+    top?: string
+    left?: string
+  }
+  width?: string
 }
 
 type CoverImageTextProps = {
@@ -16,8 +20,13 @@ type CoverImageProps = {
 } & CoverImageContainerProps
 
 const CoverImageContainer = styled.div<CoverImageContainerProps>`
+  display: inline-block;
   position: relative;
-  width: ${props => props.width || '18.75rem'};
+  width: ${props => props.theme.widths[3]};
+
+  &:not(:last-child) {
+    margin-bottom: ${props => props.theme.spacing[2]};
+  }
 
   &::before {
     display: block;
@@ -30,6 +39,27 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
     z-index: 1;
     background-color: ${props => props.theme.colours.primaries[props.colour]};
     opacity: ${props => (props.colour === 'white' ? '60%' : '50%')};
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    width: ${props => props.width || '18.75rem'};
+    margin: 0;
+
+    ${props => {
+      if (props.transform)
+        if (!props.transform.left && props.transform.top)
+          return css`
+            margin-top: ${props.transform.top};
+          `
+        else if (props.transform.left && !props.transform.top)
+          return css`
+            margin-left: ${props.transform.left};
+          `
+        else
+          return css`
+            margin: ${props.transform.top} 0 0 ${props.transform.left};
+          `
+    }}
   }
 `
 
