@@ -4,6 +4,7 @@ import { HeaderNav } from '../components/Header/HeaderNav/HeaderNav'
 import Image from '../components/Image'
 import { HeadingOne } from '../components/Text/Headings'
 import { List } from '../components/Portfolio/List/List'
+import { CoverImage } from '../components/CoverImage'
 
 export default () => (
   <>
@@ -16,6 +17,12 @@ export default () => (
       src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
       alt="Jonah Meijers"
     />
+    <CoverImage
+      src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
+      colour="orange"
+    >
+      Je moeder is een plopkoek
+    </CoverImage>
     <List />
   </>
 )
