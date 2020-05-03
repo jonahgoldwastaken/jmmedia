@@ -14,7 +14,7 @@ const StyledNav = styled.nav`
   }
 `
 
-export const FooterNav: React.FunctionComponent = props => (
+export const FooterNav: React.FunctionComponent = () => (
   <StyledNav>
     <NavList>
       <FooterNavLink href="/over">Over</FooterNavLink>
