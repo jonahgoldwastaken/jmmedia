@@ -5,9 +5,7 @@ import { colours } from './colours'
 import { fontFamilies, fontSizes, fontWeights } from './fonts'
 import { spacing, heights, widths } from './layout'
 
-const darkTheme: DefaultTheme = {
-  colours: { primaries: colours.primaries, ...colours.dark },
-  logo: '/logo-dark.svg',
+const defaultTheme = {
   breakpoints,
   animation,
   fontFamilies,
@@ -18,20 +16,19 @@ const darkTheme: DefaultTheme = {
   widths,
 }
 
+const darkTheme: DefaultTheme = {
+  ...defaultTheme,
+  colours: { primaries: colours.primaries, ...colours.dark },
+  logo: '/logo-dark.svg',
+}
+
 const lightTheme: DefaultTheme = {
+  ...defaultTheme,
   colours: {
     primaries: colours.primaries,
     ...colours.light,
   },
   logo: '/logo-light.svg',
-  breakpoints,
-  animation,
-  fontFamilies,
-  fontSizes,
-  fontWeights,
-  heights,
-  spacing,
-  widths,
 }
 
 export { lightTheme, darkTheme }
