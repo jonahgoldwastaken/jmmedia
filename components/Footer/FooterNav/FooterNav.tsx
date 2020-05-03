@@ -6,10 +6,20 @@ const StyledNav = styled.nav`
   position: fixed;
   bottom: 0;
   left: 0;
-  display: flex;
-  align-items: center;
+  width: 100%;
+  z-index: 99;
   padding: ${props => props.theme.spacing[1]};
-  @media screen and (min-width: ${props => props.theme.breakpoints[0]}) {
+  background: ${props => props.theme.colours.primary};
+
+  ul {
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     display: none;
   }
 `

@@ -7,9 +7,12 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   nav {
-    @media screen and (max-width: ${props => props.theme.breakpoints[1]}) {
-      display: none;
+    display: none;
+
+    @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+      display: block;
     }
   }
 `

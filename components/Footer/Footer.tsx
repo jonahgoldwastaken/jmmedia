@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FooterNav } from './FooterNav'
 
 const StyledFooter = styled.footer`
   display: flex;
@@ -7,5 +8,10 @@ const StyledFooter = styled.footer`
 `
 
 export const Footer: React.FunctionComponent = ({ children }) => {
-  return <StyledFooter>{children}</StyledFooter>
+  return (
+    <StyledFooter>
+      {children}
+      <FooterNav />
+    </StyledFooter>
+  )
 }
