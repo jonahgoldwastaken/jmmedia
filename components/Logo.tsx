@@ -1,24 +1,14 @@
 import styled, { ThemeContext } from 'styled-components'
 import { useContext } from 'react'
 
-type LogoProps = {
-  size?: 'large' | 'small'
-}
-
-const SmallLogo = styled.img`
-  width: 6.8125rem;
-`
-
-const LargeLogo = styled.img`
+const StyledImg = styled.img`
   width: 13.375rem;
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    width: 6.8125rem;
+  }
 `
 
-export const Logo: React.FunctionComponent<LogoProps> = props => {
-  const themeContext = useContext(ThemeContext)
-  const size = props.size || 'small'
-  return size === 'small' ? (
-    <SmallLogo src={themeContext.logo} alt="JM Logo" />
-  ) : (
-    <LargeLogo src={themeContext.logo} alt="JM Logo" />
-  )
+export const Logo: React.FunctionComponent = () => {
+  const theme = useContext(ThemeContext)
+  return <StyledImg src={theme.logo} />
 }

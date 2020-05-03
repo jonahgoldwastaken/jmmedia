@@ -1,8 +1,6 @@
-import styled, { ThemeContext } from 'styled-components'
-import { HeaderNav } from './HeaderNav'
+import styled from 'styled-components'
 import { Logo } from '../Logo'
-import useMedia from 'use-media'
-import { useContext } from 'react'
+import { HeaderNav } from './HeaderNav'
 
 const StyledHeader = styled.header`
   background: ${props => props.theme.colours.tertiary};
@@ -24,13 +22,9 @@ const StyledHeader = styled.header`
   }
 `
 export const Header: React.FunctionComponent = () => {
-  const theme = useContext(ThemeContext)
-  const isDesktop = useMedia({ minWidth: theme.breakpoints[1] })
-  console.log(isDesktop)
-
   return (
     <StyledHeader>
-      <Logo size={isDesktop ? 'small' : 'large'} />
+      <Logo />
       <HeaderNav />
     </StyledHeader>
   )
