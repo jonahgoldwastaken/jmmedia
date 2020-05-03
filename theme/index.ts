@@ -7,7 +7,7 @@ import { spacing, heights, widths } from './layout'
 
 const darkTheme: DefaultTheme = {
   colours: { primaries: colours.primaries, ...colours.dark },
-  logo: '/static/logo-dark.svg',
+  logo: '/logo-dark.svg',
   breakpoints,
   animation,
   fontFamilies,
@@ -23,7 +23,7 @@ const lightTheme: DefaultTheme = {
     primaries: colours.primaries,
     ...colours.light,
   },
-  logo: '/static/logo-light.svg',
+  logo: '/logo-light.svg',
   breakpoints,
   animation,
   fontFamilies,
