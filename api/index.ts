@@ -1,5 +1,5 @@
 import { NowRequest, NowResponse } from '@now/node'
 
-export default (req: NowRequest, res: NowResponse) => {
+export default (_: NowRequest, res: NowResponse) => {
   res.end('hoi :)')
 }

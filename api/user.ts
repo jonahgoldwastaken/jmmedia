@@ -1,6 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
 import fetch from 'node-fetch'
 const { BASE_URL } = process.env
+
 export default async (req: NowRequest, res: NowResponse) => {
   if (req.method !== 'GET') {
     res.status(405).end()

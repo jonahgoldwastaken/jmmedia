@@ -52,7 +52,8 @@ export default async (req: NowRequest, res: NowResponse) => {
     return
   }
 
-  await mongoose.connect(MONGO_HOST, { useNewUrlParser: true })
+  if (MONGO_HOST) await mongoose.connect(MONGO_HOST, { useNewUrlParser: true })
+  else res.status(500).end('Database connection failed')
 
   if (req.headers.authorization) {
     return passport.authenticate('jwt', { session: false }, (err, user) => {
@@ -64,13 +65,15 @@ export default async (req: NowRequest, res: NowResponse) => {
   } else {
     return passport.authenticate('local', { session: false }, (err, user) => {
       if (err) res.status(405).end()
-      else {
+      else if (SESSION_SECRET) {
         const token = jwt.sign(sanitiseUser(user), SESSION_SECRET, {
           audience: 'jonahmeijers.nl',
           issuer: 'auth.jonahmeijers.nl',
           expiresIn: 86400,
         })
         res.status(200).send(token)
+      } else {
+        res.status(500).end('Session secret not set')
       }
     })(req, res)
   }

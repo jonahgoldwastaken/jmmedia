@@ -9,8 +9,8 @@ export default async (req: NowRequest, res: NowResponse) => {
     res.status(405).end()
     return
   }
-
-  await mongoose.connect(MONGO_HOST, { useNewUrlParser: true })
+  if (MONGO_HOST) await mongoose.connect(MONGO_HOST, { useNewUrlParser: true })
+  else res.status(500).end('Database connection failed')
 
   const password = await argon2.hash(req.body.password)
   const userObj = {
