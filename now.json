@@ -1,4 +1,5 @@
 {
+  "name": "jm",
   "alias": "jonahmeijers.nl",
   "github": {
     "enabled": true
@@ -8,7 +9,7 @@
     {"src": "api/package.json", "use": "@now/node"}
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api" },
-    { "src": "/.*", "dest": "/website/$1" }
+    { "src": "/api/(.*)", "dest": "/api/dist/$1" },
+    { "src": "/(.*)", "dest": "/website/$1" }
   ]
 }
