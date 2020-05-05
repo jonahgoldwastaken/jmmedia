@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 type SectionProps = {
   background: 'primary' | 'secondary'
   grid?: boolean
+  centreContent?: boolean
+  fullHeight?: boolean
 }
 
 export const Section = styled.div<SectionProps>`
@@ -11,6 +13,8 @@ export const Section = styled.div<SectionProps>`
     props.background === 'secondary'
       ? props.theme.colours.primary
       : props.theme.colours.tertiary};
+
+  ${props => props.fullHeight && `height: ${props.theme.heights[3]}`};
 
   ${props =>
     props.grid &&
@@ -25,5 +29,14 @@ export const Section = styled.div<SectionProps>`
         grid-template-columns: 1fr 1fr;
         grid-gap: ${props.theme.spacing[2]};
       }
+    `}
+
+  ${props =>
+    props.centreContent &&
+    css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     `}
 `

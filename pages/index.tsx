@@ -23,49 +23,51 @@ export default () => {
             colour="orange"
             src="https://unsplash.com/photos/oSvR0wGYUBs/download?force=true"
             transform={{
-              left: '4.125rem',
+              left: 66,
             }}
           >
             Jouw nieuwe unieke product die de markt door gaat breken.
           </CoverImage>
           <CoverImage
             colour="grey"
-            width="25.3125rem"
+            width={405}
             src="https://unsplash.com/photos/ZODcBkEohk8/download?force=true"
             transform={{
-              top: '5.15625rem',
-              left: '7.5625rem',
+              top: 82.5,
+              left: 121,
             }}
           >
             Een ervaring zo uniek dat ie voor altijd gekoesterd moet worden.
           </CoverImage>
           <CoverImage
             colour="grey"
-            width="22.5rem"
+            width={360}
             src="https://unsplash.com/photos/wn7dOzUh3Rs/download?force=true"
             transform={{
-              top: '5.625rem',
-              left: '6.875rem',
+              top: 90,
+              left: 110,
             }}
           >
             Een gebeurtenis die je voor altijd wilt koesteren.
           </CoverImage>
           <CoverImage
             colour="orange"
-            width="16.875rem"
+            width={270}
             src="https://unsplash.com/photos/wynMU8psYo4/download?force=true"
             transform={{
-              top: '3.875rem',
-              left: '8.125rem',
+              top: 62,
+              left: 130,
             }}
           >
             Een gebeurtenis die je voor altijd wilt koesteren.
           </CoverImage>
         </Section>
-        <HeadingTwo centre>Zet het op foto of video!</HeadingTwo>
-        <Paragraph centre>
-          Ik ken wel een mannetje die dat voor elkaar kan krijgen.
-        </Paragraph>
+        <Section centreContent background="primary">
+          <HeadingTwo centre>Zet het op foto of video!</HeadingTwo>
+          <Paragraph centre>
+            Ik ken wel een mannetje die dat voor elkaar kan krijgen.
+          </Paragraph>
+        </Section>
       </main>
       <Footer>
         <FooterLink colour="primary" href="/services">

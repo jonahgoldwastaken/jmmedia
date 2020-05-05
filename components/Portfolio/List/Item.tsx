@@ -8,8 +8,11 @@ type ListItemProps = {
 }
 
 const StyledLI = styled.li`
+  display: block;
   grid-column: span 1;
   grid-row: span 1;
+  width: 100%;
+  height: 100%;
   a:hover q {
     text-decoration: underline;
   }

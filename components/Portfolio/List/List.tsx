@@ -5,9 +5,14 @@ import { ListItem } from './Item'
 import { HeadingOne } from '../../Text/Headings'
 import { ListFilter } from './Filter'
 
+type PortfolioListProps = {
+  heading: string
+  ownWork?: boolean
+}
+
 const StyledList = styled.ul`
   list-style: none;
-  margin: 0;
+  margin: 0 0 ${props => props.theme.spacing[2]};
   padding: 0;
   display: grid;
   grid-auto-columns: 1fr;
@@ -36,7 +41,9 @@ const ListHeader = styled.div`
   justify-content: space-between;
 `
 
-export const List = () => {
+export const List: React.FunctionComponent<PortfolioListProps> = ({
+  heading,
+}) => {
   const [currentFilter, setFilter] = useState<ListContext['currentFilter']>(
     'all'
   )
@@ -45,7 +52,7 @@ export const List = () => {
   return (
     <ListContext.Provider value={{ currentFilter, setFilter }}>
       <ListHeader>
-        <HeadingOne>Mijn hoofd</HeadingOne>
+        <HeadingOne noMargin>{heading}</HeadingOne>
         <ListFilter />
       </ListHeader>
       <StyledList>

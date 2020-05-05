@@ -5,10 +5,10 @@ import { primaries } from '../../types/primaries'
 type CoverImageContainerProps = {
   colour: primaries
   transform?: {
-    top?: string
-    left?: string
+    top?: number
+    left?: number
   }
-  width?: string
+  width?: number
 }
 
 type CoverImageTextProps = {
@@ -23,6 +23,7 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
   display: inline-block;
   position: relative;
   width: ${props => props.theme.widths[3]};
+  vertical-align: top;
 
   &:not(:last-child) {
     margin-bottom: ${props => props.theme.spacing[2]};
@@ -42,22 +43,27 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-    width: ${props => props.width || '18.75rem'};
+    width: ${props => (props.width ? `${props.width / 16}rem` : '18.75rem')};
     margin: 0;
+
+    &:not(:last-child) {
+      margin-bottom: 0;
+    }
 
     ${props => {
       if (props.transform)
         if (!props.transform.left && props.transform.top)
           return css`
-            margin-top: ${props.transform.top};
+            margin-top: ${props.transform.top / 16}rem;
           `
         else if (props.transform.left && !props.transform.top)
           return css`
-            margin-left: ${props.transform.left};
+            margin-left: ${props.transform.left / 16}rem;
           `
         else
           return css`
-            margin: ${props.transform.top} 0 0 ${props.transform.left};
+            margin: ${props.transform.top / 16}rem 0 0
+              ${props.transform.left / 16}rem;
           `
     }}
   }
@@ -66,7 +72,7 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  filter: contrast(200%) saturate(0%);
+  filter: contrast(200%) opacity(0.75);
 
   @media speech {
     display: none;
@@ -81,7 +87,7 @@ const Text = styled.p<CoverImageTextProps>`
   width: 100%;
   transform: translateY(-50%);
   margin: 0;
-  padding: ${props => props.theme.spacing[1]};
+  padding: ${props => props.theme.spacing[0]};
   z-index: 2;
   font-weight: ${props => props.theme.fontWeights[1]};
   text-align: center;

@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react'
-import { ListContext } from './Context'
 import styled from 'styled-components'
 import { BaseRunning } from '../../Text'
+import { ListContext } from './Context'
 
 const StyledSelect = styled.select`
   all: unset;

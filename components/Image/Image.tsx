@@ -5,26 +5,15 @@ type ImageProps = {
   noQuote?: boolean
   src: string
   alt?: string
-  width?: 'third' | 'half' | 'full'
-}
-
-type StyledImageProps = {
-  width?: 'third' | 'half' | 'full'
 }
 
 const Container = styled.div`
+  display: inline-block;
   position: relative;
 `
 
-const StyledImage = styled.img<StyledImageProps>`
-  width: ${props =>
-    props.width
-      ? props.width === 'third'
-        ? props.theme.widths[1]
-        : props.width === 'half'
-        ? props.theme.widths[2]
-        : props.theme.widths[3]
-      : props.theme.widths[3]};
+const StyledImage = styled.img`
+  width: 100%;
   height: 100%;
   object-fit: cover;
 `
@@ -51,11 +40,12 @@ const ImageQuote = styled.q`
 
 export const Image: React.FunctionComponent<ImageProps> = ({
   alt,
+  src,
   noQuote,
   ...props
 }) => (
-  <Container>
-    <StyledImage alt={alt} {...props} />
+  <Container {...props}>
+    <StyledImage alt={alt} src={src} />
     {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
   </Container>
 )

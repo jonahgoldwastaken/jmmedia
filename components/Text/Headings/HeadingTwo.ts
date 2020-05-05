@@ -1,7 +1,11 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { BaseHeading, HeadingProps } from './BaseHeading'
 
-export const HeadingTwo = styled.h2<HeadingProps>`
+type HeadingTwoProps = {
+  servicesWidth?: boolean
+}
+
+export const HeadingTwo = styled.h2<HeadingProps & HeadingTwoProps>`
   ${BaseHeading};
   font-size: ${props => props.theme.fontSizes[3]};
   font-weight: ${props => props.theme.fontWeights[2]};
@@ -10,8 +14,10 @@ export const HeadingTwo = styled.h2<HeadingProps>`
       ? props.theme.colours[props.colour]
       : props.theme.colours.secondary};
   ${props => props.centre && 'text-align: center'};
-
-  + p {
-    margin-top: -${props => props.theme.spacing[1]};
-  }
+  ${props =>
+    props.servicesWidth &&
+    css`
+      max-width: 34.375rem;
+      width: 100%;
+    `};
 `
