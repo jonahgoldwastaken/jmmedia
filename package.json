@@ -1,4 +1,7 @@
 {
   "private": true,
-  "workspaces": ["website", "api"]
+  "workspaces": ["website", "api"],
+  "scripts": {
+    "dev": "now dev"
+  }
 }

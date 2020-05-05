@@ -1,11 +1,11 @@
 {
   "compilerOptions": {
-    "target": "ES5",
-    "module": "CommonJS",
+    "target": "es5",
+    "module": "commonjs",
     "lib": ["es2017"],
     "moduleResolution": "node",
-    "noEmit": false,
-    "strict": false,
+    "allowJs": true,
+    "strict": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
@@ -16,9 +16,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "outDir": "dist",
-    "rootDir": "src"
+    "isolatedModules": false
   },
   "exclude": ["node_modules"],
   "include": ["**/*.ts"]

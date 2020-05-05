@@ -1,15 +1,14 @@
 {
-  "name": "jm",
-  "alias": "jonahmeijers.nl",
   "github": {
     "enabled": true
   },
   "builds": [
     {"src": "website/package.json", "use": "@now/next"},
-    {"src": "api/package.json", "use": "@now/node"}
+    {"src": "api/*.ts", "use": "@now/node"}
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/dist/$1" },
+    { "src": "/api", "dest": "/api/index.ts" },
+    { "src": "/api/(.*)", "dest": "/api/$1.ts" },
     { "src": "/(.*)", "dest": "/website/$1" }
   ]
 }
