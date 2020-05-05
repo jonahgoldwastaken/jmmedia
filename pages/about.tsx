@@ -20,7 +20,10 @@ export default () => {
           <span> is Jonah Meijers</span>
         </HeadingOne>
         <Section grid background="secondary">
-          <Image src="/jonah.jpeg" alt="Foto van Jonah" noQuote />
+          <Image
+            src="/jonah.jpeg"
+            alt="Foto van Jonah, gemaakt door Evelyn Cardoso"
+          />
           <div>
             <Paragraph noMargin colour="white">
               Ik focus me graag op anderen, en wat ze te vertellen hebben. De

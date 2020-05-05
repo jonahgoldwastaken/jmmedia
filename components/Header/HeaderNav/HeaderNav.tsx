@@ -17,7 +17,7 @@ const StyledNav = styled.nav`
 export const HeaderNav: React.FunctionComponent = () => (
   <StyledNav>
     <NavList>
-      <HeaderNavLink href="/over">Over</HeaderNavLink>
+      <HeaderNavLink href="/about">Over</HeaderNavLink>
       <HeaderNavLink href="/services">Services</HeaderNavLink>
       <HeaderNavLink href="/Portfolio">Portfolio</HeaderNavLink>
       <HeaderNavLink href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20">

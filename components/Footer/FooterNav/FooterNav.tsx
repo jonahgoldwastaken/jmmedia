@@ -27,7 +27,7 @@ const StyledNav = styled.nav`
 export const FooterNav: React.FunctionComponent = () => (
   <StyledNav>
     <NavList>
-      <FooterNavLink href="/over">Over</FooterNavLink>
+      <FooterNavLink href="/about">Over</FooterNavLink>
       <FooterNavLink href="/services">Services</FooterNavLink>
       <FooterNavLink href="/Portfolio">Portfolio</FooterNavLink>
       <FooterNavLink href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20">
