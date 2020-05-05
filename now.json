@@ -1,0 +1,14 @@
+{
+  "alias": "jonahmeijers.nl",
+  "github": {
+    "enabled": true
+  },
+  "builds": [
+    {"src": "website/package.json", "use": "@now/next"},
+    {"src": "api/package.json", "use": "@now/node"}
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api" },
+    { "src": "/.*", "dest": "/website/$1" }
+  ]
+}
