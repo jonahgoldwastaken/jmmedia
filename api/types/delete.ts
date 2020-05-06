@@ -1,5 +1,5 @@
 import { NowRequest, NowResponse } from '@now/node'
-import connectToDB from '../components/db'
+import connectToDB, { closeDBConnection } from '../components/db'
 import ProjectType from '../components/models/ProjectType'
 import fetch from 'node-fetch'
 const { BASE_URL } = process.env
@@ -35,8 +35,10 @@ export default async (req: NowRequest, res: NowResponse) => {
           } else {
             res.status(200).end(JSON.stringify(deletedProjectType.toObject()))
           }
+          closeDBConnection()
         } catch (err) {
           res.status(400).end("Project Type doesn't exist")
+          closeDBConnection()
         }
       }
     }
