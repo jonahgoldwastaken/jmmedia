@@ -1,12 +1,13 @@
 import { NowRequest, NowResponse } from '@now/node'
-import jwt from 'jsonwebtoken'
 import argon2 from 'argon2'
+import jwt from 'jsonwebtoken'
 import passport from 'passport'
 import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt'
 import { Strategy as LocalStrategy } from 'passport-local'
-import User, { UserDocument } from './models/User'
-import mongoose from 'mongoose'
-const { SESSION_SECRET, MONGO_HOST } = process.env
+import connectToDB, { closeDBConnection } from './components/db'
+import User from './components/models/User'
+
+const { SESSION_SECRET } = process.env
 
 passport.use(
   new JwtStrategy(
@@ -41,7 +42,7 @@ passport.use(
   })
 )
 
-const sanitiseUser = (user: UserDocument) => {
+const sanitiseUser = (user: User) => {
   const { username, _id } = user.toObject()
   return { username, _id }
 }
@@ -52,14 +53,17 @@ export default async (req: NowRequest, res: NowResponse) => {
     return
   }
 
-  if (MONGO_HOST) await mongoose.connect(MONGO_HOST, { useNewUrlParser: true })
-  else res.status(500).end('Database connection failed')
+  const connectedToDB = await connectToDB()
+  if (!connectedToDB) {
+    res.status(500).end('Database connection failed')
+  }
 
   if (req.headers.authorization) {
     return passport.authenticate('jwt', { session: false }, (err, user) => {
       if (err || !user) res.status(401).end()
       else {
         res.status(200).end(JSON.stringify(sanitiseUser(user)))
+        closeDBConnection()
       }
     })(req, res)
   } else {
@@ -75,6 +79,7 @@ export default async (req: NowRequest, res: NowResponse) => {
       } else {
         res.status(500).end('Session secret not set')
       }
+      closeDBConnection()
     })(req, res)
   }
 }

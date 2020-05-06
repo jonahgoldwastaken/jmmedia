@@ -1,11 +1,11 @@
 import { model, Schema, Document } from 'mongoose'
 
-export interface UserDocument extends Document {
+interface User extends Document {
   username: string
   password: string
 }
 
-const UserSchema: Schema<UserDocument> = new Schema({
+const UserSchema: Schema<User> = new Schema({
   username: {
     required: true,
     type: String,
@@ -17,6 +17,6 @@ const UserSchema: Schema<UserDocument> = new Schema({
   },
 })
 
-const User = model<UserDocument>('user', UserSchema)
+const User = model<User>('user', UserSchema)
 
 export default User

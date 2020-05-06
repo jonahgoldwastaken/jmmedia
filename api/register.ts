@@ -1,8 +1,8 @@
 import { NowRequest, NowResponse } from '@now/node'
-import User from './models/User'
+import User from './components/models/User'
 import argon2 from 'argon2'
-import mongoose from 'mongoose'
-const { MONGO_HOST, MAX_REGISTRATIONS } = process.env
+import connectToDB, { closeDBConnection } from './components/db'
+const { MAX_REGISTRATIONS } = process.env
 
 const canRegister = async () => {
   if (MAX_REGISTRATIONS) {
@@ -26,8 +26,9 @@ export default async (req: NowRequest, res: NowResponse) => {
     res.status(405).end()
     return
   }
-  if (MONGO_HOST) await mongoose.connect(MONGO_HOST, { useNewUrlParser: true })
-  else res.status(500).end('Database connection failed')
+
+  const connectedToDB = await connectToDB()
+  if (!connectedToDB) res.status(500).end('Database connection failed')
 
   const password = await argon2.hash(req.body.password)
   const userObj = {
@@ -44,5 +45,6 @@ export default async (req: NowRequest, res: NowResponse) => {
         _id,
       })
     )
+    closeDBConnection()
   } catch (err) {}
 }
