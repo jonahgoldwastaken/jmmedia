@@ -6,7 +6,7 @@ import ProjectType from '../components/models/ProjectType'
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'POST') {
+  if (req.method !== 'PUT') {
     res.status(405).end()
     return
   }
@@ -24,7 +24,7 @@ export default async (req: NowRequest, res: NowResponse) => {
       const connectedToDB = await connectToDB()
       if (!connectedToDB) {
         res.status(500).end('Database connection failed')
-      } else if (!req.body.id) {
+      } else if (!req.query.id) {
         res.status(400).end('Please provide Project Type ID')
       } else {
         const projectTypeObj = {
@@ -33,7 +33,7 @@ export default async (req: NowRequest, res: NowResponse) => {
         }
         try {
           const updatedProjectType = await ProjectType.findByIdAndUpdate(
-            req.body.id,
+            req.query.id,
             projectTypeObj,
             { new: true }
           )

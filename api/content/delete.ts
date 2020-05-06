@@ -6,7 +6,7 @@ import ProjectContent from '../components/models/ProjectContent'
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'POST') {
+  if (req.method !== 'DELETE') {
     res.status(405).end()
     return
   }
@@ -24,12 +24,12 @@ export default async (req: NowRequest, res: NowResponse) => {
       const connectedToDB = await connectToDB()
       if (!connectedToDB) {
         res.status(500).end('Database connection failed')
-      } else if (!req.body.id) {
+      } else if (!req.query.id) {
         res.status(400).end('Please provide Project Content ID')
       } else {
         try {
           const deletedProjectContent = await ProjectContent.findByIdAndDelete(
-            req.body.id
+            req.query.id
           )
           if (!deletedProjectContent) {
             res.status(400).end("Project Content doesn't exist")
