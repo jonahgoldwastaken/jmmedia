@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
-import User from './components/models/User'
 import argon2 from 'argon2'
-import connectToDB, { closeDBConnection } from './components/db'
+import connectToDB from './components/db'
+import User from './components/models/User'
 const { MAX_REGISTRATIONS } = process.env
 
 const canRegister = async () => {
@@ -45,6 +45,5 @@ export default async (req: NowRequest, res: NowResponse) => {
         _id,
       })
     )
-    closeDBConnection()
   } catch (err) {}
 }

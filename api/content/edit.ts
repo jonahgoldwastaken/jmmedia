@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
-import fetch from 'node-fetch'
 import connectToDB from '../components/db'
-import ProjectType from '../components/models/ProjectType'
+import ProjectContent from '../components/models/ProjectContent'
+
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
@@ -24,19 +24,31 @@ export default async (req: NowRequest, res: NowResponse) => {
       if (!connectedToDB) {
         res.status(500).end('Database connection failed')
       } else if (!req.body.id) {
-        res.status(400).end('Please provide Project Type ID')
+        res.status(400).end('Please provide Project Content ID')
       } else {
+        let { content, alt, id } = req.body
+        if (content && typeof content.isArray()) {
+          content = content.toString()
+        }
+        const projectContentObj = {
+          content,
+          alt,
+        }
         try {
-          const deletedProjectType = await ProjectType.findByIdAndDelete(
-            req.body.id
+          const updatedProjectContent = await ProjectContent.findByIdAndUpdate(
+            id,
+            projectContentObj,
+            { new: true }
           )
-          if (!deletedProjectType) {
-            res.status(400).end("Project Type doesn't exist")
+          if (!updatedProjectContent) {
+            res.status(400).end("Project Content doesn't exist")
           } else {
-            res.status(200).end(JSON.stringify(deletedProjectType.toObject()))
+            res
+              .status(200)
+              .end(JSON.stringify(updatedProjectContent.toObject()))
           }
         } catch (err) {
-          res.status(400).end("Project Type doesn't exist")
+          res.status(400).end("Project Content doesn't exist")
         }
       }
     }

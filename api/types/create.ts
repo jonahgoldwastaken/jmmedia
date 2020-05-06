@@ -23,19 +23,18 @@ export default async (req: NowRequest, res: NowResponse) => {
       const connectedToDB = await connectToDB()
       if (!connectedToDB) {
         res.status(500).end('Database connection failed')
-        return
-      }
-
-      const projecTypeObj = {
-        name: req.body.name,
-        type: req.body.type,
-      }
-      try {
-        const newProjectType = new ProjectType(projecTypeObj)
-        const savedProjectType = await newProjectType.save()
-        res.status(200).end(JSON.stringify(savedProjectType.toObject()))
-      } catch (err) {
-        res.status(400).end('Project type already exists')
+      } else {
+        const projecTypeObj = {
+          name: req.body.name,
+          type: req.body.type,
+        }
+        try {
+          const newProjectType = new ProjectType(projecTypeObj)
+          const savedProjectType = await newProjectType.save()
+          res.status(200).end(JSON.stringify(savedProjectType.toObject()))
+        } catch (err) {
+          res.status(400).end('Project Type already exists')
+        }
       }
     }
   }

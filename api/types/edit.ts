@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
+import fetch from 'node-fetch'
 import connectToDB from '../components/db'
 import ProjectType from '../components/models/ProjectType'
-import fetch from 'node-fetch'
 
 const { BASE_URL } = process.env
 
@@ -43,7 +43,7 @@ export default async (req: NowRequest, res: NowResponse) => {
             res.status(200).end(JSON.stringify(updatedProjectType.toObject()))
           }
         } catch (err) {
-          res.status(400).end("Project type doesn't exist")
+          res.status(400).end("Project Type doesn't exist")
         }
       }
     }

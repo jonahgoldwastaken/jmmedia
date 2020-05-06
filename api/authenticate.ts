@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import passport from 'passport'
 import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt'
 import { Strategy as LocalStrategy } from 'passport-local'
-import connectToDB, { closeDBConnection } from './components/db'
+import connectToDB from './components/db'
 import User from './components/models/User'
 
 const { SESSION_SECRET } = process.env
@@ -63,7 +63,6 @@ export default async (req: NowRequest, res: NowResponse) => {
       if (err || !user) res.status(401).end()
       else {
         res.status(200).end(JSON.stringify(sanitiseUser(user)))
-        closeDBConnection()
       }
     })(req, res)
   } else {
@@ -79,7 +78,6 @@ export default async (req: NowRequest, res: NowResponse) => {
       } else {
         res.status(500).end('Session secret not set')
       }
-      closeDBConnection()
     })(req, res)
   }
 }
