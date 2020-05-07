@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
 import fetch from 'node-fetch'
-import connectToDB from '../components/db'
-import ProjectContent from '../components/models/ProjectContent'
+import connectToDB from '../../../components/Api/db'
+import ProjectContent from '../../../components/Api/Models/ProjectContent'
 
 const { BASE_URL } = process.env
 

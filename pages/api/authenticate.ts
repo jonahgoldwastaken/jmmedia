@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken'
 import passport from 'passport'
 import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt'
 import { Strategy as LocalStrategy } from 'passport-local'
-import connectToDB from './components/db'
-import User from './components/models/User'
+import connectToDB from '../../components/Api/db'
+import User from '../../components/Api/Models/User'
 
 const { SESSION_SECRET } = process.env
 

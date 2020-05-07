@@ -1,6 +1,6 @@
 import { NowRequest, NowResponse } from '@now/node'
-import connectToDB from '../components/db'
-import ProjectContent from '../components/models/ProjectContent'
+import connectToDB from '../../../components/Api/db'
+import ProjectContent from '../../../components/Api/Models/ProjectContent'
 
 export default async (req: NowRequest, res: NowResponse) => {
   if (req.method !== 'GET') {

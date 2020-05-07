@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
 import argon2 from 'argon2'
-import connectToDB from './components/db'
-import User from './components/models/User'
+import connectToDB from '../../components/Api/db'
+import User from '../../components/Api/Models/User'
 const { MAX_REGISTRATIONS } = process.env
 
 const canRegister = async () => {
