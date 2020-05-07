@@ -10,7 +10,6 @@
     { "src": "/api/components(.*)", "status": 404 },
     { "src": "/api", "dest": "/api/index.ts" },
     { "src": "/api/(.*)", "dest": "/api/$1.ts" },
-    { "src": "/project/(.*)", "dest": "/website/project?slug=$1" },
     { "src": "/(.*)", "dest": "/website/$1" }
   ]
 }

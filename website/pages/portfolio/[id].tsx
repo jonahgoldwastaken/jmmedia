@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Header from '../components/Header'
+import Header from '../../components/Header'
 import {
   Article,
   ArticleImage,
@@ -8,11 +8,11 @@ import {
   ArticleText,
   ArticleImageRow,
   ArticleContext,
-} from '../components/Portfolio/Article'
-import Footer, { FooterLink } from '../components/Footer'
-import { ArticleVideo } from '../components/Portfolio/Article/Video'
+} from '../../components/Portfolio/Article'
+import Footer, { FooterLink } from '../../components/Footer'
+import { ArticleVideo } from '../../components/Portfolio/Article/Video'
 import { useState } from 'react'
-import DarkRoom from '../components/Portfolio/Darkroom'
+import DarkRoom from '../../components/Portfolio/Darkroom'
 
 export default () => {
   const [darkRoomOpen, setDarkRoomOpen] = useState(false)
