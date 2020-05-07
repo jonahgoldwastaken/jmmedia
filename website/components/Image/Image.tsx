@@ -5,6 +5,7 @@ type ImageProps = {
   noQuote?: boolean
   src: string
   alt?: string
+  onClick?: () => void
 }
 
 const Container = styled.div`

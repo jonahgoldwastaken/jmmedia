@@ -18,4 +18,7 @@ export const ArticleHeading = styled(HeadingTwo)`
 export const ArticleText = styled(Paragraph)`
   max-width: 34.375rem;
   margin: 0 auto ${props => props.theme.spacing[2]};
+  + p {
+    margin-top: -${props => props.theme.spacing[1]};
+  }
 `

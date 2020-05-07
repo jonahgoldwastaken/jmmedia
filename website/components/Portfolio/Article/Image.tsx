@@ -1,9 +1,18 @@
 import Image from '../../Image'
 import styled from 'styled-components'
+import { useContext } from 'react'
+import { ArticleContext } from './Context'
 
-export const ArticleImage = styled(Image)`
+type ImageProps = {
+  noQuote?: boolean
+  src: string
+  alt?: string
+}
+
+const StyledImage = styled(Image)`
   margin-top: 0;
   margin-bottom: ${props => props.theme.spacing[2]};
+  cursor: zoom-in;
 
   + div {
     margin-top: -${props => props.theme.spacing[1]};
@@ -18,6 +27,19 @@ export const ArticleImage = styled(Image)`
     }
   }
 `
+
+export const ArticleImage: React.FunctionComponent<ImageProps> = props => {
+  const { setCurrentImage, setDarkRoomOpen } = useContext(ArticleContext)
+  return (
+    <StyledImage
+      {...props}
+      onClick={() => {
+        setCurrentImage({ src: props.src, alt: props.alt })
+        setDarkRoomOpen(true)
+      }}
+    />
+  )
+}
 
 type ArticleImageRowProps = {
   amount: number
