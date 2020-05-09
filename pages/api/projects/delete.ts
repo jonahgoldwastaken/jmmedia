@@ -1,12 +1,12 @@
 import { NowRequest, NowResponse } from '@now/node'
 import fetch from 'node-fetch'
 import connectToDB, { closeDBConnection } from '../../../components/Api/db'
-import { ProjectContent } from '../../../components/Api/Models'
+import { Project } from '../../../components/Api/Models'
 
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'POST') {
+  if (req.method !== 'DELETE') {
     res.status(405).end()
     return
   }
@@ -24,20 +24,27 @@ export default async (req: NowRequest, res: NowResponse) => {
       const connectedToDB = await connectToDB()
       if (!connectedToDB) {
         res.status(500).end('Database connection failed')
+      } else if (!req.query.id) {
+        res.status(400).end('Please provide Project ID')
+        closeDBConnection()
       } else {
-        let { content, type, alt } = req.body
-        const projectContentObj = {
-          content,
-          type,
-          alt,
-        }
         try {
-          const newProjectContent = new ProjectContent(projectContentObj)
-          const savedProjectContent = await newProjectContent.save()
-          res.status(200).end(JSON.stringify(savedProjectContent.toObject()))
-          closeDBConnection()
+          const deletedProject = await Project.findByIdAndUpdate(
+            req.query.id,
+            {
+              deleted: true,
+            },
+            { new: true }
+          )
+          if (!deletedProject) {
+            res.status(400).end("Project doesn't exist")
+            closeDBConnection()
+          } else {
+            res.status(200).end(JSON.stringify(deletedProject.toObject()))
+            closeDBConnection()
+          }
         } catch (err) {
-          res.status(400).end('Project Content already exists')
+          res.status(400).end("Project doesn't exist")
           closeDBConnection()
         }
       }

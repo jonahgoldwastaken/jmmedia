@@ -1,6 +1,6 @@
 import { NowRequest, NowResponse } from '@now/node'
-import connectToDB from '../../../components/Api/db'
-import ProjectType from '../../../components/Api/Models/ProjectType'
+import connectToDB, { closeDBConnection } from '../../../components/Api/db'
+import { ProjectType } from '../../../components/Api/Models'
 
 export default async (req: NowRequest, res: NowResponse) => {
   if (req.method !== 'GET') {
@@ -13,5 +13,6 @@ export default async (req: NowRequest, res: NowResponse) => {
   } else {
     const types = await ProjectType.find()
     res.status(200).end(JSON.stringify(types))
+    closeDBConnection()
   }
 }

@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
 import fetch from 'node-fetch'
 import connectToDB, { closeDBConnection } from '../../../components/Api/db'
-import { ProjectContent } from '../../../components/Api/Models'
+import { Project } from '../../../components/Api/Models'
 
 const { BASE_URL } = process.env
 
@@ -25,16 +25,28 @@ export default async (req: NowRequest, res: NowResponse) => {
       if (!connectedToDB) {
         res.status(500).end('Database connection failed')
       } else {
-        let { content, type, alt } = req.body
-        const projectContentObj = {
-          content,
+        let {
+          title,
+          slug,
           type,
-          alt,
+          callToAction,
+          content,
+          ownWork,
+          deleted,
+        } = req.body
+        const ProjectObj = {
+          title,
+          slug: slug.toLowerCase(),
+          type,
+          callToAction,
+          content,
+          ownWork,
+          deleted,
         }
         try {
-          const newProjectContent = new ProjectContent(projectContentObj)
-          const savedProjectContent = await newProjectContent.save()
-          res.status(200).end(JSON.stringify(savedProjectContent.toObject()))
+          const newProject = new Project(ProjectObj)
+          const savedProject = await newProject.save()
+          res.status(200).end(JSON.stringify(savedProject.toObject()))
           closeDBConnection()
         } catch (err) {
           res.status(400).end('Project Content already exists')

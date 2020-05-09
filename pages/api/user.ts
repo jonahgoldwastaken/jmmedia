@@ -1,5 +1,6 @@
 import { NowRequest, NowResponse } from '@now/node'
 import fetch from 'node-fetch'
+import { closeDBConnection } from '../../components/Api/db'
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
@@ -17,9 +18,11 @@ export default async (req: NowRequest, res: NowResponse) => {
     })
     if (response.status !== 200) {
       res.status(401).end()
+      closeDBConnection()
     } else {
       const user = await response.json()
       res.end(JSON.stringify(user))
+      closeDBConnection()
     }
   }
 }

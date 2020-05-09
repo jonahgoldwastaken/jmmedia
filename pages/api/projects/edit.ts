@@ -1,12 +1,12 @@
 import { NowRequest, NowResponse } from '@now/node'
 import fetch from 'node-fetch'
 import connectToDB, { closeDBConnection } from '../../../components/Api/db'
-import { ProjectContent } from '../../../components/Api/Models'
+import { Project } from '../../../components/Api/Models'
 
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'DELETE') {
+  if (req.method !== 'PUT') {
     res.status(405).end()
     return
   }
@@ -25,24 +25,42 @@ export default async (req: NowRequest, res: NowResponse) => {
       if (!connectedToDB) {
         res.status(500).end('Database connection failed')
       } else if (!req.query.id) {
-        res.status(400).end('Please provide Project Content ID')
+        res.status(400).end('Please provide Project ID')
         closeDBConnection()
       } else {
+        const {
+          title,
+          slug,
+          type,
+          callToAction,
+          content,
+          ownWork,
+          deleted,
+        } = req.body
+        const projectObj = {
+          title,
+          slug,
+          type,
+          callToAction,
+          content,
+          ownWork,
+          deleted,
+        }
         try {
-          const deletedProjectContent = await ProjectContent.findByIdAndDelete(
-            req.query.id
+          const updatedProject = await Project.findByIdAndUpdate(
+            req.query.id,
+            projectObj,
+            { new: true }
           )
-          if (!deletedProjectContent) {
-            res.status(400).end("Project Content doesn't exist")
+          if (!updatedProject) {
+            res.status(400).end("Project doesn't exist")
             closeDBConnection()
           } else {
-            res
-              .status(200)
-              .end(JSON.stringify(deletedProjectContent.toObject()))
+            res.status(200).end(JSON.stringify(updatedProject.toObject()))
             closeDBConnection()
           }
         } catch (err) {
-          res.status(400).end("Project Content doesn't exist")
+          res.status(400).end("Project doesn't exist")
           closeDBConnection()
         }
       }

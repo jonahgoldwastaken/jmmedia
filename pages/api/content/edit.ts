@@ -1,6 +1,6 @@
 import { NowRequest, NowResponse } from '@now/node'
-import connectToDB from '../../../components/Api/db'
-import ProjectContent from '../../../components/Api/Models/ProjectContent'
+import connectToDB, { closeDBConnection } from '../../../components/Api/db'
+import { ProjectContent } from '../../../components/Api/Models'
 
 const { BASE_URL } = process.env
 
@@ -25,6 +25,7 @@ export default async (req: NowRequest, res: NowResponse) => {
         res.status(500).end('Database connection failed')
       } else if (!req.query.id) {
         res.status(400).end('Please provide Project Content ID')
+        closeDBConnection()
       } else {
         let { content, alt } = req.body
         if (content && typeof content.isArray()) {
@@ -42,13 +43,16 @@ export default async (req: NowRequest, res: NowResponse) => {
           )
           if (!updatedProjectContent) {
             res.status(400).end("Project Content doesn't exist")
+            closeDBConnection()
           } else {
             res
               .status(200)
               .end(JSON.stringify(updatedProjectContent.toObject()))
+            closeDBConnection()
           }
         } catch (err) {
           res.status(400).end("Project Content doesn't exist")
+          closeDBConnection()
         }
       }
     }

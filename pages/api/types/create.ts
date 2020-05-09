@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
 import fetch from 'node-fetch'
-import connectToDB from '../../../components/Api/db'
-import ProjectType from '../../../components/Api/Models/ProjectType'
+import connectToDB, { closeDBConnection } from '../../../components/Api/db'
+import { ProjectType } from '../../../components/Api/Models'
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
@@ -27,13 +27,16 @@ export default async (req: NowRequest, res: NowResponse) => {
         const projecTypeObj = {
           name: req.body.name,
           type: req.body.type,
+          service: req.body.service,
         }
         try {
           const newProjectType = new ProjectType(projecTypeObj)
           const savedProjectType = await newProjectType.save()
           res.status(200).end(JSON.stringify(savedProjectType.toObject()))
+          closeDBConnection()
         } catch (err) {
           res.status(400).end('Project Type already exists')
+          closeDBConnection()
         }
       }
     }

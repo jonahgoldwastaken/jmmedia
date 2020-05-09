@@ -20,3 +20,7 @@ const connectToDB = async () => {
 }
 
 export default connectToDB
+
+export const closeDBConnection = () => {
+  mongoose.connection.close()
+}

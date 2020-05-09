@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
 import fetch from 'node-fetch'
-import connectToDB from '../../../components/Api/db'
-import ProjectType from '../../../components/Api/Models/ProjectType'
+import connectToDB, { closeDBConnection } from '../../../components/Api/db'
+import { ProjectType } from '../../../components/Api/Models'
 
 const { BASE_URL } = process.env
 
@@ -26,10 +26,13 @@ export default async (req: NowRequest, res: NowResponse) => {
         res.status(500).end('Database connection failed')
       } else if (!req.query.id) {
         res.status(400).end('Please provide Project Type ID')
+        closeDBConnection()
       } else {
+        const { name, type, service } = req.body
         const projectTypeObj = {
-          name: req.body.name,
-          type: req.body.type,
+          name,
+          type,
+          service,
         }
         try {
           const updatedProjectType = await ProjectType.findByIdAndUpdate(
@@ -39,11 +42,14 @@ export default async (req: NowRequest, res: NowResponse) => {
           )
           if (!updatedProjectType) {
             res.status(400).end("Project Type doesn't exist")
+            closeDBConnection()
           } else {
             res.status(200).end(JSON.stringify(updatedProjectType.toObject()))
+            closeDBConnection()
           }
         } catch (err) {
           res.status(400).end("Project Type doesn't exist")
+          closeDBConnection()
         }
       }
     }

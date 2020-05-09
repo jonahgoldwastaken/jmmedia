@@ -1,8 +1,9 @@
-import { Document, model, Schema } from 'mongoose'
+import { Document, model, Schema, models, Model } from 'mongoose'
 
-interface ProjectType extends Document {
+export interface ProjectType extends Document {
   name: string
   type: string
+  service: string
 }
 
 const ProjectTypeSchema: Schema<ProjectType> = new Schema({
@@ -15,8 +16,11 @@ const ProjectTypeSchema: Schema<ProjectType> = new Schema({
     required: true,
     unique: true,
   },
+  service: {
+    type: String,
+    required: true,
+  },
 })
 
-const ProjectType = model('ProjectType', ProjectTypeSchema)
-
-export default ProjectType
+export const ProjectType: Model<ProjectType> =
+  models.ProjectType || model('ProjectType', ProjectTypeSchema)
