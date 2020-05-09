@@ -5,32 +5,23 @@ import { ProjectContent } from '../../../components/Api/Models'
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'PUT') {
-    res.status(405).end()
-    return
-  }
-  if (!req.headers.authorization) {
-    res.status(401).end()
-    return
-  } else {
+  if (req.method !== 'PUT') res.status(405).end()
+  else if (!req.headers.authorization) res.status(401).end()
+  else {
     const response = await fetch(BASE_URL + '/api/authenticate', {
       headers: { authorization: req.headers.authorization },
       method: 'POST',
     })
-    if (response.status !== 200) {
-      res.status(401).end()
-    } else {
+    if (response.status !== 200) res.status(401).end()
+    else {
       const connectedToDB = await connectToDB()
-      if (!connectedToDB) {
-        res.status(500).end('Database connection failed')
-      } else if (!req.query.id) {
+      if (!connectedToDB) res.status(500).end('Database connection failed')
+      else if (!req.query.id) {
         res.status(400).end('Please provide Project Content ID')
         closeDBConnection()
       } else {
         let { content, alt } = req.body
-        if (content && typeof content.isArray()) {
-          content = content.toString()
-        }
+        if (content && typeof content.isArray()) content = content.toString()
         const projectContentObj = {
           content,
           alt,

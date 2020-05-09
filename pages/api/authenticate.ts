@@ -48,39 +48,33 @@ const sanitiseUser = (user: User) => {
 }
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'POST') {
-    res.status(405).end()
-    return
-  }
-
-  const connectedToDB = await connectToDB()
-  if (!connectedToDB) {
-    res.status(500).end('Database connection failed')
-  }
-
-  if (req.headers.authorization) {
-    return passport.authenticate('jwt', { session: false }, (err, user) => {
-      if (err || !user) res.status(401).end()
-      else {
-        res.status(200).end(JSON.stringify(sanitiseUser(user)))
-        closeDBConnection()
-      }
-    })(req, res)
-  } else {
-    return passport.authenticate('local', { session: false }, (err, user) => {
-      if (err) res.status(405).end()
-      else if (SESSION_SECRET) {
-        const token = jwt.sign(sanitiseUser(user), SESSION_SECRET, {
-          audience: 'jonahmeijers.nl',
-          issuer: 'auth.jonahmeijers.nl',
-          expiresIn: 86400,
-        })
-        res.status(200).send(token)
-        closeDBConnection()
-      } else {
-        res.status(500).end('Session secret not set')
-        closeDBConnection()
-      }
-    })(req, res)
+  if (req.method !== 'POST') res.status(405).end()
+  else {
+    const connectedToDB = await connectToDB()
+    if (!connectedToDB) res.status(500).end('Database connection failed')
+    else if (req.headers.authorization)
+      return passport.authenticate('jwt', { session: false }, (err, user) => {
+        if (err || !user) res.status(401).end()
+        else {
+          res.status(200).end(JSON.stringify(sanitiseUser(user)))
+          closeDBConnection()
+        }
+      })(req, res)
+    else
+      return passport.authenticate('local', { session: false }, (err, user) => {
+        if (err) res.status(405).end()
+        else if (SESSION_SECRET) {
+          const token = jwt.sign(sanitiseUser(user), SESSION_SECRET, {
+            audience: 'jonahmeijers.nl',
+            issuer: 'auth.jonahmeijers.nl',
+            expiresIn: 86400,
+          })
+          res.status(200).send(token)
+          closeDBConnection()
+        } else {
+          res.status(500).end('Session secret not set')
+          closeDBConnection()
+        }
+      })(req, res)
   }
 }

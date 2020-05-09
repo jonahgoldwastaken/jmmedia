@@ -5,29 +5,23 @@ import { ProjectType } from '../../../components/Api/Models'
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'POST') {
-    res.status(405).end()
-    return
-  }
-  if (!req.headers.authorization) {
-    res.status(401).end()
-    return
-  } else {
+  if (req.method !== 'POST') res.status(405).end()
+  else if (!req.headers.authorization) res.status(401).end()
+  else {
     const response = await fetch(BASE_URL + '/api/authenticate', {
       headers: { authorization: req.headers.authorization },
       method: 'POST',
     })
-    if (response.status !== 200) {
-      res.status(401).end()
-    } else {
+    if (response.status !== 200) res.status(401).end()
+    else {
       const connectedToDB = await connectToDB()
-      if (!connectedToDB) {
-        res.status(500).end('Database connection failed')
-      } else {
+      if (!connectedToDB) res.status(500).end('Database connection failed')
+      else {
+        let { name, type, service } = req.body
         const projecTypeObj = {
-          name: req.body.name,
-          type: req.body.type,
-          service: req.body.service,
+          name,
+          type,
+          service,
         }
         try {
           const newProjectType = new ProjectType(projecTypeObj)

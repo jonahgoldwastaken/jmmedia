@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import Header from '../../components/Header'
-import Section from '../../components/Section'
-import { HeadingOne, HeadingTwo } from '../../components/Text/Headings'
-import { Paragraph } from '../../components/Text'
 import Footer, { FooterLink } from '../../components/Footer'
+import Header from '../../components/Header'
 import List, { ListItem } from '../../components/List'
+import Section from '../../components/Section'
+import { Paragraph } from '../../components/Text'
+import { HeadingOne, HeadingTwo } from '../../components/Text/Headings'
 
 export default () => (
   <>

@@ -4,14 +4,9 @@ import { closeDBConnection } from '../../components/Api/db'
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'GET') {
-    res.status(405).end()
-    return
-  }
-  if (!req.headers.authorization) {
-    res.status(401).end()
-    return
-  } else {
+  if (req.method !== 'GET') res.status(405).end()
+  else if (!req.headers.authorization) res.status(401).end()
+  else {
     const response = await fetch(BASE_URL + '/api/authenticate', {
       headers: { authorization: req.headers.authorization },
       method: 'POST',

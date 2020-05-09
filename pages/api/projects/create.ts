@@ -6,25 +6,18 @@ import { Project } from '../../../components/Api/Models'
 const { BASE_URL } = process.env
 
 export default async (req: NowRequest, res: NowResponse) => {
-  if (req.method !== 'POST') {
-    res.status(405).end()
-    return
-  }
-  if (!req.headers.authorization) {
-    res.status(401).end()
-    return
-  } else {
+  if (req.method !== 'POST') res.status(405).end()
+  else if (!req.headers.authorization) res.status(401).end()
+  else {
     const response = await fetch(BASE_URL + '/api/authenticate', {
       headers: { authorization: req.headers.authorization },
       method: 'POST',
     })
-    if (response.status !== 200) {
-      res.status(401).end()
-    } else {
+    if (response.status !== 200) res.status(401).end()
+    else {
       const connectedToDB = await connectToDB()
-      if (!connectedToDB) {
-        res.status(500).end('Database connection failed')
-      } else {
+      if (!connectedToDB) res.status(500).end('Database connection failed')
+      else {
         let {
           title,
           slug,
@@ -34,7 +27,7 @@ export default async (req: NowRequest, res: NowResponse) => {
           ownWork,
           deleted,
         } = req.body
-        const ProjectObj = {
+        const projectObj = {
           title,
           slug: slug.toLowerCase(),
           type,
@@ -44,7 +37,7 @@ export default async (req: NowRequest, res: NowResponse) => {
           deleted,
         }
         try {
-          const newProject = new Project(ProjectObj)
+          const newProject = new Project(projectObj)
           const savedProject = await newProject.save()
           res.status(200).end(JSON.stringify(savedProject.toObject()))
           closeDBConnection()
