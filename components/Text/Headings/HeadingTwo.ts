@@ -1,8 +1,8 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { BaseHeading, HeadingProps } from './BaseHeading'
 
 type HeadingTwoProps = {
-  servicesWidth?: boolean
+  noMargin?: boolean
 }
 
 export const HeadingTwo = styled.h2<HeadingProps & HeadingTwoProps>`
@@ -14,10 +14,5 @@ export const HeadingTwo = styled.h2<HeadingProps & HeadingTwoProps>`
       ? props.theme.colours[props.colour]
       : props.theme.colours.secondary};
   ${props => props.centre && 'text-align: center'};
-  ${props =>
-    props.servicesWidth &&
-    css`
-      max-width: 34.375rem;
-      width: 100%;
-    `};
+  ${props => props.noMargin && 'margin: 0'};
 `

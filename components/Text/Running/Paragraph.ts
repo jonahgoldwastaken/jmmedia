@@ -12,12 +12,11 @@ export const Paragraph = styled.p<ParagraphProps>`
   ${BaseRunning}
   max-width: 34.375rem;
   ${props => props.mAuto && 'margin: 0 auto'};
+  ${props => props.noMargin && 'margin: 0 !important'};
   color: ${props => props.colour || props.theme.colours.secondary};
   ${props => props.centre && 'text-align: center'};
 
   &:last-child {
     margin-bottom: ${props => props.theme.spacing[2]};
   }
-
-  ${props => props.noMargin && 'margin: 0;'}
 `

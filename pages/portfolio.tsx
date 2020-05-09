@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Footer, { FooterLink } from '../components/Footer'
 import Header from '../components/Header'
-import { List } from '../components/Portfolio/List/List'
+import PortfolioList from '../components/Portfolio/List'
 
 export default () => (
   <>
@@ -10,8 +10,8 @@ export default () => (
     </Head>
     <Header />
     <main>
-      <List heading="Samenwerkingen" />
-      <List heading="Eigen werken" ownWork />
+      <PortfolioList heading="Samenwerkingen" />
+      <PortfolioList heading="Eigen werken" ownWork />
     </main>
     <Footer>
       <FooterLink

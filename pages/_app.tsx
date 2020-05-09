@@ -20,7 +20,7 @@ const CriticalCSS = createGlobalStyle`
 `
 
 const MyApp = ({ Component, pageProps, router }) => {
-  const darkMode: boolean = useMedia('prefers-color-scheme: dark')
+  const darkMode: boolean = useMedia('(prefers-color-scheme: dark)')
   const theme = darkMode ? darkTheme : lightTheme
 
   useEffect(() => {

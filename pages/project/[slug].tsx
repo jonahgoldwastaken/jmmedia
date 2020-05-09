@@ -20,6 +20,7 @@ export default () => {
     src: string
     alt?: string
   }>({ src: '', alt: '' })
+
   return (
     <>
       <Head>

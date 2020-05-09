@@ -7,10 +7,7 @@ type HeadingOneProps = {
 
 export const HeadingOne = styled.h1<HeadingProps & HeadingOneProps>`
   ${BaseHeading};
-  margin: ${props =>
-    props.noMargin
-      ? `0 0 ${props.theme.spacing[1]}`
-      : `${props.theme.spacing[1]} 0`};
+  margin: ${props => (props.noMargin ? `0` : `${props.theme.spacing[1]} 0`)};
   font-size: ${props => props.theme.fontSizes[4]};
   font-weight: ${props => props.theme.fontWeights[3]};
   color: ${props =>

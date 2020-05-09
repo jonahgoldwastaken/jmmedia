@@ -28,6 +28,12 @@ export const Section = styled.div<SectionProps>`
         align-items: start;
         grid-template-columns: 1fr 1fr;
         grid-gap: ${props.theme.spacing[2]};
+
+        h1,
+        h2,
+        h3 {
+          grid-column: span 2;
+        }
       }
     `}
 
@@ -38,5 +44,9 @@ export const Section = styled.div<SectionProps>`
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      * {
+        max-width: 34.375rem;
+        width: 100%;
+      }
     `}
 `
