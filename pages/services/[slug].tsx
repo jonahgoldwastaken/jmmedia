@@ -16,11 +16,11 @@ export default () => {
       <Header />
       <main>
         <Section grid background="secondary">
-          <HeadingOne noMargin colour="tertiary">
+          <HeadingOne noMargin colour="secondary">
             Service die vet cool is en zo
           </HeadingOne>
           <div>
-            <Paragraph noMargin colour="white">
+            <Paragraph noMargin colour="secondary">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam
               assumenda dolor quia perspiciatis amet. Libero sint tempora vero,
               maiores eos similique porro laboriosam cupiditate? Minus iste
@@ -44,7 +44,7 @@ export default () => {
               tempore quidem enim eaque repudiandae incidunt eveniet odit
               asperiores.
             </Paragraph>
-            <Paragraph noMargin colour="white">
+            <Paragraph noMargin colour="secondary">
               Lorem ipsum dolor sit, amet consectetur adipisicing elit.
               Laudantium quia explicabo tempora possimus, aut reiciendis?
               Asperiores sed voluptatem quod porro ratione quibusdam fugit
@@ -67,7 +67,7 @@ export default () => {
         </Section>
       </main>
       <Footer>
-        <FooterLink colour="primary" href="">
+        <FooterLink colour="secondary" href="">
           Mooie call-to-action je weet zelf toch
         </FooterLink>
       </Footer>

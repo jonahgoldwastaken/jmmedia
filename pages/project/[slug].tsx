@@ -89,13 +89,13 @@ export default () => {
         </ArticleContext.Provider>
       </Article>
       <Footer>
-        <FooterLink colour="primary" href="">
+        <FooterLink colour="secondary" href="">
           Vorig project
         </FooterLink>
-        <FooterLink colour="primary" href="">
+        <FooterLink colour="secondary" href="">
           Call to action
         </FooterLink>
-        <FooterLink colour="primary" href="">
+        <FooterLink colour="secondary" href="">
           Volgend project
         </FooterLink>
       </Footer>

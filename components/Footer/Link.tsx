@@ -24,7 +24,7 @@ const StyledLink = styled.a<FooterLinkProps>`
   }
 
   ${props =>
-    props.colour === 'primary'
+    props.colour !== 'primary'
       ? css`
           background: ${props.theme.colours.primary};
           color: ${props.theme.colours.tertiary};

@@ -7,6 +7,6 @@ export const HeadingThree = styled.h3<HeadingProps>`
   font-weight: ${props => props.theme.fontWeights[2]};
   color: ${props =>
     props.colour
-      ? props.theme.colours[props.colour]
+      ? props.colour === 'secondary' && props.theme.colours.tertiary
       : props.theme.colours.secondary};
 `

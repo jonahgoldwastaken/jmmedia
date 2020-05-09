@@ -1,8 +1,9 @@
 import { css } from 'styled-components'
 
 export type HeadingProps = {
-  colour?: 'secondary' | 'tertiary'
+  colour?: 'primary' | 'secondary'
   centre?: boolean
+  noMargin?: boolean
 }
 
 export const BaseHeading = css`

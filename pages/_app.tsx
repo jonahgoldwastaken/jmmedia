@@ -1,9 +1,10 @@
 import { PageTransition } from 'next-page-transitions'
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import styledSanitize from 'styled-sanitize'
 import useMedia from 'use-media'
+import MediaQueryContext from '../components/MediaQueryContext'
 import { darkTheme, lightTheme } from '../theme'
 import { logPageViews } from '../utils/analytics'
 require('intersection-observer')
@@ -20,16 +21,27 @@ const CriticalCSS = createGlobalStyle`
 `
 
 const MyApp = ({ Component, pageProps, router }) => {
-  const darkMode: boolean = useMedia('(prefers-color-scheme: dark)')
-  const theme = darkMode ? darkTheme : lightTheme
+  const lightMode: boolean = useMedia('(prefers-color-scheme: light)')
+  const prefersReducedMotion: boolean = useMedia(
+    'prefers-reduced-motion: reduce'
+  )
+  const MediaQueryContextValue = useMemo<MediaQueryContext>(
+    () => ({
+      lightMode,
+      prefersReducedMotion,
+    }),
+    [lightMode, prefersReducedMotion]
+  )
 
   useEffect(() => {
     if (typeof window !== 'undefined') logPageViews()
   }, [])
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
+    <MediaQueryContext.Provider value={MediaQueryContextValue}>
+      <ThemeProvider
+        theme={MediaQueryContextValue.lightMode ? lightTheme : darkTheme}
+      >
         <CriticalCSS />{' '}
         <PageTransition
           skipInitialTransition
@@ -44,7 +56,7 @@ const MyApp = ({ Component, pageProps, router }) => {
         type="text/css"
         href="https://use.typekit.net/shv4sja.css"
       />
-    </>
+    </MediaQueryContext.Provider>
   )
 }
 

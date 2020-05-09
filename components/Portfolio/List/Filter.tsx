@@ -3,6 +3,10 @@ import styled from 'styled-components'
 import { BaseRunning } from '../../Text'
 import { ListContext } from './Context'
 
+const Div = styled.div`
+  color: ${props => props.theme.colours.secondary};
+`
+
 const StyledSelect = styled.select`
   all: unset;
   ${BaseRunning};
@@ -13,7 +17,7 @@ export const ListFilter = () => {
   const { setFilter } = useContext(ListContext)
   const ref = useRef<HTMLSelectElement>()
   return (
-    <div
+    <Div
       onMouseDown={e => {
         e.preventDefault()
         const evt = new MouseEvent('mousedown')
@@ -36,6 +40,6 @@ export const ListFilter = () => {
         <option value="film">Film</option>
       </StyledSelect>
       <span>&#9660;</span>
-    </div>
+    </Div>
   )
 }

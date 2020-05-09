@@ -25,21 +25,21 @@ export default () => {
             alt="Foto van Jonah, gemaakt door Evelyn Cardoso"
           />
           <div>
-            <Paragraph noMargin colour="white">
+            <Paragraph noMargin colour="secondary">
               Ik focus me graag op anderen, en wat ze te vertellen hebben. De
               verhalen die sommige mensen tot henzelf houden zijn erg bijzonder,
               wat eeuwig zonde is als er geen mogelijkheid is om ze te delen.
               Daarom bied ik deze plek aan; een plek waar verhalen vastgelegd en
               op eigen houtje gedeeld kunnen worden met degenen wie het aangaan.
             </Paragraph>{' '}
-            <Paragraph colour="white">
+            <Paragraph colour="secondary">
               Ik hou ervan om de beste manier te vinden om een probleem op te
               lossen. Bij elk creatief proces doe ik onderzoek naar de beste
               plannen van aanpak, zodat ik zeker weet dat het eindresultaat
               perfect is. Zo probeer ik ook een uniek perspectief mee te brengen
               in het creatieve proces.
             </Paragraph>
-            <Paragraph colour="white">
+            <Paragraph colour="secondary">
               Op dit moment volg ik de opleiding Communication &amp; Multimedia
               Design. Naast film en foto heb ik ook een grote passie voor
               muziek. Ik speel op dit moment geen instrumenten, maar dat kan
@@ -49,14 +49,14 @@ export default () => {
         </Section>
       </article>
       <Footer>
-        <FooterLink colour="secondary" href="/services">
+        <FooterLink colour="primary" href="/services">
           Bekijk hier hoe ik jouw verhaal kan vastleggen
         </FooterLink>
-        <FooterLink colour="secondary" href="/portfolio">
+        <FooterLink colour="primary" href="/portfolio">
           Zie welke verhalen ik al heb kunnen delen
         </FooterLink>
         <FooterLink
-          colour="secondary"
+          colour="primary"
           href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
         >
           Laten we samen uitvinden hoe we je verhaal kunnen vertellen

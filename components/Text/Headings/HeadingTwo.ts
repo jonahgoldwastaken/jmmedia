@@ -11,7 +11,7 @@ export const HeadingTwo = styled.h2<HeadingProps & HeadingTwoProps>`
   font-weight: ${props => props.theme.fontWeights[2]};
   color: ${props =>
     props.colour
-      ? props.theme.colours[props.colour]
+      ? props.colour === 'secondary' && props.theme.colours.tertiary
       : props.theme.colours.secondary};
   ${props => props.centre && 'text-align: center'};
   ${props => props.noMargin && 'margin: 0'};

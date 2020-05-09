@@ -15,7 +15,7 @@ export default () => (
     </main>
     <Footer>
       <FooterLink
-        colour="primary"
+        colour="secondary"
         href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
       >
         Hier ook tussen willen staan?

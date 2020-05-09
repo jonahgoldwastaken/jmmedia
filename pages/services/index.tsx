@@ -47,8 +47,8 @@ export default () => (
         </ListItem>
       </List>
       <Section centreContent fullHeight background="secondary">
-        <HeadingTwo colour="tertiary">Van begin tot eind</HeadingTwo>
-        <Paragraph mAuto colour="white">
+        <HeadingTwo colour="secondary">Van begin tot eind</HeadingTwo>
+        <Paragraph mAuto colour="secondary">
           Ik pas mijn werkwijze aan op het type opdracht en hoeveel
           voorbereiding al is getroffen voordat ik erbij betrokken ben geraakt.
           Zo haal ik altijd het maximale uit elke mogelijkheid en zorg ik ervoor
@@ -57,14 +57,14 @@ export default () => (
       </Section>
     </main>
     <Footer>
-      <FooterLink colour="secondary" href="/about">
+      <FooterLink colour="primary" href="/about">
         Zie hier hoe JM in elkaar steekt
       </FooterLink>
-      <FooterLink colour="secondary" href="/portfolio">
+      <FooterLink colour="primary" href="/portfolio">
         Bekijk hier het portfolio
       </FooterLink>
       <FooterLink
-        colour="secondary"
+        colour="primary"
         href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
       >
         Begin een gesprek

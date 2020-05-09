@@ -12,7 +12,7 @@ export const HeadingOne = styled.h1<HeadingProps & HeadingOneProps>`
   font-weight: ${props => props.theme.fontWeights[3]};
   color: ${props =>
     props.colour
-      ? props.theme.colours[props.colour]
+      ? props.colour === 'secondary' && props.theme.colours.tertiary
       : props.theme.colours.secondary};
   ${props => props.centre && 'text-align: center'};
 
