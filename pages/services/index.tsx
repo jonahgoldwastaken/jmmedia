@@ -5,8 +5,14 @@ import List, { ListItem } from '../../components/List'
 import Section from '../../components/Section'
 import { Paragraph } from '../../components/Text'
 import { HeadingOne, HeadingTwo } from '../../components/Text/Headings'
+import { Service } from '../../interfaces/Service'
+import { NextPage, NextPageContext } from 'next'
 
-export default () => (
+type Props = {
+  services: Service[]
+}
+
+const ServicesPage: NextPage<Props> = ({ services }) => (
   <>
     <Head>
       <title>Services - JM</title>
@@ -15,39 +21,20 @@ export default () => (
     <main>
       <HeadingOne centre>De services die ik aanbied</HeadingOne>
       <List maxRows={3}>
-        <ListItem
-          src="https://unsplash.com/photos/WSTF1QEUUWw/download?force=true"
-          href="/services/service"
-        >
-          Je moeder
-        </ListItem>
-        <ListItem
-          src="https://unsplash.com/photos/WSTF1QEUUWw/download?force=true"
-          href="/services/service"
-        >
-          Je moeder
-        </ListItem>
-        <ListItem
-          src="https://unsplash.com/photos/WSTF1QEUUWw/download?force=true"
-          href="/services/service"
-        >
-          Je moeder
-        </ListItem>
-        <ListItem
-          src="https://unsplash.com/photos/WSTF1QEUUWw/download?force=true"
-          href="/services/service"
-        >
-          Je moeder
-        </ListItem>
-        <ListItem
-          src="https://unsplash.com/photos/WSTF1QEUUWw/download?force=true"
-          href="/services/service"
-        >
-          Je moeder
-        </ListItem>
+        {services.map(service => (
+          <ListItem
+            key={service.slug}
+            src={service.image}
+            href={`/services/${service.slug}`}
+          >
+            {service.name}
+          </ListItem>
+        ))}
       </List>
       <Section centreContent fullHeight background="secondary">
-        <HeadingTwo colour="secondary">Van begin tot eind</HeadingTwo>
+        <HeadingTwo colour="secondary">
+          Ik werk met je mee van begin tot eind
+        </HeadingTwo>
         <Paragraph mAuto colour="secondary">
           Ik pas mijn werkwijze aan op het type opdracht en hoeveel
           voorbereiding al is getroffen voordat ik erbij betrokken ben geraakt.
@@ -72,3 +59,15 @@ export default () => (
     </Footer>
   </>
 )
+
+ServicesPage.getInitialProps = async (_: NextPageContext) => {
+  const services = await fetch(
+    (process?.env?.BASE_URL || window?.location?.origin) + '/api/service/get'
+  )
+    .then(r => r.json())
+    .catch(console.error)
+
+  return { services: services }
+}
+
+export default ServicesPage

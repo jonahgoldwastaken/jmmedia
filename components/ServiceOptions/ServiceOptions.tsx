@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { ServiceOption } from './ServiceOption'
 
+type ServiceOptionsProps = {
+  options: string[]
+}
+
 const ServiceOptionsList = styled.ul`
   display: flex;
   flex-flow: row wrap;
@@ -8,26 +12,14 @@ const ServiceOptionsList = styled.ul`
   list-style-type: disc;
 `
 
-export const ServiceOptions: React.FunctionComponent = () => {
+export const ServiceOptions: React.FunctionComponent<ServiceOptionsProps> = ({
+  options,
+}) => {
   return (
     <ServiceOptionsList>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
-      <ServiceOption>Je oma</ServiceOption>
+      {options.map(option => (
+        <ServiceOption>{option}</ServiceOption>
+      ))}
     </ServiceOptionsList>
   )
 }

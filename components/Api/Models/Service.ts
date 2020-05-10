@@ -3,6 +3,7 @@ import { Document, Model, model, models, Schema } from 'mongoose'
 export interface Service extends Document {
   name: string
   slug: string
+  image: string
   description: string[]
   options: string[]
   callToAction: string
@@ -18,6 +19,10 @@ const ServiceSchema: Schema<Service> = new Schema(
       type: String,
       required: true,
       unique: true,
+    },
+    image: {
+      type: String,
+      required: true,
     },
     description: [
       {

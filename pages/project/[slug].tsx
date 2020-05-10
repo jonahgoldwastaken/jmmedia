@@ -96,7 +96,7 @@ ProjectPage.getInitialProps = async (ctx: NextPageContext) => {
       `/api/projects/get?slug=${ctx.query.slug}`
   )
     .then(r => r.json())
-    .catch(err => console.log(err))
+    .catch(console.log)
 
   return { project: project || null }
 }
