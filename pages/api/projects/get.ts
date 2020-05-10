@@ -14,25 +14,30 @@ export default async (req: NowRequest, res: NowResponse) => {
         //@ts-ignore
         const project = await Project.findOne({ slug })
           .populate('content', '-_id')
-          .populate('type', 'type service -_id')
+          .populate({
+            path: 'service',
+            select: 'slug -_id',
+          })
           .exec()
 
         if (isNullOrUndefined(project)) res.status(404).end()
-        else res.status(200).end(JSON.stringify(project))
+        else res.status(200).end(JSON.stringify(project.toObject()))
         closeDBConnection()
       } catch (err) {
         res.status(404).end('Project not found')
       }
     } else {
-      const { ownWork, type } = req.query
-      let query: { ownWork?: any; type?: any } = {}
+      const { service } = req.query
+      let query: { service?: any } = {}
 
-      if (ownWork) query.ownWork = ownWork
-      if (type) query.type = type
+      if (service) query.service = service
 
       const projects = await Project.find(query)
         .populate('content', '-_id')
-        .populate('type', 'type service -_id')
+        .populate({
+          path: 'service',
+          select: 'slug -_id',
+        })
         .exec()
       res.status(200).end(JSON.stringify(projects))
       closeDBConnection()

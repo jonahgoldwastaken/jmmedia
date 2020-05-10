@@ -1,9 +1,10 @@
-import { Document, model, Schema, models, Model } from 'mongoose'
+import { Document, model, Model, models, Schema } from 'mongoose'
 
 export interface ProjectContent extends Document {
-  type: string
-  conrtent: string
+  type: 'heading' | 'paragraph' | 'image' | 'row' | 'film'
+  content: string
   alt?: string
+  size?: number
 }
 
 const ProjectContentSchema: Schema<ProjectContent> = new Schema(
@@ -11,6 +12,7 @@ const ProjectContentSchema: Schema<ProjectContent> = new Schema(
     type: {
       type: String,
       required: true,
+      enum: ['heading', 'paragraph', 'image', 'row', 'film'],
     },
     content: {
       type: String,
@@ -19,14 +21,19 @@ const ProjectContentSchema: Schema<ProjectContent> = new Schema(
     alt: {
       type: String,
     },
+    size: {
+      type: Number,
+    },
   },
   {
     toObject: {
+      virtuals: true,
       transform: (doc, ret) => {
         delete ret._id
       },
     },
     toJSON: {
+      virtuals: true,
       transform: (doc, ret) => {
         delete ret._id
       },

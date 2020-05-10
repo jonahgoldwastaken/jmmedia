@@ -1,5 +1,4 @@
-export * from './ProjectType'
 export * from './ProjectContent'
-export * from './Project'
 export * from './Service'
 export * from './User'
+export * from './Project'

@@ -1,6 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
 import connectToDB, { closeDBConnection } from '../../../components/Api/db'
 import { ProjectContent } from '../../../components/Api/Models'
+import fetch from 'isomorphic-unfetch'
 
 const { BASE_URL } = process.env
 

@@ -10,8 +10,7 @@ export default () => (
     </Head>
     <Header />
     <main>
-      <PortfolioList heading="Samenwerkingen" />
-      <PortfolioList heading="Eigen werken" ownWork />
+      <PortfolioList heading="Portfolio" />
     </main>
     <Footer>
       <FooterLink

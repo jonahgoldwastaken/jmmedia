@@ -1,13 +1,12 @@
-import { useState } from 'react'
 import styled from 'styled-components'
 import List, { ListItem } from '../../List'
 import { HeadingOne } from '../../Text/Headings'
 import { ListContext } from './Context'
 import { ListFilter } from './Filter'
+import { useProjects } from './useProjects'
 
 type PortfolioListProps = {
   heading: string
-  ownWork?: boolean
 }
 
 const ListHeader = styled.div`
@@ -20,84 +19,26 @@ const ListHeader = styled.div`
 export const PortfolioList: React.FunctionComponent<PortfolioListProps> = ({
   heading,
 }) => {
-  const [currentFilter, setFilter] = useState<ListContext['currentFilter']>(
-    'all'
-  )
-  //TODO: logica voor projecten ophalen komt hier
+  const [projectItems, filter, setFilter] = useProjects({
+    filter: 'all',
+  })
 
   return (
-    <ListContext.Provider value={{ currentFilter, setFilter }}>
+    <ListContext.Provider value={{ currentFilter: filter, setFilter }}>
       <ListHeader>
         <HeadingOne noMargin>{heading}</HeadingOne>
         <ListFilter />
       </ListHeader>
       <List>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
-        <ListItem
-          src="https://storage.googleapis.com/filmportfolio/over/profielfoto.jpg"
-          href="jonahmeijers.nl"
-        >
-          Jonah Meijers
-        </ListItem>
+        {projectItems?.map(item => (
+          <ListItem
+            key={item._id}
+            src={JSON.parse(item.content[0].content)[0]}
+            href={`/project/${item.slug}`}
+          >
+            {item.title}
+          </ListItem>
+        ))}
       </List>
     </ListContext.Provider>
   )

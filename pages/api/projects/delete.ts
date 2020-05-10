@@ -1,5 +1,5 @@
 import { NowRequest, NowResponse } from '@now/node'
-import fetch from 'node-fetch'
+import fetch from 'isomorphic-unfetch'
 import connectToDB, { closeDBConnection } from '../../../components/Api/db'
 import { Project } from '../../../components/Api/Models'
 
@@ -13,7 +13,7 @@ export default async (req: NowRequest, res: NowResponse) => {
       headers: { authorization: req.headers.authorization },
       method: 'POST',
     })
-    if (response.status !== 200) res.status(401).end()
+    if (!response.ok) res.status(401).end()
     else {
       const connectedToDB = await connectToDB()
       if (!connectedToDB) res.status(500).end('Database connection failed')

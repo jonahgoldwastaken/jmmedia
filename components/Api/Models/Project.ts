@@ -3,8 +3,7 @@ import { Document, model, Schema, models, Model } from 'mongoose'
 export interface Project extends Document {
   title: string
   slug: string
-  type: string
-  ownWork: boolean
+  service: Schema.Types.ObjectId
   content: Schema.Types.ObjectId[]
   callToAction: string
   deleted: boolean
@@ -20,10 +19,10 @@ const ProjectSchema: Schema<Project> = new Schema({
     required: true,
     unique: true,
   },
-  type: {
+  service: {
     type: Schema.Types.ObjectId,
     required: true,
-    ref: 'ProjectType',
+    ref: 'Service',
   },
   callToAction: {
     type: String,
@@ -36,11 +35,6 @@ const ProjectSchema: Schema<Project> = new Schema({
       ref: 'ProjectContent',
     },
   ],
-  ownWork: {
-    type: Boolean,
-    required: false,
-    default: false,
-  },
   deleted: {
     type: Boolean,
     required: false,

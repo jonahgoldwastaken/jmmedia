@@ -1,7 +1,7 @@
 import { NowRequest, NowResponse } from '@now/node'
-import fetch from 'node-fetch'
+import fetch from 'isomorphic-unfetch'
 import connectToDB, { closeDBConnection } from '../../../components/Api/db'
-import { Service, ProjectType } from '../../../components/Api/Models'
+import { Service } from '../../../components/Api/Models'
 
 const { BASE_URL } = process.env
 
@@ -28,11 +28,6 @@ export default async (req: NowRequest, res: NowResponse) => {
             closeDBConnection()
           } else {
             res.status(200).end(JSON.stringify(deletedService.toObject()))
-            const projectTypesToChange = await ProjectType.find({
-              serviceName: deletedService.name,
-            })
-            projectTypesToChange.map(type => (type.serviceName = ''))
-            projectTypesToChange.forEach(async type => await type.save())
             closeDBConnection()
           }
         } catch (err) {

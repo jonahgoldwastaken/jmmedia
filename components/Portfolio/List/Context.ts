@@ -1,8 +1,8 @@
 import { createContext, Dispatch, SetStateAction } from 'react'
 
 export type ListContext = {
-  currentFilter: 'all' | 'photography' | 'film'
-  setFilter: Dispatch<SetStateAction<'all' | 'photography' | 'film'>>
+  currentFilter: string
+  setFilter: Dispatch<SetStateAction<string>>
 }
 
 export const ListContext = createContext<ListContext>({

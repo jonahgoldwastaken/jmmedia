@@ -36,8 +36,6 @@ export const ListFilter = () => {
         }}
       >
         <option value="all">Alle soorten werk</option>
-        <option value="photography">Fotografie</option>
-        <option value="film">Film</option>
       </StyledSelect>
       <span>&#9660;</span>
     </Div>

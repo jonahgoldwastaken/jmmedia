@@ -1,5 +1,5 @@
 import { NowRequest, NowResponse } from '@now/node'
-import fetch from 'node-fetch'
+import fetch from 'isomorphic-unfetch'
 import connectToDB, { closeDBConnection } from '../../../components/Api/db'
 import { ProjectContent } from '../../../components/Api/Models'
 
