@@ -24,6 +24,7 @@ const ServicesPage: NextPage<Props> = ({ services }) => (
       <List maxRows={3}>
         {services.map(service => (
           <ListItem
+            document="/services/[slug]"
             key={service.slug}
             src={service.image}
             href={`/services/${service.slug}`}

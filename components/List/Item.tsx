@@ -1,9 +1,11 @@
 import styled from 'styled-components'
 import Image from '../Image'
+import Link from 'next/link'
 
 type ListItemProps = {
   href: string
   src: string
+  document: string
   children: string
 }
 
@@ -20,12 +22,15 @@ const StyledLI = styled.li`
 
 export const ListItem: React.FunctionComponent<ListItemProps> = ({
   href,
+  document,
   src,
   children,
 }) => (
   <StyledLI>
-    <a href={href}>
-      <Image src={src} alt={children} />
-    </a>
+    <Link href={document} as={href}>
+      <a>
+        <Image src={src} alt={children} />
+      </a>
+    </Link>
   </StyledLI>
 )

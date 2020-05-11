@@ -30,7 +30,10 @@ export const FooterNav: React.FunctionComponent = () => (
       <FooterNavLink href="/about">Over</FooterNavLink>
       <FooterNavLink href="/services">Services</FooterNavLink>
       <FooterNavLink href="/portfolio">Portfolio</FooterNavLink>
-      <FooterNavLink href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20">
+      <FooterNavLink
+        outbound
+        href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
+      >
         Contact
       </FooterNavLink>
     </NavList>

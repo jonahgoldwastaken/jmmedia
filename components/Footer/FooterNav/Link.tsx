@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 import { BaseRunning } from '../../Text'
+import Link from 'next/link'
 
 type NavLinkProps = {
   href: string
+  outbound?: boolean
 }
 
 const StyledAnchor = styled.a`
@@ -13,8 +15,17 @@ const StyledAnchor = styled.a`
   font-weight: ${props => props.theme.fontWeights[1]};
 `
 
-export const FooterNavLink: React.FunctionComponent<NavLinkProps> = props => (
+export const FooterNavLink: React.FunctionComponent<NavLinkProps> = ({
+  outbound,
+  ...props
+}) => (
   <li>
-    <StyledAnchor {...props} />
+    {outbound ? (
+      <StyledAnchor {...props} />
+    ) : (
+      <Link href={props.href}>
+        <StyledAnchor children={props.children} />
+      </Link>
+    )}
   </li>
 )

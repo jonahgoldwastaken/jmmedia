@@ -20,7 +20,10 @@ export const HeaderNav: React.FunctionComponent = () => (
       <HeaderNavLink href="/about">Over</HeaderNavLink>
       <HeaderNavLink href="/services">Services</HeaderNavLink>
       <HeaderNavLink href="/portfolio">Portfolio</HeaderNavLink>
-      <HeaderNavLink href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20">
+      <HeaderNavLink
+        outbound
+        href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
+      >
         Contact
       </HeaderNavLink>
     </NavList>
