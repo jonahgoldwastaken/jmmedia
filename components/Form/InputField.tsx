@@ -39,7 +39,7 @@ const Input = styled.input<InputProps>`
   border: calc(${props => props.theme.spacing[0]} / 4) solid
     ${props => props.theme.colours.secondary};
 
-  ${props => props.type && 'cursor: text'};
+  ${props => (props.type !== 'select' ? 'cursor: text' : 'cursor: pointer')};
 `
 
 export const InputField: React.FunctionComponent<InputFieldProps> = ({

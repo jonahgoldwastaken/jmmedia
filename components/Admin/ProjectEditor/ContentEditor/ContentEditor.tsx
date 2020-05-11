@@ -1,17 +1,11 @@
 import fetch from 'isomorphic-unfetch'
 import { useCookie } from 'next-cookie'
-import { KeyboardEvent, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { ProjectContent } from '../../../../interfaces/Project'
-import { Button, InputField } from '../../../Form'
-import {
-  ArticleHeading,
-  ArticleImage,
-  ArticleImageRow,
-  ArticleText,
-} from '../../../Portfolio/Article'
-import { ArticleVideo } from '../../../Portfolio/Article/Video'
+import { Button } from '../../../Form'
 import { ProjectEditorContext } from '../Context'
+import { HeadingEditor, ParagraphEditor } from './Editors'
 
 type ContentEditorProps = {
   type: ProjectContent['type']
@@ -21,17 +15,18 @@ type ContentEditorProps = {
   content: string
 }
 
+const ButtonContainer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: ${props => props.theme.widths[0]};
+  display: flex;
+`
+
 const Container = styled.div`
   position: relative;
 
-  button {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: auto;
-  }
-
-  &:not(:hover) button {
+  &:not(:hover) > ${ButtonContainer} {
     display: none;
   }
 `
@@ -46,116 +41,124 @@ export const ContentEditor: React.FunctionComponent<ContentEditorProps> = ({
   const context = useContext(ProjectEditorContext)
   const cookie = useCookie()
   const [editing, setEditing] = useState(!content)
-  const [editingValue, setEditingValue] = useState(content)
+  const [value, setValue] = useState(content)
 
-  const updateContentBlock = async (e: KeyboardEvent<HTMLDivElement>) => {
-    if (!editing) return
-    if (e.key === 'Enter') {
-      e.preventDefault()
+  const submitHandler = async () => {
+    const updatedContentBlock: ProjectContent = await fetch(
+      `${
+        process?.env?.BASE_URL || window?.location?.origin
+      }/api/content/edit?id=${id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `bearer ${cookie.get('auth-token')}`,
+        },
+        body: JSON.stringify({
+          size: size,
+          type: type,
+          content: value,
+          alt: alt,
+        }),
+      }
+    ).then(r => (r.ok ? r.json() : null))
 
-      const updatedContentBlock: ProjectContent = await fetch(
+    let contentList = [...context.content]
+    const i = contentList.findIndex(
+      ({ _id }) => _id === updatedContentBlock._id
+    )
+    contentList.splice(i, 1, updatedContentBlock)
+    context.onChange({
+      name: 'content',
+      value: contentList,
+    })
+
+    setEditing(false)
+  }
+
+  const changeHandler = (value: string) => {
+    setValue(value)
+  }
+
+  const cancelHandler = async () => {
+    if (!content) {
+      const succeeded = await fetch(
         `${
           process?.env?.BASE_URL || window?.location?.origin
-        }/api/content/edit?id=${id}`,
+        }/api/content/delete?id=${id}`,
         {
-          method: 'PUT',
+          method: 'DELETE',
           headers: {
-            'Content-Type': 'application/json',
             Authorization: `bearer ${cookie.get('auth-token')}`,
           },
-          body: JSON.stringify({
-            size: size,
-            type: type,
-            content: editingValue,
-            alt: alt,
-          }),
         }
-      ).then(r => (r.ok ? r.json() : null))
-
-      let contentList = [...context.content]
-      const i = contentList.findIndex(
-        ({ _id }) => _id === updatedContentBlock._id
-      )
-      contentList.splice(i, 1, updatedContentBlock)
-      context.onChange({
-        name: 'content',
-        value: contentList,
-      })
-
-      setEditingValue('')
+      ).then(r => r.ok)
+      if (succeeded) {
+        let contentList = [...context.content]
+        contentList.splice(contentList.length - 1, 1)
+        context.onChange({ name: 'content', value: contentList })
+        setEditing(false)
+      }
+    } else {
       setEditing(false)
     }
   }
 
-  let block: any
-  if (!editing) {
-    if (type === 'heading') block = <ArticleHeading>{content}</ArticleHeading>
-    else if (type === 'paragraph') block = <ArticleText>{content}</ArticleText>
-    else if (type === 'film') block = <ArticleVideo src={content} />
-    else if (type === 'image') block = <ArticleImage src={content} alt={alt} />
-    else {
-      const images: string[] = JSON.parse(content)
-      block = (
-        <ArticleImageRow amount={size}>
-          {images.map((image: string) => (
-            <ArticleImage src={image} />
-          ))}
-        </ArticleImageRow>
-      )
-    }
-  } else {
-    if (type === 'heading')
-      block = (
-        <InputField
-          label="Tekstkop bewerken:"
-          value={editingValue}
-          name="heading"
-          onChange={e => {
-            setEditingValue(e.currentTarget.value)
-          }}
-          type="text"
-        />
-      )
-    else if (type === 'paragraph')
-      block = (
-        <InputField
-          label="Paragraaf bewerken:"
-          value={editingValue}
-          name="paragraph"
-          onChange={e => {
-            setEditingValue(e.currentTarget.value)
-          }}
-          type="textarea"
-        />
-      )
-    else if (type === 'film') block = <ArticleVideo src={content} />
-    else if (type === 'image') block = <ArticleImage src={content} alt={alt} />
-    else {
-      const images: string[] = JSON.parse(content)
-      block = (
-        <ArticleImageRow amount={size}>
-          {images.map((image: string) => (
-            <ArticleImage src={image} />
-          ))}
-        </ArticleImageRow>
-      )
+  const deleteHandler = async () => {
+    const succeeded = await fetch(
+      `${
+        process?.env?.BASE_URL || window?.location?.origin
+      }/api/content/delete?id=${id}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `bearer ${cookie.get('auth-token')}`,
+        },
+      }
+    ).then(r => r.ok)
+    if (succeeded) {
+      let contentList = [...context.content]
+      contentList.splice(contentList.length - 1, 1)
+      context.onChange({ name: 'content', value: contentList })
+      setEditing(false)
     }
   }
 
   return (
-    <Container onKeyDown={updateContentBlock}>
+    <Container>
       {!editing && (
-        <Button
-          small
-          onClick={() => {
-            setEditing(true)
-            setEditingValue(content)
-          }}
-        >
-          Bewerken
-        </Button>
+        <ButtonContainer>
+          <Button
+            small
+            onClick={() => {
+              setEditing(true)
+            }}
+          >
+            Bewerken
+          </Button>
+          <Button small onClick={deleteHandler}>
+            Verwijderen
+          </Button>
+        </ButtonContainer>
       )}
-      {block}
+      {type === 'heading' && (
+        <HeadingEditor
+          editing={editing}
+          onChange={e => changeHandler(e.currentTarget.value)}
+          onCancel={cancelHandler}
+          onSubmit={submitHandler}
+          value={value}
+        />
+      )}
+      {type === 'paragraph' && (
+        <ParagraphEditor
+          editing={editing}
+          onChange={e => changeHandler(e.currentTarget.value)}
+          onCancel={cancelHandler}
+          onSubmit={submitHandler}
+          value={value}
+        />
+      )}
     </Container>
   )
 }

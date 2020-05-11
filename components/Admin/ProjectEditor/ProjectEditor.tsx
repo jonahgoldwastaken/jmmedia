@@ -20,7 +20,7 @@ export const ProjectEditor = () => {
       />
       <Sandbox>
         <Article>
-          <ArticleTitle>{properties.title.value}</ArticleTitle>
+          <ArticleTitle>{properties.title.value || 'Titel'}</ArticleTitle>
           {content.map(({ _id, type, alt, size, content }) => (
             <ContentEditor
               id={_id}
@@ -33,19 +33,17 @@ export const ProjectEditor = () => {
           ))}
           <AddContent />
         </Article>
-        {properties.callToAction.value && (
-          <Footer>
-            <FooterLink colour="secondary" href="#">
-              Vorig project
-            </FooterLink>
-            <FooterLink colour="secondary" href="#">
-              {properties.callToAction.value}
-            </FooterLink>
-            <FooterLink colour="secondary" href="#">
-              Volgend project
-            </FooterLink>
-          </Footer>
-        )}
+        <Footer>
+          <FooterLink colour="secondary" href="#">
+            Vorig project
+          </FooterLink>
+          <FooterLink colour="secondary" href="#">
+            {properties.callToAction.value}
+          </FooterLink>
+          <FooterLink colour="secondary" href="#">
+            Volgend project
+          </FooterLink>
+        </Footer>
       </Sandbox>
     </Editor>
   )

@@ -7,7 +7,7 @@ import { ProjectEditorContext } from '../Context'
 
 const AddContentSelectContainer = styled.div`
   width: ${props => props.theme.widths[3]};
-  padding: ${props => props.theme.spacing[3]};
+  padding: ${props => props.theme.spacing[2]} ${props => props.theme.spacing[3]};
   margin: ${props => props.theme.spacing[2]} 0;
   border: ${props => props.theme.spacing[0]} solid
     ${props => props.theme.colours.secondary};

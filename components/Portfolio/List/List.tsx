@@ -33,7 +33,7 @@ export const PortfolioList: React.FunctionComponent<PortfolioListProps> = ({
         {projectItems?.map(item => (
           <ListItem
             key={item._id}
-            src={JSON.parse(item.content[0].content)[0]}
+            src={item.content[0].content[0]}
             href={`/project/${item.slug}`}
           >
             {item.title}
