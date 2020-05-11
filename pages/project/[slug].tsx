@@ -1,3 +1,5 @@
+import fetch from 'isomorphic-unfetch'
+import { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
 import { useState } from 'react'
 import Footer, { FooterLink } from '../../components/Footer'
@@ -13,9 +15,7 @@ import {
 } from '../../components/Portfolio/Article'
 import { ArticleVideo } from '../../components/Portfolio/Article/Video'
 import DarkRoom from '../../components/Portfolio/Darkroom'
-import { NextPage, NextPageContext } from 'next'
 import { Project } from '../../interfaces/Project'
-import fetch from 'isomorphic-unfetch'
 
 type Props = {
   project: Project

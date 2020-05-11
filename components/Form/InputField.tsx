@@ -1,6 +1,6 @@
+import { ChangeEvent } from 'react'
 import styled from 'styled-components'
 import { BaseRunning } from '../Text'
-import { ChangeEvent } from 'react'
 
 type InputFieldProps = {
   type: 'email' | 'text' | 'number' | 'password'

@@ -1,4 +1,4 @@
-import { Document, model, Schema, models, Model } from 'mongoose'
+import { Document, model, Model, models, Schema } from 'mongoose'
 
 export interface Project extends Document {
   title: string

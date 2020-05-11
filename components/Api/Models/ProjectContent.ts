@@ -28,13 +28,13 @@ const ProjectContentSchema: Schema<ProjectContent> = new Schema(
   {
     toObject: {
       virtuals: true,
-      transform: (doc, ret) => {
+      transform: (_, ret) => {
         delete ret._id
       },
     },
     toJSON: {
       virtuals: true,
-      transform: (doc, ret) => {
+      transform: (_, ret) => {
         delete ret._id
       },
     },

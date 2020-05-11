@@ -1,5 +1,5 @@
-import Image from '../Image'
 import styled from 'styled-components'
+import Image from '../Image'
 
 type ListItemProps = {
   href: string

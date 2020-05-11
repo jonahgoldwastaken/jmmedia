@@ -1,6 +1,6 @@
+import styled from 'styled-components'
 import { NavList } from '../../Nav'
 import { HeaderNavLink } from './Link'
-import styled from 'styled-components'
 
 const StyledNav = styled.nav`
   display: none;

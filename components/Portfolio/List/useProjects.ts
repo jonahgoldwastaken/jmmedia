@@ -1,5 +1,5 @@
-import { useState, Dispatch, SetStateAction } from 'react'
 import fetch from 'isomorphic-unfetch'
+import { Dispatch, SetStateAction, useState } from 'react'
 import useSWR from 'swr'
 import { Project } from '../../../interfaces/Project'
 

@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-
 import { BaseRunning } from '../Text'
 
 export const Button = styled.button`

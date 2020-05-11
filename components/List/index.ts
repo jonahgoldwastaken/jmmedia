@@ -1,2 +1,2 @@
-export { List as default } from './List'
 export * from './Item'
+export { List as default } from './List'

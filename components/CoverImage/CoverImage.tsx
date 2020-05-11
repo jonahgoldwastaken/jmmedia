@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { BaseHeading } from '../Text/Headings/BaseHeading'
 import { primaries } from '../../types/primaries'
+import { BaseHeading } from '../Text/Headings/BaseHeading'
 
 type CoverImageContainerProps = {
   colour: primaries
