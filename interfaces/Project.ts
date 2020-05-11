@@ -1,4 +1,5 @@
-interface ProjectContent {
+export interface ProjectContent {
+  _id: string
   type: 'heading' | 'paragraph' | 'image' | 'row' | 'film'
   content: string
   alt?: string

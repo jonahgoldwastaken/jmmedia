@@ -7,39 +7,22 @@ export interface ProjectContent extends Document {
   size?: number
 }
 
-const ProjectContentSchema: Schema<ProjectContent> = new Schema(
-  {
-    type: {
-      type: String,
-      required: true,
-      enum: ['heading', 'paragraph', 'image', 'row', 'film'],
-    },
-    content: {
-      type: String,
-      required: true,
-    },
-    alt: {
-      type: String,
-    },
-    size: {
-      type: Number,
-    },
+const ProjectContentSchema: Schema<ProjectContent> = new Schema({
+  type: {
+    type: String,
+    required: true,
+    enum: ['heading', 'paragraph', 'image', 'row', 'film'],
   },
-  {
-    toObject: {
-      virtuals: true,
-      transform: (_, ret) => {
-        delete ret._id
-      },
-    },
-    toJSON: {
-      virtuals: true,
-      transform: (_, ret) => {
-        delete ret._id
-      },
-    },
-  }
-)
+  content: {
+    type: String,
+  },
+  alt: {
+    type: String,
+  },
+  size: {
+    type: Number,
+  },
+})
 
 export const ProjectContent: Model<ProjectContent> =
   models.ProjectContent || model('ProjectContent', ProjectContentSchema)

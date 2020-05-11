@@ -21,11 +21,12 @@ export default async (req: NowRequest, res: NowResponse) => {
         res.status(400).end('Please provide Project Content ID')
         closeDBConnection()
       } else {
-        let { content, alt } = req.body
-        if (content && typeof content.isArray()) content = content.toString()
+        let { content, alt, size } = req.body
+        if (content && typeof content !== 'string') content = content.toString()
         const projectContentObj = {
           content,
           alt,
+          size,
         }
         try {
           const updatedProjectContent = await ProjectContent.findByIdAndUpdate(

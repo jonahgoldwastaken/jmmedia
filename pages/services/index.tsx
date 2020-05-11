@@ -63,7 +63,7 @@ const ServicesPage: NextPage<Props> = ({ services }) => (
 
 ServicesPage.getInitialProps = async (_: NextPageContext) => {
   const services = await fetch(
-    (process?.env?.BASE_URL || window?.location?.origin) + '/api/service/get'
+    (process?.env?.BASE_URL || window?.location?.origin) + '/api/services/get'
   )
     .then(r => r.json())
     .catch(console.error)

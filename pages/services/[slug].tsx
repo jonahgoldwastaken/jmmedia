@@ -57,7 +57,7 @@ const ServicePage: NextPage<Props> = ({ service }) => {
 ServicePage.getInitialProps = async (ctx: NextPageContext) => {
   const service = await fetch(
     (process?.env?.BASE_URL || window?.location?.origin) +
-      `/api/service/get?slug=${ctx.query.slug}`
+      `/api/services/get?slug=${ctx.query.slug}`
   )
     .then(r => r.json())
     .catch(console.log)

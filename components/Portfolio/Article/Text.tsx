@@ -4,6 +4,7 @@ import { HeadingOne, HeadingTwo } from '../../Text/Headings'
 
 export const ArticleTitle = styled(HeadingOne)`
   margin-bottom: ${props => props.theme.spacing[1]};
+  text-align: center;
 `
 
 export const ArticleHeading = styled(HeadingTwo)`

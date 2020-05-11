@@ -5,6 +5,7 @@ import { FormEvent, useState } from 'react'
 import Form, { Button, InputField } from '../../components/Form'
 import Header from '../../components/Header'
 import { HeadingOne } from '../../components/Text/Headings'
+import { useRouter } from 'next/router'
 
 const { BASE_URL } = process.env
 
@@ -14,20 +15,33 @@ type stateFormData = {
 }
 
 type LoginProps = {
-  user: {
+  user?: {
     username: string
     _id: string
   }
 }
-
-const Login: NextPage<LoginProps> = () => {
+//@ts-ignore
+const Login: NextPage<LoginProps> = ({ cookie }) => {
   const [formData, setFormData] = useState<stateFormData>({
     username: '',
     password: '',
   })
+  const router = useRouter()
 
-  const submitForm = (e: FormEvent) => {
+  const submitForm = async (e: FormEvent) => {
     e.preventDefault()
+    const res = await fetch(window?.location?.origin + '/api/authenticate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    if (res.ok) {
+      const token = await res.text()
+      cookie.set('auth-token', token)
+      router.push('/admin/project/new')
+    }
   }
 
   return (
@@ -65,10 +79,10 @@ const Login: NextPage<LoginProps> = () => {
   )
 }
 
-Login.getInitialProps = async (ctx: WithCookieContext) => {
-  const user = await fetch(BASE_URL + '/api/authenticate', {
-    headers: { Authorization: ctx.cookie.get('auth-token') },
-  }).then(r => (r.status !== 200 ? null : r.json()))
+Login.getInitialProps = async ({ cookie }: WithCookieContext) => {
+  const user: LoginProps['user'] = await fetch(BASE_URL + '/api/authenticate', {
+    headers: { Authorization: cookie.get('auth-token') },
+  }).then(r => (r.ok ? r.json() : null))
   return { user }
 }
 

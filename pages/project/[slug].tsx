@@ -43,7 +43,7 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
             setDarkRoomOpen,
           }}
         >
-          <ArticleTitle centre>{project.title}</ArticleTitle>
+          <ArticleTitle>{project.title}</ArticleTitle>
           {project.content.map(contentBlock => {
             if (contentBlock.type === 'heading')
               return <ArticleHeading>{contentBlock.content}</ArticleHeading>
@@ -79,7 +79,10 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
         <FooterLink colour="secondary" href="">
           Vorig project
         </FooterLink>
-        <FooterLink colour="secondary" href="">
+        <FooterLink
+          colour="secondary"
+          href={`/services/${project.service.slug}`}
+        >
           {project.callToAction}
         </FooterLink>
         <FooterLink colour="secondary" href="">
