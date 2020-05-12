@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 import { BaseRunning } from '../../Text'
-import Link from 'next/link'
 
 type NavLinkProps = {
   href: string

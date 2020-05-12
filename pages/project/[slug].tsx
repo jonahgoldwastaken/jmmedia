@@ -96,7 +96,7 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
 ProjectPage.getInitialProps = async (ctx: NextPageContext) => {
   const project = await fetch(
     (process?.env?.BASE_URL || window?.location?.origin) +
-      `/api/projects/get?slug=${ctx.query.slug}`
+      `/api/projects/get/${ctx.query.slug}`
   )
     .then(r => r.json())
     .catch(console.log)

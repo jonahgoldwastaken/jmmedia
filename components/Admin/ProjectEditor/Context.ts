@@ -11,6 +11,10 @@ type ProjectEditorContext = {
       type: 'text'
       value: string
     }
+    listImage: {
+      type: 'file'
+      value: string
+    }
     callToAction: {
       type: 'text'
       value: string
@@ -30,7 +34,7 @@ type ProjectEditorContext = {
     value,
   }: {
     name: string
-    value: Array<any> | string
+    value: Array<any> | string | File
   }) => void
   onSubmit: () => void
 }

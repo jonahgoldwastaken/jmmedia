@@ -1,7 +1,7 @@
-import { EditorProps, EditorContainer } from './Editors'
-import { InputField, Button } from '../../../../Form'
 import { ChangeEvent } from 'react'
+import { Button, InputField } from '../../../../Form'
 import { ArticleHeading } from '../../../../Portfolio/Article'
+import { EditorContainer, EditorProps } from './Editors'
 
 interface HeadingEditorProps extends EditorProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void

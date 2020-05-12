@@ -1,7 +1,7 @@
 import { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import { BaseRunning } from '../../Text'
-import { ListContext } from './Context'
+import { ProjectListContext } from './Context'
 
 const Div = styled.div`
   color: ${props => props.theme.colours.secondary};
@@ -13,8 +13,8 @@ const StyledSelect = styled.select`
   margin-right: calc(${props => props.theme.spacing[0]} / 2);
 `
 
-export const ListFilter = () => {
-  const { setFilter } = useContext(ListContext)
+export const ProjectListFilter = () => {
+  const { setFilter } = useContext(ProjectListContext)
   const ref = useRef<HTMLSelectElement>()
   return (
     <Div

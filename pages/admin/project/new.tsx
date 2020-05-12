@@ -20,12 +20,14 @@ const NewProjectPage: NextPage<Props> = ({ services }) => {
   const [project, setProject] = useState<{
     title: string
     slug: string
+    listImage: string
     service: string
     callToAction: string
     content: ProjectContent[]
   }>({
     title: '',
     slug: '',
+    listImage: '',
     service: '',
     callToAction: '',
     content: [],
@@ -53,17 +55,13 @@ const NewProjectPage: NextPage<Props> = ({ services }) => {
   }
 
   const submitHandler = async () => {
-    const projectToSend = {
-      ...project,
-      content: project.content.map(content => content._id),
-    }
     const newProject = await fetch(
       `${
         process?.env?.BASE_URL || window?.location?.origin
       }/api/projects/create`,
       {
         method: 'POST',
-        body: JSON.stringify(projectToSend),
+        body: JSON.stringify(project),
         headers: {
           'Content-Type': 'application/json',
           Authorization: `bearer ${cookie.get('auth-token')}`,
@@ -89,6 +87,10 @@ const NewProjectPage: NextPage<Props> = ({ services }) => {
             slug: {
               type: 'text',
               value: project.slug,
+            },
+            listImage: {
+              type: 'file',
+              value: project.listImage,
             },
             service: {
               type: 'select',

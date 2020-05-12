@@ -2,9 +2,8 @@ import { useContext } from 'react'
 import Footer, { FooterLink } from '../../Footer'
 import { Article, ArticleTitle } from '../../Portfolio/Article'
 import Editor, { Sandbox, SideBar } from '../Editor'
-import ContentEditor from './ContentEditor'
+import ContentEditor, { AddContent } from './ContentEditor'
 import { ProjectEditorContext } from './Context'
-import { AddContent } from './ContentEditor'
 
 export const ProjectEditor = () => {
   const { properties, content, onChange, onSubmit } = useContext(
@@ -21,14 +20,14 @@ export const ProjectEditor = () => {
       <Sandbox>
         <Article>
           <ArticleTitle>{properties.title.value || 'Titel'}</ArticleTitle>
-          {content.map(({ _id, type, alt, size, content }) => (
+          {content.map(({ type, alt, size, content }, index) => (
             <ContentEditor
-              id={_id}
+              index={index}
               type={type}
               alt={alt}
               size={size}
               content={content}
-              key={_id}
+              key={content}
             />
           ))}
           <AddContent />

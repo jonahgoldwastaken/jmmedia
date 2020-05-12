@@ -3,7 +3,7 @@ import { FooterNav } from './FooterNav'
 
 const StyledFooter = styled.footer`
   position: sticky;
-  bottom: 0;
+  top: calc(100vh);
   display: flex;
   justify-content: stretch;
   width: 100%;

@@ -26,6 +26,7 @@ export default async (req: NowRequest, res: NowResponse) => {
           options,
           callToAction,
         }
+
         try {
           const newService = new Service(serviceObj)
           const savedService = await newService.save()

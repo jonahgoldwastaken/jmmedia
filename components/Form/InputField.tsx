@@ -1,12 +1,18 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { BaseRunning } from '../Text'
 
 type InputProps = {
-  type: 'email' | 'text' | 'textarea' | 'number' | 'password' | 'select'
+  type:
+    | 'email'
+    | 'text'
+    | 'textarea'
+    | 'number'
+    | 'password'
+    | 'select'
+    | 'file'
   name: string
   required?: boolean
-  value: string
   onChange: (
     event: ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -16,6 +22,7 @@ type InputProps = {
 
 type InputFieldProps = {
   label: string
+  value: string | File
   options?: Array<{ name: string; value: string }>
 } & InputProps
 
@@ -42,6 +49,19 @@ const Input = styled.input<InputProps>`
   ${props => (props.type !== 'select' ? 'cursor: text' : 'cursor: pointer')};
 `
 
+const InputImage = styled.img`
+  position: relative;
+  width: ${props => props.theme.widths[3]};
+  margin-top: ${props => props.theme.spacing[0]};
+  border: calc(${props => props.theme.spacing[0]} / 4) solid
+    ${props => props.theme.colours.secondary};
+  cursor: pointer;
+
+  + ${Input} {
+    display: none;
+  }
+`
+
 export const InputField: React.FunctionComponent<InputFieldProps> = ({
   type,
   label,
@@ -51,6 +71,18 @@ export const InputField: React.FunctionComponent<InputFieldProps> = ({
   onChange,
   options,
 }) => {
+  const [imgSrc, setImgSrc] = useState<string>()
+  useEffect(() => {
+    console.log('hoi')
+    if (value && type === 'file') {
+      const reader = new FileReader()
+      reader.readAsDataURL(value as File)
+      reader.addEventListener('load', () => {
+        setImgSrc(reader.result as string)
+      })
+    }
+  }, [value])
+
   if (type === 'select')
     return (
       <Label>
@@ -60,7 +92,7 @@ export const InputField: React.FunctionComponent<InputFieldProps> = ({
           type={type}
           name={name}
           onChange={onChange}
-          value={value}
+          value={value as string}
         >
           <option>Kies een optie...</option>
           {options.map(option => (
@@ -79,11 +111,32 @@ export const InputField: React.FunctionComponent<InputFieldProps> = ({
           name={name}
           required={required}
           onChange={onChange}
-          value={value}
+          value={value as string}
         />
       </Label>
     )
-  else
+  else if (type === 'file') {
+    return (
+      <Label>
+        {label}
+        {value && (
+          <InputImage
+            src={imgSrc}
+            alt={label}
+            onClick={e =>
+              (e.currentTarget.nextElementSibling as HTMLInputElement).click()
+            }
+          />
+        )}
+        <Input
+          type={type}
+          name={name}
+          required={required}
+          onChange={onChange}
+        />
+      </Label>
+    )
+  } else
     return (
       <Label>
         {label}
@@ -92,7 +145,7 @@ export const InputField: React.FunctionComponent<InputFieldProps> = ({
           type={type}
           required={required}
           onChange={onChange}
-          value={value}
+          value={value as string}
         />
       </Label>
     )

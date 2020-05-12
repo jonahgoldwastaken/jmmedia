@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import styled from 'styled-components'
 import { BaseHeading } from '../../Text/Headings/BaseHeading'
-import Link from 'next/link'
 
 type NavLinkProps = {
   href: string

@@ -24,6 +24,7 @@
     "argon2": "^0.26.2",
     "intersection-observer": "^0.7.0",
     "isomorphic-unfetch": "^3.0.0",
+    "jimp": "^0.10.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.12",
     "next": "^9.3.3",

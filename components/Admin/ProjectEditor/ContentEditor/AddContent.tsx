@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-unfetch'
-import { useCookie } from 'next-cookie'
 import { ChangeEvent, useContext } from 'react'
 import styled from 'styled-components'
 import { InputField } from '../../../Form'
@@ -14,26 +12,15 @@ const AddContentSelectContainer = styled.div`
 `
 
 export const AddContent = () => {
-  const cookie = useCookie()
   const context = useContext(ProjectEditorContext)
   const addHandler = async (e: ChangeEvent<HTMLSelectElement>) => {
-    const newContentBlock = await fetch(
-      (process?.env?.BASE_URL || window?.location?.origin) +
-        '/api/content/create',
-      {
-        method: 'POST',
-        headers: {
-          Authorization: `bearer ${cookie.get<string>('auth-token')}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          type: e.currentTarget.value,
-          content: '',
-          alt: '',
-          size: '',
-        }),
-      }
-    ).then(r => (r.ok ? r.json() : null))
+    const newContentBlock = {
+      type: e.currentTarget.value,
+      content: '',
+      alt: '',
+      size: '',
+    }
+
     context.onChange({
       name: 'content',
       value: [...context.content, newContentBlock],

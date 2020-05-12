@@ -30,9 +30,20 @@ const ProjectSchema: Schema<Project> = new Schema({
   },
   content: [
     {
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'ProjectContent',
+      type: {
+        type: String,
+        required: true,
+        enum: ['heading', 'paragraph', 'image', 'row', 'film'],
+      },
+      content: {
+        type: String,
+      },
+      alt: {
+        type: String,
+      },
+      size: {
+        type: Number,
+      },
     },
   ],
   deleted: {

@@ -1,5 +1,4 @@
 export interface ProjectContent {
-  _id: string
   type: 'heading' | 'paragraph' | 'image' | 'row' | 'film'
   content: string
   alt?: string
@@ -14,6 +13,7 @@ export interface Project {
   _id: string
   title: string
   slug: string
+  listImage: string
   content: ProjectContent[]
   callToAction: string
   service: ProjectService
