@@ -22,6 +22,8 @@ const ButtonContainer = styled.div`
 `
 
 const Container = styled.div`
+  display: inline-block;
+  width: 100%;
   position: relative;
 
   &:not(:hover) > ${ButtonContainer} {

@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 import { NextPage } from 'next'
 import { withCookie, WithCookieContext } from 'next-cookie'
 import { FormEvent, useState } from 'react'
-import Form, { Button, InputField } from '../../components/Form'
+import Form, { Button, Input } from '../../components/Form'
 import Header from '../../components/Header'
 import { HeadingOne } from '../../components/Text/Headings'
 import { useRouter } from 'next/router'
@@ -49,7 +49,7 @@ const Login: NextPage<LoginProps> = ({ cookie }) => {
       <Header />
       <HeadingOne centre>Inloggen</HeadingOne>
       <Form onSubmit={submitForm}>
-        <InputField
+        <Input
           type="text"
           label="Gebruikersnaam"
           name="username"
@@ -61,7 +61,7 @@ const Login: NextPage<LoginProps> = ({ cookie }) => {
             })
           }}
         />
-        <InputField
+        <Input
           type="password"
           label="Wachtwoord"
           name="password"

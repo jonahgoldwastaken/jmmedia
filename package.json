@@ -20,8 +20,12 @@
   },
   "homepage": "https://github.com/theonejonahgold/filmportfolio#readme",
   "dependencies": {
+    "@google-cloud/storage": "^4.7.0",
     "@now/node": "^1.5.1",
     "argon2": "^0.26.2",
+    "atob": "^2.1.2",
+    "btoa": "^1.2.1",
+    "detect-character-encoding": "^0.8.0",
     "intersection-observer": "^0.7.0",
     "isomorphic-unfetch": "^3.0.0",
     "jimp": "^0.10.3",
@@ -41,6 +45,7 @@
     "react-intersection-observer": "^8.25.1",
     "react-photo-gallery": "^8.0.0",
     "react-shimmer": "^2.0.1",
+    "sharp": "^0.25.2",
     "styled-components": "^5.0.0",
     "styled-normalize": "^8.0.6",
     "styled-sanitize": "^1.1.2",
@@ -48,6 +53,9 @@
     "use-media": "^1.4.0"
   },
   "devDependencies": {
+    "@types/atob": "^2.1.2",
+    "@types/btoa": "^1.2.3",
+    "@types/detect-character-encoding": "^0.7.0",
     "@types/isomorphic-fetch": "^0.0.35",
     "@types/jsonwebtoken": "^8.3.9",
     "@types/mongoose": "^5.7.15",
@@ -56,6 +64,7 @@
     "@types/passport-jwt": "^3.0.3",
     "@types/passport-local": "^1.0.33",
     "@types/react": "^16.9.11",
+    "@types/sharp": "^0.25.0",
     "@types/styled-components": "^4.1.18",
     "babel-plugin-styled-components": "^1.10.6",
     "typescript": "^3.6.3"

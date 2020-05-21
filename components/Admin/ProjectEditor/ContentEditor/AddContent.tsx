@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext } from 'react'
 import styled from 'styled-components'
-import { InputField } from '../../../Form'
+import { SelectInput } from '../../../Form'
 import { ProjectEditorContext } from '../Context'
 
 const AddContentSelectContainer = styled.div`
@@ -13,7 +13,7 @@ const AddContentSelectContainer = styled.div`
 
 export const AddContent = () => {
   const context = useContext(ProjectEditorContext)
-  const addHandler = async (e: ChangeEvent<HTMLSelectElement>) => {
+  const addHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const newContentBlock = {
       type: e.currentTarget.value,
       content: '',
@@ -29,10 +29,9 @@ export const AddContent = () => {
 
   return (
     <AddContentSelectContainer>
-      <InputField
+      <SelectInput
         name="addContent"
         onChange={addHandler}
-        type="select"
         label="Voeg content toe"
         value=""
         options={[

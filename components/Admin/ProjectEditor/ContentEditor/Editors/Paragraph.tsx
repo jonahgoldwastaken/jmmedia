@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react'
-import { Button, InputField } from '../../../../Form'
+import { Button, TextAreaInput } from '../../../../Form'
 import { ArticleText } from '../../../../Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
@@ -16,9 +16,8 @@ export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
 }) =>
   editing ? (
     <EditorContainer>
-      <InputField
+      <TextAreaInput
         label=""
-        type="textarea"
         name="paragraph"
         value={value}
         required

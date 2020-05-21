@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react'
-import { Button, InputField } from '../../../../Form'
+import { Button, Input } from '../../../../Form'
 import { ArticleHeading } from '../../../../Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
@@ -16,7 +16,7 @@ export const HeadingEditor: React.FunctionComponent<HeadingEditorProps> = ({
 }) =>
   editing ? (
     <EditorContainer>
-      <InputField
+      <Input
         label=""
         type="text"
         name="heading"
