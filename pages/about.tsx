@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import Footer, { FooterLink } from '../components/Footer'
-import Header from '../components/Header'
-import Image from '../components/Image'
-import { Logo } from '../components/Logo'
-import Section from '../components/Section'
-import { Paragraph } from '../components/Text'
-import { HeadingOne } from '../components/Text/Headings'
+import Footer, { FooterLink } from 'components/Footer'
+import Header from 'components/Header'
+import Image from 'components/Image'
+import { Logo } from 'components/Logo'
+import Section from 'components/Section'
+import { Paragraph } from 'components/Text'
+import { HeadingOne } from 'components/Text/Headings'
 
 export default () => {
   return (

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
-import Image from '../../Image'
-import { ArticleContext } from '../Article'
+import Image from 'components/Image'
+import { ArticleContext } from 'components/Portfolio/Article'
 
 type StyledDivProps = {
   open: boolean

@@ -1,14 +1,13 @@
-import fetch from 'isomorphic-unfetch'
 import { NextPage, NextPageContext } from 'next'
 import Head from 'next/head'
-import Footer, { FooterLink } from '../../components/Footer'
-import Header from '../../components/Header'
-import Image from '../../components/Image'
-import Section from '../../components/Section'
-import ServiceOptions from '../../components/ServiceOptions'
-import { Paragraph } from '../../components/Text'
-import { HeadingOne, HeadingTwo } from '../../components/Text/Headings'
-import { Service } from '../../interfaces/Service'
+import Footer, { FooterLink } from 'components/Footer'
+import Header from 'components/Header'
+import Image from 'components/Image'
+import Section from 'components/Section'
+import ServiceOptions from 'components/ServiceOptions'
+import { Paragraph } from 'components/Text'
+import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
+import { Service } from 'interfaces/Service'
 
 type Props = {
   service: Service

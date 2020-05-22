@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
 import styled, { css } from 'styled-components'
-import { BaseRunning } from '../../Text'
+import { BaseRunning } from 'components/Text'
 
 export interface BaseInputTagProps {
   name: string
@@ -8,7 +8,7 @@ export interface BaseInputTagProps {
 }
 
 export interface BaseInputProps<ValueType, Element> extends BaseInputTagProps {
-  value: ValueType
+  value?: ValueType
   label: string
   onChange: (event: ChangeEvent<Element>) => void
 }

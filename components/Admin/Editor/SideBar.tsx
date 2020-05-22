@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import Form, { Button, FileInput, Input, SelectInput } from '../../Form'
-import { HeadingOne } from '../../Text/Headings'
+import Form, { Button, FileInput, Input, SelectInput } from 'components/Form'
+import { HeadingOne } from 'components/Text/Headings'
 
 type SideBarProps = {
   onSubmit: () => void

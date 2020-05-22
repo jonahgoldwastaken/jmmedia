@@ -1,4 +1,4 @@
-import ProjectEditor from '../../components/Admin/ProjectEditor'
+import ProjectEditor from 'components/Admin/ProjectEditor'
 
 export default () => (
   <>

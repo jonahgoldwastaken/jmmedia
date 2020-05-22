@@ -1,13 +1,13 @@
+require('intersection-observer')
 import { PageTransition } from 'next-page-transitions'
 import React, { useEffect, useMemo } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import styledSanitize from 'styled-sanitize'
 import useMedia from 'use-media'
-import MediaQueryContext from '../components/MediaQueryContext'
-import { darkTheme, lightTheme } from '../theme'
-import { logPageViews } from '../utils/analytics'
-require('intersection-observer')
+import MediaQueryContext from 'components/MediaQueryContext'
+import { darkTheme, lightTheme } from 'theme'
+import { logPageViews } from 'libs/analytics'
 
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};

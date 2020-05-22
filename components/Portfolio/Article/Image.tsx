@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
-import Image from '../../Image'
+import Image from 'components/Image'
 import { ArticleContext } from './Context'
 
 type ImageProps = {

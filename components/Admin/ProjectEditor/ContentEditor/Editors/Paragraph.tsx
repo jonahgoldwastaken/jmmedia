@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
-import { Button, TextAreaInput } from '../../../../Form'
-import { ArticleText } from '../../../../Portfolio/Article'
+import { Button, TextAreaInput } from 'components/Form'
+import { ArticleText } from 'components/Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
 interface ParagraphEditorProps extends EditorProps {

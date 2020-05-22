@@ -3,7 +3,7 @@ import { animation } from './animation'
 import { breakpoints } from './breakpoints'
 import { colours } from './colours'
 import { fontFamilies, fontSizes, fontWeights } from './fonts'
-import { spacing, heights, widths } from './layout'
+import { heights, spacing, widths } from './layout'
 
 const defaultTheme = {
   breakpoints,

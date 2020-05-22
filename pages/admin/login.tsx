@@ -1,11 +1,10 @@
-import fetch from 'isomorphic-unfetch'
 import { NextPage } from 'next'
 import { withCookie, WithCookieContext } from 'next-cookie'
-import { FormEvent, useState } from 'react'
-import Form, { Button, Input } from '../../components/Form'
-import Header from '../../components/Header'
-import { HeadingOne } from '../../components/Text/Headings'
 import { useRouter } from 'next/router'
+import { FormEvent, useState } from 'react'
+import Form, { Button, Input } from 'components/Form'
+import Header from 'components/Header'
+import { HeadingOne } from 'components/Text/Headings'
 
 const { BASE_URL } = process.env
 

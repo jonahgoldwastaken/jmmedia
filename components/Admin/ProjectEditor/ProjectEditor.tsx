@@ -1,6 +1,6 @@
 import { useContext } from 'react'
-import Footer, { FooterLink } from '../../Footer'
-import { Article, ArticleTitle } from '../../Portfolio/Article'
+import Footer, { FooterLink } from 'components/Footer'
+import { Article, ArticleTitle } from 'components/Portfolio/Article'
 import Editor, { Sandbox, SideBar } from '../Editor'
 import ContentEditor, { AddContent } from './ContentEditor'
 import { ProjectEditorContext } from './Context'

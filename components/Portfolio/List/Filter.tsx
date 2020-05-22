@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react'
 import styled from 'styled-components'
-import { BaseRunning } from '../../Text'
+import { BaseRunning } from 'components/Text'
 import { ProjectListContext } from './Context'
 
 const Div = styled.div`

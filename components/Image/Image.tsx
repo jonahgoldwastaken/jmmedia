@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BaseRunning } from '../Text'
+import { BaseRunning } from 'components/Text'
 
 type ImageProps = {
   noQuote?: boolean

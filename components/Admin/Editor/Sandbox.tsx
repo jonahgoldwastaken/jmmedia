@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Header from '../../Header'
+import Header from 'components/Header'
 
 const Container = styled.div`
   flex: 1;

@@ -1,6 +1,6 @@
 import { ChangeEvent, useContext } from 'react'
 import styled from 'styled-components'
-import { SelectInput } from '../../../Form'
+import { SelectInput } from 'components/Form'
 import { ProjectEditorContext } from '../Context'
 
 const AddContentSelectContainer = styled.div`

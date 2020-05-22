@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react'
-import { Button, Input } from '../../../../Form'
-import { ArticleHeading } from '../../../../Portfolio/Article'
+import { Button, Input } from 'components/Form'
+import { ArticleHeading } from 'components/Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
 interface HeadingEditorProps extends EditorProps {

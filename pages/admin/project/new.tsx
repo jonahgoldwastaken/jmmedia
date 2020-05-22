@@ -1,14 +1,13 @@
-import fetch from 'isomorphic-unfetch'
 import { NextPage } from 'next'
-import { useState, useEffect } from 'react'
+import { useCookie } from 'next-cookie'
+import Head from 'next/head'
+import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import ProjectEditor, {
   ProjectEditorContext,
-} from '../../../components/Admin/ProjectEditor'
-import { ProjectContent } from '../../../interfaces/Project'
-import { Service } from '../../../interfaces/Service'
-import Head from 'next/head'
-import { useCookie } from 'next-cookie'
-import { useRouter } from 'next/router'
+} from 'components/Admin/ProjectEditor'
+import { ProjectContent } from 'interfaces/Project'
+import { Service } from 'interfaces/Service'
 
 type Props = {
   services: Service[]

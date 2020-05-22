@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { ProjectContent } from '../../../../interfaces/Project'
-import { Button } from '../../../Form'
+import { ProjectContent } from 'interfaces/Project'
+import { Button } from 'components/Form'
 import { ProjectEditorContext } from '../Context'
 import { HeadingEditor, ParagraphEditor } from './Editors'
 
