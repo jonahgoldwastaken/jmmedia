@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import Footer, { FooterLink } from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Portfolio/Article'
 import Editor, { Sandbox, SideBar } from '../Editor'
-import ContentEditor, { AddContent } from './ContentEditor'
+import ContentBlock from './ContentBlock'
 import { ProjectEditorContext } from './Context'
 
 export const ProjectEditor = () => {
@@ -20,17 +20,9 @@ export const ProjectEditor = () => {
       <Sandbox>
         <Article>
           <ArticleTitle>{properties.title.value || 'Titel'}</ArticleTitle>
-          {content.map(({ type, alt, size, content }, index) => (
-            <ContentEditor
-              index={index}
-              type={type}
-              alt={alt}
-              size={size}
-              content={content}
-              key={content}
-            />
+          {content.map(({ type, data }, index) => (
+            <ContentBlock index={index} type={type} data={data} key={data} />
           ))}
-          <AddContent />
         </Article>
         <Footer>
           <FooterLink colour="secondary" href="#">

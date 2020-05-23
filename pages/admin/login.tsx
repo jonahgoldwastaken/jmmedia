@@ -1,12 +1,17 @@
 import { NextPage } from 'next'
-import { withCookie, WithCookieContext } from 'next-cookie'
 import { useRouter } from 'next/router'
 import { FormEvent, useState } from 'react'
 import Form, { Button, Input } from 'components/Form'
 import Header from 'components/Header'
 import { HeadingOne } from 'components/Text/Headings'
-
-const { BASE_URL } = process.env
+import { withApollo } from 'libs/apollo'
+import { useCookie } from 'next-cookie'
+import { useMutation } from '@apollo/react-hooks'
+import {
+  LOGIN_MUTATION,
+  LoginMutationData,
+  LoginMutationVariables,
+} from 'gql/login'
 
 type stateFormData = {
   username: string
@@ -20,27 +25,26 @@ type LoginProps = {
   }
 }
 //@ts-ignore
-const Login: NextPage<LoginProps> = ({ cookie }) => {
+const Login: NextPage<LoginProps> = () => {
+  const cookie = useCookie()
+  const router = useRouter()
   const [formData, setFormData] = useState<stateFormData>({
     username: '',
     password: '',
   })
-  const router = useRouter()
+  const [mutation, { called, data, loading, error }] = useMutation<
+    LoginMutationData,
+    LoginMutationVariables
+  >(LOGIN_MUTATION)
 
   const submitForm = async (e: FormEvent) => {
     e.preventDefault()
-    const res = await fetch(window?.location?.origin + '/api/authenticate', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-    if (res.ok) {
-      const token = await res.text()
-      cookie.set('auth-token', token)
-      router.push('/admin/project/new')
-    }
+    mutation({ variables: { user: formData } })
+  }
+
+  if (called && data) {
+    cookie.set('auth-token', data.loginUser)
+    router.push('/admin/project/new')
   }
 
   return (
@@ -72,17 +76,10 @@ const Login: NextPage<LoginProps> = ({ cookie }) => {
             })
           }}
         />
-        <Button>Inloggen</Button>
+        <Button>{loading ? 'Bezig...' : 'Inloggen'}</Button>
       </Form>
     </>
   )
 }
 
-Login.getInitialProps = async ({ cookie }: WithCookieContext) => {
-  const user: LoginProps['user'] = await fetch(BASE_URL + '/api/authenticate', {
-    headers: { Authorization: cookie.get('auth-token') },
-  }).then(r => (r.ok ? r.json() : null))
-  return { user }
-}
-
-export default withCookie(Login)
+export default withApollo({ ssr: true })(Login)

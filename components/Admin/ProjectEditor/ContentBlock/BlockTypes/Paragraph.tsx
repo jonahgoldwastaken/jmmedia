@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react'
-import { Button, TextAreaInput } from 'components/Form'
+import { TextAreaInput } from 'components/Form'
 import { ArticleText } from 'components/Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
@@ -9,9 +9,7 @@ interface ParagraphEditorProps extends EditorProps {
 
 export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
   editing,
-  onCancel,
   onChange,
-  onSubmit,
   value,
 }) =>
   editing ? (
@@ -23,22 +21,6 @@ export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
         required
         onChange={onChange}
       />
-      <Button
-        onClick={e => {
-          e.preventDefault()
-          onSubmit()
-        }}
-      >
-        Opslaan
-      </Button>
-      <Button
-        onClick={e => {
-          e.preventDefault()
-          onCancel()
-        }}
-      >
-        Annuleren
-      </Button>
     </EditorContainer>
   ) : (
     <ArticleText>{value}</ArticleText>

@@ -12,10 +12,6 @@ export interface ImageUploadVariables {
 
 export const IMAGE_UPLOAD = gql`
   mutation($imageFile: Upload!) {
-    uploadImage(file: $imageFile) {
-      filename
-      mimetype
-      encoding
-    }
+    uploadImage(file: $imageFile)
   }
 `

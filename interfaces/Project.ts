@@ -1,24 +1,18 @@
-type headingValue = string
-type paragraphValue = string
-type imageValue = {
+export type headingValue = {
+  level: number
+  text: string
+}
+export type paragraphValue = string
+export type imageValue = {
   alt: string
   srcSet: string[]
 }
-type rowValue = Array<imageValue>
-type filmValue = string
-
-type contentValue =
-  | headingValue
-  | paragraphValue
-  | imageValue
-  | rowValue
-  | filmValue
+export type rowValue = Array<imageValue>
+export type filmValue = string
 
 export interface ProjectContent {
   type: 'heading' | 'paragraph' | 'image' | 'row' | 'film'
-  content: contentValue
-  alt?: string
-  size?: number
+  data: string
 }
 
 interface ProjectService {

@@ -7,10 +7,18 @@ import ProjectEditor, {
   ProjectEditorContext,
 } from 'components/Admin/ProjectEditor'
 import { ProjectContent } from 'interfaces/Project'
-import { Service } from 'interfaces/Service'
+import { withApollo } from 'libs/apollo'
+import ApolloClient from 'apollo-client'
+import {
+  NEW_PROJECT_SERVICES,
+  newProjectServicesData,
+} from 'gql/newProjectServices'
 
-type Props = {
-  services: Service[]
+interface Props {
+  services: Array<{
+    name: string
+    _id: string
+  }>
 }
 
 const NewProjectPage: NextPage<Props> = ({ services }) => {
@@ -29,7 +37,12 @@ const NewProjectPage: NextPage<Props> = ({ services }) => {
     listImage: '',
     service: '',
     callToAction: '',
-    content: [],
+    content: [
+      {
+        data: '',
+        type: 'heading',
+      },
+    ],
   })
 
   const serviceOptions = services.map(({ name, _id: value }) => ({
@@ -111,11 +124,13 @@ const NewProjectPage: NextPage<Props> = ({ services }) => {
   )
 }
 
-NewProjectPage.getInitialProps = async () => {
-  const services: Service[] = await fetch(
-    (process?.env?.BASE_URL || window?.location?.origin) + '/api/services/get'
-  ).then(r => (r.ok ? r.json() : null))
-  return { services }
+NewProjectPage.getInitialProps = async ({ apolloClient }: any) => {
+  const { data } = await (apolloClient as ApolloClient<{}>).query<
+    newProjectServicesData
+  >({
+    query: NEW_PROJECT_SERVICES,
+  })
+  return { services: data.services }
 }
 
-export default NewProjectPage
+export default withApollo({ ssr: true })(NewProjectPage)

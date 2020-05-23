@@ -1,8 +1,7 @@
-import { ApolloProvider } from '@apollo/react-hooks'
 import App from 'next/app'
 import Head from 'next/head'
-import React from 'react'
-import createApolloClient from 'apolloClient'
+import { ApolloProvider } from '@apollo/react-hooks'
+import createApolloClient from '../apolloClient'
 
 // On the client, we store the Apollo Client in the following variable.
 // This prevents the client from reinitializing between page transitions.
@@ -12,8 +11,9 @@ let globalApolloClient = null
  * Installs the Apollo Client on NextPageContext
  * or NextAppContext. Useful if you want to use apolloClient
  * inside getStaticProps, getStaticPaths or getServerSideProps
+ * @param {NextPageContext | NextAppContext} ctx
  */
-export const initOnContext = (ctx: any) => {
+export const initOnContext = ctx => {
   const inAppContext = Boolean(ctx.ctx)
 
   // We consider installing `withApollo({ ssr: true })` on global App level
