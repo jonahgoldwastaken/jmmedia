@@ -44,6 +44,7 @@ const SmallSelectInputTag = styled.select`
   color: transparent;
   margin: 0;
   cursor: pointer;
+  opacity: 0;
 `
 
 export const SmallSelectInput: React.FunctionComponent<SmallSelectInputProps> = ({

@@ -1,34 +1,14 @@
+import { ContentInput } from 'generated/graphql'
 import { createContext } from 'react'
-import { ProjectContent } from '../../../interfaces/Project'
 
 type ProjectEditorContext = {
-  properties: {
-    title: {
-      type: 'text'
-      value: string
-    }
-    slug: {
-      type: 'text'
-      value: string
-    }
-    listImage: {
-      type: 'file'
-      value: string
-    }
-    callToAction: {
-      type: 'text'
-      value: string
-    }
-    service: {
-      type: 'select'
-      value: string
-      options: Array<{
-        name: string
-        value: string
-      }>
-    }
-  }
-  content: ProjectContent[]
+  properties: Array<{
+    name: string
+    type: string
+    value: string
+    options?: Array<{ name: string; value: string }>
+  }>
+  content: ContentInput[]
   onChange: ({
     name,
     value,

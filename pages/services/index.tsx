@@ -1,4 +1,4 @@
-import { NextPage, NextPageContext } from 'next'
+import { NextPage } from 'next'
 import Head from 'next/head'
 import Footer, { FooterLink } from 'components/Footer'
 import Header from 'components/Header'
@@ -60,15 +60,5 @@ const ServicesPage: NextPage<Props> = ({ services }) => (
     </Footer>
   </>
 )
-
-ServicesPage.getInitialProps = async (_: NextPageContext) => {
-  const services = await fetch(
-    (process?.env?.BASE_URL || window?.location?.origin) + '/api/services/get'
-  )
-    .then(r => r.json())
-    .catch(console.error)
-
-  return { services: services }
-}
 
 export default ServicesPage

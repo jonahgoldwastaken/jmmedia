@@ -1,17 +1,17 @@
 import styled from 'styled-components'
 import Form, { Button, FileInput, Input, SelectInput } from 'components/Form'
 import { HeadingOne } from 'components/Text/Headings'
+import { Paragraph } from 'components/Text'
 
 type SideBarProps = {
   onSubmit: () => void
   onChange: ({ name, value }: { name: string; value: string | File }) => void
-  properties: {
-    [key: string]: {
-      type: 'text' | 'number' | 'select' | 'file'
-      value: string
-      options?: Array<{ name: string; value: string }>
-    }
-  }
+  properties: Array<{
+    name: string
+    type: string
+    value: string
+    options?: Array<{ name: string; value: string }>
+  }>
   title: string
 }
 
@@ -50,8 +50,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
           onSubmit()
         }}
       >
-        {Object.keys(properties).map(name => {
-          const { type, value, options } = properties[name]
+        {properties.map(({ name, type, value, options }) => {
           if (type === 'file')
             return (
               <FileInput

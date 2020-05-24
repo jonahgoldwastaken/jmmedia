@@ -14,13 +14,15 @@ export default function createApolloClient(
   const authToken = cookie.get('auth-token')
 
   const link = createUploadLink({
-    uri: 'http://127.0.0.1:3001',
+    uri: 'http://127.0.0.1:3000',
+    credentials: 'include',
     headers: authToken
       ? {
           Authorization: `bearer ${authToken}`,
           'keep-alive': 'true',
+          'Access-Control-Allow-Credentials': 'true',
         }
-      : { 'keep-alive': 'true' },
+      : { 'keep-alive': 'true', 'Access-Control-Allow-Credentials': 'true' },
   })
   return new ApolloClient({
     connectToDevTools: true,

@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import Footer, { FooterLink } from 'components/Footer'
 import Header from 'components/Header'
 import List, { ListItem } from 'components/List'
@@ -9,19 +8,12 @@ import {
 } from 'components/Portfolio/List'
 import { Paragraph } from 'components/Text'
 import { HeadingOne } from 'components/Text/Headings'
-import {
-  ProjectListData,
-  ProjectListVariables,
-  PROJECT_LIST,
-} from 'gql/projectList'
+import { useProjectListQuery } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import Head from 'next/head'
 
 const Portfolio = () => {
-  const { loading, error, data } = useQuery<
-    ProjectListData,
-    ProjectListVariables
-  >(PROJECT_LIST)
+  const { loading, error, data } = useProjectListQuery()
   return (
     <>
       <Head>
@@ -56,7 +48,7 @@ const Portfolio = () => {
                     <ProjectListFilter />
                   </ProjectListHeader>
                   <List>
-                    {data?.map(item => (
+                    {data?.projects.map(item => (
                       <ListItem
                         document={'/project/[slug]'}
                         key={item.title}

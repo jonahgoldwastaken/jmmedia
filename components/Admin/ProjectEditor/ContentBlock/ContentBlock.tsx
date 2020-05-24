@@ -6,7 +6,7 @@ import { HeadingEditor, ParagraphEditor } from './BlockTypes'
 import { SmallSelectInput } from 'components/Form'
 
 type ContentBlockProps = {
-  type: ProjectContent['type']
+  type: string
   data: string
   index: number
 }
@@ -15,6 +15,7 @@ const Container = styled.div`
   display: inline-block;
   width: 100%;
   position: relative;
+  cursor: text;
 
   &:not(:hover) > label {
     display: none;
@@ -31,7 +32,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
   const [value, setValue] = useState(data)
 
   const saveHandler = async () => {
-    const updatedContentBlock: ProjectContent = {
+    const updatedContentBlock = {
       type,
       data: value,
     }
@@ -51,18 +52,8 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
     let newContentBlock = {} as ProjectContent
 
     if (
-      (newType === 'heading' && type === 'image') ||
-      (newType === 'heading' && type === 'row') ||
-      (newType === 'paragraph' && type === 'image') ||
-      (newType === 'paragraph' && type === 'row') ||
-      (newType === 'film' && type === 'image') ||
-      (newType === 'film' && type === 'row') ||
-      (type === 'heading' && newType === 'image') ||
-      (type === 'heading' && newType === 'row') ||
-      (type === 'paragraph' && newType === 'image') ||
-      (type === 'paragraph' && newType === 'row') ||
-      (type === 'film' && newType === 'image') ||
-      (type === 'film' && newType === 'row')
+      (type === 'image' && newType !== type) ||
+      (type === 'row' && newType !== type)
     )
       newContentBlock.data = ''
     else newContentBlock.data = value
@@ -73,8 +64,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
   }
 
   const changeHandler = (value: any) => {
-    if (type === 'image' || type === 'row' || type === 'heading')
-      setValue(JSON.stringify(value))
+    if (type === 'image' || type === 'row') setValue(JSON.stringify(value))
     else setValue(value)
   }
 
@@ -97,6 +87,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
       )}
       {type === 'heading' && (
         <HeadingEditor
+          onClick={() => setEditing(true)}
           editing={editing}
           onChange={e => changeHandler(e.currentTarget.value)}
           onSubmit={saveHandler}
@@ -105,6 +96,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
       )}
       {type === 'paragraph' && (
         <ParagraphEditor
+          onClick={() => setEditing(true)}
           editing={editing}
           onChange={e => changeHandler(e.currentTarget.value)}
           onSubmit={saveHandler}

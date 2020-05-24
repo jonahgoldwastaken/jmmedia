@@ -1,17 +1,12 @@
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { FormEvent, useState } from 'react'
 import Form, { Button, Input } from 'components/Form'
 import Header from 'components/Header'
 import { HeadingOne } from 'components/Text/Headings'
+import { useLoginUserMutation } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
+import { NextPage } from 'next'
 import { useCookie } from 'next-cookie'
-import { useMutation } from '@apollo/react-hooks'
-import {
-  LOGIN_MUTATION,
-  LoginMutationData,
-  LoginMutationVariables,
-} from 'gql/login'
+import { useRouter } from 'next/router'
+import { FormEvent, useState, useEffect } from 'react'
 
 type stateFormData = {
   username: string
@@ -32,20 +27,19 @@ const Login: NextPage<LoginProps> = () => {
     username: '',
     password: '',
   })
-  const [mutation, { called, data, loading, error }] = useMutation<
-    LoginMutationData,
-    LoginMutationVariables
-  >(LOGIN_MUTATION)
+  const [mutation, { data, loading }] = useLoginUserMutation()
 
   const submitForm = async (e: FormEvent) => {
     e.preventDefault()
     mutation({ variables: { user: formData } })
   }
 
-  if (called && data) {
-    cookie.set('auth-token', data.loginUser)
-    router.push('/admin/project/new')
-  }
+  useEffect(() => {
+    if (data) {
+      cookie.set('auth-token', data.loginUser)
+      router.push('/admin/project/new')
+    }
+  }, [data])
 
   return (
     <>

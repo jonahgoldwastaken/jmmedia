@@ -7,7 +7,7 @@ import {
 } from './BaseInput'
 
 interface InputTagProps extends BaseInputTagProps {
-  type: 'email' | 'text' | 'number' | 'password'
+  type: string
 }
 
 interface InputProps
@@ -25,6 +25,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
   value,
   required,
   onChange,
+  onKeyPress,
 }) => (
   <Label>
     {label}
@@ -33,6 +34,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
       type={type}
       required={required}
       onChange={onChange}
+      onKeyPress={onKeyPress}
       value={value as string}
     />
   </Label>

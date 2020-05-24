@@ -1,0 +1,6 @@
+query projectServiceOptions {
+  services {
+    name
+    _id
+  }
+}
