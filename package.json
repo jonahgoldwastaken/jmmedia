@@ -6,8 +6,8 @@
     "dev:web": "yarn workspace @jmmedia/web dev",
     "dev:server": "yarn workspace @jmmedia/server dev",
     "typecheck": "concurrently \"yarn:typecheck:web\" \"yarn:typecheck:server\"",
-    "typecheck:web": "tsc --noEmit --project web/tsconfig.json",
-    "typecheck:server": "tsc --noEmit --project server/tsconfig.json",
+    "typecheck:web": "tsc --noEmit --project packages/web/tsconfig.json",
+    "typecheck:server": "tsc --noEmit --project packages/server/tsconfig.json",
     "heroku-postbuild": "./scripts/heroku.build"
   },
   "workspaces": [
@@ -28,10 +28,10 @@
     }
   },
   "lint-staged": {
-    "./server/src/*.{ts}": [
+    "./packages/server/src/*.{ts}": [
       "prettier --write"
     ],
-    "./web/{components,generated,interfaces,libs,pages,theme,types}/**/*.{ts,tsx}": [
+    "./packages/web/{components,generated,interfaces,libs,pages,theme,types}/**/*.{ts,tsx}": [
       "prettier --write"
     ]
   }

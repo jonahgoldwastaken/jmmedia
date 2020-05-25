@@ -1,10 +1,13 @@
 {
-  "extends": "../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
     "jsx": "preserve",
-    "lib": ["dom", "es2017"],
+    "lib": [
+      "dom",
+      "es2017"
+    ],
     "allowJs": true,
     "noEmit": true,
     "allowSyntheticDefaultImports": true,
@@ -14,5 +17,9 @@
     "resolveJsonModule": true,
     "baseUrl": "."
   },
-  "include": ["next-env.d.ts","**/*.ts", "**/*.tsx"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
