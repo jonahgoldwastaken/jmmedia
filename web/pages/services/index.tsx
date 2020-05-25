@@ -6,13 +6,19 @@ import List, { ListItem } from 'components/List'
 import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
-import { Service } from 'interfaces/Service'
+import { withApollo } from 'libs/apollo'
+import {
+  withServicesList,
+  ServicesListQuery,
+  ServicesListQueryVariables,
+} from 'generated/graphql'
+import { DataValue } from '@apollo/react-hoc'
 
 type Props = {
-  services: Service[]
+  data: DataValue<ServicesListQuery, ServicesListQueryVariables>
 }
 
-const ServicesPage: NextPage<Props> = ({ services }) => (
+const ServicesPage: NextPage<Props> = ({ data: { services } }) => (
   <>
     <Head>
       <title>Services - JM</title>
@@ -21,11 +27,11 @@ const ServicesPage: NextPage<Props> = ({ services }) => (
     <main>
       <HeadingOne centre>De services die ik aanbied</HeadingOne>
       <List maxRows={3}>
-        {services.map(service => (
+        {services?.map(service => (
           <ListItem
             document="/services/[slug]"
             key={service.slug}
-            src={service.image}
+            src={service.listImage}
             href={`/services/${service.slug}`}
           >
             {service.name}
@@ -61,4 +67,4 @@ const ServicesPage: NextPage<Props> = ({ services }) => (
   </>
 )
 
-export default ServicesPage
+export default withApollo({ ssr: true })(withServicesList()(ServicesPage))

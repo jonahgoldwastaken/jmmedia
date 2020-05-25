@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import * as ApolloReactCommon from '@apollo/react-common'
+import * as ApolloReactHoc from '@apollo/react-hoc'
 import * as ApolloReactHooks from '@apollo/react-hooks'
 export type Maybe<T> = T | null
 /** All built-in and custom scalars, mapped to their actual values */
@@ -211,6 +212,14 @@ export type ProjectServiceOptionsQuery = { __typename?: 'Query' } & {
   services: Array<{ __typename?: 'Service' } & Pick<Service, 'name' | '_id'>>
 }
 
+export type ServicesListQueryVariables = {}
+
+export type ServicesListQuery = { __typename?: 'Query' } & {
+  services: Array<
+    { __typename?: 'Service' } & Pick<Service, 'slug' | 'listImage' | 'name'>
+  >
+}
+
 export const ImageUploadDocument = gql`
   mutation imageUpload($imageFile: Upload!) {
     uploadImage(file: $imageFile)
@@ -220,6 +229,38 @@ export type ImageUploadMutationFn = ApolloReactCommon.MutationFunction<
   ImageUploadMutation,
   ImageUploadMutationVariables
 >
+export type ImageUploadProps<
+  TChildProps = {},
+  TDataName extends string = 'mutate'
+> = {
+  [key in TDataName]: ApolloReactCommon.MutationFunction<
+    ImageUploadMutation,
+    ImageUploadMutationVariables
+  >
+} &
+  TChildProps
+export function withImageUpload<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = 'mutate'
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    ImageUploadMutation,
+    ImageUploadMutationVariables,
+    ImageUploadProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    ImageUploadMutation,
+    ImageUploadMutationVariables,
+    ImageUploadProps<TChildProps, TDataName>
+  >(ImageUploadDocument, {
+    alias: 'imageUpload',
+    ...operationOptions,
+  })
+}
 
 /**
  * __useImageUploadMutation__
@@ -268,6 +309,38 @@ export type LoginUserMutationFn = ApolloReactCommon.MutationFunction<
   LoginUserMutation,
   LoginUserMutationVariables
 >
+export type LoginUserProps<
+  TChildProps = {},
+  TDataName extends string = 'mutate'
+> = {
+  [key in TDataName]: ApolloReactCommon.MutationFunction<
+    LoginUserMutation,
+    LoginUserMutationVariables
+  >
+} &
+  TChildProps
+export function withLoginUser<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = 'mutate'
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    LoginUserMutation,
+    LoginUserMutationVariables,
+    LoginUserProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    LoginUserMutation,
+    LoginUserMutationVariables,
+    LoginUserProps<TChildProps, TDataName>
+  >(LoginUserDocument, {
+    alias: 'loginUser',
+    ...operationOptions,
+  })
+}
 
 /**
  * __useLoginUserMutation__
@@ -316,6 +389,38 @@ export const ProjectListDocument = gql`
     }
   }
 `
+export type ProjectListProps<
+  TChildProps = {},
+  TDataName extends string = 'data'
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    ProjectListQuery,
+    ProjectListQueryVariables
+  >
+} &
+  TChildProps
+export function withProjectList<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = 'data'
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    ProjectListQuery,
+    ProjectListQueryVariables,
+    ProjectListProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    ProjectListQuery,
+    ProjectListQueryVariables,
+    ProjectListProps<TChildProps, TDataName>
+  >(ProjectListDocument, {
+    alias: 'projectList',
+    ...operationOptions,
+  })
+}
 
 /**
  * __useProjectListQuery__
@@ -371,6 +476,38 @@ export const ProjectServiceOptionsDocument = gql`
     }
   }
 `
+export type ProjectServiceOptionsProps<
+  TChildProps = {},
+  TDataName extends string = 'data'
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    ProjectServiceOptionsQuery,
+    ProjectServiceOptionsQueryVariables
+  >
+} &
+  TChildProps
+export function withProjectServiceOptions<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = 'data'
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    ProjectServiceOptionsQuery,
+    ProjectServiceOptionsQueryVariables,
+    ProjectServiceOptionsProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    ProjectServiceOptionsQuery,
+    ProjectServiceOptionsQueryVariables,
+    ProjectServiceOptionsProps<TChildProps, TDataName>
+  >(ProjectServiceOptionsDocument, {
+    alias: 'projectServiceOptions',
+    ...operationOptions,
+  })
+}
 
 /**
  * __useProjectServiceOptionsQuery__
@@ -418,4 +555,93 @@ export type ProjectServiceOptionsLazyQueryHookResult = ReturnType<
 export type ProjectServiceOptionsQueryResult = ApolloReactCommon.QueryResult<
   ProjectServiceOptionsQuery,
   ProjectServiceOptionsQueryVariables
+>
+export const ServicesListDocument = gql`
+  query servicesList {
+    services {
+      slug
+      listImage
+      name
+    }
+  }
+`
+export type ServicesListProps<
+  TChildProps = {},
+  TDataName extends string = 'data'
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    ServicesListQuery,
+    ServicesListQueryVariables
+  >
+} &
+  TChildProps
+export function withServicesList<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = 'data'
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    ServicesListQuery,
+    ServicesListQueryVariables,
+    ServicesListProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    ServicesListQuery,
+    ServicesListQueryVariables,
+    ServicesListProps<TChildProps, TDataName>
+  >(ServicesListDocument, {
+    alias: 'servicesList',
+    ...operationOptions,
+  })
+}
+
+/**
+ * __useServicesListQuery__
+ *
+ * To run a query within a React component, call `useServicesListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useServicesListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useServicesListQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useServicesListQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ServicesListQuery,
+    ServicesListQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    ServicesListQuery,
+    ServicesListQueryVariables
+  >(ServicesListDocument, baseOptions)
+}
+export function useServicesListLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ServicesListQuery,
+    ServicesListQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    ServicesListQuery,
+    ServicesListQueryVariables
+  >(ServicesListDocument, baseOptions)
+}
+export type ServicesListQueryHookResult = ReturnType<
+  typeof useServicesListQuery
+>
+export type ServicesListLazyQueryHookResult = ReturnType<
+  typeof useServicesListLazyQuery
+>
+export type ServicesListQueryResult = ApolloReactCommon.QueryResult<
+  ServicesListQuery,
+  ServicesListQueryVariables
 >
