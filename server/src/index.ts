@@ -27,7 +27,12 @@ const initialiseBootSequence = async () => {
   app.use(helmet())
   app.use(
     cors({
-      origin: 'http://localhost:3000',
+      origin:
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:3000'
+          : process.env.NODE_ENV === 'staging'
+          ? 'http://staging.jmmedia.nl'
+          : 'http://jmmedia.nl',
       credentials: true,
     })
   )
@@ -55,7 +60,7 @@ const initialiseBootSequence = async () => {
       return { ctx: { ...ctx }, user }
     },
   })
-  server.applyMiddleware({ app, cors: true, path: '/' })
+  server.applyMiddleware({ app, cors: true, path: '/api' })
   app.listen(PORT, () => {
     console.log('ready!')
   })
