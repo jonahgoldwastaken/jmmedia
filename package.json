@@ -5,8 +5,9 @@
     "dev": "concurrently \"yarn:dev:web\" \"yarn:dev:server\"",
     "dev:web": "cd web && yarn dev",
     "dev:server": "cd server && yarn dev",
-    "tsc:web": "tsc --noEmit --project web/tsconfig.json",
-    "tsc:server": "tsc --noEmit --project server/tsconfig.json"
+    "typecheck": "concurrently \"yarn:typecheck:web\" \"yarn:typecheck:server\"",
+    "typecheck:web": "tsc --noEmit --project web/tsconfig.json",
+    "typecheck:server": "tsc --noEmit --project server/tsconfig.json"
   },
   "workspaces": [
     "web",
@@ -23,7 +24,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn tsc:web && yarn tsc:server && lint-staged"
+      "pre-commit": "yarn typecheck && lint-staged"
     }
   },
   "lint-staged": {
