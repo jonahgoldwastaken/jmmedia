@@ -61,9 +61,9 @@ const initialiseBootSequence = async () => {
     },
   })
   server.applyMiddleware({ app, cors: true, path: '/api' })
-  app.listen(PORT, () => {
+  return app.listen(PORT, () => {
     console.log('ready!')
   })
 }
 
-initialiseBootSequence()
+export default initialiseBootSequence()
