@@ -15,5 +15,25 @@
   ],
   "devDependencies": {
     "concurrently": "^5.2.0"
+  },
+  "dependencies": {
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "./server/src/*.{ts,tsx}":[
+      "prettier --write",
+      "git add"
+    ],
+    "./web/{components,generated,interfaces,libs,pages,theme,types}/**/*.{ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ]
   }
 }
