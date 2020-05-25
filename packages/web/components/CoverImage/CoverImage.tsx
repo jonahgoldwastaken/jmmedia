@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { BaseHeading } from 'components/Text/Headings/BaseHeading'
 import styled, { css } from 'styled-components'
 import { primaries } from 'types/primaries'
@@ -79,8 +80,7 @@ const Image = styled.img`
   }
 `
 
-const Text = styled.p<CoverImageTextProps>`
-  ${BaseHeading}
+const Text = styled(BaseHeading).attrs({ as: 'p' })<CoverImageTextProps>`
   position: absolute;
   top: 50%;
   left: 0;

@@ -7,8 +7,7 @@ type NavLinkProps = {
   outbound?: boolean
 }
 
-const StyledAnchor = styled.a`
-  ${BaseHeading};
+const StyledAnchor = styled(BaseHeading).attrs({ as: 'a' })<{ href?: string }>`
   margin-left: ${props => props.theme.spacing[1]};
   font-size: ${props => props.theme.fontSizes[2]};
   color: ${props => props.theme.colours.secondary};
