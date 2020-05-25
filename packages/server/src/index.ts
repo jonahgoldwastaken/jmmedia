@@ -66,4 +66,4 @@ const initialiseBootSequence = async () => {
   })
 }
 
-export default initialiseBootSequence()
+initialiseBootSequence()

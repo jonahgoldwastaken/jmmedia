@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon -w src -e ts --exec \"ts-node src\"",
-    "start": "nodemon dist",
+    "start": "node dist",
     "build": "tsc"
   },
   "dependencies": {
