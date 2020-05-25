@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import { NavList } from 'components/Nav'
+import styled from 'styled-components'
 import { HeaderNavLink } from './Link'
 
 const StyledNav = styled.nav`

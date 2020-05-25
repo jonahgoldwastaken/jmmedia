@@ -1,7 +1,7 @@
 import { UserInputError } from 'apollo-server-koa'
 import { Arg, Query, Resolver, Mutation, Authorized } from 'type-graphql'
 import { Project, ProjectModel } from './model'
-import { ProjectInput } from './input'
+import { ProjectInput, NewProjectInput } from './input'
 
 @Resolver(() => Project)
 export class ProjectResolver {
@@ -39,7 +39,7 @@ export class ProjectResolver {
   @Mutation(() => Project)
   async createProject(
     @Arg('project')
-    { callToAction, content, service, listImage, slug, title }: ProjectInput
+    { callToAction, content, service, listImage, slug, title }: NewProjectInput
   ): Promise<Project> {
     const newProject = new ProjectModel({
       callToAction,

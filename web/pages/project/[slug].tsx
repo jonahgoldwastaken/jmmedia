@@ -14,7 +14,7 @@ import {
 } from 'components/Portfolio/Article'
 import { ArticleVideo } from 'components/Portfolio/Article/Video'
 import DarkRoom from 'components/Portfolio/Darkroom'
-import { Project } from 'interfaces/Project'
+import { Project, imageValue, rowValue } from 'interfaces/Project'
 
 type Props = {
   project: Project
@@ -43,32 +43,24 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
           }}
         >
           <ArticleTitle>{project.title}</ArticleTitle>
-          {project.content.map(contentBlock => {
-            if (contentBlock.type === 'heading')
-              return <ArticleHeading>{contentBlock.content}</ArticleHeading>
-            else if (contentBlock.type === 'paragraph')
-              return <ArticleText>{contentBlock.content}</ArticleText>
-            else if (contentBlock.type === 'row') {
-              const images = JSON.parse(contentBlock.content)
+          {project.content.map(({ type, data }) => {
+            if (type === 'heading')
+              return <ArticleHeading>{data}</ArticleHeading>
+            else if (type === 'paragraph')
+              return <ArticleText>{data}</ArticleText>
+            else if (type === 'row') {
+              const images: rowValue = JSON.parse(data)
               return (
-                <ArticleImageRow
-                  key={contentBlock.content}
-                  amount={contentBlock.size || 3}
-                >
-                  {images.map((image: string) => (
-                    <ArticleImage src={image} />
+                <ArticleImageRow key={data} amount={images.length}>
+                  {images.map(({ srcSet, alt }) => (
+                    <ArticleImage src={srcSet[0]} alt={alt} />
                   ))}
                 </ArticleImageRow>
               )
-            } else if (contentBlock.type === 'image')
-              return (
-                <ArticleImage
-                  src={contentBlock.content}
-                  alt={contentBlock.alt}
-                />
-              )
-            else if (contentBlock.type === 'film')
-              return <ArticleVideo controls src={contentBlock.content} />
+            } else if (type === 'image') {
+              const { srcSet, alt }: imageValue = JSON.parse(data)
+              return <ArticleImage src={srcSet[0]} alt={alt} />
+            } else return <ArticleVideo controls src={data} />
           })}
 
           <DarkRoom />

@@ -11,7 +11,7 @@ export type ArticleContext = {
 }
 
 export const ArticleContext = createContext<ArticleContext>({
-  currentImage: undefined,
+  currentImage: { src: '' },
   setCurrentImage: () => {},
   darkRoomOpen: false,
   setDarkRoomOpen: () => {},

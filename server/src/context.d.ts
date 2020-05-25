@@ -1,5 +1,3 @@
-import { User } from 'api/User'
-
 export interface jwtPayload {
   id: string
 }

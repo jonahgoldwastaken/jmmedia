@@ -1,12 +1,7 @@
 import styled from 'styled-components'
-import { BaseHeading, HeadingProps } from './BaseHeading'
+import { BaseHeading } from './BaseHeading'
 
-type HeadingOneProps = {
-  noMargin?: boolean
-}
-
-export const HeadingOne = styled.h1<HeadingProps & HeadingOneProps>`
-  ${BaseHeading};
+export const HeadingOne = styled(BaseHeading)`
   margin: ${props => (props.noMargin ? `0` : `${props.theme.spacing[1]} 0`)};
   font-size: ${props => props.theme.fontSizes[4]};
   font-weight: ${props => props.theme.fontWeights[3]};

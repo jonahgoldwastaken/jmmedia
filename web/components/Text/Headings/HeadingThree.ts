@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-import { BaseHeading, HeadingProps } from './BaseHeading'
+import { BaseHeading } from './BaseHeading'
 
-export const HeadingThree = styled.h3<HeadingProps>`
-  ${BaseHeading};
+export const HeadingThree = styled(BaseHeading).attrs({ as: 'h3' })`
   font-size: ${props => props.theme.fontSizes[2]};
   font-weight: ${props => props.theme.fontWeights[2]};
   color: ${props =>

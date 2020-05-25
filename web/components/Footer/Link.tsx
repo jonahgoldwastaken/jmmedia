@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
 import { BaseRunning } from 'components/Text'
+import styled, { css } from 'styled-components'
 
 type FooterLinkProps = {
   colour: 'primary' | 'secondary'

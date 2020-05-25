@@ -1,5 +1,5 @@
-import styled from 'styled-components'
 import { Logo } from 'components/Logo'
+import styled from 'styled-components'
 import { HeaderNav } from './HeaderNav'
 
 type HeaderProps = {

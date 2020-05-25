@@ -1,11 +1,9 @@
-import { ChangeEvent, KeyboardEvent } from 'react'
 import { TextAreaInput } from 'components/Form'
 import { ArticleText } from 'components/Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
-interface ParagraphEditorProps extends EditorProps<HTMLTextAreaElement> {
-  onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
-}
+interface ParagraphEditorProps
+  extends EditorProps<HTMLTextAreaElement, HTMLParagraphElement> {}
 
 export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
   editing,

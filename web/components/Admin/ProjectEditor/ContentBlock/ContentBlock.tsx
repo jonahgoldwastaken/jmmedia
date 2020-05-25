@@ -1,9 +1,9 @@
-import { useContext, useState, ChangeEvent } from 'react'
-import styled from 'styled-components'
+import { SmallSelectInput } from 'components/Form'
 import { ProjectContent } from 'interfaces/Project'
+import { ChangeEvent, useContext, useState } from 'react'
+import styled from 'styled-components'
 import { ProjectEditorContext } from '../Context'
 import { HeadingEditor, ParagraphEditor } from './BlockTypes'
-import { SmallSelectInput } from 'components/Form'
 
 type ContentBlockProps = {
   type: string

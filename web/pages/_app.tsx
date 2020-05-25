@@ -8,6 +8,8 @@ import useMedia from 'use-media'
 import MediaQueryContext from 'components/MediaQueryContext'
 import { darkTheme, lightTheme } from 'theme'
 import { logPageViews } from 'libs/analytics'
+import { NextPage } from 'next'
+import { AppContext, AppInitialProps } from 'next/app'
 
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
@@ -20,7 +22,11 @@ const CriticalCSS = createGlobalStyle`
   }
 `
 
-const MyApp = ({ Component, pageProps, router }) => {
+const MyApp: NextPage<AppContext & AppInitialProps> = ({
+  Component,
+  pageProps,
+  router,
+}) => {
   const lightMode: boolean = useMedia('(prefers-color-scheme: light)')
   const prefersReducedMotion: boolean = useMedia(
     'prefers-reduced-motion: reduce'

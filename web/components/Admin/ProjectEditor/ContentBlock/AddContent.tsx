@@ -1,8 +1,8 @@
+import { SelectInput } from 'components/Form'
+import { ContentInput } from 'generated/graphql'
 import { ChangeEvent, useContext } from 'react'
 import styled from 'styled-components'
-import { SelectInput } from 'components/Form'
 import { ProjectEditorContext } from '../Context'
-import { ContentInput } from 'generated/graphql'
 
 const AddContentSelectContainer = styled.div`
   width: ${props => props.theme.widths[3]};

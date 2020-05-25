@@ -1,6 +1,6 @@
+import { BaseRunning } from 'components/Text'
 import { ChangeEvent, KeyboardEvent } from 'react'
 import styled, { css } from 'styled-components'
-import { BaseRunning } from 'components/Text'
 
 export interface BaseInputTagProps {
   name: string

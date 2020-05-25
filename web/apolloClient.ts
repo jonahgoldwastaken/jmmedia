@@ -8,7 +8,7 @@ import { onError } from 'apollo-link-error'
 
 export default function createApolloClient(
   initialState: any,
-  ctx: NextPageContext
+  ctx?: NextPageContext
 ) {
   const cookie = useCookie()
   const authToken = cookie.get('auth-token')

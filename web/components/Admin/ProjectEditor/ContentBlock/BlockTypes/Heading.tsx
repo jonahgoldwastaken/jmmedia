@@ -1,9 +1,9 @@
-import { ChangeEvent } from 'react'
 import { Input } from 'components/Form'
 import { ArticleHeading } from 'components/Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
-interface HeadingEditorProps extends EditorProps<HTMLInputElement> {}
+interface HeadingEditorProps
+  extends EditorProps<HTMLInputElement, HTMLHeadingElement> {}
 
 export const HeadingEditor: React.FunctionComponent<HeadingEditorProps> = ({
   value,

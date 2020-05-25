@@ -1,5 +1,5 @@
 import ProjectEditor from 'components/Admin/ProjectEditor'
-import { ProjectInput } from 'generated/graphql'
+import { NewProjectInput } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
 import { useCookie } from 'next-cookie'
@@ -13,7 +13,7 @@ const NewProjectPage: NextPage<Props> = () => {
   const cookie = useCookie()
   const router = useRouter()
 
-  const [project, setProject] = useState<ProjectInput>({
+  const [project, setProject] = useState<NewProjectInput>({
     title: '',
     slug: '',
     listImage: '',
@@ -26,8 +26,8 @@ const NewProjectPage: NextPage<Props> = () => {
     name,
     value,
   }: {
-    name: string
-    value: string | any[]
+    name: keyof NewProjectInput
+    value: any
   }) => {
     const tempProject = { ...project }
     tempProject[name] = value

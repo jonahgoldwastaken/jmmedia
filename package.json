@@ -4,7 +4,9 @@
   "scripts": {
     "dev": "concurrently \"yarn:dev:web\" \"yarn:dev:server\"",
     "dev:web": "cd web && yarn dev",
-    "dev:server": "cd server && yarn dev"
+    "dev:server": "cd server && yarn dev",
+    "tsc:web": "tsc --noEmit --project web/tsconfig.json",
+    "tsc:server": "tsc --noEmit --project server/tsconfig.json"
   },
   "workspaces": [
     "web",
@@ -21,17 +23,15 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "yarn tsc:web && yarn tsc:server && lint-staged"
     }
   },
   "lint-staged": {
-    "./server/src/*.{ts,tsx}": [
-      "prettier --write",
-      "tsc --noEmit"
+    "./server/src/*.{ts}": [
+      "prettier --write"
     ],
     "./web/{components,generated,interfaces,libs,pages,theme,types}/**/*.{ts,tsx}": [
-      "prettier --write",
-      "tsc --noEmit"
+      "prettier --write"
     ]
   }
 }

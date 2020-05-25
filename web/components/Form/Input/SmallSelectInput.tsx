@@ -1,3 +1,4 @@
+import { rgba } from 'polished'
 import styled from 'styled-components'
 import {
   BaseInputProps,
@@ -5,7 +6,6 @@ import {
   BaseInputTagProps,
   Label,
 } from './BaseInput'
-import { rgba } from 'polished'
 
 interface SmallSelectInputTagProps extends BaseInputTagProps {}
 

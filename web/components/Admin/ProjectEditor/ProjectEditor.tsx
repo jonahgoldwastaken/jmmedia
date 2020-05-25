@@ -1,19 +1,22 @@
 import Footer, { FooterLink } from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Portfolio/Article'
-import { ProjectInput, useProjectServiceOptionsQuery } from 'generated/graphql'
+import {
+  useProjectServiceOptionsQuery,
+  NewProjectInput,
+} from 'generated/graphql'
+import { useEffect } from 'react'
 import Editor, { Sandbox, SideBar } from '../Editor'
 import ContentBlock, { AddContent } from './ContentBlock'
 import { ProjectEditorContext } from './Context'
-import { useEffect } from 'react'
 
 type Props = {
-  project: ProjectInput
+  project: NewProjectInput
   onChange: ({
     name,
     value,
   }: {
-    name: string
-    value: Array<any> | string | File
+    name: keyof NewProjectInput
+    value: any
   }) => void
   onSubmit: () => void
 }
@@ -26,11 +29,13 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
   const { data, loading } = useProjectServiceOptionsQuery()
 
   useEffect(() => {
-    const lastIndex = content.length - 1
-    if (content[lastIndex]?.data) {
-      const newContent = [...content]
-      newContent.push({ data: '', type: 'paragraph' })
-      onChange({ name: 'content', value: newContent })
+    if (content?.length > 1) {
+      const lastIndex = content?.length - 1
+      if (content[lastIndex]?.data) {
+        const newContent = [...content]
+        newContent.push({ data: '', type: 'paragraph' })
+        onChange({ name: 'content', value: newContent })
+      }
     }
   }, [content])
 
@@ -77,7 +82,10 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
       <Editor>
         <SideBar
           title="Nieuw project"
-          onChange={onChange}
+          onChange={({ name, value }) => {
+            if (Object.keys(project).includes(name))
+              onChange({ name: name as keyof NewProjectInput, value })
+          }}
           onSubmit={onSubmit}
           properties={properties}
         />

@@ -1,2 +1,2 @@
-export { ContentBlock as default } from './ContentBlock'
 export * from './AddContent'
+export { ContentBlock as default } from './ContentBlock'

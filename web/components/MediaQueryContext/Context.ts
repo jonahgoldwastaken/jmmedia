@@ -5,4 +5,7 @@ export interface MediaQueryContext {
   prefersReducedMotion: boolean
 }
 
-export const MediaQueryContext = createContext<MediaQueryContext>(null)
+export const MediaQueryContext = createContext<MediaQueryContext>({
+  lightMode: false,
+  prefersReducedMotion: false,
+})

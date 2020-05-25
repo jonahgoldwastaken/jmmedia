@@ -1,10 +1,10 @@
+import { BaseHeading } from 'components/Text/Headings/BaseHeading'
 import styled, { css } from 'styled-components'
 import { primaries } from 'types/primaries'
-import { BaseHeading } from 'components/Text/Headings/BaseHeading'
 
 type CoverImageContainerProps = {
   colour: primaries
-  transform?: {
+  transform: {
     top?: number
     left?: number
   }
@@ -51,20 +51,20 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
     }
 
     ${props => {
-      if (props.transform)
-        if (!props.transform.left && props.transform.top)
-          return css`
-            margin-top: ${props.transform.top / 16}rem;
-          `
-        else if (props.transform.left && !props.transform.top)
-          return css`
-            margin-left: ${props.transform.left / 16}rem;
-          `
-        else
-          return css`
-            margin: ${props.transform.top / 16}rem 0 0
-              ${props.transform.left / 16}rem;
-          `
+      if (!props.transform.left && props.transform.top)
+        return css`
+          margin-top: ${props.transform.top / 16}rem;
+        `
+      else if (props.transform.left && !props.transform.top)
+        return css`
+          margin-left: ${props.transform.left / 16}rem;
+        `
+      else if (props.transform.left && props.transform.top)
+        return css`
+          margin: ${props.transform.top / 16}rem 0 0
+            ${props.transform.left / 16}rem;
+        `
+      else return ''
     }}
   }
 `

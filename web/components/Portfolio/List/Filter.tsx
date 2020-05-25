@@ -1,13 +1,15 @@
+import { BaseRunning } from 'components/Text'
 import { useContext, useRef } from 'react'
 import styled from 'styled-components'
-import { BaseRunning } from 'components/Text'
 import { ProjectListContext } from './Context'
 
 const Div = styled.div`
   color: ${props => props.theme.colours.secondary};
 `
 
-const StyledSelect = styled.select`
+const StyledSelect = styled.select<{
+  ref: any
+}>`
   all: unset;
   ${BaseRunning};
   margin-right: calc(${props => props.theme.spacing[0]} / 2);

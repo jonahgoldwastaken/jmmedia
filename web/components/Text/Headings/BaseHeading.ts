@@ -1,12 +1,12 @@
-import { css } from 'styled-components'
+import styled from 'styled-components'
 
-export type HeadingProps = {
+export interface HeadingProps {
   colour?: 'primary' | 'secondary'
   centre?: boolean
   noMargin?: boolean
 }
 
-export const BaseHeading = css`
+export const BaseHeading = styled.h1<HeadingProps>`
   font-family: ${props => props.theme.fontFamilies.heading};
   letter-spacing: 0.03125em;
   line-height: 1em;

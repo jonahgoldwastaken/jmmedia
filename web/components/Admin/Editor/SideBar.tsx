@@ -1,11 +1,10 @@
-import styled from 'styled-components'
 import Form, { Button, FileInput, Input, SelectInput } from 'components/Form'
 import { HeadingOne } from 'components/Text/Headings'
-import { Paragraph } from 'components/Text'
+import styled from 'styled-components'
 
 type SideBarProps = {
   onSubmit: () => void
-  onChange: ({ name, value }: { name: string; value: string | File }) => void
+  onChange: ({ name, value }: { name: string; value: any }) => void
   properties: Array<{
     name: string
     type: string
@@ -61,13 +60,17 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
                 required
                 onChange={e => {
                   const reader = new FileReader()
-                  reader.readAsDataURL(e.currentTarget.files[0])
-                  reader.addEventListener('load', () => {
-                    onChange({
-                      name,
-                      value: reader.result as string,
+                  const { files, validity } = e.currentTarget
+                  if (validity.valid && files?.length) {
+                    const file = files[0]
+                    reader.readAsDataURL(file as File)
+                    reader.addEventListener('load', () => {
+                      onChange({
+                        name,
+                        value: reader.result as string,
+                      })
                     })
-                  })
+                  }
                 }}
               />
             )
@@ -78,7 +81,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
                 label={name}
                 name={name}
                 value={value as string}
-                options={options}
+                options={options || []}
                 required
                 onChange={e => {
                   onChange({ name, value: e.currentTarget.value })

@@ -1,6 +1,6 @@
+import Image from 'components/Image'
 import Link from 'next/link'
 import styled from 'styled-components'
-import Image from 'components/Image'
 
 type ListItemProps = {
   href: string

@@ -1,14 +1,14 @@
 // import { storage } from '../../bucket'
 import { S3 } from 'aws-sdk'
+import { ReadStream } from 'fs'
 import { FileUpload, GraphQLUpload } from 'graphql-upload'
 import sharp from 'sharp'
 import stream from 'stream'
 import { Arg, Mutation, Resolver } from 'type-graphql'
+import URL from 'url'
 import { v4 } from 'uuid'
 import { storage } from '../../bucket'
 import { Media } from './model'
-import { ReadStream } from 'fs'
-import URL from 'url'
 
 const uploadSettings = [
   { size: 500, name: 'small' },
@@ -65,6 +65,7 @@ export class MediaResolver {
   @Mutation(() => Boolean, { description: 'Deletes files at specified URL' })
   async deleteImage(@Arg('url') url: string): Promise<boolean> {
     const { pathname } = URL.parse(url)
+    if (!pathname) return false
     const Key = pathname.slice(1)
     const b2 = storage()
     await b2.deleteObject({ Bucket: 'jmmedia', Key }).promise()

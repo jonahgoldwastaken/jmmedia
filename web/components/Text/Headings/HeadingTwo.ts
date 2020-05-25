@@ -1,12 +1,7 @@
 import styled from 'styled-components'
-import { BaseHeading, HeadingProps } from './BaseHeading'
+import { BaseHeading } from './BaseHeading'
 
-type HeadingTwoProps = {
-  noMargin?: boolean
-}
-
-export const HeadingTwo = styled.h2<HeadingProps & HeadingTwoProps>`
-  ${BaseHeading};
+export const HeadingTwo = styled(BaseHeading).attrs({ as: 'h2' })`
   font-size: ${props => props.theme.fontSizes[3]};
   font-weight: ${props => props.theme.fontWeights[2]};
   color: ${props =>

@@ -30,3 +30,24 @@ export class ProjectInput implements Partial<Project> {
   @Field(() => [ContentInput], { nullable: true })
   content?: ContentInput[]
 }
+
+@InputType()
+export class NewProjectInput implements Partial<Project> {
+  @Field()
+  title?: string
+
+  @Field()
+  slug?: string
+
+  @Field()
+  listImage?: string
+
+  @Field(() => String)
+  service?: string
+
+  @Field()
+  callToAction?: string
+
+  @Field(() => [ContentInput])
+  content?: ContentInput[]
+}

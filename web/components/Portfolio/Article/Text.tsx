@@ -1,6 +1,6 @@
-import styled from 'styled-components'
 import { Paragraph } from 'components/Text'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
+import styled from 'styled-components'
 
 export const ArticleTitle = styled(HeadingOne)`
   margin-bottom: ${props => props.theme.spacing[1]};
