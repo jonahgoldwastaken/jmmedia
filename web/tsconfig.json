@@ -1,0 +1,22 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions":{
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "skipLibCheck": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "isolatedModules": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": false,
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules"]
+}

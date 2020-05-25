@@ -1,8 +1,6 @@
 {
-  "functions": {
-    "pages/api/**/*.ts": {
-      "maxDuration": 2,
-      "includeFiles": "components/Api/**/*.ts"
-    }
-  }
+  "builds": [
+    { "src": "web", "use": "@now/next" },
+    { "src": "server", "use": "@now/node" }
+  ]
 }
