@@ -1,8 +1,19 @@
 {
   "name": "jmmedia",
   "private": true,
+  "scripts": {
+    "dev": "concurrently \"yarn:dev:web\" \"yarn:dev:server\"",
+    "dev:web": "cd web && yarn dev",
+    "dev:server": "cd server && yarn dev",
+    "build": "concurrently \"yarn:build:web\" \"yarn:build:server\"",
+    "build:web": "cd web && yarn build",
+    "build:server": "cd server && yarn build"
+  },
   "workspaces": [
     "web",
     "server"
-  ]
+  ],
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  }
 }

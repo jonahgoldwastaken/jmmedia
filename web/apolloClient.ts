@@ -14,7 +14,7 @@ export default function createApolloClient(
   const authToken = cookie.get('auth-token')
 
   const link = createUploadLink({
-    uri: 'http://127.0.0.1:3000',
+    uri: 'http://127.0.0.1:4000',
     credentials: 'include',
     headers: authToken
       ? {

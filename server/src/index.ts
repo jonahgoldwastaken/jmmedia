@@ -1,3 +1,5 @@
+import { resolve } from 'path'
+require('dotenv').config({ path: resolve(process.cwd(), '..', '.env') })
 import cors from '@koa/cors'
 import { ApolloServer } from 'apollo-server-koa'
 import { graphqlUploadKoa } from 'graphql-upload'
@@ -19,14 +21,13 @@ const initialiseBootSequence = async () => {
     validate: false,
     authChecker,
   })
-
-  const PORT = process.env.PORT || 3000
+  const PORT = process.env.PORT || 4000
 
   const app = new koa()
   app.use(helmet())
   app.use(
     cors({
-      origin: 'http://localhost:3001',
+      origin: 'http://localhost:3000',
       credentials: true,
     })
   )

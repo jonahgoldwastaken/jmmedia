@@ -8,6 +8,7 @@ import { v4 } from 'uuid'
 import { storage } from '../../bucket'
 import { Media } from './model'
 import { ReadStream } from 'fs'
+import URL from 'url'
 
 const uploadSettings = [
   { size: 500, name: 'small' },
@@ -63,7 +64,7 @@ export class MediaResolver {
 
   @Mutation(() => Boolean, { description: 'Deletes files at specified URL' })
   async deleteImage(@Arg('url') url: string): Promise<boolean> {
-    const { pathname } = new URL(url)
+    const { pathname } = URL.parse(url)
     const Key = pathname.slice(1)
     const b2 = storage()
     await b2.deleteObject({ Bucket: 'jmmedia', Key }).promise()

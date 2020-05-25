@@ -1,0 +1,8 @@
+node_modules
+.yarn
+.next
+dist
+.env
+yarn-error.log
+.vercel
+.vscode

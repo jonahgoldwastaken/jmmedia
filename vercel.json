@@ -1,6 +1,10 @@
 {
   "builds": [
-    { "src": "web", "use": "@now/next" },
-    { "src": "server", "use": "@now/node" }
+    { "src": "web/package.json", "use": "@now/next" },
+    { "src": "server/package.json", "use": "@now/node-server" }
+  ],
+  "routes": [
+    { "src": "/api", "dest": "server" },
+    { "src": "/(.*)", "dest": "web" }
   ]
 }

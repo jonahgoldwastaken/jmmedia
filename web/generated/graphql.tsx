@@ -182,12 +182,12 @@ export type UserInput = {
   password: Scalars['String'];
 };
 
-export type Unnamed_1_MutationVariables = {
+export type ImageUploadMutationVariables = {
   imageFile: Scalars['Upload'];
 };
 
 
-export type Unnamed_1_Mutation = (
+export type ImageUploadMutation = (
   { __typename?: 'Mutation' }
   & Pick<Mutation, 'uploadImage'>
 );
@@ -227,6 +227,36 @@ export type ProjectServiceOptionsQuery = (
 );
 
 
+export const ImageUploadDocument = gql`
+    mutation imageUpload($imageFile: Upload!) {
+  uploadImage(file: $imageFile)
+}
+    `;
+export type ImageUploadMutationFn = ApolloReactCommon.MutationFunction<ImageUploadMutation, ImageUploadMutationVariables>;
+
+/**
+ * __useImageUploadMutation__
+ *
+ * To run a mutation, you first call `useImageUploadMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useImageUploadMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [imageUploadMutation, { data, loading, error }] = useImageUploadMutation({
+ *   variables: {
+ *      imageFile: // value for 'imageFile'
+ *   },
+ * });
+ */
+export function useImageUploadMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<ImageUploadMutation, ImageUploadMutationVariables>) {
+        return ApolloReactHooks.useMutation<ImageUploadMutation, ImageUploadMutationVariables>(ImageUploadDocument, baseOptions);
+      }
+export type ImageUploadMutationHookResult = ReturnType<typeof useImageUploadMutation>;
+export type ImageUploadMutationResult = ApolloReactCommon.MutationResult<ImageUploadMutation>;
+export type ImageUploadMutationOptions = ApolloReactCommon.BaseMutationOptions<ImageUploadMutation, ImageUploadMutationVariables>;
 export const LoginUserDocument = gql`
     mutation loginUser($user: UserInput!) {
   loginUser(user: $user)
