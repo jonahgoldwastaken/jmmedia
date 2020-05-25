@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon -w src -e ts --exec \"ts-node src\"",
-    "start": "node dist",
+    "start": "nodemon dist",
     "build": "tsc"
   },
   "dependencies": {
@@ -27,6 +27,7 @@
     "ramda": "^0.27.0",
     "reflect-metadata": "^0.1.13",
     "sharp": "^0.25.3",
+    "nodemon": "^2.0.4",
     "type-graphql": "^1.0.0-rc.2",
     "uuid": "^8.1.0"
   },
@@ -44,7 +45,6 @@
     "@types/node": "^14.0.5",
     "@types/sharp": "^0.25.0",
     "@types/uuid": "^8.0.0",
-    "nodemon": "^2.0.4",
     "ts-node": "^8.10.1",
     "typescript": "^3.9.3"
   }
