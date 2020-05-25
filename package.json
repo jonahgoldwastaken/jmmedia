@@ -3,15 +3,15 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"yarn:dev:web\" \"yarn:dev:server\"",
-    "dev:web": "cd web && yarn dev",
-    "dev:server": "cd server && yarn dev",
+    "dev:web": "yarn workspace @jmmedia/web dev",
+    "dev:server": "yarn workspace @jmmedia/server dev",
     "typecheck": "concurrently \"yarn:typecheck:web\" \"yarn:typecheck:server\"",
     "typecheck:web": "tsc --noEmit --project web/tsconfig.json",
-    "typecheck:server": "tsc --noEmit --project server/tsconfig.json"
+    "typecheck:server": "tsc --noEmit --project server/tsconfig.json",
+    "heroku-postbuild": "./scripts/heroku.build"
   },
   "workspaces": [
-    "web",
-    "server"
+    "packages/*"
   ],
   "devDependencies": {
     "husky": "^4.2.5",
