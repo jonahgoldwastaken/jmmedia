@@ -29,11 +29,11 @@
   "lint-staged": {
     "./server/src/*.{ts,tsx}":[
       "prettier --write",
-      "git add"
+      "tsc --noEmit"
     ],
     "./web/{components,generated,interfaces,libs,pages,theme,types}/**/*.{ts,tsx}": [
       "prettier --write",
-      "git add"
+      "tsc --noEmit"
     ]
   }
 }
