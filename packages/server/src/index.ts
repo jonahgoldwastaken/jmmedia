@@ -1,5 +1,5 @@
 import { resolve } from 'path'
-require('dotenv').config({ path: resolve(process.cwd(), '..', '.env') })
+require('dotenv').config({ path: resolve(process.cwd(), '..', '..', '.env') })
 import cors from '@koa/cors'
 import { ApolloServer } from 'apollo-server-koa'
 import { graphqlUploadKoa } from 'graphql-upload'
@@ -60,8 +60,8 @@ const initialiseBootSequence = async () => {
       return { ctx: { ...ctx }, user }
     },
   })
-  server.applyMiddleware({ app, cors: true, path: '/api' })
-  return app.listen(PORT, () => {
+  server.applyMiddleware({ app, cors: true, path: '/' })
+  app.listen(PORT, () => {
     console.log('ready!')
   })
 }
