@@ -16,7 +16,7 @@ fi
 
   if [ "$BUILD_ENV" = "web" ]; then
     yarn workspace @jmmedia/web build
-  elif [ "$BUILD_ENV" = "jmmedia-server" ]; then
+  elif [ "$BUILD_ENV" = "server" ]; then
     yarn workspace @jmmedia/server build
   else
     echo "Error: no build config for INATO_BUILD_ENV value '$INATO_BUILD_ENV'"
