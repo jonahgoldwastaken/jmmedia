@@ -5,9 +5,6 @@
     "dev": "concurrently \"yarn:dev:web\" \"yarn:dev:server\"",
     "dev:web": "yarn workspace @jmmedia/web dev",
     "dev:server": "yarn workspace @jmmedia/server dev",
-    "build": "concurrently \"yarn:build:web\" \"yarn:build:server\"",
-    "build:web": "yarn workspace @jmmedia/web build",
-    "build:server": "yarn workspace @jmmedia/server build",
     "typecheck": "concurrently \"yarn:typecheck:web\" \"yarn:typecheck:server\"",
     "typecheck:web": "tsc --noEmit --project packages/web/tsconfig.json",
     "typecheck:server": "tsc --noEmit --project packages/server/tsconfig.json"
