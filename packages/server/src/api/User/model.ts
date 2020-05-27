@@ -10,9 +10,8 @@ export class User {
   @Property({ required: true, unique: true })
   username: String
 
-  @Field({ nullable: true })
   @Property({ required: true })
-  password?: String
+  password: String
 }
 
 export const UserModel = getModelForClass(User, {
