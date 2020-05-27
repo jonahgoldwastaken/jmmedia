@@ -37,6 +37,10 @@ export const ImageEditor: React.FunctionComponent<ImageEditorProps> = ({
       />
     </EditorContainer>
   ) : (
-    <ArticleImage onClick={onClick} src={value.srcSet[1]} alt={value.alt} />
+    <ArticleImage
+      onClick={onClick}
+      src={value.srcSet ? value.srcSet[1] : ''}
+      alt={value.alt}
+    />
   )
 }

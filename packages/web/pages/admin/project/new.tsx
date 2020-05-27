@@ -1,16 +1,25 @@
+import { DataValue } from '@apollo/react-hoc'
 import ProjectEditor from 'components/Admin/ProjectEditor'
-import { NewProjectInput } from 'generated/graphql'
+import {
+  LoggedInUserQuery,
+  LoggedInUserQueryVariables,
+  NewProjectInput,
+  withLoggedInUser,
+} from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
-import { useCookie } from 'next-cookie'
+import { Cookie, withCookie, WithCookieProps } from 'next-cookie'
+import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 
-interface Props {}
+interface Props extends WithRouterProps, WithCookieProps {
+  data: DataValue<LoggedInUserQuery, LoggedInUserQueryVariables>
+}
 
-const NewProjectPage: NextPage<Props> = () => {
-  const cookie = useCookie()
+//@ts-ignore
+const NewProjectPage: NextPage<Props> = ({ cookie }) => {
   const router = useRouter()
 
   const [project, setProject] = useState<NewProjectInput>({
@@ -44,7 +53,7 @@ const NewProjectPage: NextPage<Props> = () => {
         body: JSON.stringify(project),
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `bearer ${cookie.get('auth-token')}`,
+          Authorization: `bearer ${(cookie as Cookie).get('auth-token')}`,
         },
       }
     ).then(r => (r.ok ? r.json() : null))
@@ -66,4 +75,24 @@ const NewProjectPage: NextPage<Props> = () => {
   )
 }
 
-export default withApollo({ ssr: true })(NewProjectPage)
+//@ts-ignore
+NewProjectPage.getInitialProps = ({ req, res, router, ...ctx }: any) => {
+  const token: string = ctx.cookie.get('auth-token')
+  console.log(ctx)
+
+  if (req && !token) {
+    res.writeHead(302, { Location: '/admin/login' })
+    res.end()
+    return
+  } else if (!token) {
+    router.push('/admin/login')
+    return
+  }
+  return {
+    token,
+  }
+}
+
+export default withApollo({ ssr: true })(
+  withLoggedInUser()(withCookie(withRouter(NewProjectPage)))
+)
