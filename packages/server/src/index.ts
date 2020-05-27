@@ -37,7 +37,7 @@ const initialiseBootSequence = async () => {
   app.keys = [process.env.SESSION_SECRET as string]
   app.use(async (ctx, next) => {
     const [error, user, message] = await authorizeToken(ctx)
-    if (error) throw error
+    if (error) console.log(error)
     if (message) console.log(message)
     if (user) ctx.state.user = user
     await next()

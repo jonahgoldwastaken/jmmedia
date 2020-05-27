@@ -1,11 +1,5 @@
-import { DataValue } from '@apollo/react-hoc'
 import ProjectEditor from 'components/Admin/ProjectEditor'
-import {
-  LoggedInUserQuery,
-  LoggedInUserQueryVariables,
-  NewProjectInput,
-  withLoggedInUser,
-} from 'generated/graphql'
+import { LoggedInUserDocument, NewProjectInput } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
 import { Cookie, withCookie, WithCookieProps } from 'next-cookie'
@@ -15,7 +9,9 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 
 interface Props extends WithRouterProps, WithCookieProps {
-  data: DataValue<LoggedInUserQuery, LoggedInUserQueryVariables>
+  currentUser: {
+    username: string
+  }
 }
 
 //@ts-ignore
@@ -76,23 +72,26 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
 }
 
 //@ts-ignore
-NewProjectPage.getInitialProps = ({ req, res, router, ...ctx }: any) => {
-  const token: string = ctx.cookie.get('auth-token')
-  console.log(ctx)
+NewProjectPage.getInitialProps = async ({
+  req,
+  res,
+  router,
+  apolloClient,
+}: any) => {
+  const {
+    data: { currentUser },
+  } = await apolloClient.query({ query: LoggedInUserDocument })
 
-  if (req && !token) {
+  if (req && !currentUser) {
     res.writeHead(302, { Location: '/admin/login' })
     res.end()
     return
-  } else if (!token) {
+  } else if (!currentUser) {
     router.push('/admin/login')
     return
   }
-  return {
-    token,
-  }
+
+  return { currentUser }
 }
 
-export default withApollo({ ssr: true })(
-  withLoggedInUser()(withCookie(withRouter(NewProjectPage)))
-)
+export default withApollo({ ssr: true })(withCookie(withRouter(NewProjectPage)))

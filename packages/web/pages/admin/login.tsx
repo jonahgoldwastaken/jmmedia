@@ -37,7 +37,7 @@ const Login: NextPage<LoginProps> = () => {
   useEffect(() => {
     if (data) {
       cookie.set('auth-token', data.loginUser)
-      router.push('/admin/project/new')
+      router.push('/admin')
     }
   }, [data])
 

@@ -1,7 +1,6 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { NextPageContext } from 'next'
-import { useCookie } from 'next-cookie'
 import { ApolloLink } from 'apollo-link'
 import { createUploadLink } from 'apollo-upload-client'
 import { onError } from 'apollo-link-error'
@@ -10,21 +9,25 @@ export default function createApolloClient(
   initialState: any,
   ctx?: NextPageContext
 ) {
-  const cookie = useCookie()
-  const authToken = cookie.get('auth-token')
-
+  const enhancedFetch = (url: string, init: any) =>
+    fetch(url, {
+      ...init,
+      headers: {
+        ...init.headers,
+        Authorization: ctx?.req?.headers.cookie
+          ? `bearer ${ctx.req.headers.cookie.split(';')[0].split('=')[1]}`
+          : document.cookie
+          ? `bearer ${document.cookie.split('=')[1]}`
+          : '',
+      },
+    }).then(response => response)
   const link = createUploadLink({
     uri:
       process.env.NODE_ENV === 'development'
         ? 'http://127.0.0.1:4000'
         : 'https://api.jmmedia.nl',
     credentials: 'include',
-    headers: authToken
-      ? {
-          Authorization: `bearer ${authToken}`,
-          'keep-alive': 'true',
-        }
-      : { 'keep-alive': 'true' },
+    fetch: enhancedFetch,
   })
   return new ApolloClient({
     connectToDevTools: true,
