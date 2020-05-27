@@ -9,6 +9,7 @@ type ProjectEditorContext = {
     options?: Array<{ name: string; value: string }>
   }>
   content: ContentInput[]
+  addContentBlock: () => void
   onChange: ({
     name,
     value,
@@ -22,6 +23,7 @@ type ProjectEditorContext = {
 export const ProjectEditorContext = createContext<ProjectEditorContext>({
   properties: [],
   content: [],
+  addContentBlock: () => undefined,
   onChange: () => undefined,
   onSubmit: () => undefined,
 })

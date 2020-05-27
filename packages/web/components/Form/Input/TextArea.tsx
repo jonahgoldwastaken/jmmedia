@@ -19,14 +19,15 @@ export const TextAreaInput: React.FunctionComponent<TextAreaInputProps> = ({
   required,
   value,
   onChange,
-  onKeyPress,
+  onKeyUp,
   name,
   label,
 }) => (
   <Label>
     {label}
     <TextArea
-      onKeyPress={onKeyPress}
+      wrap="soft"
+      onKeyUp={onKeyUp}
       name={name}
       required={required}
       onChange={onChange}

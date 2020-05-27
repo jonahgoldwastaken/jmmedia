@@ -8,6 +8,7 @@ interface HeadingEditorProps
 export const HeadingEditor: React.FunctionComponent<HeadingEditorProps> = ({
   value,
   onChange,
+  onCancel,
   onSubmit,
   onClick,
   editing,
@@ -21,8 +22,9 @@ export const HeadingEditor: React.FunctionComponent<HeadingEditorProps> = ({
         value={value}
         required
         onChange={onChange}
-        onKeyPress={e => {
+        onKeyUp={e => {
           if (e.key === 'Enter') onSubmit()
+          else if (e.key === 'Escape') onCancel()
         }}
       />
     </EditorContainer>

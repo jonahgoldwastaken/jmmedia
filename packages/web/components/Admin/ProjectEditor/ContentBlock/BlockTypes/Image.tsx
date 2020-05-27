@@ -21,7 +21,7 @@ export const ImageEditor: React.FunctionComponent<ImageEditorProps> = ({
         name=""
         value={value.alt}
         onChange={onChange}
-        onKeyPress={e => {
+        onKeyUp={e => {
           if (e.key === 'Enter') {
             e.preventDefault()
             onSubmit()

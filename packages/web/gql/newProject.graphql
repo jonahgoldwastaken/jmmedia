@@ -1,0 +1,5 @@
+mutation newProject($project: NewProjectInput!) {
+  createProject(project: $project) {
+    slug
+  }
+} 

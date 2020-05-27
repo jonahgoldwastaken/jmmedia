@@ -8,6 +8,7 @@ interface ParagraphEditorProps
 export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
   editing,
   onChange,
+  onCancel,
   onSubmit,
   onClick,
   value,
@@ -20,10 +21,14 @@ export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
         value={value}
         required
         onChange={onChange}
-        onKeyPress={e => {
+        onKeyUp={e => {
+          console.log(e.key)
           if (e.key === 'Enter') {
             e.preventDefault()
             onSubmit()
+          } else if (e.key === 'Escape') {
+            e.preventDefault()
+            onCancel()
           }
         }}
       />
