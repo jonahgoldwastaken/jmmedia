@@ -17,15 +17,14 @@ export default function createApolloClient(
     uri:
       process.env.NODE_ENV === 'development'
         ? 'http://127.0.0.1:4000'
-        : 'http://api.jmmedia.nl',
+        : 'https://api.jmmedia.nl',
     credentials: 'include',
     headers: authToken
       ? {
           Authorization: `bearer ${authToken}`,
           'keep-alive': 'true',
-          'Access-Control-Allow-Credentials': 'true',
         }
-      : { 'keep-alive': 'true', 'Access-Control-Allow-Credentials': 'true' },
+      : { 'keep-alive': 'true' },
   })
   return new ApolloClient({
     connectToDevTools: true,
