@@ -1,12 +1,12 @@
 import Image from 'components/Image'
-import { useContext } from 'react'
+import { MouseEvent } from 'react'
 import styled from 'styled-components'
-import { ArticleContext } from './Context'
 
 type ImageProps = {
   noQuote?: boolean
-  src: string
+  src: string[] | string
   alt?: string
+  onClick: (e: MouseEvent<HTMLImageElement>) => void
 }
 
 const StyledImage = styled(Image)`
@@ -28,18 +28,9 @@ const StyledImage = styled(Image)`
   }
 `
 
-export const ArticleImage: React.FunctionComponent<ImageProps> = props => {
-  const { setCurrentImage, setDarkRoomOpen } = useContext(ArticleContext)
-  return (
-    <StyledImage
-      {...props}
-      onClick={() => {
-        setCurrentImage({ src: props.src, alt: props.alt })
-        setDarkRoomOpen(true)
-      }}
-    />
-  )
-}
+export const ArticleImage: React.FunctionComponent<ImageProps> = props => (
+  <StyledImage {...props} />
+)
 
 type ArticleImageRowProps = {
   amount: number

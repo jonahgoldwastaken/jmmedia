@@ -3,7 +3,7 @@ import { ArticleText } from 'components/Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
 interface ParagraphEditorProps
-  extends EditorProps<HTMLTextAreaElement, HTMLParagraphElement> {}
+  extends EditorProps<HTMLTextAreaElement, HTMLParagraphElement, string> {}
 
 export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
   editing,

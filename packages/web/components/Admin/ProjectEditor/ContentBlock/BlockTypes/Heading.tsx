@@ -3,7 +3,7 @@ import { ArticleHeading } from 'components/Portfolio/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
 interface HeadingEditorProps
-  extends EditorProps<HTMLInputElement, HTMLHeadingElement> {}
+  extends EditorProps<HTMLInputElement, HTMLHeadingElement, string> {}
 
 export const HeadingEditor: React.FunctionComponent<HeadingEditorProps> = ({
   value,

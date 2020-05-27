@@ -22,14 +22,18 @@ export const authorizeToken = async ({
   headers: { authorization },
 }: KoaContext): Promise<AuthenticationData> => {
   if (!authorization) return [null, null, 'No Token provided']
-  const token = authorization.split(' ')[1]
-  const payload = verify(token, SESSION_SECRET as string, {
-    issuer: 'api.jmmedia.nl',
-    audience: 'jmmedia.nl',
-  }) as any
-  const user = await UserModel.findById(payload.id)
-  if (!user) return [null, null, 'User not found']
-  else return [null, user, null]
+  try {
+    const token = authorization.split(' ')[1]
+    const payload = verify(token, SESSION_SECRET as string, {
+      issuer: 'api.jmmedia.nl',
+      audience: 'jmmedia.nl',
+    }) as any
+    const user = await UserModel.findById(payload.id)
+    if (!user) return [null, null, 'User not found']
+    else return [null, user, null]
+  } catch (err) {
+    return [err, null, null]
+  }
 }
 
 export const authenticateUser = async (

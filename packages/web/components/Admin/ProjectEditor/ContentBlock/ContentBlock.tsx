@@ -1,9 +1,16 @@
 import { SmallSelectInput } from 'components/Form'
 import { ProjectContent } from 'interfaces/Project'
-import { ChangeEvent, useContext, useState } from 'react'
+import {
+  ChangeEvent,
+  useContext,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react'
 import styled from 'styled-components'
 import { ProjectEditorContext } from '../Context'
-import { HeadingEditor, ParagraphEditor } from './BlockTypes'
+import { HeadingEditor, ParagraphEditor, ImageEditor } from './BlockTypes'
+import { useImageUploadMutation } from 'generated/graphql'
 
 type ContentBlockProps = {
   type: string
@@ -15,7 +22,7 @@ const Container = styled.div`
   display: inline-block;
   width: 100%;
   position: relative;
-  cursor: text;
+  cursor: text !important;
 
   &:not(:hover) > label {
     display: none;
@@ -28,14 +35,38 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
   index,
 }) => {
   const { onChange, content } = useContext(ProjectEditorContext)
+  const [uploadImage, { data: imageData }] = useImageUploadMutation()
   const [editing, setEditing] = useState(!data)
-  const [value, setValue] = useState(data)
-
-  const saveHandler = async () => {
-    const updatedContentBlock = {
-      type,
-      data: value,
+  const [value, setValue] = useState(() => {
+    if (type === 'image' || type === 'row') {
+      let returnValue
+      if (data) returnValue = JSON.parse(data)
+      else returnValue = {}
+      return returnValue
     }
+    return data
+  })
+
+  useEffect(() => {
+    if (type === 'image' && imageData)
+      setValue({
+        alt: value.alt || '',
+        srcSet: imageData.uploadImage,
+      })
+  }, [imageData])
+
+  const saveHandler = useCallback(() => {
+    let updatedContentBlock
+    if (type === 'image' || type === 'row')
+      updatedContentBlock = {
+        type,
+        data: JSON.stringify(value),
+      }
+    else
+      updatedContentBlock = {
+        type,
+        data: value,
+      }
 
     let contentList = [...content]
     contentList.splice(index, 1, updatedContentBlock)
@@ -45,15 +76,17 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
     })
 
     setEditing(false)
-  }
+  }, [value])
 
-  const changeTypehandler = (e: ChangeEvent<HTMLSelectElement>) => {
+  const changeTypeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const newType = e.currentTarget.value as ProjectContent['type']
     let newContentBlock = {} as ProjectContent
 
     if (
       (type === 'image' && newType !== type) ||
-      (type === 'row' && newType !== type)
+      (type === 'row' && newType !== type) ||
+      (newType === 'image' && newType !== type) ||
+      (newType === 'row' && newType !== type)
     )
       newContentBlock.data = ''
     else newContentBlock.data = value
@@ -74,7 +107,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
         <SmallSelectInput
           label="&#9776;"
           name=""
-          onChange={changeTypehandler}
+          onChange={changeTypeHandler}
           value={type}
           options={[
             { name: 'Tekstkop', value: 'heading' },
@@ -99,6 +132,26 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
           onClick={() => setEditing(true)}
           editing={editing}
           onChange={e => changeHandler(e.currentTarget.value)}
+          onSubmit={saveHandler}
+          value={value}
+        />
+      )}
+      {type === 'image' && (
+        <ImageEditor
+          onClick={() => setEditing(true)}
+          editing={editing}
+          onChange={e => {
+            const {
+              target: { value: alt, validity, files },
+            } = e
+            if (validity.valid && files?.length)
+              uploadImage({ variables: { imageFile: files[0] } })
+            else
+              setValue({
+                srcSet: value.srcSet,
+                alt,
+              })
+          }}
           onSubmit={saveHandler}
           value={value}
         />

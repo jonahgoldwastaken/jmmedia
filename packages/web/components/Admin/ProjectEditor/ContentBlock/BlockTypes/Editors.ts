@@ -1,9 +1,9 @@
 import { ChangeEvent, MouseEvent } from 'react'
 import styled from 'styled-components'
 
-export interface EditorProps<InputElement, ArticleElement> {
+export interface EditorProps<InputElement, ArticleElement, VType = string> {
   editing: boolean
-  value: string
+  value: VType
   onClick: (e: MouseEvent<ArticleElement>) => void
   onChange: (event: ChangeEvent<InputElement>) => void
   onSubmit: () => void

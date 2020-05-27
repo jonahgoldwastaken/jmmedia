@@ -1,6 +1,8 @@
 import Form, { Button, FileInput, Input, SelectInput } from 'components/Form'
 import { HeadingOne } from 'components/Text/Headings'
 import styled from 'styled-components'
+import { useListImageUploadMutation } from 'generated/graphql'
+import { useEffect } from 'react'
 
 type SideBarProps = {
   onSubmit: () => void
@@ -40,6 +42,17 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
   title,
   onSubmit,
 }) => {
+  const [mutation, { data }] = useListImageUploadMutation()
+
+  useEffect(() => {
+    if (data) {
+      onChange({
+        name: 'listImage',
+        value: data.uploadListImage,
+      })
+    }
+  }, [data])
+
   return (
     <SideBarContainer>
       <HeadingOne>{title}</HeadingOne>
@@ -59,17 +72,10 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
                 value={value}
                 required
                 onChange={e => {
-                  const reader = new FileReader()
                   const { files, validity } = e.currentTarget
                   if (validity.valid && files?.length) {
                     const file = files[0]
-                    reader.readAsDataURL(file as File)
-                    reader.addEventListener('load', () => {
-                      onChange({
-                        name,
-                        value: reader.result as string,
-                      })
-                    })
+                    mutation({ variables: { imageFile: file } })
                   }
                 }}
               />

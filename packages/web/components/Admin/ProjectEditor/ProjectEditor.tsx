@@ -22,16 +22,17 @@ type Props = {
 }
 
 export const ProjectEditor: React.FunctionComponent<Props> = ({
-  project: { content, ...project },
+  project,
   onChange: onChange,
   onSubmit: onSubmit,
 }) => {
   const { data, loading } = useProjectServiceOptionsQuery()
+  const { content } = project
 
   useEffect(() => {
-    if (content?.length > 1) {
-      const lastIndex = content?.length - 1
-      if (content[lastIndex]?.data) {
+    if (content.length >= 1) {
+      const lastIndex = content.length - 1
+      if (content[lastIndex].data) {
         const newContent = [...content]
         newContent.push({ data: '', type: 'paragraph' })
         onChange({ name: 'content', value: newContent })
