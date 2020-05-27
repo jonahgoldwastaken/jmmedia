@@ -1,22 +1,30 @@
-import { withApollo } from 'libs/apollo'
+import { DataValue } from '@apollo/react-hoc'
+import Header from 'components/Header'
+import List, { ListItem } from 'components/List'
+import Section from 'components/Section'
+import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
 import {
-  withAdminPanel,
   AdminPanelQuery,
   AdminPanelQueryVariables,
+  useLoggedInUserQuery,
+  withAdminPanel,
 } from 'generated/graphql'
-import { DataValue } from '@apollo/react-hoc'
+import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
-import List, { ListItem } from 'components/List'
-import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
-import Section from 'components/Section'
-import Header from 'components/Header'
+import { withCookie, WithCookieProps } from 'next-cookie'
+import { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
+import { withRouter } from 'next/router'
 
 type Props = {
   data: DataValue<AdminPanelQuery, AdminPanelQueryVariables>
-}
+} & WithCookieProps &
+  WithRouterProps
 
+//@ts-ignore
 const AdminPanel: NextPage<Props> = ({ data: { projects, services } }) => {
+  const { data } = useLoggedInUserQuery()
+
   return (
     <>
       <Head>
@@ -24,7 +32,7 @@ const AdminPanel: NextPage<Props> = ({ data: { projects, services } }) => {
       </Head>
 
       <Header />
-      <HeadingOne>Admin paneel</HeadingOne>
+      <HeadingOne>Hoi {data?.currentUser?.username}!</HeadingOne>
       <Section background="primary" grid>
         <div>
           <HeadingTwo>projecten</HeadingTwo>
@@ -59,4 +67,23 @@ const AdminPanel: NextPage<Props> = ({ data: { projects, services } }) => {
   )
 }
 
-export default withApollo({ ssr: true })(withAdminPanel()(AdminPanel))
+//@ts-ignore
+AdminPanel.getInitialProps = (ctx: any) => {
+  const token: string = ctx.cookie.get('auth-token')
+
+  if (ctx.req && !token) {
+    ctx.res.writeHead(302, { Location: '/admin/login' })
+    ctx.res.end()
+    return
+  } else if (!token) {
+    ctx.router.push('/admin/login')
+    return
+  }
+  return {
+    token,
+  }
+}
+
+export default withApollo({ ssr: true })(
+  withAdminPanel()(withCookie(withRouter(AdminPanel)))
+)

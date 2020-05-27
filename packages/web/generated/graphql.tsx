@@ -79,7 +79,6 @@ export type User = {
   __typename?: 'User'
   _id: Scalars['ID']
   username: Scalars['String']
-  password?: Maybe<Scalars['String']>
 }
 
 export type Mutation = {
@@ -178,6 +177,17 @@ export type UserInput = {
   password: Scalars['String']
 }
 
+export type AdminPanelQueryVariables = {}
+
+export type AdminPanelQuery = { __typename?: 'Query' } & {
+  projects: Array<
+    { __typename?: 'Project' } & Pick<Project, 'listImage' | 'title' | 'slug'>
+  >
+  services: Array<
+    { __typename?: 'Service' } & Pick<Service, 'listImage' | 'name' | 'slug'>
+  >
+}
+
 export type ImageUploadMutationVariables = {
   imageFile: Scalars['Upload']
 }
@@ -220,6 +230,104 @@ export type ServicesListQuery = { __typename?: 'Query' } & {
   >
 }
 
+export type LoggedInUserQueryVariables = {}
+
+export type LoggedInUserQuery = { __typename?: 'Query' } & {
+  currentUser?: Maybe<{ __typename?: 'User' } & Pick<User, 'username'>>
+}
+
+export const AdminPanelDocument = gql`
+  query adminPanel {
+    projects {
+      listImage
+      title
+      slug
+    }
+    services {
+      listImage
+      name
+      slug
+    }
+  }
+`
+export type AdminPanelProps<
+  TChildProps = {},
+  TDataName extends string = 'data'
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    AdminPanelQuery,
+    AdminPanelQueryVariables
+  >
+} &
+  TChildProps
+export function withAdminPanel<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = 'data'
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    AdminPanelQuery,
+    AdminPanelQueryVariables,
+    AdminPanelProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    AdminPanelQuery,
+    AdminPanelQueryVariables,
+    AdminPanelProps<TChildProps, TDataName>
+  >(AdminPanelDocument, {
+    alias: 'adminPanel',
+    ...operationOptions,
+  })
+}
+
+/**
+ * __useAdminPanelQuery__
+ *
+ * To run a query within a React component, call `useAdminPanelQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminPanelQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminPanelQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useAdminPanelQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    AdminPanelQuery,
+    AdminPanelQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<AdminPanelQuery, AdminPanelQueryVariables>(
+    AdminPanelDocument,
+    baseOptions
+  )
+}
+export function useAdminPanelLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    AdminPanelQuery,
+    AdminPanelQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    AdminPanelQuery,
+    AdminPanelQueryVariables
+  >(AdminPanelDocument, baseOptions)
+}
+export type AdminPanelQueryHookResult = ReturnType<typeof useAdminPanelQuery>
+export type AdminPanelLazyQueryHookResult = ReturnType<
+  typeof useAdminPanelLazyQuery
+>
+export type AdminPanelQueryResult = ApolloReactCommon.QueryResult<
+  AdminPanelQuery,
+  AdminPanelQueryVariables
+>
 export const ImageUploadDocument = gql`
   mutation imageUpload($imageFile: Upload!) {
     uploadImage(file: $imageFile)
@@ -644,4 +752,91 @@ export type ServicesListLazyQueryHookResult = ReturnType<
 export type ServicesListQueryResult = ApolloReactCommon.QueryResult<
   ServicesListQuery,
   ServicesListQueryVariables
+>
+export const LoggedInUserDocument = gql`
+  query loggedInUser {
+    currentUser {
+      username
+    }
+  }
+`
+export type LoggedInUserProps<
+  TChildProps = {},
+  TDataName extends string = 'data'
+> = {
+  [key in TDataName]: ApolloReactHoc.DataValue<
+    LoggedInUserQuery,
+    LoggedInUserQueryVariables
+  >
+} &
+  TChildProps
+export function withLoggedInUser<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = 'data'
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    LoggedInUserQuery,
+    LoggedInUserQueryVariables,
+    LoggedInUserProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withQuery<
+    TProps,
+    LoggedInUserQuery,
+    LoggedInUserQueryVariables,
+    LoggedInUserProps<TChildProps, TDataName>
+  >(LoggedInUserDocument, {
+    alias: 'loggedInUser',
+    ...operationOptions,
+  })
+}
+
+/**
+ * __useLoggedInUserQuery__
+ *
+ * To run a query within a React component, call `useLoggedInUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useLoggedInUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useLoggedInUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useLoggedInUserQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    LoggedInUserQuery,
+    LoggedInUserQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    LoggedInUserQuery,
+    LoggedInUserQueryVariables
+  >(LoggedInUserDocument, baseOptions)
+}
+export function useLoggedInUserLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    LoggedInUserQuery,
+    LoggedInUserQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    LoggedInUserQuery,
+    LoggedInUserQueryVariables
+  >(LoggedInUserDocument, baseOptions)
+}
+export type LoggedInUserQueryHookResult = ReturnType<
+  typeof useLoggedInUserQuery
+>
+export type LoggedInUserLazyQueryHookResult = ReturnType<
+  typeof useLoggedInUserLazyQuery
+>
+export type LoggedInUserQueryResult = ApolloReactCommon.QueryResult<
+  LoggedInUserQuery,
+  LoggedInUserQueryVariables
 >
