@@ -1,0 +1,4 @@
+mutation imageUpload($imageFile: Upload!) {
+  uploadImage(file: $imageFile)
+}
+

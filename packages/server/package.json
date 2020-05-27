@@ -1,0 +1,51 @@
+{
+  "name": "@jmmedia/server",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "git@github.com:theonejonahgold/jmmedia-backend.git",
+  "author": "Jonah Meijers <jonahmeijers97@gmail.com> (https://www.jonahmeijers.nl/)",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon -w src -e ts --exec \"ts-node src\"",
+    "start": "node dist",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@koa/cors": "^3.1.0",
+    "@typegoose/typegoose": "^7.1.2",
+    "@types/ramda": "^0.27.6",
+    "apollo-server-koa": "^2.13.1",
+    "argon2": "^0.26.2",
+    "aws-sdk": "^2.681.0",
+    "class-validator": "^0.12.2",
+    "dotenv": "^8.2.0",
+    "graphql": "^15.0.0",
+    "graphql-upload": "^10.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "koa-helmet": "^5.2.0",
+    "mongoose": "^5.9.15",
+    "ramda": "^0.27.0",
+    "reflect-metadata": "^0.1.13",
+    "sharp": "^0.25.3",
+    "nodemon": "^2.0.4",
+    "type-graphql": "^1.0.0-rc.2",
+    "uuid": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/aws-sdk": "^2.7.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/graphql": "^14.5.0",
+    "@types/graphql-upload": "^8.0.3",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/koa": "^2.11.3",
+    "@types/koa-helmet": "^5.2.0",
+    "@types/koa__cors": "^3.0.1",
+    "@types/mongodb": "^3.5.18",
+    "@types/mongoose": "^5.7.21",
+    "@types/node": "^14.0.5",
+    "@types/sharp": "^0.25.0",
+    "@types/uuid": "^8.0.0",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.3"
+  }
+}

@@ -56,6 +56,16 @@ typings/
 
 # dotenv environment variables file
 .env
+.env.local
+.env.production
 
 # next.js build output
 .next
+
+.DS_Store
+
+.vercel
+
+key.json
+
+.yarn

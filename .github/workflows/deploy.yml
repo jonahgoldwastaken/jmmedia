@@ -15,15 +15,24 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-    - run: |
+    - name: Yarn Install & Build
+      run: |
           yarn config set ignore-engines true
           yarn --frozen-lockfile
-    - run: yarn build
-    - uses: oncletom/rsync-deployments@patch-1
+          yarn build
+    - name: Deploy
+      uses: oncletom/rsync-deployments@patch-1
       with:
         USER_AND_HOST: ${{secrets.DEPLOY_URL}}
         DEST: /home/jmmedia/site
         RSYNC_OPTIONS: -avzr --delete --exclude '.git*'
       env:
         DEPLOY_KEY: ${{secrets.PRIVATE_KEY}}
+    - name: SSH Remote Commands
+      uses: appleboy/ssh-action@v0.1.1
+      with:
+        host: ${{secrets.DEPLOY_URL}}
+        key: ${{secrets.PRIVATE_KEY}}
+        scritps: pm2 restart jmmedia-web && pm2 restart jmmedia-server
+
         
