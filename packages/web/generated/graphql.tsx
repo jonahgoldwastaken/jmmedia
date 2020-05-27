@@ -85,6 +85,8 @@ export type Mutation = {
   __typename?: 'Mutation'
   /** Upload a single file */
   uploadImage: Array<Scalars['String']>
+  /** Upload a listImage */
+  uploadListImage: Scalars['String']
   /** Deletes files at specified URL */
   deleteImage: Scalars['Boolean']
   createService: Service
@@ -98,6 +100,10 @@ export type Mutation = {
 }
 
 export type MutationUploadImageArgs = {
+  file: Scalars['Upload']
+}
+
+export type MutationUploadListImageArgs = {
   file: Scalars['Upload']
 }
 
@@ -195,6 +201,15 @@ export type ImageUploadMutationVariables = {
 export type ImageUploadMutation = { __typename?: 'Mutation' } & Pick<
   Mutation,
   'uploadImage'
+>
+
+export type ListImageUploadMutationVariables = {
+  imageFile: Scalars['Upload']
+}
+
+export type ListImageUploadMutation = { __typename?: 'Mutation' } & Pick<
+  Mutation,
+  'uploadListImage'
 >
 
 export type LoginUserMutationVariables = {
@@ -407,6 +422,86 @@ export type ImageUploadMutationResult = ApolloReactCommon.MutationResult<
 export type ImageUploadMutationOptions = ApolloReactCommon.BaseMutationOptions<
   ImageUploadMutation,
   ImageUploadMutationVariables
+>
+export const ListImageUploadDocument = gql`
+  mutation listImageUpload($imageFile: Upload!) {
+    uploadListImage(file: $imageFile)
+  }
+`
+export type ListImageUploadMutationFn = ApolloReactCommon.MutationFunction<
+  ListImageUploadMutation,
+  ListImageUploadMutationVariables
+>
+export type ListImageUploadProps<
+  TChildProps = {},
+  TDataName extends string = 'mutate'
+> = {
+  [key in TDataName]: ApolloReactCommon.MutationFunction<
+    ListImageUploadMutation,
+    ListImageUploadMutationVariables
+  >
+} &
+  TChildProps
+export function withListImageUpload<
+  TProps,
+  TChildProps = {},
+  TDataName extends string = 'mutate'
+>(
+  operationOptions?: ApolloReactHoc.OperationOption<
+    TProps,
+    ListImageUploadMutation,
+    ListImageUploadMutationVariables,
+    ListImageUploadProps<TChildProps, TDataName>
+  >
+) {
+  return ApolloReactHoc.withMutation<
+    TProps,
+    ListImageUploadMutation,
+    ListImageUploadMutationVariables,
+    ListImageUploadProps<TChildProps, TDataName>
+  >(ListImageUploadDocument, {
+    alias: 'listImageUpload',
+    ...operationOptions,
+  })
+}
+
+/**
+ * __useListImageUploadMutation__
+ *
+ * To run a mutation, you first call `useListImageUploadMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useListImageUploadMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [listImageUploadMutation, { data, loading, error }] = useListImageUploadMutation({
+ *   variables: {
+ *      imageFile: // value for 'imageFile'
+ *   },
+ * });
+ */
+export function useListImageUploadMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    ListImageUploadMutation,
+    ListImageUploadMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    ListImageUploadMutation,
+    ListImageUploadMutationVariables
+  >(ListImageUploadDocument, baseOptions)
+}
+export type ListImageUploadMutationHookResult = ReturnType<
+  typeof useListImageUploadMutation
+>
+export type ListImageUploadMutationResult = ApolloReactCommon.MutationResult<
+  ListImageUploadMutation
+>
+export type ListImageUploadMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  ListImageUploadMutation,
+  ListImageUploadMutationVariables
 >
 export const LoginUserDocument = gql`
   mutation loginUser($user: UserInput!) {

@@ -53,13 +53,29 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
               return (
                 <ArticleImageRow key={data} amount={images.length}>
                   {images.map(({ srcSet, alt }) => (
-                    <ArticleImage src={srcSet[0]} alt={alt} />
+                    <ArticleImage
+                      onClick={() => {
+                        setCurrentImage({ src: srcSet[1], alt })
+                        setDarkRoomOpen(true)
+                      }}
+                      src={srcSet[0]}
+                      alt={alt}
+                    />
                   ))}
                 </ArticleImageRow>
               )
             } else if (type === 'image') {
               const { srcSet, alt }: imageValue = JSON.parse(data)
-              return <ArticleImage src={srcSet[0]} alt={alt} />
+              return (
+                <ArticleImage
+                  onClick={() => {
+                    setCurrentImage({ src: srcSet[1], alt })
+                    setDarkRoomOpen(true)
+                  }}
+                  src={srcSet[0]}
+                  alt={alt}
+                />
+              )
             } else return <ArticleVideo controls src={data} />
           })}
 

@@ -1,20 +1,23 @@
 import { BaseRunning } from 'components/Text'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
+import { MouseEvent } from 'react'
 
 type ImageProps = {
   noQuote?: boolean
-  src: string
+  src: string[] | string
   alt?: string
-  onClick?: () => void
+  onClick?: (e: MouseEvent<HTMLImageElement>) => void
 }
 
 const Container = styled.div`
   display: inline-block;
   position: relative;
+  width: ${props => props.theme.widths[3]};
 `
 
 const StyledImage = styled.img`
-  width: 100%;
+  display: block;
+  width: ${props => props.theme.widths[3]};
   height: 100%;
   object-fit: cover;
 `
@@ -44,9 +47,24 @@ export const Image: React.FunctionComponent<ImageProps> = ({
   src,
   noQuote,
   ...props
-}) => (
-  <Container {...props}>
-    <StyledImage alt={alt} src={src} />
-    {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
-  </Container>
-)
+}) => {
+  const theme = useTheme()
+  if (typeof src !== 'string') {
+    return (
+      <Container {...props}>
+        <StyledImage
+          alt={alt}
+          srcSet={`${src[0]} 500w, ${src[1]} 1000w, ${src[2]} 2000w`}
+          sizes={`(max-width: ${theme.breakpoints[0]}) 500w, (max-width: ${theme.breakpoints[1]}) 1000w, (max-width: ${theme.breakpoints[2]}) 2000w`}
+        />
+        {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
+      </Container>
+    )
+  } else
+    return (
+      <Container {...props}>
+        <StyledImage alt={alt} src={src} />
+        {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
+      </Container>
+    )
+}

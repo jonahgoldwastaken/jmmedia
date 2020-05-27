@@ -2,3 +2,6 @@ mutation imageUpload($imageFile: Upload!) {
   uploadImage(file: $imageFile)
 }
 
+mutation listImageUpload($imageFile: Upload!) {
+  uploadListImage(file: $imageFile)
+}
