@@ -23,7 +23,7 @@ jobs:
       with:
         USER_AND_HOST: ${{secrets.DEPLOY_URL}}
         DEST: /site
-        RSYNC_OPTIONS: -avzr --delete --exclude '.git*'  
+        RSYNC_OPTIONS: -avzr --delete --exclude '.git*'
       env:
         DEPLOY_KEY: ${{secrets.PRIVATE_KEY}}
         
