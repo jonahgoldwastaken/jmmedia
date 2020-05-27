@@ -55,10 +55,10 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
                   {images.map(({ srcSet, alt }) => (
                     <ArticleImage
                       onClick={() => {
-                        setCurrentImage({ src: srcSet[1], alt })
+                        setCurrentImage({ src: srcSet[2], alt })
                         setDarkRoomOpen(true)
                       }}
-                      src={srcSet[0]}
+                      src={srcSet}
                       alt={alt}
                     />
                   ))}
@@ -69,10 +69,10 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
               return (
                 <ArticleImage
                   onClick={() => {
-                    setCurrentImage({ src: srcSet[1], alt })
+                    setCurrentImage({ src: srcSet[2], alt })
                     setDarkRoomOpen(true)
                   }}
-                  src={srcSet[0]}
+                  src={srcSet}
                   alt={alt}
                 />
               )

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 type ImageProps = {
   noQuote?: boolean
-  src: string
+  src: string[] | string
   alt?: string
   onClick: (e: MouseEvent<HTMLImageElement>) => void
 }
