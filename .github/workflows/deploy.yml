@@ -15,14 +15,11 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: Yarn Install
+    - name: Yarn Install & Build
       run: |
           yarn config set ignore-engines true
           yarn --frozen-lockfile
-    - name: Yarn Build
           yarn build
-    - name: Yarn Production Install
-          yarn install --prod
     - name: Deploy
       uses: oncletom/rsync-deployments@patch-1
       with:
