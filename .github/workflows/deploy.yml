@@ -22,20 +22,21 @@ jobs:
     - name: Yarn Build
       run: yarn build
     - name: Yarn Production Install
-      run: yarn install --prod
+      run: yarn install --prod --force --frozen-lockfile
     - name: Deploy
-      uses: oncletom/rsync-deployments@patch-1
+      uses: Burnett01/rsync-deployments@4.0
       with:
-        USER_AND_HOST: ${{secrets.DEPLOY_URL}}
-        DEST: /home/jmmedia/site
-        RSYNC_OPTIONS: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
-      env:
-        DEPLOY_KEY: ${{secrets.PRIVATE_KEY}}
-    - name: SSH Remote Commands
-      uses: appleboy/ssh-action@v0.1.1
+        remote_host: ${{secrets.DEPLOY_URL}}
+        remote_user: ${{secrets.DEPLOY_USER}}
+        remote_path: ${{secrets.DEPLOY_PATH}}
+        switches: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
+        remote_key: ${{secrets.PRIVATE_KEY}}
+    - name: Run SSH command
+      uses: garygrossgarten/github-action-ssh@v0.5.0
       with:
+        command: pm2 restart jmmedia-web && pm2 restart jmmedia-server
         host: ${{secrets.DEPLOY_URL}}
-        key: ${{secrets.PRIVATE_KEY}}
-        scripts: pm2 restart jmmedia-web && pm2 restart jmmedia-server
+        username: ${{secrets.DEPLOY_USER}}
+        privateKey: ${{secrets.PRIVATE_KEY}}
 
         
