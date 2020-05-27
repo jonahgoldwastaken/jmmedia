@@ -28,7 +28,7 @@ jobs:
       with:
         USER_AND_HOST: ${{secrets.DEPLOY_URL}}
         DEST: /home/jmmedia/site
-        RSYNC_OPTIONS: -avzr --delete --exclude '.git*'
+        RSYNC_OPTIONS: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
       env:
         DEPLOY_KEY: ${{secrets.PRIVATE_KEY}}
     - name: SSH Remote Commands
