@@ -20,7 +20,6 @@ export class UserResolver {
     @Arg('user') { username, password }: UserInput
   ): Promise<string | null> {
     const [error, user, message] = await authenticateUser(username, password)
-    console.log(error, user, message)
     if (error) throw error
     else if (message) throw new Error(message)
     else if (user) return issueToken(user._id)

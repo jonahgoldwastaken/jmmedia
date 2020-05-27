@@ -23,6 +23,7 @@ export class ProjectResolver {
 
   @Query(() => [Project], {
     description: 'Returns all projects, with possible filtering by service',
+    nullable: false,
   })
   async projects(
     @Arg('service', {
@@ -66,7 +67,6 @@ export class ProjectResolver {
         ...projectToUpdate.toObject(),
         ...project,
       }
-      console.log(project, updatedValues)
       projectToUpdate.overwrite(updatedValues)
       return await (await projectToUpdate.save()).toObject()
     } else throw new UserInputError('Invalid Project ID.')

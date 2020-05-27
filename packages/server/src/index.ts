@@ -60,7 +60,7 @@ const initialiseBootSequence = async () => {
   })
   server.applyMiddleware({ app, cors: true, path: '/' })
   app.listen(PORT, () => {
-    console.log('ready!')
+    console.log('ready on port :' + PORT + '!')
   })
 }
 
