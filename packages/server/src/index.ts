@@ -29,8 +29,8 @@ const initialiseBootSequence = async () => {
     cors({
       origin:
         process.env.NODE_ENV === 'development'
-          ? 'http://localhost:3000'
-          : 'http://www.jmmedia.nl',
+          ? 'http://127.0.0.1:3000'
+          : 'https://www.jmmedia.nl',
       credentials: true,
     })
   )
@@ -60,7 +60,7 @@ const initialiseBootSequence = async () => {
   })
   server.applyMiddleware({ app, cors: true, path: '/' })
   app.listen(PORT, () => {
-    console.log('ready!')
+    console.log('ready on port :' + PORT + '!')
   })
 }
 

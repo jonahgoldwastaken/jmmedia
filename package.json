@@ -26,6 +26,7 @@
   },
   "husky": {
     "hooks": {
+      "post-merge": "yarn workspace @jmmedia/web gql:gen",
       "pre-commit": "yarn typecheck && lint-staged"
     }
   },
