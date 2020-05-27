@@ -29,7 +29,7 @@ jobs:
         remote_host: ${{secrets.DEPLOY_URL}}
         remote_user: ${{secrets.DEPLOY_USER}}
         remote_path: ${{secrets.DEPLOY_PATH}}
-        switches: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
+        switches: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.vscode' --exclude '**/tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
         remote_key: ${{secrets.PRIVATE_KEY}}
     - name: Run SSH command
       uses: garygrossgarten/github-action-ssh@v0.5.0
