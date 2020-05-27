@@ -7,8 +7,7 @@
     "dev:server": "yarn workspace @jmmedia/server dev",
     "typecheck": "concurrently \"yarn:typecheck:web\" \"yarn:typecheck:server\"",
     "typecheck:web": "tsc --noEmit --project packages/web/tsconfig.json",
-    "typecheck:server": "tsc --noEmit --project packages/server/tsconfig.json",
-    "heroku-postbuild": "bash ./scripts/heroku.build"
+    "typecheck:server": "tsc --noEmit --project packages/server/tsconfig.json"
   },
   "workspaces": [
     "packages/*"
