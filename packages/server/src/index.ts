@@ -30,9 +30,7 @@ const initialiseBootSequence = async () => {
       origin:
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000'
-          : process.env.NODE_ENV === 'staging'
-          ? 'http://staging.jmmedia.nl'
-          : 'http://jmmedia.nl',
+          : 'http://www.jmmedia.nl',
       credentials: true,
     })
   )
