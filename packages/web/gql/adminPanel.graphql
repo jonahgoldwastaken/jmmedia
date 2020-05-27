@@ -1,0 +1,12 @@
+query adminPanel {
+  projects {
+    listImage
+    title
+    slug
+  }
+  services {
+    listImage
+    name
+    slug
+  }
+}

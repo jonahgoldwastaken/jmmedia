@@ -22,7 +22,10 @@ export class ServiceResolver {
     return await ServiceModel.findOne(query).populate('service')
   }
 
-  @Query(() => [Service], { description: 'Returns all services' })
+  @Query(() => [Service], {
+    description: 'Returns all services',
+    nullable: false,
+  })
   async services(): Promise<Service[]> {
     return await ServiceModel.find()
   }
