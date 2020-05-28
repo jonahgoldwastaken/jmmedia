@@ -61,7 +61,7 @@ export const SmallSelectInput: React.FunctionComponent<SmallSelectInputProps> = 
       required={required}
       name={name}
       onChange={onChange}
-      value={value}
+      value={value as string}
     >
       {options.map(option => (
         <option value={option.value}>{option.name}</option>

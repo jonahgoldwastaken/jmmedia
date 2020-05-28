@@ -1,4 +1,10 @@
-import Form, { Button, FileInput, Input, SelectInput } from 'components/Form'
+import Form, {
+  Button,
+  FileInput,
+  Input,
+  SelectInput,
+  TextAreaInput,
+} from 'components/Form'
 import { HeadingOne } from 'components/Text/Headings'
 import styled from 'styled-components'
 import { useListImageUploadMutation } from 'generated/graphql'
@@ -12,7 +18,7 @@ type SideBarProps = {
     | Array<{
         name: string
         type: string
-        value: string | null | undefined
+        value: string | string[] | null | undefined
         options?: Array<{ name: string; value: string }>
       }>
     | null
@@ -73,7 +79,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
                 key={name}
                 label={name}
                 name={name}
-                value={value || ''}
+                value={(value as string) || ''}
                 onChange={e => {
                   const { files, validity } = e.currentTarget
                   if (validity.valid && files?.length) {
@@ -93,6 +99,23 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
                 options={options || []}
                 onChange={e => {
                   onChange({ name, value: e.currentTarget.value })
+                }}
+              />
+            )
+          else if (type === 'textarea')
+            return (
+              <TextAreaInput
+                key={name}
+                label={name}
+                name={name}
+                value={
+                  typeof value !== 'string' && value ? value.join('\n') : value
+                }
+                onChange={e => {
+                  onChange({
+                    name,
+                    value: e.currentTarget.value.split('\n'),
+                  })
                 }}
               />
             )

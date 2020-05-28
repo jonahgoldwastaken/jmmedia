@@ -1,8 +1,8 @@
-import ProjectEditor from 'components/Admin/ProjectEditor'
+import ServiceEditor from 'components/Admin/ServiceEditor'
 import {
   LoggedInUserDocument,
-  NewProjectInput,
-  useNewProjectMutation,
+  ServiceInput,
+  useNewServiceMutation,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
@@ -19,43 +19,44 @@ interface Props extends WithRouterProps, WithCookieProps {
 }
 
 //@ts-ignore
-const NewProjectPage: NextPage<Props> = ({ cookie }) => {
+const NewServicePage: NextPage<Props> = ({ cookie }) => {
   const router = useRouter()
-  const [mutation] = useNewProjectMutation()
+  const [mutation] = useNewServiceMutation()
 
-  const [project, setProject] = useState<NewProjectInput>({
-    title: '',
+  const [service, setService] = useState<ServiceInput>({
+    name: '',
     slug: '',
     listImage: '',
-    service: '',
+    description: [],
+    baseOptions: [],
+    additionalOptions: [],
     callToAction: '',
-    content: [],
   })
 
   const changeHandler = ({
     name,
     value,
   }: {
-    name: keyof NewProjectInput
+    name: keyof ServiceInput
     value: any
   }) => {
-    const tempProject = { ...project }
-    tempProject[name] = value
-    setProject(tempProject)
+    const tempService = { ...service }
+    tempService[name] = value
+    setService(tempService)
   }
 
   const submitHandler = useCallback(async () => {
-    await mutation({ variables: { project } })
-    router.push('/admin')
-  }, [project])
+    await mutation({ variables: { service } })
+    router.push(`/admin`)
+  }, [service])
 
   return (
     <>
       <Head>
-        <title>{project.title || 'Nieuw project'} - JM</title>
+        <title>{service.name || 'Nieuw service'} - JM</title>
       </Head>
-      <ProjectEditor
-        project={project}
+      <ServiceEditor
+        service={service}
         onChange={changeHandler}
         onSubmit={submitHandler}
       />
@@ -64,7 +65,7 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
 }
 
 //@ts-ignore
-NewProjectPage.getInitialProps = async ({
+NewServicePage.getInitialProps = async ({
   req,
   res,
   router,
@@ -93,4 +94,4 @@ NewProjectPage.getInitialProps = async ({
   }
 }
 
-export default withApollo({ ssr: true })(withCookie(withRouter(NewProjectPage)))
+export default withApollo({ ssr: true })(withCookie(withRouter(NewServicePage)))

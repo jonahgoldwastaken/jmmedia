@@ -1,0 +1,17 @@
+mutation updateService($service: ServiceInput!, $id: String!) {
+  updateService(service: $service, id: $id) {
+    name
+  }
+}
+query serviceToUpdate($slug: String!) {
+  service(slug: $slug) {
+    _id,
+    name,
+    slug,
+    listImage
+    description
+    baseOptions
+    additionalOptions
+    callToAction
+  }
+}

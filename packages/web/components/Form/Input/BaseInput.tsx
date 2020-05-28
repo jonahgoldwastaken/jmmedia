@@ -8,7 +8,7 @@ export interface BaseInputTagProps {
 }
 
 export interface BaseInputProps<ValueType, Element> extends BaseInputTagProps {
-  value?: ValueType
+  value?: ValueType | null
   label: string
   onChange: (event: ChangeEvent<Element>) => void
   onKeyUp?: (event: KeyboardEvent<Element>) => void
