@@ -23,7 +23,7 @@ export const authorizeToken = async ({
 }: KoaContext): Promise<AuthenticationData> => {
   if (!authorization) return [null, null, 'No Token provided']
   try {
-    const token = authorization.split(' ')[1]
+    const token = (authorization as string).replace(/^bearer /g, '')
     const payload = verify(token, SESSION_SECRET as string, {
       issuer: 'api.jmmedia.nl',
       audience: 'jmmedia.nl',
