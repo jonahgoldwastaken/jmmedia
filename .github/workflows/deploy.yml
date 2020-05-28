@@ -15,16 +15,16 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: Cache Web Build
+    - name: @jmmedia/web build cache
       uses: actions/cache@v1
       with:
         path: ${{ github.workspace }}/packages/web/.next/cache
         key: ${{ runner.os }}-nextjs-${{ hashFiles('packages/web/yarn.lock') }}
-    - name: Cache Server Build
+    - name: yarn package build
       uses: actions/cache@v1
       with:
-        path: ${{ github.workspace }}/packages/server/dist
-        key: ${{ runner.os }}-server-${{ hashFiles('packages/server/yarn.lock') }}
+        path: ${{ github.workspace }}/node_modules
+        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
     - name: Yarn Install
       run: |
           yarn config set ignore-engines true
