@@ -15,8 +15,8 @@ import connectToDB from './db'
 import { default as helmet } from 'koa-helmet'
 
 const initialiseBootSequence = async () => {
-  const connectedToDb = await connectToDB()
-  console.log(connectedToDb)
+  console.log(process.env)
+  await connectToDB()
   const schema = await buildSchema({
     resolvers: [UserResolver, ProjectResolver, ServiceResolver, MediaResolver],
     validate: false,
