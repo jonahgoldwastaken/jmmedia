@@ -34,7 +34,7 @@ jobs:
     - name: Run SSH command
       uses: garygrossgarten/github-action-ssh@v0.5.0
       with:
-        command: pm2 restart jmmedia-web && pm2 restart jmmedia-server
+        command: pm2 restart jmmedia-web && pm2 restart jmmedia-server --update-env
         host: ${{secrets.DEPLOY_URL}}
         username: ${{secrets.DEPLOY_USER}}
         privateKey: ${{secrets.PRIVATE_KEY}}
