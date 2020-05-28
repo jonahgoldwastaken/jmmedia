@@ -21,7 +21,6 @@ export default function createApolloClient(
           : '',
       },
     }).then(response => response)
-  console.log(typeof document !== 'undefined' && document.cookie)
   const link = createUploadLink({
     uri:
       process.env.NODE_ENV === 'development'

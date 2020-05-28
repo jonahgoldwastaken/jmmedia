@@ -4,8 +4,7 @@ import { filmValue } from 'interfaces/Project'
 import { EditorContainer, EditorProps } from './Editors'
 import styled from 'styled-components'
 
-interface FilmEditorProps
-  extends EditorProps<HTMLInputElement, HTMLButtonElement, filmValue> {}
+interface FilmEditorProps extends EditorProps<HTMLButtonElement, filmValue> {}
 
 const EditButton = styled(Button)`
   position: absolute;
@@ -27,7 +26,7 @@ export const FilmEditor: React.FunctionComponent<FilmEditorProps> = ({
         label=""
         name=""
         value={value}
-        onChange={onChange}
+        onChange={e => onChange(e.currentTarget.value)}
         onKeyUp={e => {
           if (e.key === 'Enter') {
             e.preventDefault()

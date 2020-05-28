@@ -1,5 +1,5 @@
 import { SelectInput } from 'components/Form'
-import { useCallback, useContext } from 'react'
+import { ChangeEvent, useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import { ProjectEditorContext } from '../Context'
 
@@ -12,8 +12,15 @@ const AddContentSelectContainer = styled.div`
 `
 
 export const AddContent = () => {
-  const { addContentBlock } = useContext(ProjectEditorContext)
-  const addHandler = useCallback(() => addContentBlock(), [])
+  const { onChange, content } = useContext(ProjectEditorContext)
+  const addHandler = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      const newContent = [...content]
+      newContent.push({ type: e.currentTarget.value, data: '' })
+      onChange({ name: 'content', value: newContent })
+    },
+    [content]
+  )
 
   return (
     <AddContentSelectContainer>
