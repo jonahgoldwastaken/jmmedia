@@ -1,5 +1,5 @@
 import { ApolloClient } from 'apollo-client'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory'
 import { NextPageContext } from 'next'
 import { ApolloLink } from 'apollo-link'
 import { createUploadLink } from 'apollo-upload-client'
@@ -15,12 +15,13 @@ export default function createApolloClient(
       headers: {
         ...init.headers,
         Authorization: ctx?.req?.headers.cookie
-          ? `bearer ${ctx.req.headers.cookie.split(';')[0].split('=')[1]}`
-          : document.cookie
+          ? `bearer ${ctx?.req?.headers.cookie.split(';')[0].split('=')[1]}`
+          : typeof document !== 'undefined' && document.cookie
           ? `bearer ${document.cookie.split('=')[1]}`
           : '',
       },
     }).then(response => response)
+  console.log(typeof document !== 'undefined' && document.cookie)
   const link = createUploadLink({
     uri:
       process.env.NODE_ENV === 'development'
@@ -40,10 +41,14 @@ export default function createApolloClient(
               `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
             )
           )
-        if (networkError) console.log(`[Network error]: ${networkError}`)
+        if (networkError) console.error(`[Network error]: ${networkError}`)
       }),
       link,
     ]),
     cache: new InMemoryCache().restore(initialState),
   })
+}
+
+export type WithApolloClient<P> = P & {
+  apolloClient: ApolloClient<NormalizedCacheObject>
 }

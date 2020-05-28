@@ -6,7 +6,7 @@ import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
 import { useCookie } from 'next-cookie'
 import { useRouter } from 'next/router'
-import { FormEvent, useState, useEffect } from 'react'
+import { FormEvent, useCallback, useState, useEffect } from 'react'
 
 type stateFormData = {
   username: string
@@ -27,16 +27,19 @@ const Login: NextPage<LoginProps> = () => {
     username: '',
     password: '',
   })
-  const [mutation, { data, loading }] = useLoginUserMutation()
+  const [mutation, { data, loading, error }] = useLoginUserMutation()
 
-  const submitForm = async (e: FormEvent) => {
-    e.preventDefault()
-    mutation({ variables: { user: formData } })
-  }
+  const submitForm = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault()
+      mutation({ variables: { user: formData } })
+    },
+    [formData]
+  )
 
   useEffect(() => {
     if (data) {
-      cookie.set('auth-token', data.loginUser)
+      cookie.set('auth-token', data.loginUser, { path: '/' })
       router.push('/admin')
     }
   }, [data])
@@ -72,6 +75,7 @@ const Login: NextPage<LoginProps> = () => {
         />
         <Button>{loading ? 'Bezig...' : 'Inloggen'}</Button>
       </Form>
+      {error && <pre>{JSON.stringify(error)}</pre>}
     </>
   )
 }

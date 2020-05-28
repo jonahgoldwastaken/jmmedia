@@ -1,10 +1,10 @@
 import Footer, { FooterLink } from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Portfolio/Article'
 import {
-  useProjectServiceOptionsQuery,
   NewProjectInput,
+  useProjectServiceOptionsQuery,
 } from 'generated/graphql'
-import { useEffect } from 'react'
+import { useCallback } from 'react'
 import Editor, { Sandbox, SideBar } from '../Editor'
 import ContentBlock, { AddContent } from './ContentBlock'
 import { ProjectEditorContext } from './Context'
@@ -29,15 +29,10 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
   const { data, loading } = useProjectServiceOptionsQuery()
   const { content } = project
 
-  useEffect(() => {
-    if (content.length >= 1) {
-      const lastIndex = content.length - 1
-      if (content[lastIndex].data) {
-        const newContent = [...content]
-        newContent.push({ data: '', type: 'paragraph' })
-        onChange({ name: 'content', value: newContent })
-      }
-    }
+  const addContentBlock = useCallback(() => {
+    const copiedContent = [...content]
+    copiedContent.push({ type: 'paragraph', data: '' })
+    onChange({ name: 'content', value: copiedContent })
   }, [content])
 
   const properties = [
@@ -76,8 +71,9 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
       value={{
         content: content,
         properties,
-        onChange: onChange,
-        onSubmit: onSubmit,
+        addContentBlock,
+        onChange,
+        onSubmit,
       }}
     >
       <Editor>

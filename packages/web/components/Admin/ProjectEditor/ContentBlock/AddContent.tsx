@@ -1,6 +1,5 @@
 import { SelectInput } from 'components/Form'
-import { ContentInput } from 'generated/graphql'
-import { ChangeEvent, useContext } from 'react'
+import { useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import { ProjectEditorContext } from '../Context'
 
@@ -13,18 +12,8 @@ const AddContentSelectContainer = styled.div`
 `
 
 export const AddContent = () => {
-  const context = useContext(ProjectEditorContext)
-  const addHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newContentBlock: ContentInput = {
-      type: e.currentTarget.value,
-      data: '',
-    }
-
-    context.onChange({
-      name: 'content',
-      value: [...context.content, newContentBlock],
-    })
-  }
+  const { addContentBlock } = useContext(ProjectEditorContext)
+  const addHandler = useCallback(() => addContentBlock(), [])
 
   return (
     <AddContentSelectContainer>

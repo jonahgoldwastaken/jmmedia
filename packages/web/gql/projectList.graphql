@@ -1,7 +1,0 @@
-query projectList($service: String) {
-  projects(service: $service) {
-    slug
-    listImage
-    title
-  }
-}

@@ -1,7 +1,0 @@
-query servicesList {
-  services {
-    slug
-    listImage
-    name
-  }
-}

@@ -9,16 +9,8 @@ export class ProjectResolver {
     nullable: true,
     description: 'Returns one project based on provided slug or id',
   })
-  async project(
-    @Arg('slug', { nullable: true }) slug?: string,
-    @Arg('id', { nullable: true }) id?: string
-  ): Promise<Project | null> {
-    if (!slug && !id) throw new UserInputError('Provide one search argument')
-    if (slug && id) throw new UserInputError('Provide only one search argument')
-    let query = {}
-    if (slug) query = { slug }
-    else query = { _id: id }
-    return await ProjectModel.findOne(query).populate('service')
+  async project(@Arg('slug') slug: string): Promise<Project | null> {
+    return await ProjectModel.findOne({ slug }).populate('service')
   }
 
   @Query(() => [Project], {

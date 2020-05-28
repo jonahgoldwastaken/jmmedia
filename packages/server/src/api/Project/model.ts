@@ -38,7 +38,7 @@ export class Project {
   @Property({ required: true, unique: true })
   slug!: String
 
-  @Field(() => String)
+  @Field(() => Service)
   @Property({ ref: Service, required: true })
   service!: Ref<Service>
 

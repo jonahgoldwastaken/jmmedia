@@ -9,7 +9,12 @@ import {
 } from 'react'
 import styled from 'styled-components'
 import { ProjectEditorContext } from '../Context'
-import { HeadingEditor, ParagraphEditor, ImageEditor } from './BlockTypes'
+import {
+  HeadingEditor,
+  ParagraphEditor,
+  ImageEditor,
+  FilmEditor,
+} from './BlockTypes'
 import { useImageUploadMutation } from 'generated/graphql'
 
 type ContentBlockProps = {
@@ -34,7 +39,9 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
   type,
   index,
 }) => {
-  const { onChange, content } = useContext(ProjectEditorContext)
+  const { onChange, content, addContentBlock } = useContext(
+    ProjectEditorContext
+  )
   const [uploadImage, { data: imageData }] = useImageUploadMutation()
   const [editing, setEditing] = useState(!data)
   const [value, setValue] = useState(() => {
@@ -54,29 +61,6 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
         srcSet: imageData.uploadImage,
       })
   }, [imageData])
-
-  const saveHandler = useCallback(() => {
-    let updatedContentBlock
-    if (type === 'image' || type === 'row')
-      updatedContentBlock = {
-        type,
-        data: JSON.stringify(value),
-      }
-    else
-      updatedContentBlock = {
-        type,
-        data: value,
-      }
-
-    let contentList = [...content]
-    contentList.splice(index, 1, updatedContentBlock)
-    onChange({
-      name: 'content',
-      value: contentList,
-    })
-
-    setEditing(false)
-  }, [value])
 
   const changeTypeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const newType = e.currentTarget.value as ProjectContent['type']
@@ -101,6 +85,41 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
     else setValue(value)
   }
 
+  const cancelEditing = useCallback(() => {
+    if (!content[index].data) {
+      let contentList = [...content]
+      contentList.splice(index, 1)
+      onChange({
+        name: 'content',
+        value: contentList,
+      })
+    }
+    setEditing(false)
+  }, [value])
+
+  const saveHandler = useCallback(() => {
+    let updatedContentBlock
+    if (type === 'image' || type === 'row')
+      updatedContentBlock = {
+        type,
+        data: JSON.stringify(value),
+      }
+    else
+      updatedContentBlock = {
+        type,
+        data: value,
+      }
+
+    let contentList = [...content]
+    contentList.splice(index, 1, updatedContentBlock)
+    onChange({
+      name: 'content',
+      value: contentList,
+    })
+    setEditing(false)
+    addContentBlock()
+  }, [value])
+
   return (
     <Container>
       {editing && (
@@ -123,6 +142,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
           onClick={() => setEditing(true)}
           editing={editing}
           onChange={e => changeHandler(e.currentTarget.value)}
+          onCancel={cancelEditing}
           onSubmit={saveHandler}
           value={value}
         />
@@ -131,7 +151,10 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
         <ParagraphEditor
           onClick={() => setEditing(true)}
           editing={editing}
-          onChange={e => changeHandler(e.currentTarget.value)}
+          onChange={e =>
+            changeHandler(e.currentTarget.value.replace(/(\r\n|\n|\r)/gm, ' '))
+          }
+          onCancel={cancelEditing}
           onSubmit={saveHandler}
           value={value}
         />
@@ -152,6 +175,17 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
                 alt,
               })
           }}
+          onCancel={cancelEditing}
+          onSubmit={saveHandler}
+          value={value}
+        />
+      )}
+      {type === 'film' && (
+        <FilmEditor
+          onClick={() => setEditing(true)}
+          editing={editing}
+          onChange={e => changeHandler(e.currentTarget.value)}
+          onCancel={cancelEditing}
           onSubmit={saveHandler}
           value={value}
         />

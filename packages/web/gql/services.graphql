@@ -1,0 +1,17 @@
+query servicesList {
+  services {
+    slug
+    listImage
+    name
+  }
+}
+query service($slug: String!) {
+  service(slug: $slug) {
+    name
+    listImage
+    description
+    baseOptions
+    additionalOptions
+    callToAction
+  }
+}

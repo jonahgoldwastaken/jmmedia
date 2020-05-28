@@ -1,5 +1,5 @@
-import { NextPage, NextPageContext } from 'next'
-import Head from 'next/head'
+import { ApolloQueryResult } from 'apollo-client'
+import { WithApolloClient } from 'apolloClient'
 import Footer, { FooterLink } from 'components/Footer'
 import Header from 'components/Header'
 import Image from 'components/Image'
@@ -7,13 +7,23 @@ import Section from 'components/Section'
 import ServiceOptions from 'components/ServiceOptions'
 import { Paragraph } from 'components/Text'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
-import { Service } from 'interfaces/Service'
+import {
+  ServiceDocument,
+  ServiceQuery,
+  ServiceQueryVariables,
+} from 'generated/graphql'
+import { NextPage, NextPageContext } from 'next'
+import Error from 'next/error'
+import Head from 'next/head'
+import { withApollo } from 'libs/apollo'
 
 type Props = {
-  service: Service
+  result: ApolloQueryResult<ServiceQuery> | null
 }
 
-const ServicePage: NextPage<Props> = ({ service }) => {
+const ServicePage: NextPage<Props> = ({ result }) => {
+  if (!result?.data?.service) return <Error statusCode={404} />
+  const { service } = result.data
   return (
     <>
       <Head>
@@ -35,8 +45,14 @@ const ServicePage: NextPage<Props> = ({ service }) => {
           <Image src="https://unsplash.com/photos/WSTF1QEUUWw/download?force=true" />
         </Section>
         <Section background="primary">
-          <HeadingTwo noMargin>Mogelijke opties</HeadingTwo>
-          <ServiceOptions options={service.options} />
+          <div>
+            <HeadingTwo noMargin>Basisopties</HeadingTwo>
+            <ServiceOptions options={service.baseOptions} />
+          </div>
+          <div>
+            <HeadingTwo noMargin>Extra mogelijke opties</HeadingTwo>
+            <ServiceOptions options={service.additionalOptions} />
+          </div>
         </Section>
       </main>
       <Footer>
@@ -53,15 +69,22 @@ const ServicePage: NextPage<Props> = ({ service }) => {
   )
 }
 
-ServicePage.getInitialProps = async (ctx: NextPageContext) => {
-  const service = await fetch(
-    (process?.env?.BASE_URL || window?.location?.origin) +
-      `/api/services/get/${ctx.query.slug}`
-  )
-    .then(r => r.json())
-    .catch(console.log)
-
-  return { service: service || null }
+ServicePage.getInitialProps = async (
+  ctx: WithApolloClient<NextPageContext>
+) => {
+  const slug = ctx.query.slug as string
+  try {
+    const result = await ctx.apolloClient.query<
+      ServiceQuery,
+      ServiceQueryVariables
+    >({
+      query: ServiceDocument,
+      variables: { slug },
+    })
+    return { result }
+  } catch (err) {
+    return { result: null }
+  }
 }
 
-export default ServicePage
+export default withApollo({ ssr: true })(ServicePage)

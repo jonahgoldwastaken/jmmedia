@@ -19,7 +19,7 @@ export const HeaderNav: React.FunctionComponent = () => (
     <NavList>
       <HeaderNavLink href="/about">Over</HeaderNavLink>
       <HeaderNavLink href="/services">Services</HeaderNavLink>
-      <HeaderNavLink href="/portfolio">Portfolio</HeaderNavLink>
+      <HeaderNavLink href="/projects">Projecten</HeaderNavLink>
       <HeaderNavLink
         outbound
         href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"

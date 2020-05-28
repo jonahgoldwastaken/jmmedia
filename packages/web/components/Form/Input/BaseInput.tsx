@@ -11,7 +11,7 @@ export interface BaseInputProps<ValueType, Element> extends BaseInputTagProps {
   value?: ValueType
   label: string
   onChange: (event: ChangeEvent<Element>) => void
-  onKeyPress?: (event: KeyboardEvent<Element>) => void
+  onKeyUp?: (event: KeyboardEvent<Element>) => void
 }
 
 export const BaseInputStyling = css`

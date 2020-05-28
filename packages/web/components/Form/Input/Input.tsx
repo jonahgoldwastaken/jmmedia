@@ -25,7 +25,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
   value,
   required,
   onChange,
-  onKeyPress,
+  onKeyUp,
 }) => (
   <Label>
     {label}
@@ -34,7 +34,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
       type={type}
       required={required}
       onChange={onChange}
-      onKeyPress={onKeyPress}
+      onKeyUp={onKeyUp}
       value={value as string}
     />
   </Label>
