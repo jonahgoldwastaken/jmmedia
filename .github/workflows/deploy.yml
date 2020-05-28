@@ -30,7 +30,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ${{ github.workspace }}/packages/server/dist
-      key: ${{ runner.os }}-server-${{ hashFiles('packages/server/yarn.lock') }}
+        key: ${{ runner.os }}-server-${{ hashFiles('packages/server/yarn.lock') }}
     - name: Yarn Production Install
       run: yarn install --prod --force --frozen-lockfile
     - name: Deploy
