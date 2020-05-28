@@ -31,8 +31,8 @@ export class UserResolver {
     @Arg('user') { username, password: unhashed }: UserInput
   ): Promise<User> {
     const amtOfUsers = await UserModel.find().count()
-    if (amtOfUsers > 1)
-      throw new ForbiddenError('Amount of allowed users to register exceeded')
+    if (amtOfUsers)
+      throw new ForbiddenError('Amount of allowed users to register exceeded.')
     try {
       const password = await argon2.hash(unhashed)
       const user = new UserModel({ username, password })
