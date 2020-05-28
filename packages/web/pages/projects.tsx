@@ -8,12 +8,12 @@ import {
 } from 'components/Portfolio/List'
 import { Paragraph } from 'components/Text'
 import { HeadingOne } from 'components/Text/Headings'
-import { useProjectListQuery } from 'generated/graphql'
+import { useProjectsQuery } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import Head from 'next/head'
 
 const Portfolio = () => {
-  const { loading, error, data } = useProjectListQuery()
+  const { loading, error, data } = useProjectsQuery()
   return (
     <>
       <Head>

@@ -8,18 +8,10 @@ import { ProjectModel } from '../Project'
 export class ServiceResolver {
   @Query(() => Service, {
     nullable: true,
-    description: 'Returns one service based on provided slug or id',
+    description: 'Returns one service based on provided slug',
   })
-  async service(
-    @Arg('slug', { nullable: true }) slug?: string,
-    @Arg('id', { nullable: true }) id?: string
-  ): Promise<Service | null> {
-    if (!id && !slug) throw new UserInputError('Provide one search argument')
-    if (slug && id) throw new UserInputError('Provide only one search argument')
-    let query = {}
-    if (slug) query = { slug }
-    else query = { _id: id }
-    return await ServiceModel.findOne(query).populate('service')
+  async service(@Arg('slug') slug: string): Promise<Service | null> {
+    return await ServiceModel.findOne({ slug }).populate('service')
   }
 
   @Query(() => [Service], {

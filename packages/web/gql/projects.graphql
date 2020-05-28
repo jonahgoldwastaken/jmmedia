@@ -1,0 +1,21 @@
+query projects($service: String) {
+  projects(service: $service) {
+    slug
+    listImage
+    title
+  }
+}
+
+query project($slug: String!) {
+	project(slug:$slug) {
+    title
+    service {
+      slug
+    }
+    callToAction
+    content {
+      type
+      data
+    }
+  }
+}

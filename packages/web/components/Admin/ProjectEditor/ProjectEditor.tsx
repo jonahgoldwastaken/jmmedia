@@ -1,10 +1,10 @@
 import Footer, { FooterLink } from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Portfolio/Article'
 import {
-  useProjectServiceOptionsQuery,
   NewProjectInput,
+  useProjectServiceOptionsQuery,
 } from 'generated/graphql'
-import { useEffect, useCallback } from 'react'
+import { useCallback } from 'react'
 import Editor, { Sandbox, SideBar } from '../Editor'
 import ContentBlock, { AddContent } from './ContentBlock'
 import { ProjectEditorContext } from './Context'

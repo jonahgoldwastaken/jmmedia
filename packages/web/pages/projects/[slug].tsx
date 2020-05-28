@@ -1,6 +1,5 @@
-import { NextPage, NextPageContext } from 'next'
-import Head from 'next/head'
-import { useState } from 'react'
+import { ApolloQueryResult } from 'apollo-client'
+import { WithApolloClient } from 'apolloClient'
 import Footer, { FooterLink } from 'components/Footer'
 import Header from 'components/Header'
 import {
@@ -14,13 +13,25 @@ import {
 } from 'components/Portfolio/Article'
 import { ArticleVideo } from 'components/Portfolio/Article/Video'
 import DarkRoom from 'components/Portfolio/Darkroom'
-import { Project, imageValue, rowValue } from 'interfaces/Project'
+import {
+  ProjectDocument,
+  ProjectQuery,
+  ProjectQueryVariables,
+} from 'generated/graphql'
+import { imageValue, rowValue } from 'interfaces/Project'
+import { withApollo } from 'libs/apollo'
+import { NextPage, NextPageContext } from 'next'
+import Error from 'next/error'
+import Head from 'next/head'
+import { useState } from 'react'
 
 type Props = {
-  project: Project
+  result: ApolloQueryResult<ProjectQuery> | null
 }
 
-const ProjectPage: NextPage<Props> = ({ project }) => {
+const ProjectPage: NextPage<Props> = ({ result }) => {
+  if (!result?.data?.project) return <Error statusCode={404} />
+  const { project } = result.data
   const [darkRoomOpen, setDarkRoomOpen] = useState(false)
   const [currentImage, setCurrentImage] = useState<{
     src: string
@@ -76,9 +87,8 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
                   alt={alt}
                 />
               )
-            } else return <ArticleVideo controls src={data} />
+            } else return <ArticleVideo id={data} />
           })}
-
           <DarkRoom />
         </ArticleContext.Provider>
       </Article>
@@ -100,15 +110,22 @@ const ProjectPage: NextPage<Props> = ({ project }) => {
   )
 }
 
-ProjectPage.getInitialProps = async (ctx: NextPageContext) => {
-  const project = await fetch(
-    (process?.env?.BASE_URL || window?.location?.origin) +
-      `/api/projects/get/${ctx.query.slug}`
-  )
-    .then(r => r.json())
-    .catch(console.log)
-
-  return { project: project || null }
+ProjectPage.getInitialProps = async (
+  ctx: WithApolloClient<NextPageContext>
+) => {
+  const slug = ctx.query.slug as string
+  try {
+    const result = await ctx.apolloClient.query<
+      ProjectQuery,
+      ProjectQueryVariables
+    >({
+      query: ProjectDocument,
+      variables: { slug },
+    })
+    return { result }
+  } catch (err) {
+    return { result: null }
+  }
 }
 
-export default ProjectPage
+export default withApollo({ ssr: true })(ProjectPage)

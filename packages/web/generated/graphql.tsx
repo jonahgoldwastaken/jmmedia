@@ -16,7 +16,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  /** Returns one service based on provided slug or id */
+  /** Returns one service based on provided slug */
   service?: Maybe<Service>;
   /** Returns all services */
   services: Array<Service>;
@@ -29,14 +29,12 @@ export type Query = {
 
 
 export type QueryServiceArgs = {
-  id?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
 };
 
 
 export type QueryProjectArgs = {
-  id?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
+  slug: Scalars['String'];
 };
 
 
@@ -64,7 +62,7 @@ export type Project = {
   title: Scalars['String'];
   listImage: Scalars['String'];
   slug: Scalars['String'];
-  service: Scalars['String'];
+  service: Service;
   callToAction: Scalars['String'];
   content: Array<Content>;
   deleted: Scalars['Boolean'];
@@ -255,19 +253,6 @@ export type NewProjectMutation = (
   ) }
 );
 
-export type ProjectListQueryVariables = {
-  service?: Maybe<Scalars['String']>;
-};
-
-
-export type ProjectListQuery = (
-  { __typename?: 'Query' }
-  & { projects: Array<(
-    { __typename?: 'Project' }
-    & Pick<Project, 'slug' | 'listImage' | 'title'>
-  )> }
-);
-
 export type ProjectServiceOptionsQueryVariables = {};
 
 
@@ -279,6 +264,39 @@ export type ProjectServiceOptionsQuery = (
   )> }
 );
 
+export type ProjectsQueryVariables = {
+  service?: Maybe<Scalars['String']>;
+};
+
+
+export type ProjectsQuery = (
+  { __typename?: 'Query' }
+  & { projects: Array<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'slug' | 'listImage' | 'title'>
+  )> }
+);
+
+export type ProjectQueryVariables = {
+  slug: Scalars['String'];
+};
+
+
+export type ProjectQuery = (
+  { __typename?: 'Query' }
+  & { project?: Maybe<(
+    { __typename?: 'Project' }
+    & Pick<Project, 'title' | 'callToAction'>
+    & { service: (
+      { __typename?: 'Service' }
+      & Pick<Service, 'slug'>
+    ), content: Array<(
+      { __typename?: 'Content' }
+      & Pick<Content, 'type' | 'data'>
+    )> }
+  )> }
+);
+
 export type ServicesListQueryVariables = {};
 
 
@@ -287,6 +305,19 @@ export type ServicesListQuery = (
   & { services: Array<(
     { __typename?: 'Service' }
     & Pick<Service, 'slug' | 'listImage' | 'name'>
+  )> }
+);
+
+export type ServiceQueryVariables = {
+  slug: Scalars['String'];
+};
+
+
+export type ServiceQuery = (
+  { __typename?: 'Query' }
+  & { service?: Maybe<(
+    { __typename?: 'Service' }
+    & Pick<Service, 'name' | 'listImage' | 'description' | 'baseOptions' | 'additionalOptions' | 'callToAction'>
   )> }
 );
 
@@ -528,54 +559,6 @@ export function useNewProjectMutation(baseOptions?: ApolloReactHooks.MutationHoo
 export type NewProjectMutationHookResult = ReturnType<typeof useNewProjectMutation>;
 export type NewProjectMutationResult = ApolloReactCommon.MutationResult<NewProjectMutation>;
 export type NewProjectMutationOptions = ApolloReactCommon.BaseMutationOptions<NewProjectMutation, NewProjectMutationVariables>;
-export const ProjectListDocument = gql`
-    query projectList($service: String) {
-  projects(service: $service) {
-    slug
-    listImage
-    title
-  }
-}
-    `;
-export type ProjectListProps<TChildProps = {}, TDataName extends string = 'data'> = {
-      [key in TDataName]: ApolloReactHoc.DataValue<ProjectListQuery, ProjectListQueryVariables>
-    } & TChildProps;
-export function withProjectList<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  ProjectListQuery,
-  ProjectListQueryVariables,
-  ProjectListProps<TChildProps, TDataName>>) {
-    return ApolloReactHoc.withQuery<TProps, ProjectListQuery, ProjectListQueryVariables, ProjectListProps<TChildProps, TDataName>>(ProjectListDocument, {
-      alias: 'projectList',
-      ...operationOptions
-    });
-};
-
-/**
- * __useProjectListQuery__
- *
- * To run a query within a React component, call `useProjectListQuery` and pass it any options that fit your needs.
- * When your component renders, `useProjectListQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProjectListQuery({
- *   variables: {
- *      service: // value for 'service'
- *   },
- * });
- */
-export function useProjectListQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProjectListQuery, ProjectListQueryVariables>) {
-        return ApolloReactHooks.useQuery<ProjectListQuery, ProjectListQueryVariables>(ProjectListDocument, baseOptions);
-      }
-export function useProjectListLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProjectListQuery, ProjectListQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<ProjectListQuery, ProjectListQueryVariables>(ProjectListDocument, baseOptions);
-        }
-export type ProjectListQueryHookResult = ReturnType<typeof useProjectListQuery>;
-export type ProjectListLazyQueryHookResult = ReturnType<typeof useProjectListLazyQuery>;
-export type ProjectListQueryResult = ApolloReactCommon.QueryResult<ProjectListQuery, ProjectListQueryVariables>;
 export const ProjectServiceOptionsDocument = gql`
     query projectServiceOptions {
   services {
@@ -622,6 +605,108 @@ export function useProjectServiceOptionsLazyQuery(baseOptions?: ApolloReactHooks
 export type ProjectServiceOptionsQueryHookResult = ReturnType<typeof useProjectServiceOptionsQuery>;
 export type ProjectServiceOptionsLazyQueryHookResult = ReturnType<typeof useProjectServiceOptionsLazyQuery>;
 export type ProjectServiceOptionsQueryResult = ApolloReactCommon.QueryResult<ProjectServiceOptionsQuery, ProjectServiceOptionsQueryVariables>;
+export const ProjectsDocument = gql`
+    query projects($service: String) {
+  projects(service: $service) {
+    slug
+    listImage
+    title
+  }
+}
+    `;
+export type ProjectsProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ProjectsQuery, ProjectsQueryVariables>
+    } & TChildProps;
+export function withProjects<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ProjectsQuery,
+  ProjectsQueryVariables,
+  ProjectsProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ProjectsQuery, ProjectsQueryVariables, ProjectsProps<TChildProps, TDataName>>(ProjectsDocument, {
+      alias: 'projects',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useProjectsQuery__
+ *
+ * To run a query within a React component, call `useProjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectsQuery({
+ *   variables: {
+ *      service: // value for 'service'
+ *   },
+ * });
+ */
+export function useProjectsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProjectsQuery, ProjectsQueryVariables>) {
+        return ApolloReactHooks.useQuery<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, baseOptions);
+      }
+export function useProjectsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProjectsQuery, ProjectsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ProjectsQuery, ProjectsQueryVariables>(ProjectsDocument, baseOptions);
+        }
+export type ProjectsQueryHookResult = ReturnType<typeof useProjectsQuery>;
+export type ProjectsLazyQueryHookResult = ReturnType<typeof useProjectsLazyQuery>;
+export type ProjectsQueryResult = ApolloReactCommon.QueryResult<ProjectsQuery, ProjectsQueryVariables>;
+export const ProjectDocument = gql`
+    query project($slug: String!) {
+  project(slug: $slug) {
+    title
+    service {
+      slug
+    }
+    callToAction
+    content {
+      type
+      data
+    }
+  }
+}
+    `;
+export type ProjectProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ProjectQuery, ProjectQueryVariables>
+    } & TChildProps;
+export function withProject<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ProjectQuery,
+  ProjectQueryVariables,
+  ProjectProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ProjectQuery, ProjectQueryVariables, ProjectProps<TChildProps, TDataName>>(ProjectDocument, {
+      alias: 'project',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useProjectQuery__
+ *
+ * To run a query within a React component, call `useProjectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProjectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProjectQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useProjectQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ProjectQuery, ProjectQueryVariables>) {
+        return ApolloReactHooks.useQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, baseOptions);
+      }
+export function useProjectLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ProjectQuery, ProjectQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ProjectQuery, ProjectQueryVariables>(ProjectDocument, baseOptions);
+        }
+export type ProjectQueryHookResult = ReturnType<typeof useProjectQuery>;
+export type ProjectLazyQueryHookResult = ReturnType<typeof useProjectLazyQuery>;
+export type ProjectQueryResult = ApolloReactCommon.QueryResult<ProjectQuery, ProjectQueryVariables>;
 export const ServicesListDocument = gql`
     query servicesList {
   services {
@@ -669,6 +754,57 @@ export function useServicesListLazyQuery(baseOptions?: ApolloReactHooks.LazyQuer
 export type ServicesListQueryHookResult = ReturnType<typeof useServicesListQuery>;
 export type ServicesListLazyQueryHookResult = ReturnType<typeof useServicesListLazyQuery>;
 export type ServicesListQueryResult = ApolloReactCommon.QueryResult<ServicesListQuery, ServicesListQueryVariables>;
+export const ServiceDocument = gql`
+    query service($slug: String!) {
+  service(slug: $slug) {
+    name
+    listImage
+    description
+    baseOptions
+    additionalOptions
+    callToAction
+  }
+}
+    `;
+export type ServiceProps<TChildProps = {}, TDataName extends string = 'data'> = {
+      [key in TDataName]: ApolloReactHoc.DataValue<ServiceQuery, ServiceQueryVariables>
+    } & TChildProps;
+export function withService<TProps, TChildProps = {}, TDataName extends string = 'data'>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  ServiceQuery,
+  ServiceQueryVariables,
+  ServiceProps<TChildProps, TDataName>>) {
+    return ApolloReactHoc.withQuery<TProps, ServiceQuery, ServiceQueryVariables, ServiceProps<TChildProps, TDataName>>(ServiceDocument, {
+      alias: 'service',
+      ...operationOptions
+    });
+};
+
+/**
+ * __useServiceQuery__
+ *
+ * To run a query within a React component, call `useServiceQuery` and pass it any options that fit your needs.
+ * When your component renders, `useServiceQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useServiceQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useServiceQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<ServiceQuery, ServiceQueryVariables>) {
+        return ApolloReactHooks.useQuery<ServiceQuery, ServiceQueryVariables>(ServiceDocument, baseOptions);
+      }
+export function useServiceLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<ServiceQuery, ServiceQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<ServiceQuery, ServiceQueryVariables>(ServiceDocument, baseOptions);
+        }
+export type ServiceQueryHookResult = ReturnType<typeof useServiceQuery>;
+export type ServiceLazyQueryHookResult = ReturnType<typeof useServiceLazyQuery>;
+export type ServiceQueryResult = ApolloReactCommon.QueryResult<ServiceQuery, ServiceQueryVariables>;
 export const LoggedInUserDocument = gql`
     query loggedInUser {
   currentUser {
