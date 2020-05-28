@@ -42,15 +42,15 @@ const ServicePage: NextPage<Props> = ({ result }) => {
               </Paragraph>
             ))}
           </div>
-          <Image src="https://unsplash.com/photos/WSTF1QEUUWw/download?force=true" />
+          <Image src={service.listImage} />
         </Section>
-        <Section background="primary">
+        <Section grid background="primary">
           <div>
-            <HeadingTwo noMargin>Basisopties</HeadingTwo>
+            <HeadingTwo noMargin>De basis</HeadingTwo>
             <ServiceOptions options={service.baseOptions} />
           </div>
           <div>
-            <HeadingTwo noMargin>Extra mogelijke opties</HeadingTwo>
+            <HeadingTwo noMargin>Extra opties</HeadingTwo>
             <ServiceOptions options={service.additionalOptions} />
           </div>
         </Section>

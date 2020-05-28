@@ -33,7 +33,7 @@ export const SelectInput: React.FunctionComponent<SelectInputProps> = ({
       required={required}
       name={name}
       onChange={onChange}
-      value={value}
+      value={value as string}
     >
       <option>Kies een optie...</option>
       {options.map(option => (
