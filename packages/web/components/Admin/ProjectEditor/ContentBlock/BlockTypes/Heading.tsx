@@ -1,5 +1,5 @@
 import { Input } from 'components/Form'
-import { ArticleHeading } from 'components/Portfolio/Article'
+import { ArticleHeading } from 'components/Project/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
 interface HeadingEditorProps

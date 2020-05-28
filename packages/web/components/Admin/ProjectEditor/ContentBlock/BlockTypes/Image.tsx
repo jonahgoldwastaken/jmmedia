@@ -1,5 +1,5 @@
 import { FileInput, Input } from 'components/Form'
-import { ArticleImage } from 'components/Portfolio/Article'
+import { ArticleImage } from 'components/Project/Article'
 import { imageValue } from 'interfaces/Project'
 import { EditorContainer, EditorProps } from './Editors'
 

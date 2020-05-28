@@ -1,5 +1,5 @@
 import { TextAreaInput } from 'components/Form'
-import { ArticleText } from 'components/Portfolio/Article'
+import { ArticleText } from 'components/Project/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
 interface ParagraphEditorProps

@@ -1,5 +1,5 @@
 import { Input, Button } from 'components/Form'
-import { ArticleVideo } from 'components/Portfolio/Article'
+import { ArticleVideo } from 'components/Project/Article'
 import { filmValue } from 'interfaces/Project'
 import { EditorContainer, EditorProps } from './Editors'
 import styled from 'styled-components'

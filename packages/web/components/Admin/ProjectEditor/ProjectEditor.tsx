@@ -1,5 +1,5 @@
 import Footer, { FooterLink } from 'components/Footer'
-import { Article, ArticleTitle } from 'components/Portfolio/Article'
+import { Article, ArticleTitle } from 'components/Project/Article'
 import {
   NewProjectInput,
   useProjectServiceOptionsQuery,
