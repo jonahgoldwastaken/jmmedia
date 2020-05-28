@@ -138,12 +138,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
           <Button>Annuleren</Button>
         </Link>
         {onDelete && (
-          <Button
-            onClick={e => {
-              e.preventDefault()
-              onDelete()
-            }}
-          >
+          <Button type="button" onClick={() => onDelete()}>
             Verwijderen
           </Button>
         )}

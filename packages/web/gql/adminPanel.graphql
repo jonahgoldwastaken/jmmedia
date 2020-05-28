@@ -1,12 +1,14 @@
 query adminPanel {
-  projects {
+  projects(includeDeleted: true) {
     listImage
     title
     slug
+    _id
   }
   services {
     listImage
     name
     slug
+    _id
   }
 }

@@ -1,4 +1,3 @@
-import { DataValue } from '@apollo/react-hoc'
 import Footer, { FooterLink } from 'components/Footer'
 import Header from 'components/Header'
 import List, { ListItem } from 'components/List'
@@ -7,22 +6,25 @@ import {
   ProjectListFilter,
   ProjectListHeader,
 } from 'components/Project/List'
+import { Paragraph } from 'components/Text'
 import { HeadingOne } from 'components/Text/Headings'
-import {
-  ProjectsQuery,
-  ProjectsQueryVariables,
-  withProjects,
-} from 'generated/graphql'
+import { useProjectsQuery } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
 import Head from 'next/head'
-import { Paragraph } from 'components/Text'
+import { useEffect, useState } from 'react'
 
-type Props = {
-  data: DataValue<ProjectsQuery, ProjectsQueryVariables>
-}
+type Props = {}
 
-const Portfolio: NextPage<Props> = ({ data: { projects } }) => {
+const Portfolio: NextPage<Props> = () => {
+  const { data, loading, refetch, called } = useProjectsQuery()
+  const [filter, setFilter] = useState<string>('')
+
+  useEffect(() => {
+    console.log(called)
+    if (called) refetch({ service: filter })
+  }, [filter])
+
   return (
     <>
       <Head>
@@ -31,15 +33,17 @@ const Portfolio: NextPage<Props> = ({ data: { projects } }) => {
       <Header />
       <main>
         <ProjectListContext.Provider
-          value={{ currentFilter: 'all', setFilter: () => undefined }}
+          value={{ currentFilter: filter, setFilter }}
         >
           <ProjectListHeader>
             <HeadingOne>Portfolio</HeadingOne>
             <ProjectListFilter />
           </ProjectListHeader>
-          {projects ? (
+          {loading ? (
+            <Paragraph>Lekker alles aan het laden</Paragraph>
+          ) : data ? (
             <List>
-              {projects?.map(item => (
+              {data.projects.map(item => (
                 <ListItem
                   document={'/projects/[slug]'}
                   key={item.title}
@@ -62,7 +66,9 @@ const Portfolio: NextPage<Props> = ({ data: { projects } }) => {
           colour="secondary"
           href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
         >
-          {projects
+          {loading
+            ? 'Hier ook tussen willen staan?'
+            : data?.projects
             ? 'Hier ook tussen willen staan?'
             : 'Hier als eerste op willen staan?'}
         </FooterLink>
@@ -71,4 +77,4 @@ const Portfolio: NextPage<Props> = ({ data: { projects } }) => {
   )
 }
 
-export default withApollo({ ssr: true })(withProjects()(Portfolio))
+export default withApollo({ ssr: true })(Portfolio)

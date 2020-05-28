@@ -22,10 +22,20 @@ export class ProjectResolver {
       nullable: true,
       description: 'ObjectID of service to filter on',
     })
-    service?: string
+    service?: string,
+    @Arg('includeDeleted', {
+      nullable: true,
+      description: 'Include deleted projects',
+    })
+    includeDeleted: boolean = false
   ): Promise<Project[]> {
-    if (service) return ProjectModel.find({ service }).populate('service')
-    return await ProjectModel.find().populate('service')
+    if (service)
+      return ProjectModel.find(
+        includeDeleted ? { service } : { service, deleted: includeDeleted }
+      ).populate('service')
+    return await ProjectModel.find(
+      includeDeleted ? {} : { deleted: includeDeleted }
+    ).populate('service')
   }
 
   @Authorized()

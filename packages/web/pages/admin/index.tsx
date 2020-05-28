@@ -38,8 +38,8 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
               <Link href="/admin/project">
                 <Button>Nieuw project</Button>
               </Link>
-              {data?.projects?.map(({ listImage, title, slug }) => (
-                <List maxRows={2}>
+              {data?.projects?.map(({ listImage, title, slug, _id }) => (
+                <List maxRows={1} key={_id}>
                   <ListItem
                     document="/admin/project/[slug]"
                     href={`/admin/project/${slug}`}
@@ -55,8 +55,8 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
               <Link href="/admin/service">
                 <Button>Nieuwe service</Button>
               </Link>
-              {data?.services?.map(({ listImage, name, slug }) => (
-                <List maxRows={2}>
+              {data?.services?.map(({ listImage, name, slug, _id }) => (
+                <List maxRows={1} key={_id}>
                   <ListItem
                     document="/admin/service/[slug]"
                     href={`/admin/service/${slug}`}

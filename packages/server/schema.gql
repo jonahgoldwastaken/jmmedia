@@ -72,6 +72,9 @@ type Query {
 
   """Returns all projects, with possible filtering by service"""
   projects(
+    """Include deleted projects"""
+    includeDeleted: Boolean
+
     """ObjectID of service to filter on"""
     service: String
   ): [Project!]!

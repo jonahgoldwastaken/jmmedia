@@ -16,11 +16,13 @@ type Props = {
   project: ProjectInput
   onChange: ({ name, value }: { name: keyof ProjectInput; value: any }) => void
   onSubmit: () => void
+  onDelete?: () => void
 }
 
 export const ProjectEditor: React.FunctionComponent<Props> = ({
   project,
   onChange,
+  onDelete,
   onSubmit,
   sideBarTitle,
 }) => {
@@ -99,6 +101,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
               onChange({ name: name as keyof ProjectInput, value })
           }}
           onSubmit={onSubmit}
+          onDelete={onDelete}
           properties={properties}
         />
         <Sandbox>

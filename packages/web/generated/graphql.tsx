@@ -36,6 +36,7 @@ export type QueryProjectArgs = {
 }
 
 export type QueryProjectsArgs = {
+  includeDeleted?: Maybe<Scalars['Boolean']>
   service?: Maybe<Scalars['String']>
 }
 
@@ -185,10 +186,16 @@ export type AdminPanelQueryVariables = {}
 
 export type AdminPanelQuery = { __typename?: 'Query' } & {
   projects: Array<
-    { __typename?: 'Project' } & Pick<Project, 'listImage' | 'title' | 'slug'>
+    { __typename?: 'Project' } & Pick<
+      Project,
+      'listImage' | 'title' | 'slug' | '_id'
+    >
   >
   services: Array<
-    { __typename?: 'Service' } & Pick<Service, 'listImage' | 'name' | 'slug'>
+    { __typename?: 'Service' } & Pick<
+      Service,
+      'listImage' | 'name' | 'slug' | '_id'
+    >
   >
 }
 
@@ -374,15 +381,17 @@ export type LoggedInUserQuery = { __typename?: 'Query' } & {
 
 export const AdminPanelDocument = gql`
   query adminPanel {
-    projects {
+    projects(includeDeleted: true) {
       listImage
       title
       slug
+      _id
     }
     services {
       listImage
       name
       slug
+      _id
     }
   }
 `
@@ -1138,7 +1147,7 @@ export type ProjectServiceOptionsQueryResult = ApolloReactCommon.QueryResult<
 >
 export const ProjectsDocument = gql`
   query projects($service: String) {
-    projects(service: $service) {
+    projects(service: $service, includeDeleted: false) {
       slug
       listImage
       title

@@ -9,6 +9,7 @@ export const connectToDB = async () => {
         dbName: MONGO_DATABASE,
         useUnifiedTopology: true,
         useCreateIndex: true,
+        useFindAndModify: false,
       })
       return true
     } catch (err) {
