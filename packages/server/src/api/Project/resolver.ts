@@ -1,7 +1,7 @@
 import { UserInputError } from 'apollo-server-koa'
-import { Arg, Query, Resolver, Mutation, Authorized } from 'type-graphql'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
+import { ProjectInput } from './input'
 import { Project, ProjectModel } from './model'
-import { ProjectInput, NewProjectInput } from './input'
 
 @Resolver(() => Project)
 export class ProjectResolver {
@@ -22,17 +22,27 @@ export class ProjectResolver {
       nullable: true,
       description: 'ObjectID of service to filter on',
     })
-    service?: string
+    service?: string,
+    @Arg('includeDeleted', {
+      nullable: true,
+      description: 'Include deleted projects',
+    })
+    includeDeleted: boolean = false
   ): Promise<Project[]> {
-    if (service) return ProjectModel.find({ service }).populate('service')
-    return await ProjectModel.find().populate('service')
+    if (service)
+      return ProjectModel.find(
+        includeDeleted ? { service } : { service, deleted: includeDeleted }
+      ).populate('service')
+    return await ProjectModel.find(
+      includeDeleted ? {} : { deleted: includeDeleted }
+    ).populate('service')
   }
 
   @Authorized()
   @Mutation(() => Project)
   async createProject(
     @Arg('project')
-    { callToAction, content, service, listImage, slug, title }: NewProjectInput
+    { callToAction, content, service, listImage, slug, title }: ProjectInput
   ): Promise<Project> {
     const newProject = new ProjectModel({
       callToAction,

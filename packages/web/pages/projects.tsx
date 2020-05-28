@@ -10,10 +10,21 @@ import { Paragraph } from 'components/Text'
 import { HeadingOne } from 'components/Text/Headings'
 import { useProjectsQuery } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
+import { NextPage } from 'next'
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
-const Portfolio = () => {
-  const { loading, error, data } = useProjectsQuery()
+type Props = {}
+
+const Portfolio: NextPage<Props> = () => {
+  const { data, loading, refetch, called } = useProjectsQuery()
+  const [filter, setFilter] = useState<string>('')
+
+  useEffect(() => {
+    console.log(called)
+    if (called) refetch({ service: filter })
+  }, [filter])
+
   return (
     <>
       <Head>
@@ -22,46 +33,32 @@ const Portfolio = () => {
       <Header />
       <main>
         <ProjectListContext.Provider
-          value={{ currentFilter: 'all', setFilter: () => undefined }}
+          value={{ currentFilter: filter, setFilter }}
         >
-          {(() => {
-            if (error)
-              return (
-                <>
-                  <HeadingOne centre>Er ging iets verkeerd!</HeadingOne>
-                  <Paragraph centre>
-                    Herlaad de pagina om het opnieuw te proberen.
-                  </Paragraph>
-                </>
-              )
-            else if (loading)
-              return (
-                <ProjectListHeader>
-                  <HeadingOne centre>Projecten laden</HeadingOne>
-                </ProjectListHeader>
-              )
-            else
-              return (
-                <>
-                  <ProjectListHeader>
-                    <HeadingOne>Portfolio</HeadingOne>
-                    <ProjectListFilter />
-                  </ProjectListHeader>
-                  <List>
-                    {data?.projects.map(item => (
-                      <ListItem
-                        document={'/projects/[slug]'}
-                        key={item.title}
-                        src={item.listImage}
-                        href={`/projects/${item.slug}`}
-                      >
-                        {item.title}
-                      </ListItem>
-                    ))}
-                  </List>
-                </>
-              )
-          })()}
+          <ProjectListHeader>
+            <HeadingOne>Portfolio</HeadingOne>
+            <ProjectListFilter />
+          </ProjectListHeader>
+          {loading ? (
+            <Paragraph>Lekker alles aan het laden</Paragraph>
+          ) : data ? (
+            <List>
+              {data.projects.map(item => (
+                <ListItem
+                  document={'/projects/[slug]'}
+                  key={item.title}
+                  src={item.listImage}
+                  href={`/projects/${item.slug}`}
+                >
+                  {item.title}
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <Paragraph>
+              Een zeer uitgebreide lijst zoals je kunt zien.
+            </Paragraph>
+          )}
         </ProjectListContext.Provider>
       </main>
       <Footer>
@@ -69,7 +66,11 @@ const Portfolio = () => {
           colour="secondary"
           href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
         >
-          Hier ook tussen willen staan?
+          {loading
+            ? 'Hier ook tussen willen staan?'
+            : data?.projects
+            ? 'Hier ook tussen willen staan?'
+            : 'Hier als eerste op willen staan?'}
         </FooterLink>
       </Footer>
     </>

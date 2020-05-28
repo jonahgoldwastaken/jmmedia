@@ -11,6 +11,7 @@ type ParagraphProps = {
 export const Paragraph = styled.p<ParagraphProps>`
   ${BaseRunning}
   max-width: 34.375rem;
+  margin: ${props => `0 0 ${props.theme.spacing[1]}`};
   ${props => props.mAuto && 'margin: 0 auto'};
   ${props => props.noMargin && 'margin: 0 !important'};
   color: ${props =>

@@ -1,7 +1,7 @@
 import ProjectEditor from 'components/Admin/ProjectEditor'
 import {
   LoggedInUserDocument,
-  NewProjectInput,
+  ProjectInput,
   useNewProjectMutation,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
@@ -23,7 +23,7 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
   const router = useRouter()
   const [mutation] = useNewProjectMutation()
 
-  const [project, setProject] = useState<NewProjectInput>({
+  const [project, setProject] = useState<ProjectInput>({
     title: '',
     slug: '',
     listImage: '',
@@ -36,7 +36,7 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
     name,
     value,
   }: {
-    name: keyof NewProjectInput
+    name: keyof ProjectInput
     value: any
   }) => {
     const tempProject = { ...project }

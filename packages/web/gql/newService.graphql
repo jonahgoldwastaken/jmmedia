@@ -1,5 +1,0 @@
-mutation newService($service: ServiceInput!) {
-  createService(service: $service) {
-    slug
-  }
-} 

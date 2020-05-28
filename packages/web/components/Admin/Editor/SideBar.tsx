@@ -14,6 +14,7 @@ import Link from 'next/link'
 type SideBarProps = {
   onSubmit: () => void
   onChange: ({ name, value }: { name: string; value: any }) => void
+  onDelete?: () => void
   properties:
     | Array<{
         name: string
@@ -49,6 +50,7 @@ const SideBarContainer = styled.div`
 export const SideBar: React.FunctionComponent<SideBarProps> = ({
   properties,
   onChange,
+  onDelete,
   title,
   onSubmit,
 }) => {
@@ -135,6 +137,11 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
         <Link href="/admin">
           <Button>Annuleren</Button>
         </Link>
+        {onDelete && (
+          <Button type="button" onClick={() => onDelete()}>
+            Verwijderen
+          </Button>
+        )}
       </Form>
     </SideBarContainer>
   )

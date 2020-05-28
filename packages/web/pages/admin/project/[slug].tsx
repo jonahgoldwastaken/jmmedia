@@ -4,6 +4,7 @@ import {
   ProjectInput,
   useProjectToUpdateQuery,
   useUpdateProjectMutation,
+  useDeleteProjectMutation,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
@@ -28,7 +29,8 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
   const { data, loading } = useProjectToUpdateQuery({
     variables: { slug: slug as string },
   })
-  const [mutation] = useUpdateProjectMutation()
+  const [mutation, { data: updateResult }] = useUpdateProjectMutation()
+  const [deleteProject, { data: deleteResult }] = useDeleteProjectMutation()
   const [id, setId] = useState('')
   const [project, setProject] = useState<ProjectInput>({
     title: '',
@@ -62,6 +64,10 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
     }
   }, [data])
 
+  useEffect(() => {
+    if (updateResult || deleteResult) router.push('/admin')
+  }, [deleteResult, updateResult])
+
   const changeHandler = useCallback(
     ({ name, value }: { name: keyof ProjectInput; value: any }) => {
       console.log('project to copy', project)
@@ -75,9 +81,12 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
   )
 
   const submitHandler = useCallback(async () => {
-    await mutation({ variables: { project, id } })
-    router.push(`/admin`)
+    mutation({ variables: { project, id } })
   }, [project, id])
+
+  const deleteHandler = useCallback(async () => {
+    deleteProject({ variables: { id } })
+  }, [id])
 
   return (
     <>
@@ -89,6 +98,7 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
           loading ? 'Project laden...' : `${project.title} Bewerken`
         }
         project={project}
+        onDelete={deleteHandler}
         onChange={changeHandler}
         onSubmit={submitHandler}
       />

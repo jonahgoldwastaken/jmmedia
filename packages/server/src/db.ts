@@ -3,17 +3,17 @@ const { MONGO_URL, MONGO_DATABASE } = process.env
 
 export const connectToDB = async () => {
   if (MONGO_URL && MONGO_DATABASE) {
-    console.log(MONGO_URL, MONGO_DATABASE)
     try {
       await mongoose.connect(MONGO_URL, {
         useNewUrlParser: true,
         dbName: MONGO_DATABASE,
         useUnifiedTopology: true,
         useCreateIndex: true,
+        useFindAndModify: false,
       })
       return true
     } catch (err) {
-      console.log(err)
+      console.error(err)
       return false
     }
   } else {

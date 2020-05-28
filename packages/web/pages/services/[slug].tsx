@@ -37,9 +37,7 @@ const ServicePage: NextPage<Props> = ({ result }) => {
           </HeadingOne>
           <div>
             {service.description.map(paragraph => (
-              <Paragraph noMargin colour="secondary">
-                {paragraph}
-              </Paragraph>
+              <Paragraph colour="secondary">{paragraph}</Paragraph>
             ))}
           </div>
           <Image src={service.listImage} />

@@ -1,10 +1,10 @@
 import Footer, { FooterLink } from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Project/Article'
 import {
-  NewProjectInput,
   ProjectInput,
   useProjectServiceOptionsQuery,
   ContentInput,
+  ContentTypes,
 } from 'generated/graphql'
 import { useCallback } from 'react'
 import Editor, { Sandbox, SideBar } from '../Editor'
@@ -13,20 +13,16 @@ import { ProjectEditorContext } from './Context'
 
 type Props = {
   sideBarTitle?: string
-  project: NewProjectInput | ProjectInput
-  onChange: ({
-    name,
-    value,
-  }: {
-    name: keyof NewProjectInput | keyof ProjectInput
-    value: any
-  }) => void
+  project: ProjectInput
+  onChange: ({ name, value }: { name: keyof ProjectInput; value: any }) => void
   onSubmit: () => void
+  onDelete?: () => void
 }
 
 export const ProjectEditor: React.FunctionComponent<Props> = ({
   project,
   onChange,
+  onDelete,
   onSubmit,
   sideBarTitle,
 }) => {
@@ -34,8 +30,8 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
   const { content } = project
 
   const addContentBlock = useCallback(
-    (newContentValue: NewProjectInput['content']) => {
-      newContentValue.push({ type: 'paragraph', data: '' })
+    (newContentValue: ProjectInput['content']) => {
+      newContentValue.push({ type: ContentTypes.Paragraph, data: '' })
       onChange({ name: 'content', value: newContentValue })
     },
     [project]
@@ -102,9 +98,10 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
           title={sideBarTitle || 'Nieuw project'}
           onChange={({ name, value }) => {
             if (Object.keys(project).includes(name))
-              onChange({ name: name as keyof NewProjectInput, value })
+              onChange({ name: name as keyof ProjectInput, value })
           }}
           onSubmit={onSubmit}
+          onDelete={onDelete}
           properties={properties}
         />
         <Sandbox>

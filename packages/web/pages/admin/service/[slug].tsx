@@ -4,6 +4,7 @@ import {
   ServiceInput,
   useServiceToUpdateQuery,
   useUpdateServiceMutation,
+  useDeleteServiceMutation,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
@@ -28,7 +29,8 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
   const { data, loading } = useServiceToUpdateQuery({
     variables: { slug: slug as string },
   })
-  const [mutation] = useUpdateServiceMutation()
+  const [mutation, { data: updateResult }] = useUpdateServiceMutation()
+  const [deleteService, { data: deleteResult }] = useDeleteServiceMutation()
   const [id, setId] = useState('')
   const [service, setService] = useState<ServiceInput>({
     name: '',
@@ -65,6 +67,10 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
     }
   }, [data])
 
+  useEffect(() => {
+    if (updateResult || deleteResult) router.push('/admin')
+  }, [deleteResult, updateResult])
+
   const changeHandler = ({
     name,
     value,
@@ -78,9 +84,12 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
   }
 
   const submitHandler = useCallback(async () => {
-    await mutation({ variables: { service, id } })
-    router.push(`/admin`)
+    mutation({ variables: { service, id } })
   }, [service])
+
+  const deleteHandler = useCallback(async () => {
+    deleteService({ variables: { id } })
+  }, [id])
 
   return (
     <>
@@ -90,6 +99,7 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
       <ServiceEditor
         sideBarTitle={loading ? 'Service laden...' : `${service.name} Bewerken`}
         service={service}
+        onDelete={deleteHandler}
         onChange={changeHandler}
         onSubmit={submitHandler}
       />

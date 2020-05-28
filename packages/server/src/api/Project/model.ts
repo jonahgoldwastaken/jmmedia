@@ -4,14 +4,27 @@ import {
   prop as Property,
   Ref,
 } from '@typegoose/typegoose'
-import { Field, ID, ObjectType } from 'type-graphql'
+import { Field, ID, ObjectType, registerEnumType } from 'type-graphql'
 import { Service } from '../Service'
+
+export enum ContentTypes {
+  heading = 'heading',
+  paragraph = 'paragraph',
+  image = 'image',
+  row = 'row',
+  film = 'film',
+}
+
+registerEnumType(ContentTypes, {
+  name: 'ContentTypes',
+  description: 'The different available content types',
+})
 
 @ObjectType({ description: 'The Project Content block model' })
 class Content {
-  @Field(() => String)
+  @Field(() => ContentTypes)
   @Property({
-    enum: ['heading', 'paragraph', 'image', 'row', 'film'],
+    enum: ContentTypes,
     required: true,
   })
   type!: String

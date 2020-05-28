@@ -1,5 +1,5 @@
 query projects($service: String) {
-  projects(service: $service) {
+  projects(service: $service, includeDeleted: false) {
     slug
     listImage
     title

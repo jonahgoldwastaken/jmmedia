@@ -2,6 +2,7 @@ import { SelectInput } from 'components/Form'
 import { ChangeEvent, useCallback, useContext } from 'react'
 import styled from 'styled-components'
 import { ProjectEditorContext } from '../Context'
+import { ContentTypes } from 'generated/graphql'
 
 const AddContentSelectContainer = styled.div`
   width: ${props => props.theme.widths[3]};
@@ -15,8 +16,8 @@ export const AddContent = () => {
   const { onChange, content } = useContext(ProjectEditorContext)
   const addHandler = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
-      const newContent = Array.from(content || [])
-      newContent.push({ type: e.currentTarget.value, data: '' })
+      const newContent = [...content]
+      newContent.push({ type: e.currentTarget.value as ContentTypes, data: '' })
       onChange({ name: 'content', value: newContent })
     },
     [content]

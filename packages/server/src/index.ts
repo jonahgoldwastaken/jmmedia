@@ -15,12 +15,12 @@ import connectToDB from './db'
 import { default as helmet } from 'koa-helmet'
 
 const initialiseBootSequence = async () => {
-  console.log(process.env)
   await connectToDB()
   const schema = await buildSchema({
     resolvers: [UserResolver, ProjectResolver, ServiceResolver, MediaResolver],
     validate: false,
     authChecker,
+    emitSchemaFile: true,
   })
   const PORT = process.env.PORT || 4000
 
@@ -37,9 +37,8 @@ const initialiseBootSequence = async () => {
   )
   app.keys = [process.env.SESSION_SECRET as string]
   app.use(async (ctx, next) => {
-    const [error, user, message] = await authorizeToken(ctx)
+    const [error, user] = await authorizeToken(ctx)
     if (error) console.log(error)
-    if (message) console.log(message)
     if (user) ctx.state.user = user
     await next()
   })
