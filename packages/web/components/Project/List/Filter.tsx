@@ -33,7 +33,7 @@ export const ProjectListFilter = () => {
         value={currentFilter}
         onChange={e => setFilter(e.currentTarget.value)}
       >
-        <option value="">Alle soorten werk</option>
+        <option value="">Filter op service</option>
         {data &&
           data.services.map(({ _id, name }) => (
             <option value={_id}>{name}</option>
