@@ -1,7 +1,6 @@
 import Footer, { FooterLink } from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Project/Article'
 import {
-  NewProjectInput,
   ProjectInput,
   useProjectServiceOptionsQuery,
   ContentInput,
@@ -13,14 +12,8 @@ import { ProjectEditorContext } from './Context'
 
 type Props = {
   sideBarTitle?: string
-  project: NewProjectInput | ProjectInput
-  onChange: ({
-    name,
-    value,
-  }: {
-    name: keyof NewProjectInput | keyof ProjectInput
-    value: any
-  }) => void
+  project: ProjectInput
+  onChange: ({ name, value }: { name: keyof ProjectInput; value: any }) => void
   onSubmit: () => void
 }
 
@@ -34,7 +27,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
   const { content } = project
 
   const addContentBlock = useCallback(
-    (newContentValue: NewProjectInput['content']) => {
+    (newContentValue: ProjectInput['content']) => {
       newContentValue.push({ type: 'paragraph', data: '' })
       onChange({ name: 'content', value: newContentValue })
     },
@@ -102,7 +95,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
           title={sideBarTitle || 'Nieuw project'}
           onChange={({ name, value }) => {
             if (Object.keys(project).includes(name))
-              onChange({ name: name as keyof NewProjectInput, value })
+              onChange({ name: name as keyof ProjectInput, value })
           }}
           onSubmit={onSubmit}
           properties={properties}

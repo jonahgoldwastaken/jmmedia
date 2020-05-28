@@ -1,4 +1,4 @@
-mutation newProject($project: NewProjectInput!) {
+mutation newProject($project: ProjectInput!) {
   createProject(project: $project) {
     slug
   }

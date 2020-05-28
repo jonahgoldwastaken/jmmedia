@@ -123,7 +123,7 @@ export type MutationDeleteServiceArgs = {
 }
 
 export type MutationCreateProjectArgs = {
-  project: NewProjectInput
+  project: ProjectInput
 }
 
 export type MutationUpdateProjectArgs = {
@@ -153,7 +153,7 @@ export type ServiceInput = {
   callToAction: Scalars['String']
 }
 
-export type NewProjectInput = {
+export type ProjectInput = {
   title: Scalars['String']
   slug: Scalars['String']
   listImage: Scalars['String']
@@ -165,15 +165,6 @@ export type NewProjectInput = {
 export type ContentInput = {
   type: Scalars['String']
   data: Scalars['String']
-}
-
-export type ProjectInput = {
-  title?: Maybe<Scalars['String']>
-  slug?: Maybe<Scalars['String']>
-  listImage?: Maybe<Scalars['String']>
-  service?: Maybe<Scalars['String']>
-  callToAction?: Maybe<Scalars['String']>
-  content?: Maybe<Array<ContentInput>>
 }
 
 export type UserInput = {
@@ -220,7 +211,7 @@ export type LoginUserMutation = { __typename?: 'Mutation' } & Pick<
 >
 
 export type NewProjectMutationVariables = {
-  project: NewProjectInput
+  project: ProjectInput
 }
 
 export type NewProjectMutation = { __typename?: 'Mutation' } & {
@@ -687,7 +678,7 @@ export type LoginUserMutationOptions = ApolloReactCommon.BaseMutationOptions<
   LoginUserMutationVariables
 >
 export const NewProjectDocument = gql`
-  mutation newProject($project: NewProjectInput!) {
+  mutation newProject($project: ProjectInput!) {
     createProject(project: $project) {
       slug
     }

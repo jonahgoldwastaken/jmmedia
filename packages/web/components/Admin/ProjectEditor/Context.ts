@@ -1,4 +1,4 @@
-import { ContentInput, NewProjectInput, ProjectInput } from 'generated/graphql'
+import { ContentInput, ProjectInput } from 'generated/graphql'
 import { createContext } from 'react'
 
 type ProjectEditorContext = {
@@ -12,13 +12,7 @@ type ProjectEditorContext = {
     | null
     | undefined
   content: ContentInput[] | null | undefined
-  onChange: ({
-    name,
-    value,
-  }: {
-    name: keyof NewProjectInput | keyof ProjectInput
-    value: any
-  }) => void
+  onChange: ({ name, value }: { name: keyof ProjectInput; value: any }) => void
   onSubmit: () => void
 }
 
