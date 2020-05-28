@@ -15,7 +15,7 @@ export const AddContent = () => {
   const { onChange, content } = useContext(ProjectEditorContext)
   const addHandler = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
-      const newContent = [...content]
+      const newContent = Array.from(content || [])
       newContent.push({ type: e.currentTarget.value, data: '' })
       onChange({ name: 'content', value: newContent })
     },

@@ -1,0 +1,21 @@
+mutation updateProject($project: ProjectInput!, $id: String!) {
+  updateProject(project: $project, id: $id) {
+    title
+  }
+}
+query projectToUpdate($slug: String!) {
+  project(slug: $slug) {
+    _id
+    title
+    slug
+    service {
+      _id
+    }
+    listImage
+    callToAction
+    content {
+      type
+      data
+    }
+  }
+}

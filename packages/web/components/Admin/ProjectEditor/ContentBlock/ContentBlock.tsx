@@ -53,7 +53,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
 
   const changeTypeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
     const newType = e.currentTarget.value as ProjectContent['type']
-    const contentList = [...content]
+    const contentList = Array.from(content || [])
 
     let newContentBlock: ProjectContent = { data: '', type: newType }
     if (
@@ -71,7 +71,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
   const changeHandler = useCallback((value: any) => setValue(value), [])
 
   const cancelEditing = useCallback(() => {
-    if (!content[index].data) {
+    if (content && !content[index].data) {
       let contentList = [...content]
       contentList.splice(index, 1)
       onChange({
@@ -95,7 +95,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
         data: value,
       }
 
-    let contentList = [...content]
+    let contentList = Array.from(content || [])
     contentList.splice(index, 1, updatedContentBlock)
     onChange({
       name: 'content',

@@ -3,16 +3,20 @@ import { HeadingOne } from 'components/Text/Headings'
 import styled from 'styled-components'
 import { useListImageUploadMutation } from 'generated/graphql'
 import { useEffect } from 'react'
+import Link from 'next/link'
 
 type SideBarProps = {
   onSubmit: () => void
   onChange: ({ name, value }: { name: string; value: any }) => void
-  properties: Array<{
-    name: string
-    type: string
-    value: string
-    options?: Array<{ name: string; value: string }>
-  }>
+  properties:
+    | Array<{
+        name: string
+        type: string
+        value: string | null | undefined
+        options?: Array<{ name: string; value: string }>
+      }>
+    | null
+    | undefined
   title: string
 }
 
@@ -62,15 +66,14 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
           onSubmit()
         }}
       >
-        {properties.map(({ name, type, value, options }) => {
+        {properties?.map(({ name, type, value, options }) => {
           if (type === 'file')
             return (
               <FileInput
                 key={name}
                 label={name}
                 name={name}
-                value={value}
-                required
+                value={value || ''}
                 onChange={e => {
                   const { files, validity } = e.currentTarget
                   if (validity.valid && files?.length) {
@@ -88,7 +91,6 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
                 name={name}
                 value={value as string}
                 options={options || []}
-                required
                 onChange={e => {
                   onChange({ name, value: e.currentTarget.value })
                 }}
@@ -107,6 +109,9 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
             )
         })}
         <Button>Opslaan</Button>
+        <Link href="/admin">
+          <Button>Annuleren</Button>
+        </Link>
       </Form>
     </SideBarContainer>
   )
