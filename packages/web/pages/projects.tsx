@@ -50,10 +50,10 @@ const Portfolio = () => {
                   <List>
                     {data?.projects.map(item => (
                       <ListItem
-                        document={'/project/[slug]'}
+                        document={'/projects/[slug]'}
                         key={item.title}
                         src={item.listImage}
-                        href={`/project/${item.slug}`}
+                        href={`/projects/${item.slug}`}
                       >
                         {item.title}
                       </ListItem>
