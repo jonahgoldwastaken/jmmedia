@@ -69,9 +69,10 @@ export class ServiceResolver {
   @Authorized()
   @Mutation(() => Boolean)
   async deleteService(@Arg('id') id: string) {
+    const newService = await ServiceModel.findOne({ _id: { $ne: id } })
     await ProjectModel.updateMany(
       { service: id },
-      { $set: { service: 'none' } }
+      { $set: { service: newService?._id } }
     )
     await ServiceModel.findByIdAndDelete(id)
     return true

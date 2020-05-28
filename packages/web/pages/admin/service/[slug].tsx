@@ -4,6 +4,7 @@ import {
   ServiceInput,
   useServiceToUpdateQuery,
   useUpdateServiceMutation,
+  useDeleteServiceMutation,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
@@ -29,6 +30,7 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
     variables: { slug: slug as string },
   })
   const [mutation] = useUpdateServiceMutation()
+  const [deleteService] = useDeleteServiceMutation()
   const [id, setId] = useState('')
   const [service, setService] = useState<ServiceInput>({
     name: '',
@@ -79,8 +81,13 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
 
   const submitHandler = useCallback(async () => {
     await mutation({ variables: { service, id } })
-    router.push(`/admin`)
+    router.push('/admin')
   }, [service])
+
+  const deleteHandler = useCallback(async () => {
+    await deleteService({ variables: { id } })
+    router.push('/admin')
+  }, [id])
 
   return (
     <>
@@ -90,6 +97,7 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
       <ServiceEditor
         sideBarTitle={loading ? 'Service laden...' : `${service.name} Bewerken`}
         service={service}
+        onDelete={deleteHandler}
         onChange={changeHandler}
         onSubmit={submitHandler}
       />

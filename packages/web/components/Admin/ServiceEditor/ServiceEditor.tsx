@@ -12,12 +12,14 @@ type Props = {
   service: ServiceInput
   onChange: ({ name, value }: { name: keyof ServiceInput; value: any }) => void
   onSubmit: () => void
+  onDelete?: () => void
 }
 
 export const ServiceEditor: React.FunctionComponent<Props> = ({
   service,
   onChange,
   onSubmit,
+  onDelete,
   sideBarTitle,
 }) => {
   const properties = [
@@ -67,6 +69,7 @@ export const ServiceEditor: React.FunctionComponent<Props> = ({
             onChange({ name: name as keyof ServiceInput, value })
         }}
         onSubmit={onSubmit}
+        onDelete={onDelete}
         properties={properties}
       />
       <Sandbox>

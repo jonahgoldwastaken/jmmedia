@@ -1,7 +1,15 @@
+mutation newService($service: ServiceInput!) {
+  createService(service: $service) {
+    slug
+  }
+} 
 mutation updateService($service: ServiceInput!, $id: String!) {
   updateService(service: $service, id: $id) {
     name
   }
+}
+mutation deleteService($id: String!) {
+  deleteService(id: $id)
 }
 query serviceToUpdate($slug: String!) {
   service(slug: $slug) {
