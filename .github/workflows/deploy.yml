@@ -15,12 +15,12 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: @jmmedia/web build cache
+    - name: jmmedia/web build cache
       uses: actions/cache@v1
       with:
         path: ${{ github.workspace }}/packages/web/.next/cache
         key: ${{ runner.os }}-nextjs-${{ hashFiles('packages/web/yarn.lock') }}
-    - name: yarn package build
+    - name: node_modules cache
       uses: actions/cache@v1
       with:
         path: ${{ github.workspace }}/node_modules
