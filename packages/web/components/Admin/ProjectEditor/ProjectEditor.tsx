@@ -4,6 +4,7 @@ import {
   NewProjectInput,
   ProjectInput,
   useProjectServiceOptionsQuery,
+  ContentInput,
 } from 'generated/graphql'
 import { useCallback } from 'react'
 import Editor, { Sandbox, SideBar } from '../Editor'
@@ -11,12 +12,13 @@ import ContentBlock, { AddContent } from './ContentBlock'
 import { ProjectEditorContext } from './Context'
 
 type Props = {
-  project: NewProjectInput
+  sideBarTitle?: string
+  project: NewProjectInput | ProjectInput
   onChange: ({
     name,
     value,
   }: {
-    name: keyof NewProjectInput
+    name: keyof NewProjectInput | keyof ProjectInput
     value: any
   }) => void
   onSubmit: () => void
@@ -26,6 +28,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
   project,
   onChange,
   onSubmit,
+  sideBarTitle,
 }) => {
   const { data, loading } = useProjectServiceOptionsQuery()
   const { content } = project
@@ -35,14 +38,14 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
       newContentValue.push({ type: 'paragraph', data: '' })
       onChange({ name: 'content', value: newContentValue })
     },
-    []
+    [project]
   )
 
   const changeHandler = useCallback(
     ({ name, value }: { name: keyof ProjectInput; value: any }) => {
       if (
         name === 'content' &&
-        value.length >= content.length &&
+        value.length >= (content as ContentInput[]).length &&
         value[value.length - 1].data
       ) {
         console.log('value', value)
@@ -51,7 +54,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
       }
       onChange({ name, value })
     },
-    [content]
+    [project]
   )
 
   const properties = [
@@ -88,7 +91,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
   return (
     <ProjectEditorContext.Provider
       value={{
-        content: content,
+        content,
         properties,
         onChange: changeHandler,
         onSubmit,
@@ -96,7 +99,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
     >
       <Editor>
         <SideBar
-          title="Nieuw project"
+          title={sideBarTitle || 'Nieuw project'}
           onChange={({ name, value }) => {
             if (Object.keys(project).includes(name))
               onChange({ name: name as keyof NewProjectInput, value })
@@ -107,7 +110,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
         <Sandbox>
           <Article>
             <ArticleTitle>{project.title || 'Titel'}</ArticleTitle>
-            {content.map(({ type, data }, index) => (
+            {content?.map(({ type, data }, index) => (
               <ContentBlock
                 key={JSON.stringify({ type, data, index })}
                 index={index}
@@ -115,9 +118,10 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
                 data={data}
               />
             ))}
-            {(!content.length || content[content.length - 1].data) && (
-              <AddContent />
-            )}
+            {content &&
+              (!content.length || content[content.length - 1].data) && (
+                <AddContent />
+              )}
           </Article>
           <Footer>
             <FooterLink colour="secondary" href="#">
