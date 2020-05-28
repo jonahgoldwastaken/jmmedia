@@ -12,6 +12,7 @@ export const connectToDB = async () => {
       })
       return true
     } catch (err) {
+      console.log(err)
       return false
     }
   } else {
