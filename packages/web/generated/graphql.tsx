@@ -68,8 +68,17 @@ export type Project = {
 /** The Project Content block model */
 export type Content = {
   __typename?: 'Content'
-  type: Scalars['String']
+  type: ContentTypes
   data: Scalars['String']
+}
+
+/** The different available content types */
+export enum ContentTypes {
+  Heading = 'heading',
+  Paragraph = 'paragraph',
+  Image = 'image',
+  Row = 'row',
+  Film = 'film',
 }
 
 /** The User model */
@@ -163,7 +172,7 @@ export type ProjectInput = {
 }
 
 export type ContentInput = {
-  type: Scalars['String']
+  type: ContentTypes
   data: Scalars['String']
 }
 

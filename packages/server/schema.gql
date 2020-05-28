@@ -5,25 +5,42 @@
 
 """The Project Content block model"""
 type Content {
-  alt: String!
-  content: String!
-  size: Float!
-  type: String!
+  data: String!
+  type: ContentTypes!
 }
 
-"""The Media model"""
-type Media {
-  encoding: String!
-  filename: String!
-  mimetype: String!
+input ContentInput {
+  data: String!
+  type: ContentTypes!
+}
+
+"""The different available content types"""
+enum ContentTypes {
+  film
+  heading
+  image
+  paragraph
+  row
 }
 
 type Mutation {
-  loginUser(user: UserInput!): String!
+  createProject(project: ProjectInput!): Project!
+  createService(service: ServiceInput!): Service!
+
+  """Deletes files at specified URL"""
+  deleteImage(url: String!): Boolean!
+  deleteProject(id: String!): Boolean!
+  deleteService(id: String!): Boolean!
+  loginUser(user: UserInput!): String
   registerUser(user: UserInput!): User
+  updateProject(id: String!, project: ProjectInput!): Project!
+  updateService(id: String!, service: ServiceInput!): Service!
 
   """Upload a single file"""
-  uploadImage(file: Upload!): Media!
+  uploadImage(file: Upload!): [String!]!
+
+  """Upload a listImage"""
+  uploadListImage(file: Upload!): String!
 }
 
 """The Project model"""
@@ -32,6 +49,15 @@ type Project {
   callToAction: String!
   content: [Content!]!
   deleted: Boolean!
+  listImage: String!
+  service: Service!
+  slug: String!
+  title: String!
+}
+
+input ProjectInput {
+  callToAction: String!
+  content: [ContentInput!]!
   listImage: String!
   service: String!
   slug: String!
@@ -42,13 +68,41 @@ type Query {
   currentUser: User
 
   """Returns one project based on provided slug or id"""
-  project(id: String, slug: String): Project
+  project(slug: String!): Project
 
   """Returns all projects, with possible filtering by service"""
   projects(
     """ObjectID of service to filter on"""
     service: String
   ): [Project!]!
+
+  """Returns one service based on provided slug"""
+  service(slug: String!): Service
+
+  """Returns all services"""
+  services: [Service!]!
+}
+
+"""The Service model"""
+type Service {
+  _id: ID!
+  additionalOptions: [String!]!
+  baseOptions: [String!]!
+  callToAction: String!
+  description: [String!]!
+  listImage: String!
+  name: String!
+  slug: String!
+}
+
+input ServiceInput {
+  additionalOptions: [String!]!
+  baseOptions: [String!]!
+  callToAction: String!
+  description: [String!]!
+  listImage: String!
+  name: String!
+  slug: String!
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -57,7 +111,6 @@ scalar Upload
 """The User model"""
 type User {
   _id: ID!
-  password: String
   username: String!
 }
 

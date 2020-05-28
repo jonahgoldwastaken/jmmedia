@@ -4,6 +4,7 @@ import {
   ProjectInput,
   useProjectServiceOptionsQuery,
   ContentInput,
+  ContentTypes,
 } from 'generated/graphql'
 import { useCallback } from 'react'
 import Editor, { Sandbox, SideBar } from '../Editor'
@@ -28,7 +29,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
 
   const addContentBlock = useCallback(
     (newContentValue: ProjectInput['content']) => {
-      newContentValue.push({ type: 'paragraph', data: '' })
+      newContentValue.push({ type: ContentTypes.Paragraph, data: '' })
       onChange({ name: 'content', value: newContentValue })
     },
     [project]

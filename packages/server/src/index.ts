@@ -20,6 +20,7 @@ const initialiseBootSequence = async () => {
     resolvers: [UserResolver, ProjectResolver, ServiceResolver, MediaResolver],
     validate: false,
     authChecker,
+    emitSchemaFile: true,
   })
   const PORT = process.env.PORT || 4000
 

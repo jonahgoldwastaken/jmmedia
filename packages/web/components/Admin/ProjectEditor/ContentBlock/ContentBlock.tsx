@@ -1,5 +1,5 @@
 import { SmallSelectInput } from 'components/Form'
-import { ProjectContent } from 'interfaces/Project'
+import { ContentTypes } from 'generated/graphql'
 import { ChangeEvent, useCallback, useContext, useState } from 'react'
 import styled from 'styled-components'
 import { ProjectEditorContext } from '../Context'
@@ -12,7 +12,7 @@ import {
 } from './BlockTypes'
 
 type ContentBlockProps = {
-  type: string
+  type: ContentTypes
   data: string
   index: number
 }
@@ -30,11 +30,12 @@ const Container = styled.div`
 
 export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
   data,
-  type,
+  type: givenType,
   index,
 }) => {
   const { onChange, content } = useContext(ProjectEditorContext)
   const [editing, setEditing] = useState(!data)
+  const [type, setType] = useState(givenType)
   const [value, setValue] = useState(() => {
     if (type === 'image') {
       let returnValue
@@ -52,20 +53,16 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
   })
 
   const changeTypeHandler = (e: ChangeEvent<HTMLSelectElement>) => {
-    const newType = e.currentTarget.value as ProjectContent['type']
-    const contentList = Array.from(content || [])
+    const newType = e.currentTarget.value as ContentTypes
 
-    let newContentBlock: ProjectContent = { data: '', type: newType }
     if (
-      (type === 'image' && newType !== type) ||
-      (type === 'row' && newType !== type) ||
-      (newType === 'image' && newType !== type) ||
-      (newType === 'row' && newType !== type)
+      type === 'image' ||
+      type === 'row' ||
+      newType === 'image' ||
+      newType === 'row'
     )
-      newContentBlock.data = ''
-    else newContentBlock.data = value
-    contentList[index] = newContentBlock
-    onChange({ name: 'content', value: contentList })
+      setValue('')
+    setType(newType)
   }
 
   const changeHandler = useCallback((value: any) => setValue(value), [])
@@ -95,7 +92,7 @@ export const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
         data: value,
       }
 
-    let contentList = Array.from(content || [])
+    let contentList = [...content]
     contentList.splice(index, 1, updatedContentBlock)
     onChange({
       name: 'content',

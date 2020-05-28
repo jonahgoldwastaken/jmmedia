@@ -1,9 +1,9 @@
 import { Field, InputType } from 'type-graphql'
-import { Project } from './model'
+import { Project, ContentTypes } from './model'
 
 @InputType()
 class ContentInput {
-  @Field(() => String)
+  @Field(() => ContentTypes)
   type: string
 
   @Field()
