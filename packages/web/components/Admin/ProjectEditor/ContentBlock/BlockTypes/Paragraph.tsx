@@ -1,9 +1,9 @@
 import { TextAreaInput } from 'components/Form'
-import { ArticleText } from 'components/Portfolio/Article'
+import { ArticleText } from 'components/Project/Article'
 import { EditorContainer, EditorProps } from './Editors'
 
 interface ParagraphEditorProps
-  extends EditorProps<HTMLTextAreaElement, HTMLParagraphElement, string> {}
+  extends EditorProps<HTMLParagraphElement, string> {}
 
 export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
   editing,
@@ -20,9 +20,8 @@ export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
         name="paragraph"
         value={value}
         required
-        onChange={onChange}
+        onChange={e => onChange(e.currentTarget.value)}
         onKeyUp={e => {
-          console.log(e.key)
           if (e.key === 'Enter') {
             e.preventDefault()
             onSubmit()

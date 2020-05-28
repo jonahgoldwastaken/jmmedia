@@ -1,7 +1,8 @@
 import Footer, { FooterLink } from 'components/Footer'
-import { Article, ArticleTitle } from 'components/Portfolio/Article'
+import { Article, ArticleTitle } from 'components/Project/Article'
 import {
   NewProjectInput,
+  ProjectInput,
   useProjectServiceOptionsQuery,
 } from 'generated/graphql'
 import { useCallback } from 'react'
@@ -23,17 +24,35 @@ type Props = {
 
 export const ProjectEditor: React.FunctionComponent<Props> = ({
   project,
-  onChange: onChange,
-  onSubmit: onSubmit,
+  onChange,
+  onSubmit,
 }) => {
   const { data, loading } = useProjectServiceOptionsQuery()
   const { content } = project
 
-  const addContentBlock = useCallback(() => {
-    const copiedContent = [...content]
-    copiedContent.push({ type: 'paragraph', data: '' })
-    onChange({ name: 'content', value: copiedContent })
-  }, [content])
+  const addContentBlock = useCallback(
+    (newContentValue: NewProjectInput['content']) => {
+      newContentValue.push({ type: 'paragraph', data: '' })
+      onChange({ name: 'content', value: newContentValue })
+    },
+    []
+  )
+
+  const changeHandler = useCallback(
+    ({ name, value }: { name: keyof ProjectInput; value: any }) => {
+      if (
+        name === 'content' &&
+        value.length >= content.length &&
+        value[value.length - 1].data
+      ) {
+        console.log('value', value)
+        addContentBlock(value)
+        return
+      }
+      onChange({ name, value })
+    },
+    [content]
+  )
 
   const properties = [
     {
@@ -71,8 +90,7 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
       value={{
         content: content,
         properties,
-        addContentBlock,
-        onChange,
+        onChange: changeHandler,
         onSubmit,
       }}
     >
@@ -90,9 +108,16 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
           <Article>
             <ArticleTitle>{project.title || 'Titel'}</ArticleTitle>
             {content.map(({ type, data }, index) => (
-              <ContentBlock index={index} type={type} data={data} key={data} />
+              <ContentBlock
+                key={JSON.stringify({ type, data, index })}
+                index={index}
+                type={type}
+                data={data}
+              />
             ))}
-            {!content.length && <AddContent />}
+            {(!content.length || content[content.length - 1].data) && (
+              <AddContent />
+            )}
           </Article>
           <Footer>
             <FooterLink colour="secondary" href="#">

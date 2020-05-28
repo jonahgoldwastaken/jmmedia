@@ -10,9 +10,9 @@ import {
   ArticleImageRow,
   ArticleText,
   ArticleTitle,
-} from 'components/Portfolio/Article'
-import { ArticleVideo } from 'components/Portfolio/Article/Video'
-import DarkRoom from 'components/Portfolio/Darkroom'
+} from 'components/Project/Article'
+import { ArticleVideo } from 'components/Project/Article/Video'
+import DarkRoom from 'components/Project/Darkroom'
 import {
   ProjectDocument,
   ProjectQuery,

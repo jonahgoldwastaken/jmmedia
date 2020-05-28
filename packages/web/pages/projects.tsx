@@ -5,7 +5,7 @@ import {
   ProjectListContext,
   ProjectListFilter,
   ProjectListHeader,
-} from 'components/Portfolio/List'
+} from 'components/Project/List'
 import { Paragraph } from 'components/Text'
 import { HeadingOne } from 'components/Text/Headings'
 import { useProjectsQuery } from 'generated/graphql'

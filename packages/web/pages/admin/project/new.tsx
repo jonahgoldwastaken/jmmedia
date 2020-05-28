@@ -40,7 +40,6 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
     value: any
   }) => {
     const tempProject = { ...project }
-    console.log('tempProject', tempProject)
     tempProject[name] = value
     setProject(tempProject)
   }

@@ -1,5 +1,5 @@
 import Image from 'components/Image'
-import { ArticleContext } from 'components/Portfolio/Article'
+import { ArticleContext } from 'components/Project/Article'
 import { useContext } from 'react'
 import styled, { css } from 'styled-components'
 
