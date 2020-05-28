@@ -8,6 +8,8 @@ import { NextPage } from 'next'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
 import { withRouter } from 'next/router'
+import Link from 'next/link'
+import { Button } from 'components/Form'
 
 type Props = {
   currentUser: {
@@ -33,6 +35,9 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
           <>
             <div>
               <HeadingTwo>Projecten</HeadingTwo>
+              <Link href="/admin/project">
+                <Button>Nieuw project</Button>
+              </Link>
               {data?.projects?.map(({ listImage, title, slug }) => (
                 <List maxRows={2}>
                   <ListItem
@@ -47,6 +52,9 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
             </div>
             <div>
               <HeadingTwo>Services</HeadingTwo>
+              <Link href="/admin/service">
+                <Button>Nieuwe service</Button>
+              </Link>
               {data?.services?.map(({ listImage, name, slug }) => (
                 <List maxRows={2}>
                   <ListItem
