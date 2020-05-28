@@ -1,4 +1,4 @@
-import { UserInputError } from 'apollo-server-koa'
+import { UserInputError, ForbiddenError } from 'apollo-server-koa'
 import argon2 from 'argon2'
 import { MongoError } from 'mongodb'
 import { authenticateUser, issueToken } from '../../authentication'
@@ -30,6 +30,9 @@ export class UserResolver {
   async registerUser(
     @Arg('user') { username, password: unhashed }: UserInput
   ): Promise<User> {
+    const amtOfUsers = await UserModel.find().count()
+    if (amtOfUsers > 1)
+      throw new ForbiddenError('Amount of allowed users to register exceeded')
     try {
       const password = await argon2.hash(unhashed)
       const user = new UserModel({ username, password })
