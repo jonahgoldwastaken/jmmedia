@@ -79,7 +79,7 @@ export class MediaResolver {
     const pass = new stream.PassThrough()
     readStream
       .pipe(sharp())
-      .resize(500)
+      .resize(500, 500, { fit: 'cover' })
       .jpeg({ quality: 60, progressive: true })
       .pipe(pass)
     const { Location } = await b2
