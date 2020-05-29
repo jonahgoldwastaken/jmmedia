@@ -1,10 +1,10 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: RSync Production deployment
+name: RSync Staging Deployment
 
-on:
-  push:
+on: 
+  pull_request:
     branches: [ master ]
 
 jobs:
@@ -32,7 +32,7 @@ jobs:
     - name: Yarn Build
       run: yarn build
       env:
-        SERVER_URL: https://api.jmmedia.nl
+        SERVER_URL: https://api.staging.jmmedia.nl
     - name: Yarn Production Install
       run: yarn install --prod --force --frozen-lockfile
     - name: Deploy
@@ -40,13 +40,13 @@ jobs:
       with:
         remote_host: ${{secrets.DEPLOY_URL}}
         remote_user: ${{secrets.DEPLOY_USER}}
-        remote_path: ${{secrets.DEPLOY_PATH}}
+        remote_path: ${{secrets.STAGING_PATH}}
         switches: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.vscode' --exclude '**/tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
         remote_key: ${{secrets.PRIVATE_KEY}}
     - name: Run SSH command
       uses: garygrossgarten/github-action-ssh@v0.5.0
       with:
-        command: bash ~/prod.sh
+        command: bash ~/staging.sh
         host: ${{secrets.DEPLOY_URL}}
         username: ${{secrets.DEPLOY_USER}}
         privateKey: ${{secrets.PRIVATE_KEY}}
