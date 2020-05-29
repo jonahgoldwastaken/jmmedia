@@ -26,7 +26,7 @@ jobs:
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         
     - name: Create deployment
-      id: staging-deployment
+      id: deployment
       uses: chrnorm/deployment-action@v1.2.0
       with:
         token: "${{ github.token }}"
