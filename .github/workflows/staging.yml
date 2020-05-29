@@ -1,8 +1,8 @@
-name: RSync Production deployment
+name: RSync Staging deployment
 
 on:
-  push:
-    branches: [ master ]
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
