@@ -1,8 +1,8 @@
-name: RSync Production deployment
+name: RSync Staging deployment
 
 on:
-  push:
-    branches: [ master ]
+  pull_request:
+    branches: [master]
 
 jobs:
   build:
@@ -80,6 +80,6 @@ jobs:
       uses: chrnorm/deployment-status@releases/v1
       with:
         token: "${{ github.token }}"
-        target_url: https://jmmedia.nl
-        state: "cancelled"
+        target_url: https://staging.jmmedia.nl
+        state: "failure"
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
