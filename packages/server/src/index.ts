@@ -28,10 +28,7 @@ const initialiseBootSequence = async () => {
   app.use(helmet())
   app.use(
     cors({
-      origin:
-        process.env.NODE_ENV === 'development'
-          ? 'http://127.0.0.1:3000'
-          : 'https://www.jmmedia.nl',
+      origin: process.env.CLIENT_URL,
       credentials: true,
     })
   )

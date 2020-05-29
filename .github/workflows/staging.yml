@@ -12,7 +12,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-
+        
     - name: Prepare Next.JS build cache
       uses: actions/cache@v1
       with:
@@ -26,12 +26,12 @@ jobs:
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         
     - name: Create deployment
-      id: production-deployment
+      id: staging-deployment
       uses: chrnorm/deployment-action@v1.2.0
       with:
         token: "${{ github.token }}"
-        target_url: https://jmmedia.nl
-        environment: production
+        target_url: https://staging.jmmedia.nl
+        environment: staging
         
     - name: Build deployment
       run: |
@@ -45,14 +45,14 @@ jobs:
       with:
         remote_host: ${{secrets.DEPLOY_URL}}
         remote_user: ${{secrets.DEPLOY_USER}}
-        remote_path: ${{secrets.DEPLOY_PATH}}
+        remote_path: ${{secrets.STAGING_PATH}}
         switches: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.vscode' --exclude '**/tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
         remote_key: ${{secrets.PRIVATE_KEY}}
         
     - name: Run SSH command
       uses: garygrossgarten/github-action-ssh@v0.5.0
       with:
-        command: bash ~/prod.sh
+        command: bash ~/staging.sh
         host: ${{secrets.DEPLOY_URL}}
         username: ${{secrets.DEPLOY_USER}}
         privateKey: ${{secrets.PRIVATE_KEY}}
@@ -62,7 +62,7 @@ jobs:
       uses: chrnorm/deployment-status@releases/v1
       with:
         token: "${{ github.token }}"
-        target_url: https://jmmedia.nl
+        target_url: https://staging.jmmedia.nl
         state: "success"
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
@@ -71,7 +71,7 @@ jobs:
       uses: chrnorm/deployment-status@releases/v1
       with:
         token: "${{ github.token }}"
-        target_url: https://jmmedia.nl
+        target_url: https://staging.jmmedia.nl
         state: "failure"
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 

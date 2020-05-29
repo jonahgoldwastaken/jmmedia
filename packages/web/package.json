@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start --port 3000",
+    "start": "next start",
     "gql:gen": "graphql-codegen --config codegen.yml"
   },
   "repository": {
