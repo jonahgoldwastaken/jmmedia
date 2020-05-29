@@ -81,5 +81,5 @@ jobs:
       with:
         token: "${{ github.token }}"
         target_url: https://jmmedia.nl
-        state: "cancelled"
+        state: "failure"
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
