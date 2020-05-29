@@ -58,28 +58,28 @@ jobs:
         privateKey: ${{secrets.PRIVATE_KEY}}
         
     - name: Update deployment status (success)
-        if: ${{ success() }}
-        uses: chrnorm/deployment-status@releases/v1
-        with:
-          token: "${{ github.token }}"
-          target_url: https://staging.jmmedia.nl
-          state: "success"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+      if: ${{ success() }}
+      uses: chrnorm/deployment-status@releases/v1
+      with:
+        token: "${{ github.token }}"
+        target_url: https://staging.jmmedia.nl
+        state: "success"
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
-      - name: Update deployment status (failure)
-        if: ${{ failure() }}
-        uses: chrnorm/deployment-status@releases/v1
-        with:
-          token: "${{ github.token }}"
-          target_url: https://staging.jmmedia.nl
-          state: "failure"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+    - name: Update deployment status (failure)
+      if: ${{ failure() }}
+      uses: chrnorm/deployment-status@releases/v1
+      with:
+        token: "${{ github.token }}"
+        target_url: https://staging.jmmedia.nl
+        state: "failure"
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
-      - name: Update deployment status (cancelled)
-        if: ${{ cancelled() }}
-        uses: chrnorm/deployment-status@releases/v1
-        with:
-          token: "${{ github.token }}"
-          target_url: https://jmmedia.nl
-          state: "cancelled"
-          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+    - name: Update deployment status (cancelled)
+      if: ${{ cancelled() }}
+      uses: chrnorm/deployment-status@releases/v1
+      with:
+        token: "${{ github.token }}"
+        target_url: https://jmmedia.nl
+        state: "cancelled"
+        deployment_id: ${{ steps.deployment.outputs.deployment_id }}
