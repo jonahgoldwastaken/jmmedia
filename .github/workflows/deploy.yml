@@ -1,6 +1,3 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
 name: RSync Production deployment
 
 on:
@@ -15,27 +12,35 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-    - name: jmmedia/web build cache
+
+    - name: Prepare Next.JS build cache
       uses: actions/cache@v1
       with:
         path: ${{ github.workspace }}/packages/web/.next/cache
         key: ${{ runner.os }}-nextjs-${{ hashFiles('packages/web/yarn.lock') }}
-    - name: node_modules cache
+
+    - name: Prepare node_modules cache
       uses: actions/cache@v1
       with:
         path: ${{ github.workspace }}/node_modules
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-    - name: Yarn Install
+        
+    - name: Create deployment
+      id: production-deployment
+      uses: chrnorm/deployment-action@v1.2.0
+      with:
+        token: "${{ github.token }}"
+        target_url: https://jmmedia.nl
+        environment: production
+        
+    - name: Build deployment
       run: |
           yarn config set ignore-engines true
           yarn --frozen-lockfile
-    - name: Yarn Build
-      run: yarn build
-      env:
-        SERVER_URL: https://api.jmmedia.nl
-    - name: Yarn Production Install
-      run: yarn install --prod --force --frozen-lockfile
-    - name: Deploy
+          yarn build
+          yarn install --prod --force --frozen-lockfile
+          
+    - name: Upload artifacts
       uses: Burnett01/rsync-deployments@4.0
       with:
         remote_host: ${{secrets.DEPLOY_URL}}
@@ -43,6 +48,7 @@ jobs:
         remote_path: ${{secrets.DEPLOY_PATH}}
         switches: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.vscode' --exclude '**/tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
         remote_key: ${{secrets.PRIVATE_KEY}}
+        
     - name: Run SSH command
       uses: garygrossgarten/github-action-ssh@v0.5.0
       with:
@@ -50,5 +56,23 @@ jobs:
         host: ${{secrets.DEPLOY_URL}}
         username: ${{secrets.DEPLOY_USER}}
         privateKey: ${{secrets.PRIVATE_KEY}}
+        
+    - name: Update deployment status (success)
+        if: success()
+        uses: chrnorm/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target_url: https://jmmedia.nl
+          state: "success"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+
+      - name: Update deployment status (failure)
+        if: failure()
+        uses: chrnorm/deployment-status@releases/v1
+        with:
+          token: "${{ github.token }}"
+          target_url: https://jmmedia.nl
+          state: "failure"
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
         
