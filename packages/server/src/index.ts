@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 require('dotenv').config({ path: resolve(process.cwd(), '..', '..', '.env') })
-import cors from '@koa/cors'
 import { ApolloServer } from 'apollo-server-koa'
 import { graphqlUploadKoa } from 'graphql-upload'
 import koa from 'koa'
