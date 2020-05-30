@@ -54,7 +54,11 @@ const initialiseBootSequence = async () => {
       return { ctx: { ...ctx }, user }
     },
   })
-  server.applyMiddleware({ app, path: '/' })
+  server.applyMiddleware({
+    app,
+    path: '/',
+    cors: { credentials: true, origin: process.env.CLIENT_URL },
+  })
   app.listen(PORT, () => {
     console.log(`Ready on port ${PORT}`)
   })
