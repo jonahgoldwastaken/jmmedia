@@ -58,11 +58,7 @@ const initialiseBootSequence = async () => {
     .use(
       server.getMiddleware({
         path: '/',
-        cors: {
-          origin: process.env.CLIENT_URL,
-          credentials: true,
-          keepHeadersOnError: true,
-        },
+        cors: false,
       })
     )
     .listen(PORT, () => {
