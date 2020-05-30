@@ -32,6 +32,11 @@ const initialiseBootSequence = async () => {
       credentials: true,
     })
   )
+  app.use(async (ctx, next) => {
+    console.log(ctx.headers)
+    console.log(ctx.res.getHeaders())
+    await next()
+  })
   app.keys = [process.env.SESSION_SECRET as string]
   app.use(async (ctx, next) => {
     const [error, user] = await authorizeToken(ctx)
