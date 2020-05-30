@@ -26,31 +26,6 @@ const initialiseBootSequence = async () => {
   const PORT = Number(process.env.PORT) || 4000
 
   const app = new koa()
-  app.use(helmet())
-  app.use(logger())
-  app.use(async (ctx, next) => {
-    console.log(ctx.header.origin, process.env.CLIENT_URL)
-    await next()
-  })
-  app.use(
-    cors({
-      origin: process.env.CLIENT_URL,
-      credentials: true,
-    })
-  )
-  app.use(async (ctx, next) => {
-    const [error, user] = await authorizeToken(ctx)
-    if (error) console.log(error)
-    if (user) ctx.state.user = user
-    await next()
-  })
-  app.use(
-    graphqlUploadKoa({
-      maxFieldSize: 1000000,
-      maxFileSize: 40000000,
-      maxFiles: 5,
-    })
-  )
   const server = new ApolloServer({
     schema,
     uploads: false,
@@ -60,14 +35,37 @@ const initialiseBootSequence = async () => {
       return { ctx: { ...ctx }, user }
     },
   })
-  server.applyMiddleware({
-    app,
-    path: '/',
-    cors: { credentials: true, origin: process.env.CLIENT_URL },
-  })
-  app.listen(PORT, () => {
-    console.log(`Ready on port ${PORT}`)
-  })
+
+  app
+    .use(helmet())
+    .use(logger())
+    .use(async (ctx, next) => {
+      console.log(ctx.header.origin, process.env.CLIENT_URL)
+      await next()
+    })
+    .use(
+      cors({
+        origin: process.env.CLIENT_URL,
+        credentials: true,
+      })
+    )
+    .use(async (ctx, next) => {
+      const [error, user] = await authorizeToken(ctx)
+      if (error) console.log(error)
+      if (user) ctx.state.user = user
+      await next()
+    })
+    .use(
+      graphqlUploadKoa({
+        maxFieldSize: 1000000,
+        maxFileSize: 40000000,
+        maxFiles: 5,
+      })
+    )
+    .use(server.getMiddleware({ path: '/', cors: false }))
+    .listen(PORT, () => {
+      console.log(`Ready on port ${PORT}`)
+    })
 }
 
 initialiseBootSequence()
