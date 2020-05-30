@@ -56,9 +56,10 @@ const initialiseBootSequence = async () => {
         path: '/',
         cors: {
           origin: ctx => {
-            if (ctx.origin === 'http://localhost:3000')
+            if (ctx.request.origin === 'http://localhost:3000')
               return 'http://localhost:3000'
-            if (ctx.origin === 'https://jmmedia.nl') return 'https://jmmedia.nl'
+            if (ctx.request.origin === 'https://jmmedia.nl')
+              return 'https://jmmedia.nl'
             return 'https://www.jmmedia.nl'
           },
           credentials: true,
