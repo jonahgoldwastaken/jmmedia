@@ -21,7 +21,7 @@ jobs:
         key: ${{ runner.os }}-modules-build-${{ hashFiles('**/yarn.lock') }}
     
     - name: Install if no cache
-      if: ${{ !steps.build_modules_cache.cache-hit }}
+      if: ${{ steps.cache-primes.outputs.cache-hit != 'true' }}
       run: yarn install --frozen-lockfile
     
   build_server:
@@ -115,7 +115,7 @@ jobs:
         key: ${{ runner.os }}-prod_modules_cache-${{ hashFiles('**/yarn.lock') }}
 
     - name: Yarn install if no cache
-      if: ${{ !steps.build_modules_cache.cache-hit }}
+      if: ${{ steps.cache-primes.outputs.cache-hit != 'true' }}
       run: yarn install --prod --frozen-lockfile
 
     - name: Upload build
