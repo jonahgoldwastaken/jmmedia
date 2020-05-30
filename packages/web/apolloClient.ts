@@ -12,7 +12,6 @@ export default function createApolloClient(
   const enhancedFetch = (url: string, init: any) =>
     fetch(url, {
       ...init,
-      mode: 'no-cors',
       headers: {
         ...init.headers,
         Authorization: ctx?.req?.headers.cookie
@@ -23,7 +22,8 @@ export default function createApolloClient(
       },
     }).then(response => response)
   const link = createUploadLink({
-    uri: process.env.NEXT_PUBLIC_SERVER_URL,
+    uri: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:4000',
+    credentials: 'include',
     fetch: enhancedFetch,
   })
   return new ApolloClient({
