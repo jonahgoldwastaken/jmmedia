@@ -62,6 +62,12 @@ jobs:
       with:
         path: ${{ github.workspace }}/node_modules
         key: ${{ runner.os }}-modules-build-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Use NextJS build cache
+      uses: actions/cache@v1
+      with:
+        path: ${{ github.workspace }}/packages/web/.next/cache
+        key: ${{ runner.os }}-nextjs-${{ hashFiles('${{ github.workspace }}/packages/web/yarn.lock') }}
         
     - name: Build deployment
       run: yarn build:web
