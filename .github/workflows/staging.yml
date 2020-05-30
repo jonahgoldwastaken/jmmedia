@@ -97,6 +97,8 @@ jobs:
 
     - name: Build deployment
       run: yarn build:web
+      env:
+        NEXT_PUBLIC_SERVER_URL: https://api.staging.jmmedia.nl
 
     - name: Upload web build
       uses: actions/upload-artifact@v2
