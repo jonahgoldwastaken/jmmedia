@@ -23,18 +23,12 @@ const initialiseBootSequence = async () => {
     emitSchemaFile: true,
   })
   const PORT = Number(process.env.PORT) || 4000
-  const HOSTNAME = process.env.HOST_NAME || `127.0.0.1:${PORT}`
 
   const app = new koa()
   app.use(helmet({}))
   app.use(
     cors({
-      origin: ctx => {
-        console.log(ctx.headers.origin, process.env.CLIENT_URL)
-        if (ctx.headers.origin === process.env.CLIENT_URL)
-          return process.env.CLIENT_URL as string
-        else return 'https://www.jmmedia.nl'
-      },
+      origin: process.env.CLIENT_URL,
       credentials: true,
     })
   )
@@ -60,9 +54,9 @@ const initialiseBootSequence = async () => {
       return { ctx: { ...ctx }, user }
     },
   })
-  server.applyMiddleware({ app, cors: true, path: '/' })
-  app.listen(PORT, HOSTNAME, () => {
-    console.log(`Ready on ${HOSTNAME}:${PORT}`)
+  server.applyMiddleware({ app, path: '/' })
+  app.listen(PORT, () => {
+    console.log(`Ready on port ${PORT}`)
   })
 }
 
