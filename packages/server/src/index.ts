@@ -26,10 +26,11 @@ const initialiseBootSequence = async () => {
   const HOSTNAME = process.env.HOST_NAME || `127.0.0.1:${PORT}`
 
   const app = new koa()
-  app.use(helmet())
+  app.use(helmet({}))
   app.use(
     cors({
       origin: ctx => {
+        console.log(ctx.headers.origin, process.env.CLIENT_URL)
         if (ctx.headers.origin === process.env.CLIENT_URL)
           return process.env.CLIENT_URL as string
         else return 'https://www.jmmedia.nl'
