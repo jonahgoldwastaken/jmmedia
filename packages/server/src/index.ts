@@ -54,16 +54,7 @@ const initialiseBootSequence = async () => {
     .use(
       server.getMiddleware({
         path: '/api/',
-        cors: {
-          origin: ctx => {
-            if (ctx.origin === 'http://localhost:4000')
-              return 'http://localhost:3000'
-            return 'https://jmmedia.nl'
-          },
-          credentials: true,
-          allowMethods: ['GET', 'OPTIONS', 'POST'],
-          allowHeaders: ['Authorization', 'Content-Type'],
-        },
+        cors: process.env.NODE_ENV === 'development' ? { origin: '*' } : false,
       })
     )
     .listen(PORT, () => {
