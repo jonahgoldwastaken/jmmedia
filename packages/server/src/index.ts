@@ -39,10 +39,6 @@ const initialiseBootSequence = async () => {
     .use(helmet())
     .use(logger())
     .use(async (ctx, next) => {
-      console.log(ctx.header.origin, process.env.CLIENT_URL)
-      await next()
-    })
-    .use(async (ctx, next) => {
       const [error, user] = await authorizeToken(ctx)
       if (error) console.log(error)
       if (user) ctx.state.user = user
@@ -58,7 +54,12 @@ const initialiseBootSequence = async () => {
     .use(
       server.getMiddleware({
         path: '/',
-        cors: false,
+        cors: {
+          origin: '*',
+          credentials: true,
+          allowMethods: ['GET', 'OPTIONS', 'POST'],
+          allowHeaders: ['Authorization', 'Content-Type'],
+        },
       })
     )
     .listen(PORT, () => {
