@@ -23,7 +23,6 @@ export default function createApolloClient(
     }).then(response => response)
   const link = createUploadLink({
     uri: process.env.NEXT_PUBLIC_SERVER_URL,
-    credentials: 'include',
     fetch: enhancedFetch,
   })
   return new ApolloClient({
