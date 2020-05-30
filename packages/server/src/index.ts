@@ -55,7 +55,7 @@ const initialiseBootSequence = async () => {
       server.getMiddleware({
         path: '/',
         cors: {
-          origin: '*',
+          origin: process.env.CLIENT_URL || 'http://localhost:3000',
           credentials: true,
           allowMethods: ['GET', 'OPTIONS', 'POST'],
           allowHeaders: ['Authorization', 'Content-Type'],
