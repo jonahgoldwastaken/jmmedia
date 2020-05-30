@@ -58,8 +58,6 @@ const initialiseBootSequence = async () => {
           origin: ctx => {
             if (ctx.origin === 'http://localhost:4000')
               return 'http://localhost:3000'
-            if (ctx.origin === 'https://www.jmmedia.nl')
-              return 'https://www.jmmedia.nl'
             return 'https://jmmedia.nl'
           },
           credentials: true,
