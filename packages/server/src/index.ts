@@ -26,18 +26,18 @@ const initialiseBootSequence = async () => {
 
   const app = new koa()
   app.use(helmet())
-  app.use(
-    cors({
-      origin: process.env.CLIENT_URL,
-      credentials: true,
-    })
-  )
   app.use(async (ctx, next) => {
     console.log(ctx.headers)
     console.log(ctx.res.getHeaders())
     await next()
   })
   app.keys = [process.env.SESSION_SECRET as string]
+  app.use(
+    cors({
+      origin: process.env.CLIENT_URL,
+      credentials: true,
+    })
+  )
   app.use(async (ctx, next) => {
     const [error, user] = await authorizeToken(ctx)
     if (error) console.log(error)
