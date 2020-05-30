@@ -27,15 +27,13 @@ const initialiseBootSequence = async () => {
 
   const app = new koa()
   app.use(helmet())
-  app.use(async (ctx, next) => {
-    console.log(ctx.headers)
-    console.log(ctx.res.getHeaders())
-    await next()
-  })
-  app.keys = [process.env.SESSION_SECRET as string]
   app.use(
     cors({
-      origin: process.env.CLIENT_URL,
+      origin: ctx => {
+        if (ctx.headers.origin === process.env.CLIENT_URL)
+          return process.env.CLIENT_URL as string
+        else return 'https://www.jmmedia.nl'
+      },
       credentials: true,
     })
   )
