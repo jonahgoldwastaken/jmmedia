@@ -13,6 +13,7 @@ import { UserResolver } from './api/User'
 import { authChecker, authorizeToken } from './authentication'
 import connectToDB from './db'
 import { default as helmet } from 'koa-helmet'
+import logger from 'koa-logger'
 
 const initialiseBootSequence = async () => {
   await connectToDB()
@@ -25,7 +26,8 @@ const initialiseBootSequence = async () => {
   const PORT = Number(process.env.PORT) || 4000
 
   const app = new koa()
-  app.use(helmet({}))
+  app.use(helmet())
+  app.use(logger())
   app.use(
     cors({
       origin: process.env.CLIENT_URL,

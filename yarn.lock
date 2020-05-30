@@ -1987,6 +1987,13 @@
     "@types/helmet" "*"
     "@types/koa" "*"
 
+"@types/koa-logger@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@types/koa-logger/-/koa-logger-3.1.1.tgz#bf759ba2f25b7562ffa30b09616bb1c1e5070fea"
+  integrity sha512-wp2HaskkPugfwgXgNnc+idnReuJZSTTYQbkcxXjsMhp1kTc342PxDzTL9FXDgBfEvgt9NX1CCGjkwPKX2dlEKQ==
+  dependencies:
+    "@types/koa" "*"
+
 "@types/koa@*", "@types/koa@^2.0.46", "@types/koa@^2.11.3":
   version "2.11.3"
   resolved "https://registry.yarnpkg.com/@types/koa/-/koa-2.11.3.tgz#540ece376581b12beadf9a417dd1731bc31c16ce"
@@ -3349,7 +3356,7 @@ busboy@^0.3.1:
   dependencies:
     dicer "0.3.0"
 
-bytes@3.1.0:
+bytes@3.1.0, bytes@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/bytes/-/bytes-3.1.0.tgz#f6cf7933a360e0588fa9fde85651cdc7f805d1f6"
   integrity sha512-zauLjrfCG+xvoyaqLoV8bLVXXNGC4JqlxFCutSDWA6fJrTo2ZuvLYTqZ7aHBLZSMOopbzwv8f+wZcVzfVTI2Dg==
@@ -5838,6 +5845,11 @@ human-signals@^1.1.1:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-1.1.1.tgz#c5b1cd14f50aeae09ab6c59fe63ba3395fe4dfa3"
   integrity sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==
 
+humanize-number@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/humanize-number/-/humanize-number-0.0.2.tgz#11c0af6a471643633588588048f1799541489c18"
+  integrity sha1-EcCvakcWQ2M1iFiASPF5lUFInBg=
+
 husky@^4.2.5:
   version "4.2.5"
   resolved "https://registry.yarnpkg.com/husky/-/husky-4.2.5.tgz#2b4f7622673a71579f901d9885ed448394b5fa36"
@@ -6628,6 +6640,16 @@ koa-helmet@^5.2.0:
   integrity sha512-Q4h4CnpcEo3NuIvD1bBOakkfusPiOvJc/NlOI9M+pG3zeNm2OqFLMbIzCPsvGBz++37KMregUBXZvQiNPDD37w==
   dependencies:
     helmet "^3.21.1"
+
+koa-logger@^3.2.1:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/koa-logger/-/koa-logger-3.2.1.tgz#ab9db879526db3837cc9ce4fd983c025b1689f22"
+  integrity sha512-MjlznhLLKy9+kG8nAXKJLM0/ClsQp/Or2vI3a5rbSQmgl8IJBQO0KI5FA70BvW+hqjtxjp49SpH2E7okS6NmHg==
+  dependencies:
+    bytes "^3.1.0"
+    chalk "^2.4.2"
+    humanize-number "0.0.2"
+    passthrough-counter "^1.0.0"
 
 koa-router@^7.4.0:
   version "7.4.0"
@@ -8096,6 +8118,11 @@ pascalcase@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/pascalcase/-/pascalcase-0.1.1.tgz#b363e55e8006ca6fe21784d2db22bd15d7917f14"
   integrity sha1-s2PlXoAGym/iF4TS2yK9FdeRfxQ=
+
+passthrough-counter@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/passthrough-counter/-/passthrough-counter-1.0.0.tgz#1967d9e66da572b5c023c787db112a387ab166fa"
+  integrity sha1-GWfZ5m2lcrXAI8eH2xEqOHqxZvo=
 
 path-browserify@0.0.1:
   version "0.0.1"
