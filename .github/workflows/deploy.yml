@@ -98,7 +98,7 @@ jobs:
     - name: Build deployment
       run: yarn build:web
       env:
-        NEXT_PUBLIC_SERVER_URL: https://api.jmmedia.nl
+        NEXT_PUBLIC_SERVER_URL: https://jmmedia.nl/api
 
 
     - name: Upload web build
