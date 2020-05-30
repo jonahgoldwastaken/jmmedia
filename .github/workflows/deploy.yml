@@ -2,10 +2,10 @@ name: RSync Production deployment
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
-  build:
+  install:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -13,36 +13,112 @@ jobs:
       with:
         node-version: 14
 
-    - name: Prepare Next.JS build cache
+    - name: Load node_modules build cache
       uses: actions/cache@v1
-      with:
-        path: ${{ github.workspace }}/packages/web/.next/cache
-        key: ${{ runner.os }}-nextjs-${{ hashFiles('packages/web/yarn.lock') }}
-
-    - name: Prepare node_modules cache
-      uses: actions/cache@v1
+      id: build_modules_cache
       with:
         path: ${{ github.workspace }}/node_modules
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-modules-build-${{ hashFiles('**/yarn.lock') }}
+    
+    - name: Install if no cache
+      if: ${{ !steps.build_modules_cache.cache-hit }}
+      run: yarn install --frozen-lockfile
+    
+    - name: Upload node_modules
+      uses: actions/upload-artifact@v2
+      with:
+        name: build_modules
+        path: ${{ github.workspace }}/node_modules
+
+  build_server:
+    needs: [install]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
         
-    - name: Create deployment
+    - name: Download node_modules
+      uses: actions/download-artifact@v2
+      with:
+        name: build_modules
+        path: ${{ github.workspace }}/node_modules
+        
+    - name: Build deployment
+      run: yarn build:server
+    
+    - name: Upload server build
+      uses: actions/upload-artifact@v2
+      with:
+        name: server_build
+        path: ${{ github.workspace }}/packages/server
+  
+  build_web:
+    needs: [install]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
+        
+    - name: Download node_modules
+      uses: actions/download-artifact@v2
+      with:
+        name: build_modules
+        path: ${{ github.workspace }}/node_modules
+        
+    - name: Build deployment
+      run: yarn build:web
+    
+    - name: Upload web build
+      uses: actions/upload-artifact@v2
+      with:
+        name: web_build
+        path: ${{ github.workspace }}/packages/web
+  
+  deploy:
+    needs: [build_web, build_server]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Create Github deployment
       id: deployment
       uses: chrnorm/deployment-action@v1.2.0
       with:
         token: "${{ github.token }}"
-        target_url: https://jmmedia.nl
+        target_url: https://www.jmmedia.nl
         environment: production
-        
-    - name: Build deployment
-      run: |
-          yarn config set ignore-engines true
-          yarn --frozen-lockfile
-          yarn build
-          yarn install --prod --force --frozen-lockfile
-      env:
-        NEXT_PUBLIC_SERVER_URL: https://api.jmmedia.nl
-          
-    - name: Upload artifacts
+
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 14
+
+    - name: Download server build
+      uses: actions/download-artifact@v2
+      with:
+        name: server_build
+        path: ${{ github.workspace }}/packages/server
+
+    - name: Download web build
+      uses: actions/download-artifact@v2
+      with:
+        name: web_build
+        path: ${{ github.workspace }}/packages/web
+
+    - name: Load node_modules prod cache
+      uses: actions/cache@v1
+      id: prod_modules_cache
+      with:
+        path: ${{ github.workspace }}/node_modules
+        key: ${{ runner.os }}-prod_modules_cache-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Yarn install if no cache
+      if: ${{ !steps.build_modules_cache.cache-hit }}
+      run: yarn install --prod --frozen-lockfile
+
+    - name: Upload build
       uses: Burnett01/rsync-deployments@4.0
       with:
         remote_host: ${{secrets.DEPLOY_URL}}
@@ -64,7 +140,6 @@ jobs:
       uses: chrnorm/deployment-status@releases/v1
       with:
         token: "${{ github.token }}"
-        target_url: https://jmmedia.nl
         state: "success"
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
@@ -73,7 +148,6 @@ jobs:
       uses: chrnorm/deployment-status@releases/v1
       with:
         token: "${{ github.token }}"
-        target_url: https://jmmedia.nl
         state: "failure"
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
 
@@ -82,6 +156,5 @@ jobs:
       uses: chrnorm/deployment-status@releases/v1
       with:
         token: "${{ github.token }}"
-        target_url: https://jmmedia.nl
         state: "failure"
         deployment_id: ${{ steps.deployment.outputs.deployment_id }}
