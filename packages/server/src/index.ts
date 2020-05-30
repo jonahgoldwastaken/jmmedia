@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 require('dotenv').config({ path: resolve(process.cwd(), '..', '..', '.env') })
-import cors from '@koa/cors'
 import { ApolloServer } from 'apollo-server-koa'
 import { graphqlUploadKoa } from 'graphql-upload'
 import koa from 'koa'
@@ -13,6 +12,7 @@ import { UserResolver } from './api/User'
 import { authChecker, authorizeToken } from './authentication'
 import connectToDB from './db'
 import { default as helmet } from 'koa-helmet'
+import logger from 'koa-logger'
 
 const initialiseBootSequence = async () => {
   await connectToDB()
@@ -22,30 +22,9 @@ const initialiseBootSequence = async () => {
     authChecker,
     emitSchemaFile: true,
   })
-  const PORT = process.env.PORT || 4000
+  const PORT = Number(process.env.PORT) || 4000
 
   const app = new koa()
-  app.use(helmet())
-  app.use(
-    cors({
-      origin: process.env.CLIENT_URL,
-      credentials: true,
-    })
-  )
-  app.keys = [process.env.SESSION_SECRET as string]
-  app.use(async (ctx, next) => {
-    const [error, user] = await authorizeToken(ctx)
-    if (error) console.log(error)
-    if (user) ctx.state.user = user
-    await next()
-  })
-  app.use(
-    graphqlUploadKoa({
-      maxFieldSize: 1000000,
-      maxFileSize: 40000000,
-      maxFiles: 5,
-    })
-  )
   const server = new ApolloServer({
     schema,
     uploads: false,
@@ -55,10 +34,37 @@ const initialiseBootSequence = async () => {
       return { ctx: { ...ctx }, user }
     },
   })
-  server.applyMiddleware({ app, cors: true, path: '/' })
-  app.listen(PORT, () => {
-    console.log('ready on port :' + PORT + '!')
-  })
+
+  app
+    .use(helmet())
+    .use(logger())
+    .use(async (ctx, next) => {
+      const [error, user] = await authorizeToken(ctx)
+      if (error) console.log(error)
+      if (user) ctx.state.user = user
+      await next()
+    })
+    .use(
+      graphqlUploadKoa({
+        maxFieldSize: 1000000,
+        maxFileSize: 40000000,
+        maxFiles: 5,
+      })
+    )
+    .use(
+      server.getMiddleware({
+        path: '/',
+        cors: {
+          origin: '*',
+          credentials: true,
+          allowMethods: ['GET', 'OPTIONS', 'POST'],
+          allowHeaders: ['Authorization', 'Content-Type'],
+        },
+      })
+    )
+    .listen(PORT, () => {
+      console.log(`Ready on port ${PORT}`)
+    })
 }
 
 initialiseBootSequence()
