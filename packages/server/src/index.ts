@@ -43,12 +43,6 @@ const initialiseBootSequence = async () => {
       console.log(ctx.header.origin, process.env.CLIENT_URL)
       await next()
     })
-    .use(
-      cors({
-        origin: process.env.CLIENT_URL,
-        credentials: true,
-      })
-    )
     .use(async (ctx, next) => {
       const [error, user] = await authorizeToken(ctx)
       if (error) console.log(error)
@@ -62,7 +56,16 @@ const initialiseBootSequence = async () => {
         maxFiles: 5,
       })
     )
-    .use(server.getMiddleware({ path: '/', cors: false }))
+    .use(
+      server.getMiddleware({
+        path: '/',
+        cors: {
+          origin: process.env.CLIENT_URL,
+          credentials: true,
+          keepHeadersOnError: true,
+        },
+      })
+    )
     .listen(PORT, () => {
       console.log(`Ready on port ${PORT}`)
     })
