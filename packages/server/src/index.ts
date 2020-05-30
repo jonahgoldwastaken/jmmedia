@@ -22,7 +22,8 @@ const initialiseBootSequence = async () => {
     authChecker,
     emitSchemaFile: true,
   })
-  const PORT = process.env.PORT || 4000
+  const PORT = Number(process.env.PORT) || 4000
+  const HOSTNAME = process.env.HOST_NAME || `127.0.0.1:${PORT}`
 
   const app = new koa()
   app.use(helmet())
@@ -61,8 +62,8 @@ const initialiseBootSequence = async () => {
     },
   })
   server.applyMiddleware({ app, cors: true, path: '/' })
-  app.listen(PORT, () => {
-    console.log('ready on port :' + PORT + '!')
+  app.listen(PORT, HOSTNAME, () => {
+    console.log(`Ready on ${HOSTNAME}:${PORT}`)
   })
 }
 
