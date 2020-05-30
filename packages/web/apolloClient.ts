@@ -12,6 +12,7 @@ export default function createApolloClient(
   const enhancedFetch = (url: string, init: any) =>
     fetch(url, {
       ...init,
+      mode: 'no-cors',
       headers: {
         ...init.headers,
         Authorization: ctx?.req?.headers.cookie
