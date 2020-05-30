@@ -39,6 +39,8 @@ jobs:
           yarn --frozen-lockfile
           yarn build
           yarn install --prod --force --frozen-lockfile
+      env:
+        NEXT_PUBLIC_SERVER_URL: https://api.jmmedia.nl
           
     - name: Upload artifacts
       uses: Burnett01/rsync-deployments@4.0
