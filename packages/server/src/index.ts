@@ -28,6 +28,10 @@ const initialiseBootSequence = async () => {
   const app = new koa()
   app.use(helmet())
   app.use(logger())
+  app.use(async (ctx, next) => {
+    console.log(ctx.header.origin, process.env.CLIENT_URL)
+    await next()
+  })
   app.use(
     cors({
       origin: process.env.CLIENT_URL,
