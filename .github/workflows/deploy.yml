@@ -94,11 +94,12 @@ jobs:
 
     - name: Install packages
       run: yarn
-      env:
-        NEXT_PUBLIC_SERVER_URL: https://api.jmmedia.nl
 
     - name: Build deployment
       run: yarn build:web
+      env:
+        NEXT_PUBLIC_SERVER_URL: https://api.jmmedia.nl
+
 
     - name: Upload web build
       uses: actions/upload-artifact@v2
