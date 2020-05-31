@@ -22,7 +22,7 @@ export const ProjectListFilter = () => {
   const ref = useRef<HTMLSelectElement>()
   return (
     <Div
-      onMouseDown={e => {
+      onMouseDown={() => {
         const evt = new MouseEvent('mousedown')
         if (typeof ref.current !== 'undefined') ref.current.dispatchEvent(evt)
       }}
