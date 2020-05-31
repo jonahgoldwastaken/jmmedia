@@ -6,10 +6,9 @@ import {
   Label,
 } from './BaseInput'
 
-interface TextAreaProps extends BaseInputTagProps {}
+interface TextAreaProps extends BaseInputTagProps<'textarea'> {}
 
-interface TextAreaInputProps
-  extends BaseInputProps<string, HTMLTextAreaElement> {}
+interface TextAreaInputProps extends BaseInputProps<'textarea'> {}
 
 const TextArea = styled.textarea<TextAreaProps>`
   ${BaseInputStyling}

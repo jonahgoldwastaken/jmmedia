@@ -6,15 +6,13 @@ import {
   Label,
 } from './BaseInput'
 
-interface SelectInputTagProps extends BaseInputTagProps {}
+interface SelectInputTagProps extends BaseInputTagProps<'select'> {}
 
-interface SelectInputProps
-  extends BaseInputProps<string, HTMLSelectElement>,
-    SelectInputTagProps {
+interface SelectInputProps extends BaseInputProps<'select'> {
   options: Array<{ name: string; value: string }>
 }
 
-const SelectInputTag = styled.select`
+const SelectInputTag = styled.select<SelectInputTagProps>`
   ${BaseInputStyling}
   cursor: pointer;
 `

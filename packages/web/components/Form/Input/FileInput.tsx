@@ -7,9 +7,11 @@ import {
   Label,
 } from './BaseInput'
 
-interface FileInputTagProps extends BaseInputTagProps {}
+interface FileInputTagProps extends BaseInputTagProps<'input'> {}
 
-interface FileInputProps extends BaseInputProps<string, HTMLInputElement> {}
+interface FileInputProps extends BaseInputProps<'input'> {
+  value: string
+}
 
 const InputImage = styled.img`
   position: relative;
