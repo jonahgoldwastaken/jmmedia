@@ -6,38 +6,30 @@ import {
   Label,
 } from './BaseInput'
 
-interface SelectInputTagProps extends BaseInputTagProps {}
+interface SelectInputTagProps extends BaseInputTagProps<'select'> {}
 
-interface SelectInputProps
-  extends BaseInputProps<string, HTMLSelectElement>,
-    SelectInputTagProps {
+interface SelectInputProps extends BaseInputProps<'select'> {
   options: Array<{ name: string; value: string }>
 }
 
-const SelectInputTag = styled.select`
+const SelectInputTag = styled.select<SelectInputTagProps>`
   ${BaseInputStyling}
   cursor: pointer;
 `
 
 export const SelectInput: React.FunctionComponent<SelectInputProps> = ({
   label,
-  name,
-  onChange,
-  value,
-  required,
   options,
+  ...props
 }) => (
   <Label>
     {label}
-    <SelectInputTag
-      required={required}
-      name={name}
-      onChange={onChange}
-      value={value as string}
-    >
+    <SelectInputTag {...props}>
       <option>Kies een optie...</option>
       {options.map(option => (
-        <option value={option.value}>{option.name}</option>
+        <option key={option.value} value={option.value}>
+          {option.name}
+        </option>
       ))}
     </SelectInputTag>
   </Label>

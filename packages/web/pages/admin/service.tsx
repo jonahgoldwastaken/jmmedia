@@ -1,16 +1,13 @@
 import ServiceEditor from 'components/Admin/ServiceEditor'
-import {
-  LoggedInUserDocument,
-  ServiceInput,
-  useNewServiceMutation,
-} from 'generated/graphql'
+import { Formik } from 'formik'
+import { LoggedInUserDocument, useNewServiceMutation } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
 import { withCookie, WithCookieProps } from 'next-cookie'
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useState, useCallback } from 'react'
+import { useEffect } from 'react'
 
 interface Props extends WithRouterProps, WithCookieProps {
   currentUser: {
@@ -21,45 +18,31 @@ interface Props extends WithRouterProps, WithCookieProps {
 //@ts-ignore
 const NewServicePage: NextPage<Props> = ({ cookie }) => {
   const router = useRouter()
-  const [mutation] = useNewServiceMutation()
+  const [mutation, { data }] = useNewServiceMutation()
 
-  const [service, setService] = useState<ServiceInput>({
-    name: '',
-    slug: '',
-    listImage: '',
-    description: [],
-    baseOptions: [],
-    additionalOptions: [],
-    callToAction: '',
-  })
-
-  const changeHandler = ({
-    name,
-    value,
-  }: {
-    name: keyof ServiceInput
-    value: any
-  }) => {
-    const tempService = { ...service }
-    tempService[name] = value
-    setService(tempService)
-  }
-
-  const submitHandler = useCallback(async () => {
-    await mutation({ variables: { service } })
-    router.push(`/admin`)
-  }, [service])
+  useEffect(() => {
+    if (data) router.push('/admin')
+  }, [data])
 
   return (
     <>
       <Head>
-        <title>{service.name || 'Nieuw service'} - JM</title>
+        <title>Nieuwe Service- JM</title>
       </Head>
-      <ServiceEditor
-        service={service}
-        onChange={changeHandler}
-        onSubmit={submitHandler}
-      />
+      <Formik
+        initialValues={{
+          name: '',
+          slug: '',
+          listImage: '',
+          description: [],
+          baseOptions: [],
+          additionalOptions: [],
+          callToAction: '',
+        }}
+        onSubmit={service => mutation({ variables: { service } })}
+      >
+        <ServiceEditor />
+      </Formik>
     </>
   )
 }

@@ -1,4 +1,5 @@
-export * from './FileInput'
+export * from './ListImageInput'
+export * from './ImageInput'
 export * from './Input'
 export * from './SelectInput'
 export * from './SmallSelectInput'

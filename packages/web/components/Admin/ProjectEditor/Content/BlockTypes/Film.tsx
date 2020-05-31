@@ -16,7 +16,7 @@ export const FilmEditor: React.FunctionComponent<FilmEditorProps> = ({
   onChange,
   onCancel,
   onClick,
-  onSubmit,
+  onSave: onSubmit,
   value,
 }) => {
   return editing ? (

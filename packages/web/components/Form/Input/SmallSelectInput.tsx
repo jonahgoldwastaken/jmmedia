@@ -7,11 +7,9 @@ import {
   Label,
 } from './BaseInput'
 
-interface SmallSelectInputTagProps extends BaseInputTagProps {}
+interface SmallSelectInputTagProps extends BaseInputTagProps<'select'> {}
 
-interface SmallSelectInputProps
-  extends BaseInputProps<string, HTMLSelectElement>,
-    SmallSelectInputTagProps {
+interface SmallSelectInputProps extends BaseInputProps<'select'> {
   options: Array<{ name: string; value: string }>
 }
 
@@ -32,7 +30,7 @@ const SmallSelectInputLabel = styled(Label)`
   }
 `
 
-const SmallSelectInputTag = styled.select`
+const SmallSelectInputTag = styled.select<SmallSelectInputTagProps>`
   ${BaseInputStyling};
   position: absolute;
   top: 0;
