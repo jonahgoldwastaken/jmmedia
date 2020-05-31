@@ -1,17 +1,15 @@
 import { BaseRunning } from 'components/Text'
-import { ChangeEvent, KeyboardEvent } from 'react'
 import styled, { css } from 'styled-components'
 
-export interface BaseInputTagProps {
-  name: string
-  required?: boolean
-}
+export type BaseInputTagProps<
+  Element extends React.ElementType
+> = React.ComponentPropsWithoutRef<Element> & {}
 
-export interface BaseInputProps<ValueType, Element> extends BaseInputTagProps {
-  value?: ValueType | null
+export type BaseInputProps<
+  Element extends React.ElementType
+> = BaseInputTagProps<Element> & {
+  name: string
   label: string
-  onChange: (event: ChangeEvent<Element>) => void
-  onKeyUp?: (event: KeyboardEvent<Element>) => void
 }
 
 export const BaseInputStyling = css`
