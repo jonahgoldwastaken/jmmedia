@@ -2,26 +2,17 @@ import ProjectEditor from 'components/Admin/ProjectEditor'
 import { Formik } from 'formik'
 import {
   LoggedInUserDocument,
-  useNewProjectMutation,
   ProjectInput,
+  useNewProjectMutation,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
-import { NextPage } from 'next'
-import { withCookie, WithCookieProps } from 'next-cookie'
+import { NextPage, NextPageContext } from 'next'
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { WithApolloClient } from 'apolloClient'
 
-interface Props extends WithRouterProps, WithCookieProps {
-  currentUser: {
-    username: string
-  }
-}
-
-//@ts-ignore
-const NewProjectPage: NextPage<Props> = ({ cookie }) => {
-  const router = useRouter()
+const NewProjectPage: NextPage<WithRouterProps> = ({ router }) => {
   const [mutation, { data }] = useNewProjectMutation()
 
   useEffect(() => {
@@ -57,34 +48,30 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
   )
 }
 
-//@ts-ignore
 NewProjectPage.getInitialProps = async ({
-  req,
   res,
   router,
   apolloClient,
-}: any) => {
+}: WithApolloClient<NextPageContext & WithRouterProps>) => {
   try {
     const {
       data: { currentUser },
     } = await apolloClient.query({ query: LoggedInUserDocument })
-    if (req && !currentUser) {
+    if (res && !currentUser) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-      return
     } else if (!currentUser) {
       router.push('/admin/login')
-      return
     }
 
-    return { currentUser }
+    return { router }
   } catch {
-    if (req) {
+    if (res) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-      return
     } else router.push('/admin/login')
+    return { router }
   }
 }
 
-export default withApollo({ ssr: true })(withCookie(withRouter(NewProjectPage)))
+export default withApollo({ ssr: true })(withRouter(NewProjectPage))

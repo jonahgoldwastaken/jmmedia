@@ -1,3 +1,4 @@
+import { WithApolloClient } from 'apolloClient'
 import ServiceEditor from 'components/Admin/ServiceEditor'
 import { Formik } from 'formik'
 import {
@@ -7,22 +8,12 @@ import {
   useUpdateServiceMutation,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
-import { NextPage } from 'next'
-import { withCookie, WithCookieProps } from 'next-cookie'
+import { NextPage, NextPageContext } from 'next'
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
 
-interface Props extends WithRouterProps, WithCookieProps {
-  currentUser: {
-    username: string
-  }
-}
-
-//@ts-ignore
-const NewServicePage: NextPage<Props> = ({ cookie }) => {
-  const router = useRouter()
+const EditServicePage: NextPage<WithRouterProps> = ({ router }) => {
   const {
     query: { slug },
   } = router
@@ -76,34 +67,30 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
   )
 }
 
-//@ts-ignore
-NewServicePage.getInitialProps = async ({
-  req,
+EditServicePage.getInitialProps = async ({
   res,
   router,
   apolloClient,
-}: any) => {
+}: WithApolloClient<NextPageContext & WithRouterProps>) => {
   try {
     const {
       data: { currentUser },
     } = await apolloClient.query({ query: LoggedInUserDocument })
-    if (req && !currentUser) {
-      res.writeHead(302, { Location: '/admin/login' })
-      res.end()
-      return
-    } else if (!currentUser) {
-      router.push('/admin/login')
-      return
-    }
 
-    return { currentUser }
-  } catch {
-    if (req) {
+    if (res && !currentUser) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-      return
+    } else if (!currentUser) router.push('/admin/login')
+
+    return { router }
+  } catch {
+    if (res) {
+      res.writeHead(302, { Location: '/admin/login' })
+      res.end()
     } else router.push('/admin/login')
+
+    return { router }
   }
 }
 
-export default withApollo({ ssr: true })(withCookie(withRouter(NewServicePage)))
+export default withApollo({ ssr: true })(withRouter(EditServicePage))

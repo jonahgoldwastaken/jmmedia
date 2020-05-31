@@ -4,20 +4,20 @@ import Section from 'components/Section'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
 import { LoggedInUserDocument, useAdminPanelQuery } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
-import { NextPage } from 'next'
+import { NextPage, NextPageContext } from 'next'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
 import { withRouter } from 'next/router'
 import Link from 'next/link'
 import { Button } from 'components/Form'
+import { WithApolloClient } from 'apolloClient'
 
 type Props = {
-  currentUser: {
+  currentUser?: {
     username: string
   }
 } & WithRouterProps
 
-//@ts-ignore
 const AdminPanel: NextPage<Props> = ({ currentUser }) => {
   const { data, loading } = useAdminPanelQuery()
 
@@ -74,33 +74,29 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
   )
 }
 
-//@ts-ignore
 AdminPanel.getInitialProps = async ({
-  req,
   res,
   router,
   apolloClient,
-}: any) => {
+}: WithApolloClient<NextPageContext & WithRouterProps>) => {
   try {
     const {
       data: { currentUser },
     } = await apolloClient.query({ query: LoggedInUserDocument })
-    if (req && !currentUser) {
+    if (res && !currentUser) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-      return
     } else if (!currentUser) {
       router.push('/admin/login')
-      return
     }
 
-    return { currentUser }
+    return { currentUser, router }
   } catch {
-    if (req) {
+    if (res) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-      return
     } else router.push('/admin/login')
+    return { currentUser: undefined, router }
   }
 }
 
