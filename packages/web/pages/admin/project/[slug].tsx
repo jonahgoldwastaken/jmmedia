@@ -13,6 +13,7 @@ import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
+import { Formik } from 'formik'
 
 interface Props extends WithRouterProps, WithCookieProps {
   currentUser: {
@@ -21,7 +22,7 @@ interface Props extends WithRouterProps, WithCookieProps {
 }
 
 //@ts-ignore
-const NewProjectPage: NextPage<Props> = ({ cookie }) => {
+const EditProjectPage: NextPage<Props> = ({ cookie }) => {
   const router = useRouter()
   const {
     query: { slug },
@@ -32,34 +33,10 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
   const [mutation, { data: updateResult }] = useUpdateProjectMutation()
   const [deleteProject, { data: deleteResult }] = useDeleteProjectMutation()
   const [id, setId] = useState('')
-  const [project, setProject] = useState<ProjectInput>({
-    title: '',
-    slug: '',
-    listImage: '',
-    service: '',
-    callToAction: '',
-    content: [],
-  })
 
   useEffect(() => {
     if (data?.project) {
-      const {
-        callToAction,
-        title,
-        content,
-        listImage,
-        service,
-        slug,
-        _id,
-      } = data.project
-      setProject({
-        title,
-        callToAction,
-        content: content.map(({ type, data }) => ({ type, data })),
-        listImage,
-        slug,
-        service: service._id,
-      })
+      const { _id } = data.project
       setId(_id)
     }
   }, [data])
@@ -68,22 +45,6 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
     if (updateResult || deleteResult) router.push('/admin')
   }, [deleteResult, updateResult])
 
-  const changeHandler = useCallback(
-    ({ name, value }: { name: keyof ProjectInput; value: any }) => {
-      console.log('project to copy', project)
-      const tempProject = { ...project }
-      console.log('before editing', tempProject)
-      tempProject[name] = value
-      console.log('after editing', tempProject)
-      setProject(tempProject)
-    },
-    [project]
-  )
-
-  const submitHandler = useCallback(async () => {
-    mutation({ variables: { project, id } })
-  }, [project, id])
-
   const deleteHandler = useCallback(async () => {
     deleteProject({ variables: { id } })
   }, [id])
@@ -91,17 +52,28 @@ const NewProjectPage: NextPage<Props> = ({ cookie }) => {
   return (
     <>
       <Head>
-        <title>{project.title || 'Project'} Bewerken - JM</title>
+        <title>{data?.project?.title || 'Project'} Bewerken - JM</title>
       </Head>
-      <ProjectEditor
-        sideBarTitle={
-          loading ? 'Project laden...' : `${project.title} Bewerken`
+      <Formik
+        onSubmit={project => mutation({ variables: { project, id } })}
+        initialValues={
+          {
+            title: data?.project?.title || '',
+            slug: data?.project?.slug || '',
+            listImage: data?.project?.listImage || '',
+            service: data?.project?.service || '',
+            callToAction: data?.project?.callToAction || '',
+            content: data?.project?.content || [],
+          } as ProjectInput
         }
-        project={project}
-        onDelete={deleteHandler}
-        onChange={changeHandler}
-        onSubmit={submitHandler}
-      />
+      >
+        <ProjectEditor
+          sideBarTitle={
+            loading ? 'Project laden...' : `${data?.project?.title} Bewerken`
+          }
+          onDelete={deleteHandler}
+        />
+      </Formik>
     </>
   )
 }
