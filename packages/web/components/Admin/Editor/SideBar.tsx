@@ -1,29 +1,22 @@
 import Form, {
   Button,
-  FileInput,
+  ListImageInput,
   Input,
   SelectInput,
   TextAreaInput,
 } from 'components/Form'
 import { HeadingOne } from 'components/Text/Headings'
-import styled from 'styled-components'
-import { useListImageUploadMutation } from 'generated/graphql'
-import { useEffect } from 'react'
+import { Field, useFormikContext } from 'formik'
 import Link from 'next/link'
+import styled from 'styled-components'
 
 type SideBarProps = {
-  onSubmit: () => void
-  onChange: ({ name, value }: { name: string; value: any }) => void
   onDelete?: () => void
-  properties:
-    | Array<{
-        name: string
-        type: string
-        value: string | string[] | null | undefined
-        options?: Array<{ name: string; value: string }>
-      }>
-    | null
-    | undefined
+  properties: Array<{
+    name: string
+    type: string
+    options?: Array<{ name: string; value: string }>
+  }>
   title: string
 }
 
@@ -49,93 +42,43 @@ const SideBarContainer = styled.div`
 
 export const SideBar: React.FunctionComponent<SideBarProps> = ({
   properties,
-  onChange,
   onDelete,
   title,
-  onSubmit,
 }) => {
-  const [mutation, { data }] = useListImageUploadMutation()
-
-  useEffect(() => {
-    if (data) {
-      onChange({
-        name: 'listImage',
-        value: data.uploadListImage,
-      })
-    }
-  }, [data])
-
+  const { handleSubmit, handleReset } = useFormikContext()
   return (
     <SideBarContainer>
       <HeadingOne>{title}</HeadingOne>
-      <Form
-        onSubmit={e => {
-          e.preventDefault()
-          onSubmit()
-        }}
-      >
-        {properties?.map(({ name, type, value, options }) => {
+      <Form onSubmit={handleSubmit} onReset={handleReset}>
+        {properties.map(({ name, type, options }) => {
           if (type === 'file')
-            return (
-              <FileInput
-                key={name}
-                label={name}
-                name={name}
-                value={(value as string) || ''}
-                onChange={e => {
-                  const { files, validity } = e.currentTarget
-                  if (validity.valid && files?.length) {
-                    const file = files[0]
-                    mutation({ variables: { imageFile: file } })
-                  }
-                }}
-              />
-            )
+            return <ListImageInput key={name} label={name} name={name} />
           else if (type === 'select')
             return (
-              <SelectInput
+              <Field
                 key={name}
                 label={name}
                 name={name}
-                value={value as string}
                 options={options || []}
-                onChange={e => {
-                  onChange({ name, value: e.currentTarget.value })
-                }}
+                as={SelectInput}
               />
             )
           else if (type === 'textarea')
-            return (
-              <TextAreaInput
-                key={name}
-                label={name}
-                name={name}
-                value={
-                  typeof value !== 'string' && value ? value.join('\n') : value
-                }
-                onChange={e => {
-                  onChange({
-                    name,
-                    value: e.currentTarget.value.split('\n'),
-                  })
-                }}
-              />
-            )
+            return <TextAreaInput key={name} label={name} name={name} />
           else
             return (
-              <Input
+              <Field
                 key={name}
                 type={type}
                 label={name}
                 name={name}
-                value={value as string}
-                onChange={e => onChange({ name, value: e.currentTarget.value })}
+                as={Input}
               />
             )
         })}
         <Button>Opslaan</Button>
         <Link href="/admin">
-          <Button>Annuleren</Button>
+          <Button type="button">Annuleren</Button>
         </Link>
         {onDelete && (
           <Button type="button" onClick={() => onDelete()}>

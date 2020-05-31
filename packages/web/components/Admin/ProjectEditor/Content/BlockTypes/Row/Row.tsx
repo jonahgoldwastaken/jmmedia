@@ -9,7 +9,7 @@ interface ImageRowEditorProps extends EditorProps<HTMLImageElement, rowValue> {}
 export const ImageRowEditor: React.FunctionComponent<ImageRowEditorProps> = ({
   editing,
   onClick,
-  onSubmit,
+  onSave,
   onCancel,
   value,
   onChange,
@@ -44,7 +44,7 @@ export const ImageRowEditor: React.FunctionComponent<ImageRowEditorProps> = ({
           </>
         ))}
       <Button onClick={addImage}>Afbeelding toevoegen</Button>
-      <Button onClick={onSubmit}>Opslaan</Button>
+      <Button onClick={onSave}>Opslaan</Button>
       <Button onClick={onCancel}>Annuleren</Button>
     </EditorContainer>
   ) : (

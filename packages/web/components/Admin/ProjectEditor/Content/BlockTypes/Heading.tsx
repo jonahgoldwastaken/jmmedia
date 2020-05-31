@@ -8,7 +8,7 @@ export const HeadingEditor: React.FunctionComponent<HeadingEditorProps> = ({
   value,
   onChange,
   onCancel,
-  onSubmit,
+  onSave: onSubmit,
   onClick,
   editing,
 }) =>

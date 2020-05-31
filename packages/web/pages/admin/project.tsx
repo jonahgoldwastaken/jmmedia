@@ -1,8 +1,9 @@
 import ProjectEditor from 'components/Admin/ProjectEditor'
+import { Formik } from 'formik'
 import {
   LoggedInUserDocument,
-  ProjectInput,
   useNewProjectMutation,
+  ProjectInput,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
@@ -10,7 +11,7 @@ import { withCookie, WithCookieProps } from 'next-cookie'
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { useState, useCallback } from 'react'
+import { useEffect } from 'react'
 
 interface Props extends WithRouterProps, WithCookieProps {
   currentUser: {
@@ -21,44 +22,37 @@ interface Props extends WithRouterProps, WithCookieProps {
 //@ts-ignore
 const NewProjectPage: NextPage<Props> = ({ cookie }) => {
   const router = useRouter()
-  const [mutation] = useNewProjectMutation()
+  const [mutation, { data }] = useNewProjectMutation()
 
-  const [project, setProject] = useState<ProjectInput>({
-    title: '',
-    slug: '',
-    listImage: '',
-    service: '',
-    callToAction: '',
-    content: [],
-  })
-
-  const changeHandler = ({
-    name,
-    value,
-  }: {
-    name: keyof ProjectInput
-    value: any
-  }) => {
-    const tempProject = { ...project }
-    tempProject[name] = value
-    setProject(tempProject)
-  }
-
-  const submitHandler = useCallback(async () => {
-    await mutation({ variables: { project } })
-    router.push('/admin')
-  }, [project])
+  useEffect(() => {
+    if (data?.createProject) router.push('/admin')
+  }, [data])
 
   return (
     <>
       <Head>
-        <title>{project.title || 'Nieuw project'} - JM</title>
+        <title>Nieuw project - JM</title>
       </Head>
-      <ProjectEditor
-        project={project}
-        onChange={changeHandler}
-        onSubmit={submitHandler}
-      />
+      <Formik
+        initialValues={
+          {
+            title: '',
+            slug: '',
+            listImage: '',
+            service: '',
+            callToAction: '',
+            content: [
+              {
+                type: 'paragraph',
+                data: '',
+              },
+            ],
+          } as ProjectInput
+        }
+        onSubmit={project => mutation({ variables: { project } })}
+      >
+        <ProjectEditor />
+      </Formik>
     </>
   )
 }
