@@ -40,6 +40,8 @@ jobs:
 
     - name: Build deployment
       run: yarn build:web
+      env:
+        NEXT_PUBLIC_SERVER_URL: /api/
 
     - name: Upload build
       uses: Burnett01/rsync-deployments@4.0
