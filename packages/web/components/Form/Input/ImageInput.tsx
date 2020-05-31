@@ -1,7 +1,4 @@
 import { BaseRunning } from 'components/Text'
-import { useField } from 'formik'
-import { useListImageUploadMutation } from 'generated/graphql'
-import { ChangeEvent, useEffect } from 'react'
 import styled from 'styled-components'
 import {
   BaseInputProps,
@@ -10,9 +7,10 @@ import {
   Label,
 } from './BaseInput'
 
-interface FileInputTagProps extends BaseInputTagProps<'input'> {}
+interface ImageInputTagProps extends BaseInputTagProps<'input'> {}
 
-interface FileInputProps extends BaseInputProps<'input'> {
+interface ImageInputProps extends BaseInputProps<'input'> {
+  value: string
   name: string
 }
 
@@ -36,7 +34,7 @@ const InputImage = styled.img`
   }
 `
 
-const FileInputTag = styled.input<FileInputTagProps>`
+const ImageInputTag = styled.input<ImageInputTagProps>`
   ${BaseInputStyling}
 
   &::-webkit-file-upload-button {
@@ -56,29 +54,15 @@ const FileInputTag = styled.input<FileInputTagProps>`
   }
 `
 
-export const FileInput: React.FunctionComponent<FileInputProps> = ({
+export const ImageInput: React.FunctionComponent<ImageInputProps> = ({
   label,
-  name,
+  value,
+  onChange,
 }) => {
-  const [mutation, { data }] = useListImageUploadMutation()
-  const [{ value, onChange: _onChange, ...field }, , { setValue }] = useField({
-    name,
-  })
-
-  useEffect(() => {
-    if (data) setValue(data.uploadListImage)
-  }, [data])
-
-  const uploadFile = (e: ChangeEvent<HTMLInputElement>) => {
-    const { files, validity } = e.currentTarget
-    if (validity && files?.length)
-      mutation({ variables: { imageFile: files[0] } })
-  }
-
   return (
     <Label>
       {label}
-      <FileInputTag type="file" onChange={uploadFile} {...field} />
+      <ImageInputTag type="file" onChange={onChange} />
       {value && <InputImage src={value} />}
     </Label>
   )

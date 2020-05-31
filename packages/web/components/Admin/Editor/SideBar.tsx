@@ -1,6 +1,6 @@
 import Form, {
   Button,
-  FileInput,
+  ListImageInput,
   Input,
   SelectInput,
   TextAreaInput,
@@ -52,7 +52,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
       <Form onSubmit={handleSubmit} onReset={handleReset}>
         {properties.map(({ name, type, options }) => {
           if (type === 'file')
-            return <FileInput key={name} label={name} name={name} />
+            return <ListImageInput key={name} label={name} name={name} />
           else if (type === 'select')
             return (
               <Field

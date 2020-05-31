@@ -29,7 +29,7 @@ export const TextAreaInput: React.FunctionComponent<TextAreaInputProps> = ({
       {label}
       <TextArea
         onKeyUp={onKeyUp}
-        value={value.join('\n')}
+        value={value ? value.join('\n') : value}
         onChange={e => {
           setValue(e.currentTarget.value.split('\n'))
         }}
