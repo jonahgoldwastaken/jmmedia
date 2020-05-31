@@ -20,15 +20,22 @@ jobs:
       id: yarn-cache-dir-path
       run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - uses: actions/cache@v2
+    - name: Yarn Cache
+      uses: actions/cache@v2
       id: yarn-cache
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
+      
+    - name: Use NextJS build cache
+      uses: actions/cache@v1
+      with:
+        path: ${{ github.workspace }}/packages/web/.next/cache
+        key: ${{ runner.os }}-nextjs-${{ hashFiles('${{ github.workspace }}/packages/web/yarn.lock') }}
 
-    - name: Install if no cache
+    - name: Install packages
       run: yarn install --frozen-lockfile
 
     - name: Build deployment
@@ -37,7 +44,7 @@ jobs:
     - name: Upload build
       uses: Burnett01/rsync-deployments@4.0
       with:
-        path: ${{ github.workspace }}/packages/web
+        path: packages/web/
         remote_host: ${{secrets.DEPLOY_URL}}
         remote_user: ${{secrets.DEPLOY_USER}}
         remote_path: ${{secrets.WEB_PATH}}
