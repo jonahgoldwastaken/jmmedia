@@ -25,7 +25,7 @@ jobs:
       id: yarn-cache
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('yarn.lock') }}
         restore-keys: |
           ${{ runner.os }}-yarn-
       
@@ -33,7 +33,7 @@ jobs:
       uses: actions/cache@v1
       with:
         path: ${{ github.workspace }}/packages/web/.next/cache
-        key: ${{ runner.os }}-nextjs-${{ hashFiles('${{ github.workspace }}/packages/web/yarn.lock') }}
+        key: ${{ runner.os }}-nextjs-${{ hashFiles('yarn.lock') }}
 
     - name: Install packages
       run: yarn install --frozen-lockfile
