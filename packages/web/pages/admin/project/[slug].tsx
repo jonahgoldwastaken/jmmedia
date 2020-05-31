@@ -108,4 +108,6 @@ NewProjectPage.getInitialProps = async ({
   }
 }
 
-export default withApollo({ ssr: true })(withCookie(withRouter(NewProjectPage)))
+export default withApollo({ ssr: true })(
+  withCookie(withRouter(EditProjectPage))
+)
