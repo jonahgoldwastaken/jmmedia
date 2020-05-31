@@ -1,8 +1,8 @@
 import { Field, InputType } from 'type-graphql'
-import { Project, ContentTypes } from './model'
+import { Project, Content, ContentTypes } from './model'
 
 @InputType()
-class ContentInput {
+class ContentInput implements Partial<Content> {
   @Field(() => ContentTypes)
   type: string
 

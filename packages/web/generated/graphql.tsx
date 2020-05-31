@@ -69,6 +69,7 @@ export type Project = {
 /** The Project Content block model */
 export type Content = {
   __typename?: 'Content'
+  _id: Scalars['ID']
   type: ContentTypes
   data: Scalars['String']
 }
@@ -295,7 +296,7 @@ export type ProjectQuery = { __typename?: 'Query' } & {
     { __typename?: 'Project' } & Pick<Project, 'title' | 'callToAction'> & {
         service: { __typename?: 'Service' } & Pick<Service, 'slug'>
         content: Array<
-          { __typename?: 'Content' } & Pick<Content, 'type' | 'data'>
+          { __typename?: 'Content' } & Pick<Content, '_id' | 'type' | 'data'>
         >
       }
   >
@@ -1242,6 +1243,7 @@ export const ProjectDocument = gql`
       }
       callToAction
       content {
+        _id
         type
         data
       }
