@@ -5,6 +5,7 @@
 
 """The Project Content block model"""
 type Content {
+  _id: ID!
   data: String!
   type: ContentTypes!
 }

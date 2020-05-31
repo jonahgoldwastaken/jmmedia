@@ -21,13 +21,16 @@ registerEnumType(ContentTypes, {
 })
 
 @ObjectType({ description: 'The Project Content block model' })
-class Content {
+export class Content {
+  @Field(() => ID)
+  readonly _id?: string
+
   @Field(() => ContentTypes)
   @Property({
     enum: ContentTypes,
     required: true,
   })
-  type!: String
+  type: string
 
   @Field()
   @Property({ required: true })
@@ -37,31 +40,31 @@ class Content {
 @ObjectType({ description: 'The Project model' })
 export class Project {
   @Field(() => ID)
-  readonly _id: String
+  readonly _id: string
 
   @Field()
   @Property({ required: true })
-  title!: String
+  title: string
 
   @Field()
   @Property({ required: true })
-  listImage!: String
+  listImage: string
 
   @Field()
   @Property({ required: true, unique: true })
-  slug!: String
+  slug: string
 
   @Field(() => Service)
   @Property({ ref: Service, required: true })
-  service!: Ref<Service>
+  service: Ref<Service>
 
   @Field()
   @Property({ required: true })
-  callToAction!: String
+  callToAction: string
 
   @Field(() => [Content])
   @ArrayProperty({ items: Content })
-  content!: Content[]
+  content: Content[]
 
   @Field()
   @Property({ default: false })

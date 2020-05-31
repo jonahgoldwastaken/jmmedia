@@ -54,15 +54,15 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
           }}
         >
           <ArticleTitle>{project.title}</ArticleTitle>
-          {project.content.map(({ type, data }) => {
+          {project.content.map(({ type, data, _id }) => {
             if (type === 'heading')
-              return <ArticleHeading>{data}</ArticleHeading>
+              return <ArticleHeading key={_id}>{data}</ArticleHeading>
             else if (type === 'paragraph')
-              return <ArticleText>{data}</ArticleText>
+              return <ArticleText key={_id}>{data}</ArticleText>
             else if (type === 'row') {
               const images: rowValue = JSON.parse(data)
               return (
-                <ArticleImageRow key={data} amount={images.length}>
+                <ArticleImageRow key={_id} amount={images.length}>
                   {images.map(({ srcSet, alt }) => (
                     <ArticleImage
                       onClick={() => {
@@ -79,6 +79,7 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
               const { srcSet, alt }: imageValue = JSON.parse(data)
               return (
                 <ArticleImage
+                  key={_id}
                   onClick={() => {
                     setCurrentImage({ src: srcSet[2], alt })
                     setDarkRoomOpen(true)
@@ -87,7 +88,7 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
                   alt={alt}
                 />
               )
-            } else return <ArticleVideo id={data} />
+            } else return <ArticleVideo key={_id} id={data} />
           })}
           <DarkRoom />
         </ArticleContext.Provider>
