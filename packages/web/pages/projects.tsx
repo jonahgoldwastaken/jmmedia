@@ -21,7 +21,6 @@ const Portfolio: NextPage<Props> = () => {
   const [filter, setFilter] = useState<string>('')
 
   useEffect(() => {
-    console.log(called)
     if (called) refetch({ service: filter })
   }, [filter])
 

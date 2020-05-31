@@ -46,7 +46,6 @@ export const Content: React.FunctionComponent<FieldArrayRenderProps> = ({
   }
 
   const saveHandler = () => {
-    console.log(value)
     if (value[value.length - 1].data) push({ type: 'paragraph', data: '' })
   }
 
