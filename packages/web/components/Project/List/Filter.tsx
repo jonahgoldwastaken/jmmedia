@@ -23,7 +23,6 @@ export const ProjectListFilter = () => {
   return (
     <Div
       onMouseDown={e => {
-        e.preventDefault()
         const evt = new MouseEvent('mousedown')
         if (typeof ref.current !== 'undefined') ref.current.dispatchEvent(evt)
       }}
@@ -36,7 +35,9 @@ export const ProjectListFilter = () => {
         <option value="">Filter op service</option>
         {data &&
           data.services.map(({ _id, name }) => (
-            <option value={_id}>{name}</option>
+            <option key={_id} value={_id}>
+              {name}
+            </option>
           ))}
       </StyledSelect>
       <span>&#9660;</span>
