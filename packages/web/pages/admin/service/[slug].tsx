@@ -1,10 +1,10 @@
 import ServiceEditor from 'components/Admin/ServiceEditor'
+import { Formik } from 'formik'
 import {
   LoggedInUserDocument,
-  ServiceInput,
+  useDeleteServiceMutation,
   useServiceToUpdateQuery,
   useUpdateServiceMutation,
-  useDeleteServiceMutation,
 } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
@@ -32,37 +32,10 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
   const [mutation, { data: updateResult }] = useUpdateServiceMutation()
   const [deleteService, { data: deleteResult }] = useDeleteServiceMutation()
   const [id, setId] = useState('')
-  const [service, setService] = useState<ServiceInput>({
-    name: '',
-    slug: '',
-    listImage: '',
-    description: [],
-    baseOptions: [],
-    additionalOptions: [],
-    callToAction: '',
-  })
 
   useEffect(() => {
     if (data?.service) {
-      const {
-        name,
-        slug,
-        listImage,
-        description,
-        baseOptions,
-        additionalOptions,
-        callToAction,
-        _id,
-      } = data.service
-      setService({
-        name,
-        slug,
-        listImage,
-        description,
-        baseOptions,
-        additionalOptions,
-        callToAction,
-      })
+      const { _id } = data.service
       setId(_id)
     }
   }, [data])
@@ -71,22 +44,6 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
     if (updateResult || deleteResult) router.push('/admin')
   }, [deleteResult, updateResult])
 
-  const changeHandler = ({
-    name,
-    value,
-  }: {
-    name: keyof ServiceInput
-    value: any
-  }) => {
-    const tempService = { ...service }
-    tempService[name] = value
-    setService(tempService)
-  }
-
-  const submitHandler = useCallback(async () => {
-    mutation({ variables: { service, id } })
-  }, [service])
-
   const deleteHandler = useCallback(async () => {
     deleteService({ variables: { id } })
   }, [id])
@@ -94,15 +51,27 @@ const NewServicePage: NextPage<Props> = ({ cookie }) => {
   return (
     <>
       <Head>
-        <title>{service.name || 'Service'} bewerken - JM</title>
+        <title>{data?.service?.name || 'Service'} bewerken - JM</title>
       </Head>
-      <ServiceEditor
-        sideBarTitle={loading ? 'Service laden...' : `${service.name} Bewerken`}
-        service={service}
-        onDelete={deleteHandler}
-        onChange={changeHandler}
-        onSubmit={submitHandler}
-      />
+      <Formik
+        initialValues={{
+          name: data?.service?.name || '',
+          slug: data?.service?.slug || '',
+          listImage: data?.service?.listImage || '',
+          description: data?.service?.description || [],
+          baseOptions: data?.service?.description || [],
+          additionalOptions: data?.service?.additionalOptions || [],
+          callToAction: data?.service?.callToAction || '',
+        }}
+        onSubmit={service => mutation({ variables: { service, id } })}
+      >
+        <ServiceEditor
+          sideBarTitle={
+            loading ? 'Service laden...' : `${data?.service?.name} Bewerken`
+          }
+          onDelete={deleteHandler}
+        />
+      </Formik>
     </>
   )
 }
