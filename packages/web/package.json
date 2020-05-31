@@ -30,6 +30,7 @@
     "apollo-link": "^1.2.14",
     "apollo-link-error": "^1.1.13",
     "apollo-upload-client": "^13.0.0",
+    "formik": "^2.1.4",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
     "intersection-observer": "^0.7.0",
