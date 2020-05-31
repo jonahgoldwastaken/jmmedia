@@ -8,6 +8,7 @@ export type BaseInputTagProps<
 export type BaseInputProps<
   Element extends React.ElementType
 > = BaseInputTagProps<Element> & {
+  name: string
   label: string
 }
 

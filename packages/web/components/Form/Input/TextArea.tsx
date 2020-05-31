@@ -1,3 +1,4 @@
+import { useField } from 'formik'
 import styled from 'styled-components'
 import {
   BaseInputProps,
@@ -15,22 +16,26 @@ const TextArea = styled.textarea<TextAreaProps>`
 `
 
 export const TextAreaInput: React.FunctionComponent<TextAreaInputProps> = ({
-  required,
-  value,
-  onChange,
   onKeyUp,
   name,
   label,
-}) => (
-  <Label>
-    {label}
-    <TextArea
-      wrap="soft"
-      onKeyUp={onKeyUp}
-      name={name}
-      required={required}
-      onChange={onChange}
-      value={value as string}
-    />
-  </Label>
-)
+  ...props
+}) => {
+  const [{ value, onChange: _onChange, ...field }, , { setValue }] = useField({
+    name,
+  })
+  return (
+    <Label>
+      {label}
+      <TextArea
+        onKeyUp={onKeyUp}
+        value={value.join('\n')}
+        onChange={e => {
+          setValue(e.currentTarget.value.split('\n'))
+        }}
+        {...props}
+        {...field}
+      />
+    </Label>
+  )
+}

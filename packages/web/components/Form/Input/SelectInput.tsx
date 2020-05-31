@@ -19,20 +19,12 @@ const SelectInputTag = styled.select<SelectInputTagProps>`
 
 export const SelectInput: React.FunctionComponent<SelectInputProps> = ({
   label,
-  name,
-  onChange,
-  value,
-  required,
   options,
+  ...props
 }) => (
   <Label>
     {label}
-    <SelectInputTag
-      required={required}
-      name={name}
-      onChange={onChange}
-      value={value as string}
-    >
+    <SelectInputTag {...props}>
       <option>Kies een optie...</option>
       {options.map(option => (
         <option value={option.value}>{option.name}</option>
