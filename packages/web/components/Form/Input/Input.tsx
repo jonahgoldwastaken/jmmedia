@@ -6,20 +6,36 @@ import {
   Label,
 } from './BaseInput'
 
-interface InputTagProps extends BaseInputTagProps<'input'> {}
+interface InputTagProps extends BaseInputTagProps {
+  type: string
+}
 
-interface InputProps extends BaseInputProps<'input'> {}
+interface InputProps
+  extends BaseInputProps<string, HTMLInputElement>,
+    InputTagProps {}
 
 const InputTag = styled.input<InputTagProps>`
   ${BaseInputStyling}
 `
 
 export const Input: React.FunctionComponent<InputProps> = ({
+  type,
   label,
-  ...props
+  name,
+  value,
+  required,
+  onChange,
+  onKeyUp,
 }) => (
   <Label>
     {label}
-    <InputTag {...props} />
+    <InputTag
+      name={name}
+      type={type}
+      required={required}
+      onChange={onChange}
+      onKeyUp={onKeyUp}
+      value={value as string}
+    />
   </Label>
 )

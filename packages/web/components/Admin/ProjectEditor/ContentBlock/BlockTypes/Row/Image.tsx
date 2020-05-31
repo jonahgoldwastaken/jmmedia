@@ -1,25 +1,25 @@
-import { ImageInput, Input } from 'components/Form'
-import { ArticleImage } from 'components/Project/Article'
+import { FileInput, Input } from 'components/Form'
 import { useImageUploadMutation } from 'generated/graphql'
 import { imageValue } from 'interfaces/Project'
 import { ChangeEvent, useEffect } from 'react'
-import { EditorContainer, EditorProps } from './Editors'
+import { EditorProps } from '../Editors'
 
-interface ImageEditorProps extends EditorProps<HTMLImageElement, imageValue> {}
+interface RowImageEditorProps
+  extends Pick<
+    EditorProps<HTMLImageElement, imageValue>,
+    'value' | 'onChange'
+  > {}
 
-export const ImageEditor: React.FunctionComponent<ImageEditorProps> = ({
-  editing,
-  onChange,
-  onClick,
-  onSave: onSubmit,
+export const RowImageEditor: React.FunctionComponent<RowImageEditorProps> = ({
   value,
+  onChange,
 }) => {
   const [uploadImage, { data }] = useImageUploadMutation()
 
   useEffect(() => {
     if (data) {
       onChange({
-        alt: value.alt,
+        ...value,
         srcSet: data.uploadImage,
       })
     }
@@ -32,9 +32,8 @@ export const ImageEditor: React.FunctionComponent<ImageEditorProps> = ({
     if (validity.valid && files?.length)
       uploadImage({ variables: { imageFile: files[0] } })
   }
-
-  return editing ? (
-    <EditorContainer>
+  return (
+    <>
       <Input
         type="text"
         label="Afbeelding"
@@ -42,30 +41,18 @@ export const ImageEditor: React.FunctionComponent<ImageEditorProps> = ({
         value={value.alt}
         onChange={e =>
           onChange({
-            srcSet: value.srcSet,
+            ...value,
             alt: e.currentTarget.value,
           })
         }
-        onKeyUp={e => {
-          if (e.key === 'Enter') {
-            e.preventDefault()
-            onSubmit()
-          }
-        }}
       />
-      <ImageInput
+      <FileInput
         name=""
         label=""
         value={value.srcSet ? value.srcSet[0] : ''}
         required
         onChange={imageUploader}
       />
-    </EditorContainer>
-  ) : (
-    <ArticleImage
-      onClick={onClick}
-      src={value.srcSet ? value.srcSet[1] : ''}
-      alt={value.alt}
-    />
+    </>
   )
 }

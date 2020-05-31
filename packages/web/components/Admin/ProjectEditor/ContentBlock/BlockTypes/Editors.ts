@@ -6,8 +6,8 @@ export interface EditorProps<ArticleElement, VType = string> {
   value: VType
   onClick: (e: MouseEvent<ArticleElement>) => void
   onCancel: () => void
-  onChange: (value: VType) => void
-  onSave: () => void
+  onChange: (value: any) => void
+  onSubmit: () => void
 }
 
 export const EditorContainer = styled.div`

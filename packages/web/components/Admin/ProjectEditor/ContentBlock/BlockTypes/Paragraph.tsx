@@ -9,7 +9,7 @@ export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
   editing,
   onChange,
   onCancel,
-  onSave: onSubmit,
+  onSubmit,
   onClick,
   value,
 }) =>

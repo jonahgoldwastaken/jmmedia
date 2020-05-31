@@ -10,8 +10,7 @@
     "build:server": "yarn workspace @jmmedia/server build",
     "typecheck": "concurrently \"yarn:typecheck:web\" \"yarn:typecheck:server\"",
     "typecheck:web": "tsc --noEmit --project packages/web/tsconfig.json",
-    "typecheck:server": "tsc --noEmit --project packages/server/tsconfig.json",
-    "postinstall": "patch-package"
+    "typecheck:server": "tsc --noEmit --project packages/server/tsconfig.json"
   },
   "workspaces": [
     "packages/*"

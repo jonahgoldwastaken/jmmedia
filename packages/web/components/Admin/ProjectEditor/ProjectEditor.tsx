@@ -1,35 +1,73 @@
 import Footer, { FooterLink } from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Project/Article'
-import { FieldArray, useFormikContext } from 'formik'
-import { ProjectInput, useProjectServiceOptionsQuery } from 'generated/graphql'
+import {
+  ProjectInput,
+  useProjectServiceOptionsQuery,
+  ContentInput,
+  ContentTypes,
+} from 'generated/graphql'
+import { useCallback } from 'react'
 import Editor, { Sandbox, SideBar } from '../Editor'
-import Content from './Content'
+import ContentBlock, { AddContent } from './ContentBlock'
+import { ProjectEditorContext } from './Context'
 
 type Props = {
   sideBarTitle?: string
+  project: ProjectInput
+  onChange: ({ name, value }: { name: keyof ProjectInput; value: any }) => void
+  onSubmit: () => void
   onDelete?: () => void
 }
 
 export const ProjectEditor: React.FunctionComponent<Props> = ({
+  project,
+  onChange,
   onDelete,
+  onSubmit,
   sideBarTitle,
 }) => {
   const { data, loading } = useProjectServiceOptionsQuery()
-  const {
-    values: { title, callToAction },
-  } = useFormikContext<ProjectInput>()
+  const { content } = project
+
+  const addContentBlock = useCallback(
+    (newContentValue: ProjectInput['content']) => {
+      newContentValue.push({ type: ContentTypes.Paragraph, data: '' })
+      onChange({ name: 'content', value: newContentValue })
+    },
+    [project]
+  )
+
+  const changeHandler = useCallback(
+    ({ name, value }: { name: keyof ProjectInput; value: any }) => {
+      if (
+        name === 'content' &&
+        value.length >= (content as ContentInput[]).length &&
+        value[value.length - 1].data
+      ) {
+        console.log('value', value)
+        addContentBlock(value)
+        return
+      }
+      onChange({ name, value })
+    },
+    [project]
+  )
+
   const properties = [
     {
       name: 'title',
       type: 'text',
+      value: project.title,
     },
     {
       name: 'slug',
       type: 'text',
+      value: project.slug,
     },
     {
       name: 'listImage',
       type: 'file',
+      value: project.listImage,
     },
     {
       name: loading ? 'laden...' : 'service',
@@ -37,37 +75,64 @@ export const ProjectEditor: React.FunctionComponent<Props> = ({
       options: data
         ? data.services.map(({ name, _id }) => ({ name, value: _id }))
         : [],
+      value: project.service,
     },
     {
       name: 'callToAction',
       type: 'text',
+      value: project.callToAction,
     },
   ]
 
   return (
-    <Editor>
-      <SideBar
-        title={sideBarTitle || 'Nieuw project'}
-        onDelete={onDelete}
-        properties={properties}
-      />
-      <Sandbox>
-        <Article>
-          <ArticleTitle>{title || 'Titel'}</ArticleTitle>
-          <FieldArray name="content" component={Content} />
-        </Article>
-        <Footer>
-          <FooterLink colour="secondary" href="#">
-            Vorig project
-          </FooterLink>
-          <FooterLink colour="secondary" href="#">
-            {callToAction}
-          </FooterLink>
-          <FooterLink colour="secondary" href="#">
-            Volgend project
-          </FooterLink>
-        </Footer>
-      </Sandbox>
-    </Editor>
+    <ProjectEditorContext.Provider
+      value={{
+        content,
+        properties,
+        onChange: changeHandler,
+        onSubmit,
+      }}
+    >
+      <Editor>
+        <SideBar
+          title={sideBarTitle || 'Nieuw project'}
+          onChange={({ name, value }) => {
+            if (Object.keys(project).includes(name))
+              onChange({ name: name as keyof ProjectInput, value })
+          }}
+          onSubmit={onSubmit}
+          onDelete={onDelete}
+          properties={properties}
+        />
+        <Sandbox>
+          <Article>
+            <ArticleTitle>{project.title || 'Titel'}</ArticleTitle>
+            {content?.map(({ type, data }, index) => (
+              <ContentBlock
+                key={JSON.stringify({ type, data, index })}
+                index={index}
+                type={type}
+                data={data}
+              />
+            ))}
+            {content &&
+              (!content.length || content[content.length - 1].data) && (
+                <AddContent />
+              )}
+          </Article>
+          <Footer>
+            <FooterLink colour="secondary" href="#">
+              Vorig project
+            </FooterLink>
+            <FooterLink colour="secondary" href="#">
+              {project.callToAction}
+            </FooterLink>
+            <FooterLink colour="secondary" href="#">
+              Volgend project
+            </FooterLink>
+          </Footer>
+        </Sandbox>
+      </Editor>
+    </ProjectEditorContext.Provider>
   )
 }

@@ -1,19 +1,41 @@
 import Form, { Button, Input } from 'components/Form'
 import Header from 'components/Header'
 import { HeadingOne } from 'components/Text/Headings'
-import { Field, Formik } from 'formik'
-import { useLoginUserMutation, useLoggedInUserQuery } from 'generated/graphql'
+import { useLoginUserMutation } from 'generated/graphql'
 import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
 import { useCookie } from 'next-cookie'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { FormEvent, useCallback, useState, useEffect } from 'react'
 
-const Login: NextPage = () => {
+type stateFormData = {
+  username: string
+  password: string
+}
+
+type LoginProps = {
+  user?: {
+    username: string
+    _id: string
+  }
+}
+//@ts-ignore
+const Login: NextPage<LoginProps> = () => {
   const cookie = useCookie()
   const router = useRouter()
+  const [formData, setFormData] = useState<stateFormData>({
+    username: '',
+    password: '',
+  })
   const [mutation, { data, loading, error }] = useLoginUserMutation()
-  const { data: loggedInData } = useLoggedInUserQuery()
+
+  const submitForm = useCallback(
+    (e: FormEvent) => {
+      e.preventDefault()
+      mutation({ variables: { user: formData } })
+    },
+    [formData]
+  )
 
   useEffect(() => {
     if (data) {
@@ -22,38 +44,37 @@ const Login: NextPage = () => {
     }
   }, [data])
 
-  useEffect(() => {
-    loggedInData && loggedInData.currentUser && router.push('/admin')
-  }, [loggedInData])
-
   return (
     <>
       <Header />
       <HeadingOne centre>Inloggen</HeadingOne>
-      <Formik
-        initialValues={{ username: '', password: '' }}
-        onSubmit={user => mutation({ variables: { user } })}
-      >
-        {({ handleSubmit, handleReset }) => (
-          <Form onSubmit={handleSubmit} onReset={handleReset}>
-            <Field
-              type="text"
-              label="Gebruikersnaam"
-              placeholder="Jonah"
-              name="username"
-              as={Input}
-            />
-            <Field
-              type="password"
-              placeholder="Een super geheim wachtwoord"
-              label="Wachtwoord"
-              name="password"
-              as={Input}
-            />
-            <Button>{loading ? 'Bezig...' : 'Inloggen'}</Button>
-          </Form>
-        )}
-      </Formik>
+      <Form onSubmit={submitForm}>
+        <Input
+          type="text"
+          label="Gebruikersnaam"
+          name="username"
+          value={formData.username}
+          onChange={e => {
+            setFormData({
+              username: (e.currentTarget as HTMLInputElement).value,
+              password: formData.password,
+            })
+          }}
+        />
+        <Input
+          type="password"
+          label="Wachtwoord"
+          name="password"
+          value={formData.password}
+          onChange={e => {
+            setFormData({
+              password: (e.currentTarget as HTMLInputElement).value,
+              username: formData.username,
+            })
+          }}
+        />
+        <Button>{loading ? 'Bezig...' : 'Inloggen'}</Button>
+      </Form>
       {error && <pre>{JSON.stringify(error)}</pre>}
     </>
   )

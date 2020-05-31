@@ -7,12 +7,9 @@ import {
   Label,
 } from './BaseInput'
 
-interface ImageInputTagProps extends BaseInputTagProps<'input'> {}
+interface FileInputTagProps extends BaseInputTagProps {}
 
-interface ImageInputProps extends BaseInputProps<'input'> {
-  value: string
-  name: string
-}
+interface FileInputProps extends BaseInputProps<string, HTMLInputElement> {}
 
 const InputImage = styled.img`
   position: relative;
@@ -34,7 +31,7 @@ const InputImage = styled.img`
   }
 `
 
-const ImageInputTag = styled.input<ImageInputTagProps>`
+const FileInputTag = styled.input<FileInputTagProps>`
   ${BaseInputStyling}
 
   &::-webkit-file-upload-button {
@@ -54,15 +51,22 @@ const ImageInputTag = styled.input<ImageInputTagProps>`
   }
 `
 
-export const ImageInput: React.FunctionComponent<ImageInputProps> = ({
-  label,
-  value,
+export const FileInput: React.FunctionComponent<FileInputProps> = ({
   onChange,
+  label,
+  name,
+  value,
+  required,
 }) => {
   return (
     <Label>
       {label}
-      <ImageInputTag type="file" onChange={onChange} />
+      <FileInputTag
+        type="file"
+        name={name}
+        required={required}
+        onChange={onChange}
+      />
       {value && <InputImage src={value} />}
     </Label>
   )
