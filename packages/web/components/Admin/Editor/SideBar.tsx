@@ -40,7 +40,7 @@ const SideBarContainer = styled.div`
   }
 `
 
-export const SideBar: React.FunctionComponent<SideBarProps> = ({
+export const SideBar: React.FC<SideBarProps> = ({
   properties,
   onDelete,
   title,

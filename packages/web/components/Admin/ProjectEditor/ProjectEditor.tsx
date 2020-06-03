@@ -10,10 +10,7 @@ type Props = {
   onDelete?: () => void
 }
 
-export const ProjectEditor: React.FunctionComponent<Props> = ({
-  onDelete,
-  sideBarTitle,
-}) => {
+export const ProjectEditor: React.FC<Props> = ({ onDelete, sideBarTitle }) => {
   const { data, loading } = useProjectServiceOptionsQuery()
   const {
     values: { title, callToAction },

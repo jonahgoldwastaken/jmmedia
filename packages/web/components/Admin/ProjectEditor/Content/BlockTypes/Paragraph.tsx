@@ -5,7 +5,7 @@ import { EditorContainer, EditorProps } from './Editors'
 interface ParagraphEditorProps
   extends EditorProps<HTMLParagraphElement, string> {}
 
-export const ParagraphEditor: React.FunctionComponent<ParagraphEditorProps> = ({
+export const ParagraphEditor: React.FC<ParagraphEditorProps> = ({
   editing,
   onChange,
   onCancel,

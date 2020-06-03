@@ -13,6 +13,7 @@ import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import Section from 'components/Section'
 
 type Props = {}
 
@@ -31,36 +32,41 @@ const Portfolio: NextPage<Props> = () => {
       </Head>
       <Header />
       <main>
-        <ProjectListContext.Provider
-          value={{ currentFilter: filter, setFilter }}
-        >
-          <ProjectListHeader>
-            <HeadingOne>Portfolio</HeadingOne>
-            <ProjectListFilter />
-          </ProjectListHeader>
-          {loading ? (
-            <Paragraph>Lekker alles aan het laden</Paragraph>
-          ) : data ? (
-            <List>
-              {data.projects.map(item => (
-                <ListItem
-                  document={'/projects/[slug]'}
-                  key={item.title}
-                  src={item.listImage}
-                  href={`/projects/${item.slug}`}
-                >
-                  {item.title}
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-            <Paragraph>
-              Een zeer uitgebreide lijst zoals je kunt zien.
-            </Paragraph>
-          )}
-        </ProjectListContext.Provider>
+        <Section background="primary">
+          <ProjectListContext.Provider
+            value={{ currentFilter: filter, setFilter }}
+          >
+            <ProjectListHeader>
+              <HeadingOne noMargin>Portfolio</HeadingOne>
+              <ProjectListFilter />
+            </ProjectListHeader>
+            {loading ? (
+              <Paragraph>Lekker alles aan het laden</Paragraph>
+            ) : data ? (
+              <List>
+                {data.projects.map(item => (
+                  <ListItem
+                    document={'/projects/[slug]'}
+                    key={item.title}
+                    src={item.listImage}
+                    href={`/projects/${item.slug}`}
+                  >
+                    {item.title}
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+              <Paragraph>
+                Een zeer uitgebreide lijst zoals je kunt zien.
+              </Paragraph>
+            )}
+          </ProjectListContext.Provider>
+        </Section>
       </main>
-      <Footer>
+      <Footer background="secondary">
+        <FooterLink colour="secondary" href="/services">
+          Bekijken wat ik jou kan bieden?
+        </FooterLink>
         <FooterLink
           colour="secondary"
           href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
@@ -70,6 +76,9 @@ const Portfolio: NextPage<Props> = () => {
             : data?.projects
             ? 'Hier ook tussen willen staan?'
             : 'Hier als eerste op willen staan?'}
+        </FooterLink>
+        <FooterLink colour="secondary" href="/about">
+          Meer lezen over JM?
         </FooterLink>
       </Footer>
     </>

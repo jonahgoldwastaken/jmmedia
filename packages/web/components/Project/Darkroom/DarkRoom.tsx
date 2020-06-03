@@ -12,11 +12,14 @@ const StyledDiv = styled.div<StyledDivProps>`
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   z-index: 99999;
   background-color: ${props => props.theme.colours.primaries.black};
   cursor: zoom-out;
 
+  > div {
+    height: 100%;
+  }
   img {
     object-fit: contain;
   }
@@ -34,7 +37,7 @@ const StyledDiv = styled.div<StyledDivProps>`
   }
 `
 
-export const DarkRoom: React.FunctionComponent = () => {
+export const DarkRoom: React.FC = () => {
   const {
     currentImage: { src, alt },
     darkRoomOpen,
@@ -42,7 +45,7 @@ export const DarkRoom: React.FunctionComponent = () => {
   } = useContext(ArticleContext)
   return (
     <StyledDiv open={darkRoomOpen} onClick={() => setDarkRoomOpen(false)}>
-      <Image src={src} alt={alt} />
+      <Image src={src} alt={alt} noQuote />
     </StyledDiv>
   )
 }

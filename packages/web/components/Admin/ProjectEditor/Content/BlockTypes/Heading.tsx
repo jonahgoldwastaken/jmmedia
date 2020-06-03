@@ -4,7 +4,7 @@ import { EditorContainer, EditorProps } from './Editors'
 
 interface HeadingEditorProps extends EditorProps<HTMLHeadingElement, string> {}
 
-export const HeadingEditor: React.FunctionComponent<HeadingEditorProps> = ({
+export const HeadingEditor: React.FC<HeadingEditorProps> = ({
   value,
   onChange,
   onCancel,

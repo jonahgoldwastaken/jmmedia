@@ -20,7 +20,11 @@ export const Paragraph = styled.p<ParagraphProps>`
       : props.theme.colours.secondary};
   ${props => props.centre && 'text-align: center'};
 
-  &:last-child {
-    margin-bottom: ${props => props.theme.spacing[2]};
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    max-width: 55rem;
+  }
+
+  &:not(:last-child) {
+    margin-bottom: ${props => props.theme.spacing[1]};
   }
 `

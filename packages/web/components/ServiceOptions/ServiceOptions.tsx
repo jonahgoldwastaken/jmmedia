@@ -12,9 +12,7 @@ const ServiceOptionsList = styled.ul`
   list-style-type: disc;
 `
 
-export const ServiceOptions: React.FunctionComponent<ServiceOptionsProps> = ({
-  options,
-}) => {
+export const ServiceOptions: React.FC<ServiceOptionsProps> = ({ options }) => {
   return (
     <ServiceOptionsList>
       {options.map(option => (

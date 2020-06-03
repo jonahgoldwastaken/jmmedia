@@ -15,7 +15,7 @@ const TextArea = styled.textarea<TextAreaProps>`
   ${BaseInputStyling}
 `
 
-export const TextAreaInput: React.FunctionComponent<TextAreaInputProps> = ({
+export const TextAreaInput: React.FC<TextAreaInputProps> = ({
   onKeyUp,
   name,
   label,

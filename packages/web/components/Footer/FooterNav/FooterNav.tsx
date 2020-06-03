@@ -7,7 +7,7 @@ const StyledNav = styled.nav`
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 99;
+  z-index: 9999;
   padding: ${props => props.theme.spacing[1]};
   background: ${props => props.theme.colours.primary};
 
@@ -24,9 +24,10 @@ const StyledNav = styled.nav`
   }
 `
 
-export const FooterNav: React.FunctionComponent = () => (
+export const FooterNav: React.FC = () => (
   <StyledNav>
     <NavList>
+      <FooterNavLink href="/">Home</FooterNavLink>
       <FooterNavLink href="/about">Over</FooterNavLink>
       <FooterNavLink href="/services">Services</FooterNavLink>
       <FooterNavLink href="/projects">Projecten</FooterNavLink>

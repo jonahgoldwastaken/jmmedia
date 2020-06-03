@@ -10,7 +10,7 @@ interface RowImageEditorProps
     'value' | 'onChange'
   > {}
 
-export const RowImageEditor: React.FunctionComponent<RowImageEditorProps> = ({
+export const RowImageEditor: React.FC<RowImageEditorProps> = ({
   value,
   onChange,
 }) => {

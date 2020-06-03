@@ -28,7 +28,7 @@ const StyledImage = styled(Image)`
   }
 `
 
-export const ArticleImage: React.FunctionComponent<ImageProps> = props => (
+export const ArticleImage: React.FC<ImageProps> = props => (
   <StyledImage {...props} />
 )
 

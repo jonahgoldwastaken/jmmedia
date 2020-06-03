@@ -17,7 +17,7 @@ const FakeBody = styled.div`
   }
 `
 
-export const Sandbox: React.FunctionComponent = ({ children }) => (
+export const Sandbox: React.FC = ({ children }) => (
   <Container>
     <FakeBody>
       <Header />

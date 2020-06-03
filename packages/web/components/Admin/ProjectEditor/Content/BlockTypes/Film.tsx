@@ -11,7 +11,7 @@ const EditButton = styled(Button)`
   top: 0;
   right: 0;
 `
-export const FilmEditor: React.FunctionComponent<FilmEditorProps> = ({
+export const FilmEditor: React.FC<FilmEditorProps> = ({
   editing,
   onChange,
   onCancel,

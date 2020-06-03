@@ -17,10 +17,7 @@ const VideoContainer = styled.div`
   }
 `
 
-export const ArticleVideo: React.FunctionComponent<ArticleVideoProps> = ({
-  id,
-  onClick,
-}) => {
+export const ArticleVideo: React.FC<ArticleVideoProps> = ({ id, onClick }) => {
   const {
     colours: { primary },
   } = useTheme()

@@ -6,6 +6,9 @@ import { useProjectServiceOptionsQuery } from 'generated/graphql'
 
 const Div = styled.div`
   color: ${props => props.theme.colours.secondary};
+  @media screen and (max-width: ${props => props.theme.breakpoints[1]}) {
+    margin-top: ${props => props.theme.spacing[0]};
+  }
 `
 
 const StyledSelect = styled.select<{

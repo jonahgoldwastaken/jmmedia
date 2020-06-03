@@ -30,7 +30,7 @@ const Container = styled.div`
   }
 `
 
-export const Content: React.FunctionComponent<FieldArrayRenderProps> = ({
+export const Content: React.FC<FieldArrayRenderProps> = ({
   replace,
   remove,
   push,
@@ -80,7 +80,7 @@ export const Content: React.FunctionComponent<FieldArrayRenderProps> = ({
   )
 }
 
-const ContentBlock: React.FunctionComponent<ContentBlockProps> = ({
+const ContentBlock: React.FC<ContentBlockProps> = ({
   value: { data, type },
   onTypeChange,
   onCancel,

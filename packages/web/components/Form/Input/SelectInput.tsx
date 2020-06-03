@@ -17,7 +17,7 @@ const SelectInputTag = styled.select<SelectInputTagProps>`
   cursor: pointer;
 `
 
-export const SelectInput: React.FunctionComponent<SelectInputProps> = ({
+export const SelectInput: React.FC<SelectInputProps> = ({
   label,
   options,
   ...props

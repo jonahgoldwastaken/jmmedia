@@ -1,11 +1,10 @@
-import Head from 'next/head'
 import Footer, { FooterLink } from 'components/Footer'
 import Header from 'components/Header'
 import Image from 'components/Image'
-import { Logo } from 'components/Logo'
 import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
 import { HeadingOne } from 'components/Text/Headings'
+import Head from 'next/head'
 
 export default () => {
   return (
@@ -13,12 +12,11 @@ export default () => {
       <Head>
         <title>Over - JM</title>
       </Head>
-      <Header noLogo />
+      <Header />
       <article>
-        <HeadingOne centre>
-          <Logo noLarge aria-label="JM" />
-          <span> is Jonah Meijers</span>
-        </HeadingOne>
+        <Section background="primary">
+          <HeadingOne centre>JM is Jonah Meijers</HeadingOne>
+        </Section>
         <Section grid background="secondary">
           <Image
             src="/jonah.jpeg"
