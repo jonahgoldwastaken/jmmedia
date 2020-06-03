@@ -14,9 +14,10 @@ const StyledNav = styled.nav`
   }
 `
 
-export const HeaderNav: React.FunctionComponent = () => (
+export const HeaderNav: React.FC = () => (
   <StyledNav>
     <NavList>
+      <HeaderNavLink href="/">Home</HeaderNavLink>
       <HeaderNavLink href="/about">Over</HeaderNavLink>
       <HeaderNavLink href="/services">Services</HeaderNavLink>
       <HeaderNavLink href="/projects">Projecten</HeaderNavLink>

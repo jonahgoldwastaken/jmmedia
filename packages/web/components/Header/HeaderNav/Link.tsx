@@ -16,7 +16,7 @@ const StyledAnchor = styled(BaseHeading).attrs({ as: 'a' })<{ href?: string }>`
   cursor: pointer;
 `
 
-export const HeaderNavLink: React.FunctionComponent<NavLinkProps> = ({
+export const HeaderNavLink: React.FC<NavLinkProps> = ({
   href,
   outbound,
   children,

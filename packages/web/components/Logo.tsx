@@ -6,14 +6,10 @@ type LogoProps = {
 }
 
 const StyledImg = styled.img<LogoProps>`
-  width: ${props => (props.noLarge ? '6.8125rem' : '13.375rem')};
-
-  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
-    width: 6.8125rem;
-  }
+  width: 6.8125rem;
 `
 
-export const Logo: React.FunctionComponent<LogoProps> = props => {
+export const Logo: React.FC<LogoProps> = props => {
   const theme = useContext(ThemeContext)
   return <StyledImg {...props} src={theme.logo} />
 }

@@ -20,7 +20,7 @@ const StyledLI = styled.li`
   }
 `
 
-export const ListItem: React.FunctionComponent<ListItemProps> = ({
+export const ListItem: React.FC<ListItemProps> = ({
   href,
   document,
   src,

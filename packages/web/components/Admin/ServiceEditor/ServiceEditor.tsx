@@ -13,10 +13,7 @@ type Props = {
   onDelete?: () => void
 }
 
-export const ServiceEditor: React.FunctionComponent<Props> = ({
-  onDelete,
-  sideBarTitle,
-}) => {
+export const ServiceEditor: React.FC<Props> = ({ onDelete, sideBarTitle }) => {
   const { values } = useFormikContext<ServiceInput>()
   const properties = [
     {

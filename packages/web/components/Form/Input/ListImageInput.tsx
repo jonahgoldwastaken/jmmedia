@@ -56,7 +56,7 @@ const FileInputTag = styled.input<FileInputTagProps>`
   }
 `
 
-export const ListImageInput: React.FunctionComponent<FileInputProps> = ({
+export const ListImageInput: React.FC<FileInputProps> = ({
   label,
   onChange,
   name,

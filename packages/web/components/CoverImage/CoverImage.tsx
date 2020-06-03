@@ -5,11 +5,11 @@ import { primaries } from 'types/primaries'
 
 type CoverImageContainerProps = {
   colour: primaries
-  transform: {
+  transform: Array<{
     top?: number
     left?: number
-  }
-  width?: number
+  }>
+  width?: number[]
 }
 
 type CoverImageTextProps = {
@@ -43,29 +43,40 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
     opacity: ${props => (props.colour === 'white' ? '60%' : '50%')};
   }
 
-  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
-    width: ${props => (props.width ? `${props.width / 16}rem` : '18.75rem')};
-    margin: 0;
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    width: ${props =>
+      props.width?.length ? `${props.width[0] / 16}rem` : '18.75rem'};
+    ${props => {
+      return `margin: ${
+        props.transform[0].top ? props.transform[0].top / 16 : 0
+      }rem 0 0 ${props.transform[0].left ? props.transform[0].left / 16 : 0}rem`
+    }}
+  }
 
-    &:not(:last-child) {
-      margin-bottom: 0;
-    }
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    width: ${props =>
+      props.width?.length
+        ? props.width.length > 1
+          ? `${props.width[1] / 16}rem`
+          : `${props.width[0] / 16}rem`
+        : '28.125rem'};
 
     ${props => {
-      if (!props.transform.left && props.transform.top)
-        return css`
-          margin-top: ${props.transform.top / 16}rem;
-        `
-      else if (props.transform.left && !props.transform.top)
-        return css`
-          margin-left: ${props.transform.left / 16}rem;
-        `
-      else if (props.transform.left && props.transform.top)
-        return css`
-          margin: ${props.transform.top / 16}rem 0 0
-            ${props.transform.left / 16}rem;
-        `
-      else return ''
+      if (props.transform.length > 1) {
+        return `margin: ${
+          props.transform[1].top
+            ? props.transform[1].top / 16
+            : props.transform[0].top
+            ? props.transform[0].top / 16
+            : 0
+        }rem 0 0 ${
+          props.transform[1].left
+            ? props.transform[1].left / 16
+            : props.transform[0].left
+            ? props.transform[0].left / 16
+            : 0
+        }rem`
+      }
     }}
   }
 `
@@ -106,7 +117,7 @@ const Text = styled(BaseHeading).attrs({ as: 'p' })<CoverImageTextProps>`
   }};
 `
 
-export const CoverImage: React.FunctionComponent<CoverImageProps> = ({
+export const CoverImage: React.FC<CoverImageProps> = ({
   src,
   children,
   ...props

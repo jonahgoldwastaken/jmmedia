@@ -7,7 +7,7 @@ import { EditorContainer, EditorProps } from './Editors'
 
 interface ImageEditorProps extends EditorProps<HTMLImageElement, imageValue> {}
 
-export const ImageEditor: React.FunctionComponent<ImageEditorProps> = ({
+export const ImageEditor: React.FC<ImageEditorProps> = ({
   editing,
   onChange,
   onClick,

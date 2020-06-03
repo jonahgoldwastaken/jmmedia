@@ -6,7 +6,7 @@ import { RowImageEditor } from './Image'
 
 interface ImageRowEditorProps extends EditorProps<HTMLImageElement, rowValue> {}
 
-export const ImageRowEditor: React.FunctionComponent<ImageRowEditorProps> = ({
+export const ImageRowEditor: React.FC<ImageRowEditorProps> = ({
   editing,
   onClick,
   onSave,

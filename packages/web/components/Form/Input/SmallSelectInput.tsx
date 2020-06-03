@@ -45,7 +45,7 @@ const SmallSelectInputTag = styled.select<SmallSelectInputTagProps>`
   opacity: 0;
 `
 
-export const SmallSelectInput: React.FunctionComponent<SmallSelectInputProps> = ({
+export const SmallSelectInput: React.FC<SmallSelectInputProps> = ({
   label,
   name,
   onChange,

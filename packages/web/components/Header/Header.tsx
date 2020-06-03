@@ -2,17 +2,9 @@ import { Logo } from 'components/Logo'
 import styled from 'styled-components'
 import { HeaderNav } from './HeaderNav'
 
-type HeaderProps = {
-  noLogo?: boolean
-}
-
-const StyledHeader = styled.header`
+const StyledDiv = styled.div`
   background: ${props => props.theme.colours.tertiary};
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: ${props => props.theme.spacing[1]};
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     position: sticky;
@@ -22,11 +14,26 @@ const StyledHeader = styled.header`
   }
 `
 
-export const Header: React.FunctionComponent<HeaderProps> = ({ noLogo }) => {
+const StyledHeader = styled.header`
+  max-width: 64rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${props => props.theme.spacing[1]};
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[3]}) {
+    max-width: 96rem;
+  }
+`
+
+export const Header: React.FC = () => {
   return (
-    <StyledHeader>
-      {!noLogo && <Logo />}
-      <HeaderNav />
-    </StyledHeader>
+    <StyledDiv>
+      <StyledHeader>
+        <Logo />
+        <HeaderNav />
+      </StyledHeader>
+    </StyledDiv>
   )
 }

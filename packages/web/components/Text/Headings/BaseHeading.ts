@@ -11,5 +11,12 @@ export const BaseHeading = styled.h1<HeadingProps>`
   letter-spacing: 0.03125em;
   line-height: 1em;
   text-transform: uppercase;
-  margin: ${props => props.theme.spacing[2]} 0;
+  margin: 0;
+  &:not(:only-child) {
+    margin: 0 0 ${props => props.theme.spacing[1]};
+
+    @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+      margin: 0 0 ${props => props.theme.spacing[2]};
+    }
+  }
 `

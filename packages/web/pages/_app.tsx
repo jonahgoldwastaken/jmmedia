@@ -14,12 +14,6 @@ import { AppContext, AppInitialProps } from 'next/app'
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
   ${styledSanitize};
-  body {
-    min-height: 100vh;
-    max-width: 64rem;
-    margin: auto;
-    background: ${props => props.theme.colours.tertiary};
-  }
 `
 
 const MyApp: NextPage<AppContext & AppInitialProps> = ({

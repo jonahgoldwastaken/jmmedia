@@ -11,11 +11,11 @@ const StyledLink = styled.a<FooterLinkProps>`
   display: none;
   align-items: center;
   justify-content: center;
-  height: calc(${props => props.theme.heights[1]} / 2);
+  height: calc(${props => props.theme.heights[1]} / 3);
   padding: ${props => props.theme.spacing[1]};
   flex: 1;
   font-weight: ${props => props.theme.fontWeights[1]};
-  font-size: ${props => props.theme.fontSizes[2]};
+  font-size: ${props => props.theme.fontSizes[1]};
   text-align: center;
 
   
@@ -36,11 +36,11 @@ const StyledLink = styled.a<FooterLinkProps>`
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     display: flex;
-    height: ${props => props.theme.heights[1]};
+    height: calc(${props => props.theme.heights[1]}/2);
   }
 `
 
-export const FooterLink: React.FunctionComponent<FooterLinkProps> = ({
+export const FooterLink: React.FC<FooterLinkProps> = ({
   children,
   ...props
 }) => (

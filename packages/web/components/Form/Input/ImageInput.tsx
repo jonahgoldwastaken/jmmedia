@@ -54,7 +54,7 @@ const ImageInputTag = styled.input<ImageInputTagProps>`
   }
 `
 
-export const ImageInput: React.FunctionComponent<ImageInputProps> = ({
+export const ImageInput: React.FC<ImageInputProps> = ({
   label,
   value,
   onChange,

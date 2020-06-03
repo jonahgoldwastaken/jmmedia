@@ -42,7 +42,7 @@ const ImageQuote = styled.q`
   }
 `
 
-export const Image: React.FunctionComponent<ImageProps> = ({
+export const Image: React.FC<ImageProps> = ({
   alt,
   src,
   noQuote,

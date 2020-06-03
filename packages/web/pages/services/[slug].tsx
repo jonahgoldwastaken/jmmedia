@@ -53,7 +53,7 @@ const ServicePage: NextPage<Props> = ({ result }) => {
           </div>
         </Section>
       </main>
-      <Footer>
+      <Footer background="secondary">
         <FooterLink
           colour="secondary"
           href={encodeURI(

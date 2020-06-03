@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import * as ApolloReactCommon from '@apollo/react-common'
-import * as ApolloReactHoc from '@apollo/react-hoc'
 import * as ApolloReactHooks from '@apollo/react-hooks'
 export type Maybe<T> = T | null
 /** All built-in and custom scalars, mapped to their actual values */
@@ -396,38 +395,6 @@ export const AdminPanelDocument = gql`
     }
   }
 `
-export type AdminPanelProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    AdminPanelQuery,
-    AdminPanelQueryVariables
-  >
-} &
-  TChildProps
-export function withAdminPanel<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    AdminPanelQuery,
-    AdminPanelQueryVariables,
-    AdminPanelProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    AdminPanelQuery,
-    AdminPanelQueryVariables,
-    AdminPanelProps<TChildProps, TDataName>
-  >(AdminPanelDocument, {
-    alias: 'adminPanel',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useAdminPanelQuery__
@@ -483,38 +450,6 @@ export type ImageUploadMutationFn = ApolloReactCommon.MutationFunction<
   ImageUploadMutation,
   ImageUploadMutationVariables
 >
-export type ImageUploadProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    ImageUploadMutation,
-    ImageUploadMutationVariables
-  >
-} &
-  TChildProps
-export function withImageUpload<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ImageUploadMutation,
-    ImageUploadMutationVariables,
-    ImageUploadProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    ImageUploadMutation,
-    ImageUploadMutationVariables,
-    ImageUploadProps<TChildProps, TDataName>
-  >(ImageUploadDocument, {
-    alias: 'imageUpload',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useImageUploadMutation__
@@ -563,38 +498,6 @@ export type ListImageUploadMutationFn = ApolloReactCommon.MutationFunction<
   ListImageUploadMutation,
   ListImageUploadMutationVariables
 >
-export type ListImageUploadProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    ListImageUploadMutation,
-    ListImageUploadMutationVariables
-  >
-} &
-  TChildProps
-export function withListImageUpload<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ListImageUploadMutation,
-    ListImageUploadMutationVariables,
-    ListImageUploadProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    ListImageUploadMutation,
-    ListImageUploadMutationVariables,
-    ListImageUploadProps<TChildProps, TDataName>
-  >(ListImageUploadDocument, {
-    alias: 'listImageUpload',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useListImageUploadMutation__
@@ -643,38 +546,6 @@ export type LoginUserMutationFn = ApolloReactCommon.MutationFunction<
   LoginUserMutation,
   LoginUserMutationVariables
 >
-export type LoginUserProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    LoginUserMutation,
-    LoginUserMutationVariables
-  >
-} &
-  TChildProps
-export function withLoginUser<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    LoginUserMutation,
-    LoginUserMutationVariables,
-    LoginUserProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    LoginUserMutation,
-    LoginUserMutationVariables,
-    LoginUserProps<TChildProps, TDataName>
-  >(LoginUserDocument, {
-    alias: 'loginUser',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useLoginUserMutation__
@@ -725,38 +596,6 @@ export type NewProjectMutationFn = ApolloReactCommon.MutationFunction<
   NewProjectMutation,
   NewProjectMutationVariables
 >
-export type NewProjectProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    NewProjectMutation,
-    NewProjectMutationVariables
-  >
-} &
-  TChildProps
-export function withNewProject<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    NewProjectMutation,
-    NewProjectMutationVariables,
-    NewProjectProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    NewProjectMutation,
-    NewProjectMutationVariables,
-    NewProjectProps<TChildProps, TDataName>
-  >(NewProjectDocument, {
-    alias: 'newProject',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useNewProjectMutation__
@@ -807,38 +646,6 @@ export type UpdateProjectMutationFn = ApolloReactCommon.MutationFunction<
   UpdateProjectMutation,
   UpdateProjectMutationVariables
 >
-export type UpdateProjectProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    UpdateProjectMutation,
-    UpdateProjectMutationVariables
-  >
-} &
-  TChildProps
-export function withUpdateProject<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    UpdateProjectMutation,
-    UpdateProjectMutationVariables,
-    UpdateProjectProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    UpdateProjectMutation,
-    UpdateProjectMutationVariables,
-    UpdateProjectProps<TChildProps, TDataName>
-  >(UpdateProjectDocument, {
-    alias: 'updateProject',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useUpdateProjectMutation__
@@ -888,38 +695,6 @@ export type DeleteProjectMutationFn = ApolloReactCommon.MutationFunction<
   DeleteProjectMutation,
   DeleteProjectMutationVariables
 >
-export type DeleteProjectProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    DeleteProjectMutation,
-    DeleteProjectMutationVariables
-  >
-} &
-  TChildProps
-export function withDeleteProject<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    DeleteProjectMutation,
-    DeleteProjectMutationVariables,
-    DeleteProjectProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    DeleteProjectMutation,
-    DeleteProjectMutationVariables,
-    DeleteProjectProps<TChildProps, TDataName>
-  >(DeleteProjectDocument, {
-    alias: 'deleteProject',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useDeleteProjectMutation__
@@ -977,38 +752,6 @@ export const ProjectToUpdateDocument = gql`
     }
   }
 `
-export type ProjectToUpdateProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    ProjectToUpdateQuery,
-    ProjectToUpdateQueryVariables
-  >
-} &
-  TChildProps
-export function withProjectToUpdate<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ProjectToUpdateQuery,
-    ProjectToUpdateQueryVariables,
-    ProjectToUpdateProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    ProjectToUpdateQuery,
-    ProjectToUpdateQueryVariables,
-    ProjectToUpdateProps<TChildProps, TDataName>
-  >(ProjectToUpdateDocument, {
-    alias: 'projectToUpdate',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useProjectToUpdateQuery__
@@ -1066,38 +809,6 @@ export const ProjectServiceOptionsDocument = gql`
     }
   }
 `
-export type ProjectServiceOptionsProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >
-} &
-  TChildProps
-export function withProjectServiceOptions<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables,
-    ProjectServiceOptionsProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables,
-    ProjectServiceOptionsProps<TChildProps, TDataName>
-  >(ProjectServiceOptionsDocument, {
-    alias: 'projectServiceOptions',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useProjectServiceOptionsQuery__
@@ -1155,38 +866,6 @@ export const ProjectsDocument = gql`
     }
   }
 `
-export type ProjectsProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    ProjectsQuery,
-    ProjectsQueryVariables
-  >
-} &
-  TChildProps
-export function withProjects<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ProjectsQuery,
-    ProjectsQueryVariables,
-    ProjectsProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    ProjectsQuery,
-    ProjectsQueryVariables,
-    ProjectsProps<TChildProps, TDataName>
-  >(ProjectsDocument, {
-    alias: 'projects',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useProjectsQuery__
@@ -1250,38 +929,6 @@ export const ProjectDocument = gql`
     }
   }
 `
-export type ProjectProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    ProjectQuery,
-    ProjectQueryVariables
-  >
-} &
-  TChildProps
-export function withProject<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ProjectQuery,
-    ProjectQueryVariables,
-    ProjectProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    ProjectQuery,
-    ProjectQueryVariables,
-    ProjectProps<TChildProps, TDataName>
-  >(ProjectDocument, {
-    alias: 'project',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useProjectQuery__
@@ -1338,38 +985,6 @@ export type NewServiceMutationFn = ApolloReactCommon.MutationFunction<
   NewServiceMutation,
   NewServiceMutationVariables
 >
-export type NewServiceProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    NewServiceMutation,
-    NewServiceMutationVariables
-  >
-} &
-  TChildProps
-export function withNewService<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    NewServiceMutation,
-    NewServiceMutationVariables,
-    NewServiceProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    NewServiceMutation,
-    NewServiceMutationVariables,
-    NewServiceProps<TChildProps, TDataName>
-  >(NewServiceDocument, {
-    alias: 'newService',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useNewServiceMutation__
@@ -1420,38 +1035,6 @@ export type UpdateServiceMutationFn = ApolloReactCommon.MutationFunction<
   UpdateServiceMutation,
   UpdateServiceMutationVariables
 >
-export type UpdateServiceProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    UpdateServiceMutation,
-    UpdateServiceMutationVariables
-  >
-} &
-  TChildProps
-export function withUpdateService<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    UpdateServiceMutation,
-    UpdateServiceMutationVariables,
-    UpdateServiceProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    UpdateServiceMutation,
-    UpdateServiceMutationVariables,
-    UpdateServiceProps<TChildProps, TDataName>
-  >(UpdateServiceDocument, {
-    alias: 'updateService',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useUpdateServiceMutation__
@@ -1501,38 +1084,6 @@ export type DeleteServiceMutationFn = ApolloReactCommon.MutationFunction<
   DeleteServiceMutation,
   DeleteServiceMutationVariables
 >
-export type DeleteServiceProps<
-  TChildProps = {},
-  TDataName extends string = 'mutate'
-> = {
-  [key in TDataName]: ApolloReactCommon.MutationFunction<
-    DeleteServiceMutation,
-    DeleteServiceMutationVariables
-  >
-} &
-  TChildProps
-export function withDeleteService<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'mutate'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    DeleteServiceMutation,
-    DeleteServiceMutationVariables,
-    DeleteServiceProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withMutation<
-    TProps,
-    DeleteServiceMutation,
-    DeleteServiceMutationVariables,
-    DeleteServiceProps<TChildProps, TDataName>
-  >(DeleteServiceDocument, {
-    alias: 'deleteService',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useDeleteServiceMutation__
@@ -1586,38 +1137,6 @@ export const ServiceToUpdateDocument = gql`
     }
   }
 `
-export type ServiceToUpdateProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    ServiceToUpdateQuery,
-    ServiceToUpdateQueryVariables
-  >
-} &
-  TChildProps
-export function withServiceToUpdate<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ServiceToUpdateQuery,
-    ServiceToUpdateQueryVariables,
-    ServiceToUpdateProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    ServiceToUpdateQuery,
-    ServiceToUpdateQueryVariables,
-    ServiceToUpdateProps<TChildProps, TDataName>
-  >(ServiceToUpdateDocument, {
-    alias: 'serviceToUpdate',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useServiceToUpdateQuery__
@@ -1676,38 +1195,6 @@ export const ServicesDocument = gql`
     }
   }
 `
-export type ServicesProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    ServicesQuery,
-    ServicesQueryVariables
-  >
-} &
-  TChildProps
-export function withServices<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ServicesQuery,
-    ServicesQueryVariables,
-    ServicesProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    ServicesQuery,
-    ServicesQueryVariables,
-    ServicesProps<TChildProps, TDataName>
-  >(ServicesDocument, {
-    alias: 'services',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useServicesQuery__
@@ -1766,38 +1253,6 @@ export const ServiceDocument = gql`
     }
   }
 `
-export type ServiceProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    ServiceQuery,
-    ServiceQueryVariables
-  >
-} &
-  TChildProps
-export function withService<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    ServiceQuery,
-    ServiceQueryVariables,
-    ServiceProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    ServiceQuery,
-    ServiceQueryVariables,
-    ServiceProps<TChildProps, TDataName>
-  >(ServiceDocument, {
-    alias: 'service',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useServiceQuery__
@@ -1850,38 +1305,6 @@ export const LoggedInUserDocument = gql`
     }
   }
 `
-export type LoggedInUserProps<
-  TChildProps = {},
-  TDataName extends string = 'data'
-> = {
-  [key in TDataName]: ApolloReactHoc.DataValue<
-    LoggedInUserQuery,
-    LoggedInUserQueryVariables
-  >
-} &
-  TChildProps
-export function withLoggedInUser<
-  TProps,
-  TChildProps = {},
-  TDataName extends string = 'data'
->(
-  operationOptions?: ApolloReactHoc.OperationOption<
-    TProps,
-    LoggedInUserQuery,
-    LoggedInUserQueryVariables,
-    LoggedInUserProps<TChildProps, TDataName>
-  >
-) {
-  return ApolloReactHoc.withQuery<
-    TProps,
-    LoggedInUserQuery,
-    LoggedInUserQueryVariables,
-    LoggedInUserProps<TChildProps, TDataName>
-  >(LoggedInUserDocument, {
-    alias: 'loggedInUser',
-    ...operationOptions,
-  })
-}
 
 /**
  * __useLoggedInUserQuery__
