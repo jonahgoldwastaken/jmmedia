@@ -43,7 +43,7 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
     opacity: ${props => (props.colour === 'white' ? '60%' : '50%')};
   }
 
-  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
     width: ${props =>
       props.width?.length ? `${props.width[0] / 16}rem` : '18.75rem'};
     ${props => {
@@ -53,7 +53,7 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
     }}
   }
 
-  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+  @media screen and (min-width: ${props => props.theme.breakpoints[3]}) {
     width: ${props =>
       props.width?.length
         ? props.width.length > 1
