@@ -1,4 +1,4 @@
-import { Input, ImageInput } from 'components/Form'
+import { ImageInput, Input } from 'components/Form'
 import { useImageUploadMutation } from 'generated/graphql'
 import { imageValue } from 'interfaces/Project'
 import { ChangeEvent, useEffect } from 'react'

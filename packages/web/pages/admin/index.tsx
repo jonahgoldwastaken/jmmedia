@@ -1,3 +1,5 @@
+import { WithApolloClient } from 'apolloClient'
+import { Button } from 'components/Form'
 import Header from 'components/Header'
 import List, { ListItem } from 'components/List'
 import Section from 'components/Section'
@@ -7,10 +9,8 @@ import { withApollo } from 'libs/apollo'
 import { NextPage, NextPageContext } from 'next'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
-import { withRouter } from 'next/router'
 import Link from 'next/link'
-import { Button } from 'components/Form'
-import { WithApolloClient } from 'apolloClient'
+import { withRouter } from 'next/router'
 
 type Props = {
   currentUser?: {
@@ -35,7 +35,7 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
           <>
             <div>
               <HeadingTwo>Projecten</HeadingTwo>
-              <Link href="/admin/project">
+              <Link scroll={false} href="/admin/project">
                 <Button>Nieuw project</Button>
               </Link>
               {data?.projects?.map(({ listImage, title, slug, _id }) => (
@@ -52,7 +52,7 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
             </div>
             <div>
               <HeadingTwo>Services</HeadingTwo>
-              <Link href="/admin/service">
+              <Link scroll={false} href="/admin/service">
                 <Button>Nieuwe service</Button>
               </Link>
               {data?.services?.map(({ listImage, name, slug, _id }) => (

@@ -1,8 +1,8 @@
-import { Input, Button } from 'components/Form'
+import { Button, Input } from 'components/Form'
 import { ArticleVideo } from 'components/Project/Article'
 import { filmValue } from 'interfaces/Project'
-import { EditorContainer, EditorProps } from './Editors'
 import styled from 'styled-components'
+import { EditorContainer, EditorProps } from './Editors'
 
 interface FilmEditorProps extends EditorProps<HTMLButtonElement, filmValue> {}
 

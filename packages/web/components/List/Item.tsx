@@ -1,36 +1,29 @@
-import Image from 'components/Image'
-import Link from 'next/link'
+import { motion, Variants } from 'framer-motion'
 import styled from 'styled-components'
+import { animation } from 'theme/animation'
 
-type ListItemProps = {
-  href: string
-  src: string
-  document: string
-  children: string
+export const itemVariants: Variants = {
+  hidden: {
+    height: 0,
+  },
+  visible: {
+    height: '100%',
+    transition: { ease: animation.curve, duration: animation.timing[1] },
+  },
+  exit: {
+    height: 0,
+    transition: { ease: animation.curve, duration: animation.timing[1] },
+  },
 }
 
-const StyledLI = styled.li`
+export const ListItem = motion.custom(styled.li`
   display: block;
   grid-column: span 1;
   grid-row: span 1;
   width: 100%;
   height: 100%;
+  overflow: hidden;
   a:hover q {
     text-decoration: underline;
   }
-`
-
-export const ListItem: React.FC<ListItemProps> = ({
-  href,
-  document,
-  src,
-  children,
-}) => (
-  <StyledLI>
-    <Link href={document} as={href}>
-      <a>
-        <Image src={src} alt={children} />
-      </a>
-    </Link>
-  </StyledLI>
-)
+`)

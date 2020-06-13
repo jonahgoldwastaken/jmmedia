@@ -12,10 +12,10 @@ import {
   ServiceQuery,
   ServiceQueryVariables,
 } from 'generated/graphql'
+import { withApollo } from 'libs/apollo'
 import { NextPage, NextPageContext } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
-import { withApollo } from 'libs/apollo'
 
 type Props = {
   result: ApolloQueryResult<ServiceQuery> | null

@@ -1,7 +1,7 @@
 import { WithApolloClient } from 'apolloClient'
 import Footer, { FooterLink } from 'components/Footer'
 import Header from 'components/Header'
-import List, { ListItem } from 'components/List'
+import List from 'components/List'
 import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
@@ -29,18 +29,11 @@ const ServicesPage: NextPage<Props> = ({ data: { services } }) => {
         <Section background="primary">
           <HeadingOne>De services die ik aanbied</HeadingOne>
           {services ? (
-            <List maxRows={3}>
-              {services.map(service => (
-                <ListItem
-                  document="/services/[slug]"
-                  key={service.slug}
-                  src={service.listImage}
-                  href={`/services/${service.slug}`}
-                >
-                  {service.name}
-                </ListItem>
-              ))}
-            </List>
+            <List
+              items={services}
+              document="/services/[slug]"
+              as="/services/"
+            />
           ) : (
             <Paragraph>Zoals je kan zien bied ik erg veel aan.</Paragraph>
           )}

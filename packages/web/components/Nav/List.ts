@@ -1,10 +1,9 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const NavList = styled.ul`
+export const NavList = motion.custom(styled.ul`
   padding: 0;
   list-style: none;
-  &,
-  & li {
-    display: inline;
-  }
-`
+  display: flex;
+  width: 100%;
+`)

@@ -27,8 +27,8 @@ declare module 'styled-components' {
     fontSizes: string[]
     fontWeights: number[]
     animation: {
-      timing: string[]
-      curve: string
+      timing: number[]
+      curve: number[]
     }
   }
 }

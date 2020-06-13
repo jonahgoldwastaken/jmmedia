@@ -1,7 +1,7 @@
 import Form, {
   Button,
-  ListImageInput,
   Input,
+  ListImageInput,
   SelectInput,
   TextAreaInput,
 } from 'components/Form'
@@ -77,7 +77,7 @@ export const SideBar: React.FC<SideBarProps> = ({
             )
         })}
         <Button>Opslaan</Button>
-        <Link href="/admin">
+        <Link href="/admin" scroll={false}>
           <Button type="button">Annuleren</Button>
         </Link>
         {onDelete && (

@@ -1,8 +1,8 @@
 import { BaseRunning } from 'components/Text'
+import { useProjectServiceOptionsQuery } from 'generated/graphql'
 import { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import { ProjectListContext } from './Context'
-import { useProjectServiceOptionsQuery } from 'generated/graphql'
 
 const Div = styled.div`
   color: ${props => props.theme.colours.secondary};

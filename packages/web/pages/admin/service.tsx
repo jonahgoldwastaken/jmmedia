@@ -1,3 +1,4 @@
+import { WithApolloClient } from 'apolloClient'
 import ServiceEditor from 'components/Admin/ServiceEditor'
 import { Formik } from 'formik'
 import { LoggedInUserDocument, useNewServiceMutation } from 'generated/graphql'
@@ -6,7 +7,6 @@ import { NextPage, NextPageContext } from 'next'
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
 import { useEffect } from 'react'
-import { WithApolloClient } from 'apolloClient'
 
 const NewServicePage: NextPage<WithRouterProps> = ({ router }) => {
   const [mutation, { data }] = useNewServiceMutation()

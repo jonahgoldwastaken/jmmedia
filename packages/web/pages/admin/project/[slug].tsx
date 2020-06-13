@@ -1,3 +1,4 @@
+import { WithApolloClient } from 'apolloClient'
 import ProjectEditor from 'components/Admin/ProjectEditor'
 import { Formik } from 'formik'
 import {
@@ -12,7 +13,6 @@ import { NextPage, NextPageContext } from 'next'
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
 import { useCallback, useEffect, useState } from 'react'
-import { WithApolloClient } from 'apolloClient'
 
 const EditProjectPage: NextPage<WithRouterProps> = ({ router }) => {
   const {

@@ -1,9 +1,9 @@
-import { ApolloClient } from 'apollo-client'
 import { InMemoryCache, NormalizedCacheObject } from 'apollo-cache-inmemory'
-import { NextPageContext } from 'next'
+import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
-import { createUploadLink } from 'apollo-upload-client'
 import { onError } from 'apollo-link-error'
+import { createUploadLink } from 'apollo-upload-client'
+import { NextPageContext } from 'next'
 
 export default function createApolloClient(
   initialState: any,

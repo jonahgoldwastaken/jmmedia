@@ -1,10 +1,10 @@
-import Head from 'next/head'
 import CoverImage from 'components/CoverImage'
 import Footer, { FooterLink } from 'components/Footer'
 import Header from 'components/Header'
 import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
+import Head from 'next/head'
 
 export default () => {
   return (

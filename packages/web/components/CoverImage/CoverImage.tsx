@@ -1,6 +1,6 @@
 //@ts-nocheck
 import { BaseHeading } from 'components/Text/Headings/BaseHeading'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { primaries } from 'types/primaries'
 
 type CoverImageContainerProps = {

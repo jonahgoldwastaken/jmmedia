@@ -1,25 +1,39 @@
 import { BaseRunning } from 'components/Text'
-import styled, { useTheme } from 'styled-components'
 import { MouseEvent } from 'react'
+import styled, { useTheme, css } from 'styled-components'
 
 type ImageProps = {
   noQuote?: boolean
   src: string[] | string
   alt?: string
+  loaded: boolean
+  onLoad: () => void
   onClick?: (e: MouseEvent<HTMLImageElement>) => void
 }
 
 const Container = styled.div`
-  display: inline-block;
+  display: block;
   position: relative;
+  height: 100%;
   width: ${props => props.theme.widths[3]};
 `
 
-const StyledImage = styled.img`
+const StyledImage = styled.img<{ loaded: boolean }>`
   display: block;
   width: ${props => props.theme.widths[3]};
   height: 100%;
   object-fit: cover;
+  ${props =>
+    props.loaded &&
+    css`
+      &:after {
+        display: block;
+        height: 100%;
+        width: ${props => props.theme.widths[3]};
+        content: '';
+        background: ${props => props.theme.colours.tertiary};
+      }
+    `}
 `
 
 const ImageQuote = styled.q`
@@ -46,25 +60,25 @@ export const Image: React.FC<ImageProps> = ({
   alt,
   src,
   noQuote,
+  onLoad,
+  loaded,
   ...props
 }) => {
   const theme = useTheme()
-  if (typeof src !== 'string') {
-    return (
-      <Container {...props}>
+  return (
+    <Container {...props}>
+      {typeof src !== 'string' ? (
         <StyledImage
           alt={alt}
           srcSet={`${src[0]} 500w, ${src[1]} 1000w, ${src[2]} 2000w`}
           sizes={`(max-width: ${theme.breakpoints[0]}) 500w, (max-width: ${theme.breakpoints[1]}) 1000w, (max-width: ${theme.breakpoints[2]}) 2000w`}
+          loaded={loaded}
+          onLoad={onLoad}
         />
-        {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
-      </Container>
-    )
-  } else
-    return (
-      <Container {...props}>
-        <StyledImage alt={alt} src={src} />
-        {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
-      </Container>
-    )
+      ) : (
+        <StyledImage alt={alt} src={src} loaded={loaded} onLoad={onLoad} />
+      )}
+      {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
+    </Container>
+  )
 }

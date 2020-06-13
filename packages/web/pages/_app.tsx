@@ -1,26 +1,31 @@
 require('intersection-observer')
-import { PageTransition } from 'next-page-transitions'
+import MediaQueryContext from 'components/MediaQueryContext'
+import { AnimatePresence } from 'framer-motion'
+import { logPageViews } from 'libs/analytics'
+import { NextPage } from 'next'
+import { AppContext, AppInitialProps } from 'next/app'
+import { useRouter } from 'next/router'
 import React, { useEffect, useMemo } from 'react'
 import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import styledSanitize from 'styled-sanitize'
-import useMedia from 'use-media'
-import MediaQueryContext from 'components/MediaQueryContext'
 import { darkTheme, lightTheme } from 'theme'
-import { logPageViews } from 'libs/analytics'
-import { NextPage } from 'next'
-import { AppContext, AppInitialProps } from 'next/app'
+import useMedia from 'use-media'
 
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
   ${styledSanitize};
 `
 
+const handleAnimationCompletion = () => {
+  if (typeof window !== 'undefined') window.scrollTo({ top: 0 })
+}
+
 const MyApp: NextPage<AppContext & AppInitialProps> = ({
   Component,
   pageProps,
-  router,
 }) => {
+  const router = useRouter()
   const lightMode: boolean = useMedia('(prefers-color-scheme: light)')
   const darkMode: boolean = useMedia('(prefers-color-scheme: dark)')
   const prefersReducedMotion: boolean = useMedia(
@@ -40,28 +45,29 @@ const MyApp: NextPage<AppContext & AppInitialProps> = ({
   }, [])
 
   return (
-    <MediaQueryContext.Provider value={MediaQueryContextValue}>
-      <ThemeProvider
-        theme={() => {
-          if (darkMode) return darkTheme
-          else return lightTheme
-        }}
-      >
-        <CriticalCSS />{' '}
-        <PageTransition
-          skipInitialTransition
-          timeout={400}
-          classNames="page-transition"
+    <>
+      <CriticalCSS />
+      <MediaQueryContext.Provider value={MediaQueryContextValue}>
+        <ThemeProvider
+          theme={() => {
+            if (darkMode) return darkTheme
+            else return lightTheme
+          }}
         >
-          <Component {...pageProps} key={router.route} />
-        </PageTransition>
-      </ThemeProvider>
+          <AnimatePresence
+            exitBeforeEnter
+            onExitComplete={handleAnimationCompletion}
+          >
+            <Component {...pageProps} key={router.route} />
+          </AnimatePresence>
+        </ThemeProvider>
+      </MediaQueryContext.Provider>
       <link
         rel="stylesheet"
         type="text/css"
         href="https://use.typekit.net/shv4sja.css"
       />
-    </MediaQueryContext.Provider>
+    </>
   )
 }
 

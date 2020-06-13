@@ -23,7 +23,7 @@ export const FooterNavLink: React.FC<NavLinkProps> = ({
     {outbound ? (
       <StyledAnchor {...props} />
     ) : (
-      <Link href={props.href}>
+      <Link href={props.href} scroll={false}>
         <StyledAnchor children={props.children} />
       </Link>
     )}
