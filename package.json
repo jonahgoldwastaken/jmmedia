@@ -17,14 +17,13 @@
     "packages/*"
   ],
   "devDependencies": {
+    "concurrently": "^5.2.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.6",
     "prettier": "^2.0.5",
-    "typescript": "^3.9.3",
-    "concurrently": "^5.2.0"
+    "typescript": "^3.9.3"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "husky": {
     "hooks": {
       "pre-commit": "yarn typecheck && lint-staged"
