@@ -1,7 +1,7 @@
 import { WithApolloClient } from 'apolloClient'
 import { Button } from 'components/Form'
 import Header from 'components/Header'
-import List, { ListItem } from 'components/List'
+import List from 'components/List'
 import Section from 'components/Section'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
 import { LoggedInUserDocument, useAdminPanelQuery } from 'generated/graphql'
@@ -38,34 +38,32 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
               <Link scroll={false} href="/admin/project">
                 <Button>Nieuw project</Button>
               </Link>
-              {data?.projects?.map(({ listImage, title, slug, _id }) => (
-                <List maxRows={1} key={_id}>
-                  <ListItem
-                    document="/admin/project/[slug]"
-                    href={`/admin/project/${slug}`}
-                    src={listImage}
-                  >
-                    {title}
-                  </ListItem>
-                </List>
-              ))}
+              {data?.projects && (
+                <List
+                  maxRows={1}
+                  items={data.projects.map(({ listImage, title, slug }) => ({
+                    name: title,
+                    slug,
+                    listImage,
+                  }))}
+                  document="/admin/project/[slug]"
+                  as="/admin/project/"
+                />
+              )}
             </div>
             <div>
               <HeadingTwo>Services</HeadingTwo>
               <Link scroll={false} href="/admin/service">
                 <Button>Nieuwe service</Button>
               </Link>
-              {data?.services?.map(({ listImage, name, slug, _id }) => (
-                <List maxRows={1} key={_id}>
-                  <ListItem
-                    document="/admin/service/[slug]"
-                    href={`/admin/service/${slug}`}
-                    src={listImage}
-                  >
-                    {name}
-                  </ListItem>
-                </List>
-              ))}
+              {data?.services && (
+                <List
+                  maxRows={1}
+                  items={data.services}
+                  document="/admin/service/[slug]"
+                  as="/admin/service/"
+                />
+              )}
             </div>
           </>
         )}
