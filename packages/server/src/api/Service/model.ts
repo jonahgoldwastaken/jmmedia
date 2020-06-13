@@ -1,8 +1,4 @@
-import {
-  arrayProp as ArrayProperty,
-  getModelForClass,
-  prop as Property,
-} from '@typegoose/typegoose'
+import { getModelForClass, prop as Property } from '@typegoose/typegoose'
 import { Field, ID, ObjectType } from 'type-graphql'
 
 @ObjectType({ description: 'The Service model' })
@@ -23,15 +19,15 @@ export class Service {
   listImage!: String
 
   @Field(() => [String])
-  @ArrayProperty({ items: String, required: true })
+  @Property({ type: String, required: true })
   description!: String[]
 
   @Field(() => [String])
-  @ArrayProperty({ items: String, required: true })
+  @Property({ type: String, required: true })
   baseOptions!: String[]
 
   @Field(() => [String])
-  @ArrayProperty({ items: String, required: true })
+  @Property({ type: String, required: true })
   additionalOptions!: String[]
 
   @Field()

@@ -1,9 +1,4 @@
-import {
-  arrayProp as ArrayProperty,
-  getModelForClass,
-  prop as Property,
-  Ref,
-} from '@typegoose/typegoose'
+import { getModelForClass, prop as Property, Ref } from '@typegoose/typegoose'
 import { Field, ID, ObjectType, registerEnumType } from 'type-graphql'
 import { Service } from '../Service'
 
@@ -63,7 +58,7 @@ export class Project {
   callToAction: string
 
   @Field(() => [Content])
-  @ArrayProperty({ items: Content })
+  @Property({ type: Content })
   content: Content[]
 
   @Field()
