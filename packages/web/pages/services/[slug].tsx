@@ -36,8 +36,10 @@ const ServicePage: NextPage<Props> = ({ result }) => {
             {service.name}
           </HeadingOne>
           <div>
-            {service.description.map(paragraph => (
-              <Paragraph colour="secondary">{paragraph}</Paragraph>
+            {service.description.map((paragraph, i) => (
+              <Paragraph key={i} colour="secondary">
+                {paragraph}
+              </Paragraph>
             ))}
           </div>
           <Image src={service.listImage} />

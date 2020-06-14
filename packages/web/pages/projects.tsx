@@ -47,8 +47,8 @@ const Portfolio: NextPage<Props> = () => {
                   slug: project.slug,
                   listImage: project.listImage,
                 }))}
-                document="/services/[slug]"
-                as="/services/"
+                document="/projects/[slug]"
+                as="/projects/"
               />
             ) : (
               <Paragraph>

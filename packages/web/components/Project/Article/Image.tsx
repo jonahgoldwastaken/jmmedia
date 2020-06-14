@@ -1,13 +1,6 @@
-import Image from 'components/Image'
+import Image, { ImageProps } from 'components/Image'
 import { MouseEvent } from 'react'
 import styled from 'styled-components'
-
-type ImageProps = {
-  noQuote?: boolean
-  src: string[] | string
-  alt?: string
-  onClick: (e: MouseEvent<HTMLImageElement>) => void
-}
 
 const StyledImage = styled(Image)`
   margin-top: 0;
@@ -28,8 +21,15 @@ const StyledImage = styled(Image)`
   }
 `
 
-export const ArticleImage: React.FC<ImageProps> = props => (
-  <StyledImage {...props} />
+interface ArticleImageProps extends Partial<ImageProps> {
+  noQuote?: boolean
+  src: string[] | string
+  alt?: string
+  onClick?: (e: MouseEvent<HTMLImageElement>) => void
+}
+
+export const ArticleImage: React.FC<ArticleImageProps> = props => (
+  <StyledImage animation {...props} />
 )
 
 type ArticleImageRowProps = {

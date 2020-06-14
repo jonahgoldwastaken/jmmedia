@@ -21,7 +21,7 @@ export default () => {
         <Section background="secondary">
           <CoverImage
             colour="orange"
-            src="https://unsplash.com/photos/oSvR0wGYUBs/download?force=true"
+            src="https://unsplash.com/photos/oSvR0wGYUBs/download"
             transform={[
               {
                 left: 66,
@@ -37,7 +37,7 @@ export default () => {
           <CoverImage
             colour="grey"
             width={[405, 607.5]}
-            src="https://unsplash.com/photos/ZODcBkEohk8/download?force=true"
+            src="https://unsplash.com/photos/ZODcBkEohk8/download"
             transform={[
               {
                 top: 82.5,
@@ -49,12 +49,12 @@ export default () => {
               },
             ]}
           >
-            Een ervaring zo uniek dat ie voor altijd gekoesterd moet worden.
+            Een ervaring die je op elk moment terug wilt kijken.
           </CoverImage>
           <CoverImage
             colour="grey"
             width={[360, 540]}
-            src="https://unsplash.com/photos/wn7dOzUh3Rs/download?force=true"
+            src="/evenement.jpg"
             transform={[
               {
                 top: 90,
@@ -71,7 +71,7 @@ export default () => {
           <CoverImage
             colour="orange"
             width={[270, 337.5]}
-            src="https://unsplash.com/photos/wynMU8psYo4/download?force=true"
+            src="https://unsplash.com/photos/wynMU8psYo4/download"
             transform={[
               {
                 top: 62,
@@ -83,7 +83,7 @@ export default () => {
               },
             ]}
           >
-            Een gebeurtenis die je voor altijd wilt koesteren.
+            Je online aanwezigheid die wel een opknapbeurt kan gebruiken.
           </CoverImage>
         </Section>
         <Section centreContent background="primary">

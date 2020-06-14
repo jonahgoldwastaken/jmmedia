@@ -45,7 +45,7 @@ export const DarkRoom: React.FC = () => {
   } = useContext(ArticleContext)
   return (
     <StyledDiv open={darkRoomOpen} onClick={() => setDarkRoomOpen(false)}>
-      <Image src={src} alt={alt} noQuote />
+      <Image animation src={src} alt={alt} noQuote />
     </StyledDiv>
   )
 }

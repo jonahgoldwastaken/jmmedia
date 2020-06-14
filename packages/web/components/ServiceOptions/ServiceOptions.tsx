@@ -15,8 +15,8 @@ const ServiceOptionsList = styled.ul`
 export const ServiceOptions: React.FC<ServiceOptionsProps> = ({ options }) => {
   return (
     <ServiceOptionsList>
-      {options.map(option => (
-        <ServiceOption>{option}</ServiceOption>
+      {options.map((option, i) => (
+        <ServiceOption key={i}>{option}</ServiceOption>
       ))}
     </ServiceOptionsList>
   )

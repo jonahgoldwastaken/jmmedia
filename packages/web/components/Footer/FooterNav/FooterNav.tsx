@@ -3,11 +3,12 @@ import styled from 'styled-components'
 import { FooterNavLink } from './Link'
 
 const StyledNav = styled.nav`
-  position: fixed;
+  display: block;
+  position: fixed !important;
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 10;
   padding: ${props => props.theme.spacing[1]};
   background: ${props => props.theme.colours.primary};
 

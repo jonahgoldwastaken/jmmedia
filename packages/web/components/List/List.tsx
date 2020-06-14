@@ -1,11 +1,10 @@
 import Image from 'components/Image'
-import { motion, Variants, useAnimation } from 'framer-motion'
+import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
-import LazyLoad from 'react-lazyload'
+import { useCallback, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { animation } from 'theme/animation'
-import { itemVariants, ListItem } from './Item'
-import { useState, useEffect } from 'react'
+import { ListItem } from './Item'
 
 type StyledListProps = {
   maxRows?: number
@@ -78,37 +77,22 @@ list-style: none;
   }
 `)
 
-export const List: React.FC<ListProps> = ({ items, document, as }) => {
-  const [imageLoaded, setImageLoaded] = useState(false)
-  const controls = useAnimation()
-
-  useEffect(() => {
-    if (imageLoaded) controls.start('visible')
-  }, [imageLoaded])
-  return (
-    <StyledList
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      maxRows={3}
-      variants={listVariants}
-    >
-      {items.map(item => (
-        <LazyLoad offset={400} css={{ height: '100%', width: '100%' }} once>
-          <ListItem variants={itemVariants} animate={controls} key={item.slug}>
-            <Link scroll={false} href={document} as={as.concat(item.slug)}>
-              <a>
-                <Image
-                  src={item.listImage}
-                  alt={item.name}
-                  onLoad={() => setImageLoaded(true)}
-                  loaded={imageLoaded}
-                />
-              </a>
-            </Link>
-          </ListItem>
-        </LazyLoad>
-      ))}
-    </StyledList>
-  )
-}
+export const List: React.FC<ListProps> = ({ items, document, as }) => (
+  <StyledList
+    initial="hidden"
+    animate="visible"
+    exit="exit"
+    maxRows={3}
+    variants={listVariants}
+  >
+    {items.map(item => (
+      <ListItem key={item.slug}>
+        <Link scroll={false} href={document} as={as.concat(item.slug)}>
+          <a>
+            <Image src={item.listImage} alt={item.name} />
+          </a>
+        </Link>
+      </ListItem>
+    ))}
+  </StyledList>
+)

@@ -1,4 +1,6 @@
+import { motion, Transition, Variants } from 'framer-motion'
 import styled, { css } from 'styled-components'
+import { animation } from 'theme/animation'
 
 type SectionProps = {
   grid?: boolean
@@ -51,7 +53,7 @@ const SectionDiv = styled.section<SectionProps>`
 
 `
 
-const SectionContainer = styled.div<SectionContainerProps>`
+const SectionContainer = motion.custom(styled.div<SectionContainerProps>`
   background: ${props =>
     props.background === 'secondary'
       ? props.theme.colours.primary
@@ -70,13 +72,43 @@ const SectionContainer = styled.div<SectionContainerProps>`
         height: ${props.theme.heights[4]};
       }
     `}
-`
+`)
+
+const sectionContainerVariants: Variants = {
+  initial: {
+    y: '6.875rem',
+    opacity: 0,
+  },
+  visible: {
+    y: '0rem',
+    opacity: 1,
+  },
+  exit: {
+    y: '-6.875rem',
+    opacity: 0,
+  },
+}
+
+const sectionContainerTransition: Transition = {
+  ease: animation.curve,
+  duration: animation.timing[1],
+  delayChildren: animation.timing[1],
+}
 
 export const Section: React.FC<SectionContainerProps> = ({
   children,
   ...props
-}) => (
-  <SectionContainer {...props}>
-    <SectionDiv {...props}>{children}</SectionDiv>
-  </SectionContainer>
-)
+}) => {
+  return (
+    <SectionContainer
+      variants={sectionContainerVariants}
+      transition={sectionContainerTransition}
+      initial="initial"
+      animate="visible"
+      exit="exit"
+      {...props}
+    >
+      <SectionDiv {...props}>{children}</SectionDiv>
+    </SectionContainer>
+  )
+}

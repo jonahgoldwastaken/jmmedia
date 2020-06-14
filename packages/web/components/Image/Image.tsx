@@ -1,39 +1,30 @@
 import { BaseRunning } from 'components/Text'
-import { MouseEvent } from 'react'
-import styled, { useTheme, css } from 'styled-components'
+import { motion, useAnimation, Variants } from 'framer-motion'
+import { MouseEvent, useEffect, useState } from 'react'
+import styled, { useTheme } from 'styled-components'
+import { animation } from 'theme/animation'
 
-type ImageProps = {
+export type ImageProps = {
   noQuote?: boolean
   src: string[] | string
   alt?: string
-  loaded: boolean
-  onLoad: () => void
   onClick?: (e: MouseEvent<HTMLImageElement>) => void
+  animation?: boolean
 }
 
-const Container = styled.div`
+const Container = motion.custom(styled.div`
   display: block;
   position: relative;
   height: 100%;
   width: ${props => props.theme.widths[3]};
-`
+  overflow: hidden;
+`)
 
-const StyledImage = styled.img<{ loaded: boolean }>`
+const StyledImage = styled.img`
   display: block;
   width: ${props => props.theme.widths[3]};
   height: 100%;
   object-fit: cover;
-  ${props =>
-    props.loaded &&
-    css`
-      &:after {
-        display: block;
-        height: 100%;
-        width: ${props => props.theme.widths[3]};
-        content: '';
-        background: ${props => props.theme.colours.tertiary};
-      }
-    `}
 `
 
 const ImageQuote = styled.q`
@@ -56,27 +47,56 @@ const ImageQuote = styled.q`
   }
 `
 
+const imageVariants: Variants = {
+  initial: {
+    clipPath: 'inset(0% 0% 100% 0%)',
+  },
+  loaded: {
+    clipPath: 'inset(0% 0% 0% 0%)',
+    transition: {
+      ease: animation.curve,
+      duration: animation.timing[1],
+    },
+  },
+}
+
 export const Image: React.FC<ImageProps> = ({
   alt,
   src,
   noQuote,
-  onLoad,
-  loaded,
+  animation,
   ...props
 }) => {
   const theme = useTheme()
+  const controls = useAnimation()
+  const [loaded, setLoaded] = useState(false)
+  const [source, setSource] = useState('')
+
+  useEffect(() => {
+    if (typeof src !== 'string')
+      setSource(`${src[0]} 500w, ${src[1]} 1000w, ${src[2]} 2000w`)
+    else setSource(src)
+  })
+
+  useEffect(() => {
+    if (animation && loaded) controls.start('loaded')
+  }, [loaded, animation])
+
   return (
-    <Container {...props}>
+    <Container
+      variants={animation ? imageVariants : {}}
+      animate={controls}
+      {...props}
+    >
       {typeof src !== 'string' ? (
         <StyledImage
           alt={alt}
-          srcSet={`${src[0]} 500w, ${src[1]} 1000w, ${src[2]} 2000w`}
+          srcSet={source}
           sizes={`(max-width: ${theme.breakpoints[0]}) 500w, (max-width: ${theme.breakpoints[1]}) 1000w, (max-width: ${theme.breakpoints[2]}) 2000w`}
-          loaded={loaded}
-          onLoad={onLoad}
+          onLoad={() => setLoaded(true)}
         />
       ) : (
-        <StyledImage alt={alt} src={src} loaded={loaded} onLoad={onLoad} />
+        <StyledImage alt={alt} src={source} onLoad={() => setLoaded(true)} />
       )}
       {alt && !noQuote && <ImageQuote>{alt}</ImageQuote>}
     </Container>

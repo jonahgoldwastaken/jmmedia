@@ -41,18 +41,18 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
   return (
     <>
       <Head>
-        <title>Project - JM</title>
+        <title>{project.title} - JM</title>
       </Head>
       <Header />
-      <Article>
-        <ArticleContext.Provider
-          value={{
-            currentImage,
-            setCurrentImage,
-            darkRoomOpen,
-            setDarkRoomOpen,
-          }}
-        >
+      <ArticleContext.Provider
+        value={{
+          currentImage,
+          setCurrentImage,
+          darkRoomOpen,
+          setDarkRoomOpen,
+        }}
+      >
+        <Article>
           <ArticleTitle>{project.title}</ArticleTitle>
           {project.content.map(({ type, data, _id }) => {
             if (type === 'heading')
@@ -90,10 +90,10 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
               )
             } else return <ArticleVideo key={_id} id={data} />
           })}
-          <DarkRoom />
-        </ArticleContext.Provider>
-      </Article>
-      <Footer>
+        </Article>
+        <DarkRoom />
+      </ArticleContext.Provider>
+      <Footer background="secondary">
         <FooterLink colour="secondary" href="">
           Vorig project
         </FooterLink>

@@ -10,11 +10,17 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import styledNormalize from 'styled-normalize'
 import styledSanitize from 'styled-sanitize'
 import { darkTheme, lightTheme } from 'theme'
+import { breakpoints } from 'theme/breakpoints'
 import useMedia from 'use-media'
 
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
   ${styledSanitize};
+  @media screen and (max-width: ${darkTheme.breakpoints[1]}) {
+    body {
+    margin-bottom: 3.875rem;
+    }
+  }
 `
 
 const handleAnimationCompletion = () => {
@@ -31,13 +37,15 @@ const MyApp: NextPage<AppContext & AppInitialProps> = ({
   const prefersReducedMotion: boolean = useMedia(
     'prefers-reduced-motion: reduce'
   )
+  const isMobile: boolean = useMedia(`max-width: ${breakpoints[1]}`)
   const MediaQueryContextValue = useMemo<MediaQueryContext>(
     () => ({
       darkMode,
       lightMode,
       prefersReducedMotion,
+      isMobile,
     }),
-    [lightMode, darkMode, prefersReducedMotion]
+    [lightMode, darkMode, prefersReducedMotion, isMobile]
   )
 
   useEffect(() => {

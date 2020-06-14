@@ -1,9 +1,31 @@
+import { Transition, Variants } from 'framer-motion'
 import styled from 'styled-components'
+import { animation } from 'theme/animation'
 
 export interface HeadingProps {
   colour?: 'primary' | 'secondary'
   centre?: boolean
   noMargin?: boolean
+}
+
+export const headingVariants: Variants = {
+  initial: {
+    y: '50%',
+    opacity: 0,
+  },
+  visible: {
+    y: '0%',
+    opacity: 1,
+  },
+  exit: {
+    y: '-50%',
+    opacity: 0,
+  },
+}
+
+export const headingTransition: Transition = {
+  ease: animation.curve,
+  duration: animation.timing[1],
 }
 
 export const BaseHeading = styled.h1<HeadingProps>`

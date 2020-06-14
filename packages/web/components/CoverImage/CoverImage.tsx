@@ -1,6 +1,9 @@
 //@ts-nocheck
+import Image from 'components/Image'
 import { BaseHeading } from 'components/Text/Headings/BaseHeading'
+import { motion, Transition, useCycle, Variants } from 'framer-motion'
 import styled from 'styled-components'
+import { animation } from 'theme/animation'
 import { primaries } from 'types/primaries'
 
 type CoverImageContainerProps = {
@@ -20,11 +23,13 @@ type CoverImageProps = {
   src: string
 } & CoverImageContainerProps
 
-const CoverImageContainer = styled.div<CoverImageContainerProps>`
-  display: inline-block;
+const CoverImageContainer = motion.custom(styled.div<CoverImageContainerProps>`
   position: relative;
   width: ${props => props.theme.widths[3]};
   vertical-align: top;
+  display: inline-grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
 
   &:not(:last-child) {
     margin-bottom: ${props => props.theme.spacing[2]};
@@ -79,11 +84,11 @@ const CoverImageContainer = styled.div<CoverImageContainerProps>`
       }
     }}
   }
-`
+`)
 
-const Image = styled.img`
-  width: 100%;
-  height: 100%;
+const StyledImage = styled(Image)`
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
   filter: contrast(200%) opacity(0.75);
 
   @media speech {
@@ -91,13 +96,15 @@ const Image = styled.img`
   }
 `
 
-const Text = styled(BaseHeading).attrs({ as: 'p' })<CoverImageTextProps>`
-  position: absolute;
-  top: 50%;
-  left: 0;
+const Text = motion.custom(styled(BaseHeading).attrs({ as: 'p' })<
+  CoverImageTextProps
+>`
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+  position: relative;
   width: 100%;
-  transform: translateY(-50%);
-  margin: 0;
+  align-self: center;
+  margin: 0 !important;
   padding: ${props => props.theme.spacing[0]};
   z-index: 2;
   font-weight: ${props => props.theme.fontWeights[1]};
@@ -115,17 +122,56 @@ const Text = styled(BaseHeading).attrs({ as: 'p' })<CoverImageTextProps>`
         return props.theme.colours.primaries.grey
     }
   }};
-`
+`)
+
+const textVariants: Variants = {
+  initial: { scale: 1 },
+  hover: {
+    scale: 1.05,
+  },
+}
+
+const containerVariants: Variants = {
+  initial: { scale: 1 },
+  hover: {
+    scale: 1.1,
+  },
+}
+
+const coverImageTransition: Transition = {
+  ease: animation.curve,
+  duration: animation.timing[1],
+}
 
 export const CoverImage: React.FC<CoverImageProps> = ({
   src,
   children,
   ...props
 }) => {
+  const [deg, cycleDeg] = useCycle(
+    '0deg',
+    '83deg',
+    '180deg',
+    '274deg',
+    '28deg',
+    '462deg',
+    '261deg'
+  )
+
   return (
-    <CoverImageContainer {...props}>
-      <Image src={src} />
-      <Text colour={props.colour}>{children}</Text>
+    <CoverImageContainer
+      variants={containerVariants}
+      transition={coverImageTransition}
+      initial="initial"
+      whileHover="hover"
+      onClick={cycleDeg}
+      style={{ rotate: deg }}
+      {...props}
+    >
+      <StyledImage src={src} />
+      <Text variants={textVariants} colour={props.colour}>
+        {children}
+      </Text>
     </CoverImageContainer>
   )
 }
