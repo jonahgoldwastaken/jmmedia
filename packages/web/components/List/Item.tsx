@@ -6,7 +6,7 @@ import { animation } from 'theme/animation'
 
 export const itemVariants: Variants = {
   hidden: {
-    clipPath: 'inset(0% 0% 100% 0%)',
+    clipPath: 'inset(100% 0% 0% 0%)',
   },
   visible: {
     clipPath: 'inset(0% 0% 0% 0%)',

@@ -15,7 +15,6 @@ declare module 'styled-components' {
         grey: string
       }
     }
-    logo: string
     spacing: string[]
     heights: string[]
     widths: string[]

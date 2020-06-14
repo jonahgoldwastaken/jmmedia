@@ -19,7 +19,6 @@ const defaultTheme = {
 const darkTheme: DefaultTheme = {
   ...defaultTheme,
   colours: { primaries: colours.primaries, ...colours.dark },
-  logo: '/logo-dark.svg',
 }
 
 const lightTheme: DefaultTheme = {
@@ -28,7 +27,6 @@ const lightTheme: DefaultTheme = {
     primaries: colours.primaries,
     ...colours.light,
   },
-  logo: '/logo-light.svg',
 }
 
 export { lightTheme, darkTheme }
