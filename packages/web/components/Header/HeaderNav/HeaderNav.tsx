@@ -12,7 +12,7 @@ const StyledNav = styled.nav`
     margin: 1rem 0 1rem auto;
   }
 
-  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
     display: block;
   }
 `

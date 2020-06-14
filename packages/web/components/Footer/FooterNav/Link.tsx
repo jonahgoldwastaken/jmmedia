@@ -13,6 +13,10 @@ const StyledAnchor = styled.a`
   text-decoration: none;
   font-size: ${props => props.theme.fontSizes[0]};
   font-weight: ${props => props.theme.fontWeights[1]};
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    font-size: ${props => props.theme.fontSizes[1]};
+  }
 `
 
 export const FooterNavLink: React.FC<NavLinkProps> = ({

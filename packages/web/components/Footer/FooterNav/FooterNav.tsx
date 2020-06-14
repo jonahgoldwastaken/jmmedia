@@ -21,6 +21,10 @@ const StyledNav = styled.nav`
   }
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    padding: ${props => props.theme.spacing[2]};
+  }
+
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
     display: none;
   }
 `

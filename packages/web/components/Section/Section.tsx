@@ -18,6 +18,10 @@ const SectionDiv = styled.section<SectionProps>`
   margin: auto;
   padding: ${props => props.theme.spacing[1]};
 
+  @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+    padding: ${props => props.theme.spacing[2]};
+  }
+
   ${props =>
     props.grid &&
     css`
