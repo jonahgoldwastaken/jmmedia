@@ -1,7 +1,6 @@
 import Image from 'components/Image'
 import { motion, Variants } from 'framer-motion'
 import Link from 'next/link'
-import { useCallback, useEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
 import { animation } from 'theme/animation'
 import { ListItem } from './Item'
