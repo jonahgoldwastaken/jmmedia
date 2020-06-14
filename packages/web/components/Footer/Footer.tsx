@@ -57,6 +57,7 @@ export const Footer: React.FC<FooterProps> = ({ children, background }) => {
   if (!isMobile)
     return (
       <StyledDiv
+        key="noMobileFooter"
         variants={footerVariants}
         transition={footerTransition}
         initial="initial"
@@ -72,7 +73,7 @@ export const Footer: React.FC<FooterProps> = ({ children, background }) => {
     )
   else
     return (
-      <StyledDiv background={background}>
+      <StyledDiv key="mobileFooter" background={background}>
         <StyledFooter>
           {children}
           <FooterNav />

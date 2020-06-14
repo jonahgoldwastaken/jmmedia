@@ -49,10 +49,10 @@ const ImageQuote = styled.q`
 
 const imageVariants: Variants = {
   initial: {
-    height: '0%',
+    clipPath: 'inset(100% 0% 0% 0%)',
   },
   loaded: {
-    height: '100%',
+    clipPath: 'inset(0% 0% 0% 0%)',
     transition: {
       ease: animation.curve,
       duration: animation.timing[1],

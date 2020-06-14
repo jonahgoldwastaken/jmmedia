@@ -16,7 +16,7 @@ const SectionDiv = styled.section<SectionProps>`
   max-width: 64rem;
   height: 100%;
   margin: auto;
-  padding: ${props => props.theme.spacing[2]};
+  padding: ${props => props.theme.spacing[1]};
 
   ${props =>
     props.grid &&

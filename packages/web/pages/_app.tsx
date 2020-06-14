@@ -35,9 +35,9 @@ const MyApp: NextPage<AppContext & AppInitialProps> = ({
   const lightMode: boolean = useMedia('(prefers-color-scheme: light)')
   const darkMode: boolean = useMedia('(prefers-color-scheme: dark)')
   const prefersReducedMotion: boolean = useMedia(
-    'prefers-reduced-motion: reduce'
+    '(prefers-reduced-motion: reduce)'
   )
-  const isMobile: boolean = useMedia(`max-width: ${breakpoints[1]}`)
+  const isMobile: boolean = useMedia(`(max-width: ${breakpoints[1]})`)
   const MediaQueryContextValue = useMemo<MediaQueryContext>(
     () => ({
       darkMode,

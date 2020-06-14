@@ -10,7 +10,7 @@ export const HeadingOne = motion.custom(styled(BaseHeading)`
     props.colour
       ? props.colour === 'secondary' && props.theme.colours.tertiary
       : props.theme.colours.secondary};
-  ${props => props.centre && 'text-align: center'};
+
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
     font-size: ${props => props.theme.fontSizes[5]};

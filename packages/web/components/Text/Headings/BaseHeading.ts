@@ -34,10 +34,12 @@ export const BaseHeading = styled.h1<HeadingProps>`
   line-height: 1em;
   text-transform: uppercase;
   margin: 0;
+
   &:not(:only-child) {
     margin: 0 0 ${props => props.theme.spacing[1]};
 
     @media screen and (min-width: ${props => props.theme.breakpoints[2]}) {
+      ${props => props.centre && 'text-align: center'};
       margin: 0 0 ${props => props.theme.spacing[2]};
     }
   }

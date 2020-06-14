@@ -27,7 +27,7 @@ const ServicesPage: NextPage<Props> = ({ data: { services } }) => {
       <Header />
       <main>
         <Section background="primary">
-          <HeadingOne>De services die ik aanbied</HeadingOne>
+          <HeadingOne>Onze services</HeadingOne>
           {services ? (
             <List
               items={services}

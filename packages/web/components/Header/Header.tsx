@@ -3,14 +3,15 @@ import styled from 'styled-components'
 import { HeaderNav } from './HeaderNav'
 
 const StyledDiv = styled.div`
-  background: ${props => props.theme.colours.tertiary};
   width: 100%;
+  position: relative;
+  z-index: 10;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[1]}) {
+    background: ${props => props.theme.colours.tertiary};
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 99999;
   }
 `
 
