@@ -1,4 +1,4 @@
-import Footer, { FooterLink } from 'components/Footer'
+import Footer from 'components/Footer'
 import Header from 'components/Header'
 import List from 'components/List'
 import {
@@ -18,7 +18,7 @@ import { useEffect, useState } from 'react'
 type Props = {}
 
 const Portfolio: NextPage<Props> = () => {
-  const { data, loading, refetch, called } = useProjectsQuery()
+  const { data, refetch, called } = useProjectsQuery()
   const [filter, setFilter] = useState<string>('')
 
   useEffect(() => {
@@ -58,24 +58,7 @@ const Portfolio: NextPage<Props> = () => {
           </ProjectListContext.Provider>
         </Section>
       </main>
-      <Footer background="secondary">
-        <FooterLink colour="secondary" href="/services">
-          Bekijken wat ik jou kan bieden?
-        </FooterLink>
-        <FooterLink
-          colour="secondary"
-          href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
-        >
-          {loading
-            ? 'Hier ook tussen willen staan?'
-            : data?.projects
-            ? 'Hier ook tussen willen staan?'
-            : 'Hier als eerste op willen staan?'}
-        </FooterLink>
-        <FooterLink colour="secondary" href="/about">
-          Meer lezen over JM?
-        </FooterLink>
-      </Footer>
+      <Footer />
     </>
   )
 }

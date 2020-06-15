@@ -1,6 +1,6 @@
 import { ApolloQueryResult } from 'apollo-client'
 import { WithApolloClient } from 'apolloClient'
-import Footer, { FooterLink } from 'components/Footer'
+import Footer from 'components/Footer'
 import Header from 'components/Header'
 import Image from 'components/Image'
 import Section from 'components/Section'
@@ -55,16 +55,7 @@ const ServicePage: NextPage<Props> = ({ result }) => {
           </div>
         </Section>
       </main>
-      <Footer background="secondary">
-        <FooterLink
-          colour="secondary"
-          href={encodeURI(
-            `mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag voor ${service.name.toLowerCase()}: `
-          )}
-        >
-          {service.callToAction}
-        </FooterLink>
-      </Footer>
+      <Footer />
     </>
   )
 }

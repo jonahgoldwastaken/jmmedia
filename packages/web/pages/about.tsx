@@ -1,4 +1,4 @@
-import Footer, { FooterLink } from 'components/Footer'
+import Footer from 'components/Footer'
 import Header from 'components/Header'
 import Image from 'components/Image'
 import Section from 'components/Section'
@@ -47,20 +47,7 @@ export default () => {
           </div>
         </Section>
       </article>
-      <Footer>
-        <FooterLink colour="primary" href="/services">
-          Bekijk hier hoe ik jouw verhaal kan vastleggen
-        </FooterLink>
-        <FooterLink colour="primary" href="/portfolio">
-          Zie welke verhalen ik al heb kunnen delen
-        </FooterLink>
-        <FooterLink
-          colour="primary"
-          href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
-        >
-          Laten we samen uitvinden hoe we je verhaal kunnen vertellen
-        </FooterLink>
-      </Footer>
+      <Footer />
     </>
   )
 }

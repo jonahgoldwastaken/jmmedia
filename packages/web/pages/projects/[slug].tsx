@@ -1,6 +1,6 @@
 import { ApolloQueryResult } from 'apollo-client'
 import { WithApolloClient } from 'apolloClient'
-import Footer, { FooterLink } from 'components/Footer'
+import Footer from 'components/Footer'
 import Header from 'components/Header'
 import {
   Article,
@@ -93,20 +93,7 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
         </Article>
         <DarkRoom />
       </ArticleContext.Provider>
-      <Footer background="secondary">
-        <FooterLink colour="secondary" href="">
-          Vorig project
-        </FooterLink>
-        <FooterLink
-          colour="secondary"
-          href={`/services/${project.service.slug}`}
-        >
-          {project.callToAction}
-        </FooterLink>
-        <FooterLink colour="secondary" href="">
-          Volgend project
-        </FooterLink>
-      </Footer>
+      <Footer />
     </>
   )
 }

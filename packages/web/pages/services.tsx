@@ -1,5 +1,5 @@
 import { WithApolloClient } from 'apolloClient'
-import Footer, { FooterLink } from 'components/Footer'
+import Footer from 'components/Footer'
 import Header from 'components/Header'
 import List from 'components/List'
 import Section from 'components/Section'
@@ -50,20 +50,7 @@ const ServicesPage: NextPage<Props> = ({ data: { services } }) => {
           </Paragraph>
         </Section>
       </main>
-      <Footer>
-        <FooterLink colour="primary" href="/about">
-          Zie hier hoe JM in elkaar steekt
-        </FooterLink>
-        <FooterLink colour="primary" href="/portfolio">
-          Bekijk hier het portfolio
-        </FooterLink>
-        <FooterLink
-          colour="primary"
-          href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
-        >
-          Begin een gesprek
-        </FooterLink>
-      </Footer>
+      <Footer />
     </>
   )
 }

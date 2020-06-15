@@ -1,7 +1,7 @@
+import MediaQueryContext from 'components/MediaQueryContext'
 import { motion } from 'framer-motion'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import MediaQueryContext from 'components/MediaQueryContext'
 import DarkLogo from './logo-dark.svg'
 import LightLogo from './logo-light.svg'
 

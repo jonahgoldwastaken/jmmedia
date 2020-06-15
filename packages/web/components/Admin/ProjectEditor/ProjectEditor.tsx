@@ -1,4 +1,4 @@
-import Footer, { FooterLink } from 'components/Footer'
+import Footer, { DestkopFooterNavLink } from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Project/Article'
 import { FieldArray, useFormikContext } from 'formik'
 import { ProjectInput, useProjectServiceOptionsQuery } from 'generated/graphql'
@@ -54,15 +54,15 @@ export const ProjectEditor: React.FC<Props> = ({ onDelete, sideBarTitle }) => {
           <FieldArray name="content" component={Content} />
         </Article>
         <Footer>
-          <FooterLink colour="secondary" href="#">
+          <DestkopFooterNavLink colour="secondary" href="#">
             Vorig project
-          </FooterLink>
-          <FooterLink colour="secondary" href="#">
+          </DestkopFooterNavLink>
+          <DestkopFooterNavLink colour="secondary" href="#">
             {callToAction}
-          </FooterLink>
-          <FooterLink colour="secondary" href="#">
+          </DestkopFooterNavLink>
+          <DestkopFooterNavLink colour="secondary" href="#">
             Volgend project
-          </FooterLink>
+          </DestkopFooterNavLink>
         </Footer>
       </Sandbox>
     </Editor>

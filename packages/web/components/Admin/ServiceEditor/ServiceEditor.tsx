@@ -1,4 +1,4 @@
-import Footer, { FooterLink } from 'components/Footer'
+import Footer, { DestkopFooterNavLink } from 'components/Footer'
 import Image from 'components/Image'
 import Section from 'components/Section'
 import ServiceOptions from 'components/ServiceOptions'
@@ -80,9 +80,9 @@ export const ServiceEditor: React.FC<Props> = ({ onDelete, sideBarTitle }) => {
           </Section>
         </main>
         <Footer>
-          <FooterLink colour="secondary" href="#">
+          <DestkopFooterNavLink colour="secondary" href="#">
             {values.callToAction}
-          </FooterLink>
+          </DestkopFooterNavLink>
         </Footer>
       </Sandbox>
     </Editor>

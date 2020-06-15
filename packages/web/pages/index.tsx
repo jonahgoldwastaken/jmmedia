@@ -1,5 +1,5 @@
 import CoverImage from 'components/CoverImage'
-import Footer, { FooterLink } from 'components/Footer'
+import Footer from 'components/Footer'
 import Header from 'components/Header'
 import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
@@ -93,23 +93,7 @@ export default () => {
           </Paragraph>
         </Section>
       </main>
-      <Footer>
-        <FooterLink colour="primary" href="/services">
-          Bekijk het aanbod
-        </FooterLink>
-        <FooterLink colour="primary" href="/portfolio">
-          Zie wie je voor zijn geweest
-        </FooterLink>
-        <FooterLink colour="primary" href="/about">
-          Lees meer over JM
-        </FooterLink>
-        <FooterLink
-          colour="primary"
-          href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
-        >
-          Maak een babbeltje
-        </FooterLink>
-      </Footer>
+      <Footer />
     </>
   )
 }

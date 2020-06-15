@@ -1,8 +1,8 @@
 import { motion, Transition, Variants } from 'framer-motion'
+import { useMemo } from 'react'
+import { useInView } from 'react-intersection-observer'
 import styled, { css } from 'styled-components'
 import { animation } from 'theme/animation'
-import { useInView } from 'react-intersection-observer'
-import { useMemo } from 'react'
 
 type SectionProps = {
   grid?: boolean

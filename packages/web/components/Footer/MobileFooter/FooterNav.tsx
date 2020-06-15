@@ -4,11 +4,6 @@ import { FooterNavLink } from './Link'
 
 const StyledNav = styled.nav`
   display: block;
-  position: fixed !important;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
   padding: ${props => props.theme.spacing[1]};
   background: ${props => props.theme.colours.primary};
 
@@ -29,7 +24,7 @@ const StyledNav = styled.nav`
   }
 `
 
-export const FooterNav: React.FC = () => (
+export const MobileFooterNav: React.FC = () => (
   <StyledNav>
     <NavList>
       <FooterNavLink href="/">Home</FooterNavLink>
