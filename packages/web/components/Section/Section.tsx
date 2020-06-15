@@ -1,6 +1,8 @@
 import { motion, Transition, Variants } from 'framer-motion'
 import styled, { css } from 'styled-components'
 import { animation } from 'theme/animation'
+import { useInView } from 'react-intersection-observer'
+import { useMemo } from 'react'
 
 type SectionProps = {
   grid?: boolean
@@ -103,9 +105,18 @@ export const Section: React.FC<SectionContainerProps> = ({
   children,
   ...props
 }) => {
+  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0 })
+  const key = useMemo(() => Math.random(), [inView])
+
   return (
     <SectionContainer
-      variants={sectionContainerVariants}
+      key={key}
+      ref={ref}
+      variants={
+        inView
+          ? sectionContainerVariants
+          : { initial: sectionContainerVariants.initial }
+      }
       transition={sectionContainerTransition}
       initial="initial"
       animate="visible"
