@@ -1,14 +1,13 @@
-import { WithApolloClient } from 'apolloClient'
 import ServiceEditor from 'components/Admin/ServiceEditor'
 import { Formik } from 'formik'
 import { LoggedInUserDocument, useNewServiceMutation } from 'generated/graphql'
-import { withApollo } from 'libs/apollo'
+import { initializeApollo } from 'libs/apolloClient'
 import { NextPage, NextPageContext } from 'next'
-import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
+import Router, { NextRouter } from 'next/router'
 import Head from 'next/head'
 import { useEffect } from 'react'
 
-const NewServicePage: NextPage<WithRouterProps> = ({ router }) => {
+const NewServicePage: NextPage<{ router: NextRouter }> = ({ router }) => {
   const [mutation, { data }] = useNewServiceMutation()
 
   useEffect(() => {
@@ -38,11 +37,9 @@ const NewServicePage: NextPage<WithRouterProps> = ({ router }) => {
   )
 }
 
-NewServicePage.getInitialProps = async ({
-  res,
-  router,
-  apolloClient,
-}: WithApolloClient<NextPageContext & WithRouterProps>) => {
+NewServicePage.getInitialProps = async (ctx: NextPageContext) => {
+  const apolloClient = initializeApollo(ctx)
+  const { res } = ctx
   try {
     const {
       data: { currentUser },
@@ -51,17 +48,17 @@ NewServicePage.getInitialProps = async ({
     if (res && !currentUser) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-    } else if (!currentUser) router.push('/admin/login')
+    } else if (!currentUser) Router.push('/admin/login')
 
-    return { router }
+    return { router: Router }
   } catch {
     if (res) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-    } else router.push('/admin/login')
+    } else Router.push('/admin/login')
 
-    return { router }
+    return { router: Router }
   }
 }
 
-export default withApollo({ ssr: true })(withRouter(NewServicePage))
+export default NewServicePage

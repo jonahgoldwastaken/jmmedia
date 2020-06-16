@@ -1,67 +1,70 @@
-import { WithApolloClient } from 'apolloClient'
 import ProjectEditor from 'components/Admin/ProjectEditor'
 import { Formik } from 'formik'
 import {
   LoggedInUserDocument,
   ProjectInput,
+  ProjectToUpdateDocument,
+  ProjectToUpdateQuery,
+  ProjectToUpdateQueryVariables,
   useDeleteProjectMutation,
-  useProjectToUpdateQuery,
   useUpdateProjectMutation,
 } from 'generated/graphql'
-import { withApollo } from 'libs/apollo'
+import { initializeApollo } from 'libs/apolloClient'
 import { NextPage, NextPageContext } from 'next'
-import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
-import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect } from 'react'
 
-const EditProjectPage: NextPage<WithRouterProps> = ({ router }) => {
-  const {
-    query: { slug },
-  } = router
-  const { data, loading } = useProjectToUpdateQuery({
-    variables: { slug: slug as string },
-  })
+interface Props {
+  project?: ProjectToUpdateQuery['project']
+}
+
+const EditProjectPage: NextPage<Props> = ({ project }) => {
+  const router = useRouter()
   const [mutation, { data: updateResult }] = useUpdateProjectMutation()
   const [deleteProject, { data: deleteResult }] = useDeleteProjectMutation()
-  const [id, setId] = useState('')
 
   useEffect(() => {
-    if (data?.project) {
-      const { _id } = data.project
-      setId(_id)
-    }
-  }, [data])
+    if (!project) router.push('/admin')
+  }, [project])
 
   useEffect(() => {
     if (updateResult || deleteResult) router.push('/admin')
   }, [deleteResult, updateResult])
 
   const deleteHandler = useCallback(async () => {
-    deleteProject({ variables: { id } })
-  }, [id])
+    deleteProject({ variables: { id: project?._id as string } })
+  }, [project])
 
   return (
     <>
       <Head>
-        <title>{data?.project?.title || 'Project'} Bewerken - JM</title>
+        <title>{project?.title || 'Project'} Bewerken - JM</title>
       </Head>
       <Formik
-        onSubmit={project => mutation({ variables: { project, id } })}
+        onSubmit={projectToSend =>
+          mutation({
+            variables: { project: projectToSend, id: project?._id as string },
+          })
+        }
         initialValues={
           {
-            title: data?.project?.title || '',
-            slug: data?.project?.slug || '',
-            listImage: data?.project?.listImage || '',
-            service: data?.project?.service || '',
-            callToAction: data?.project?.callToAction || '',
-            content: data?.project?.content || [],
+            title: project?.title || '',
+            slug: project?.slug || '',
+            listImage: project?.listImage || '',
+            service: project?.service._id || '',
+            callToAction: project?.callToAction || '',
+            content:
+              project?.content.map(({ type, data }) => ({
+                type,
+                data,
+              })) || [],
           } as ProjectInput
         }
       >
         <ProjectEditor
-          sideBarTitle={
-            loading ? 'Project laden...' : `${data?.project?.title} Bewerken`
-          }
+          key={project?._id}
+          sideBarTitle={`${project?.title} Bewerken`}
           onDelete={deleteHandler}
         />
       </Formik>
@@ -69,11 +72,12 @@ const EditProjectPage: NextPage<WithRouterProps> = ({ router }) => {
   )
 }
 
-EditProjectPage.getInitialProps = async ({
-  res,
-  router,
-  apolloClient,
-}: WithApolloClient<NextPageContext & WithRouterProps>) => {
+EditProjectPage.getInitialProps = async (ctx: NextPageContext) => {
+  const apolloClient = initializeApollo(ctx)
+  const {
+    res,
+    query: { slug },
+  } = ctx
   try {
     const {
       data: { currentUser },
@@ -83,15 +87,25 @@ EditProjectPage.getInitialProps = async ({
     if (res && !currentUser) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-    } else if (!currentUser) router.push('/admin/login')
-    return { router }
+    } else if (!currentUser) document.location.pathname = '/admin/login'
+    else {
+      const result = await apolloClient.query<
+        ProjectToUpdateQuery,
+        ProjectToUpdateQueryVariables
+      >({
+        query: ProjectToUpdateDocument,
+        variables: { slug: slug as string },
+      })
+      return { project: result.data?.project }
+    }
+    return { project: null }
   } catch {
     if (res) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-    } else router.push('/admin/login')
-    return { router }
+    } else document.location.pathname = '/admin/login'
+    return { project: null }
   }
 }
 
-export default withApollo({ ssr: true })(withRouter(EditProjectPage))
+export default EditProjectPage

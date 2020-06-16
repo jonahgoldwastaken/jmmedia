@@ -12,6 +12,8 @@ import styledSanitize from 'styled-sanitize'
 import { darkTheme, lightTheme } from 'theme'
 import { breakpoints } from 'theme/breakpoints'
 import useMedia from 'use-media'
+import { ApolloProvider } from '@apollo/react-hooks'
+import { useApollo } from 'libs/apolloClient'
 
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
@@ -31,6 +33,7 @@ const handleAnimationCompletion = () => {
 const MyApp: NextPage<AppContext & AppInitialProps> = ({
   Component,
   pageProps,
+  ctx,
 }) => {
   const router = useRouter()
   const lightMode: boolean = useMedia('(prefers-color-scheme: light)')
@@ -48,13 +51,14 @@ const MyApp: NextPage<AppContext & AppInitialProps> = ({
     }),
     [lightMode, darkMode, prefersReducedMotion, isMobile]
   )
+  const apolloClient = useApollo(ctx, pageProps.initialApolloState)
 
   useEffect(() => {
     if (typeof window !== 'undefined') logPageViews()
   }, [])
 
   return (
-    <>
+    <ApolloProvider client={apolloClient}>
       <MediaQueryContext.Provider value={MediaQueryContextValue}>
         <ThemeProvider
           theme={() => {
@@ -76,7 +80,7 @@ const MyApp: NextPage<AppContext & AppInitialProps> = ({
         type="text/css"
         href="https://use.typekit.net/shv4sja.css"
       />
-    </>
+    </ApolloProvider>
   )
 }
 

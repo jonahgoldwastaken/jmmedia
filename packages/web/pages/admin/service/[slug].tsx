@@ -1,65 +1,63 @@
-import { WithApolloClient } from 'apolloClient'
 import ServiceEditor from 'components/Admin/ServiceEditor'
 import { Formik } from 'formik'
 import {
   LoggedInUserDocument,
+  ServiceToUpdateDocument,
+  ServiceToUpdateQuery,
+  ServiceToUpdateQueryVariables,
   useDeleteServiceMutation,
-  useServiceToUpdateQuery,
   useUpdateServiceMutation,
 } from 'generated/graphql'
-import { withApollo } from 'libs/apollo'
-import { NextPage, NextPageContext } from 'next'
-import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
+import { initializeApollo } from 'libs/apolloClient'
+import { NextPage } from 'next'
 import Head from 'next/head'
-import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect } from 'react'
 
-const EditServicePage: NextPage<WithRouterProps> = ({ router }) => {
-  const {
-    query: { slug },
-  } = router
-  const { data, loading } = useServiceToUpdateQuery({
-    variables: { slug: slug as string },
-  })
+interface Props {
+  service?: ServiceToUpdateQuery['service']
+}
+
+const EditServicePage: NextPage<Props> = ({ service }) => {
+  const router = useRouter()
   const [mutation, { data: updateResult }] = useUpdateServiceMutation()
   const [deleteService, { data: deleteResult }] = useDeleteServiceMutation()
-  const [id, setId] = useState('')
 
   useEffect(() => {
-    if (data?.service) {
-      const { _id } = data.service
-      setId(_id)
-    }
-  }, [data])
+    if (!service) router.push('/admin')
+  }, [service])
 
   useEffect(() => {
     if (updateResult || deleteResult) router.push('/admin')
   }, [deleteResult, updateResult])
 
   const deleteHandler = useCallback(async () => {
-    deleteService({ variables: { id } })
-  }, [id])
+    deleteService({ variables: { id: service?._id as string } })
+  }, [service])
 
   return (
     <>
       <Head>
-        <title>{data?.service?.name || 'Service'} bewerken - JM</title>
+        <title>{service?.name || 'Service'} bewerken - JM</title>
       </Head>
       <Formik
         initialValues={{
-          name: data?.service?.name || '',
-          slug: data?.service?.slug || '',
-          listImage: data?.service?.listImage || '',
-          description: data?.service?.description || [],
-          baseOptions: data?.service?.description || [],
-          additionalOptions: data?.service?.additionalOptions || [],
-          callToAction: data?.service?.callToAction || '',
+          name: service?.name || '',
+          slug: service?.slug || '',
+          listImage: service?.listImage || '',
+          description: service?.description || [],
+          baseOptions: service?.description || [],
+          additionalOptions: service?.additionalOptions || [],
+          callToAction: service?.callToAction || '',
         }}
-        onSubmit={service => mutation({ variables: { service, id } })}
+        onSubmit={serviceToSend =>
+          mutation({
+            variables: { service: serviceToSend, id: service?._id as string },
+          })
+        }
       >
         <ServiceEditor
-          sideBarTitle={
-            loading ? 'Service laden...' : `${data?.service?.name} Bewerken`
-          }
+          sideBarTitle={`${service?.name} Bewerken`}
           onDelete={deleteHandler}
         />
       </Formik>
@@ -67,11 +65,12 @@ const EditServicePage: NextPage<WithRouterProps> = ({ router }) => {
   )
 }
 
-EditServicePage.getInitialProps = async ({
-  res,
-  router,
-  apolloClient,
-}: WithApolloClient<NextPageContext & WithRouterProps>) => {
+EditServicePage.getInitialProps = async ctx => {
+  const apolloClient = initializeApollo(ctx)
+  const {
+    res,
+    query: { slug },
+  } = ctx
   try {
     const {
       data: { currentUser },
@@ -80,17 +79,26 @@ EditServicePage.getInitialProps = async ({
     if (res && !currentUser) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-    } else if (!currentUser) router.push('/admin/login')
-
-    return { router }
+    } else if (!currentUser) document.location.pathname = '/admin/login'
+    else {
+      const result = await apolloClient.query<
+        ServiceToUpdateQuery,
+        ServiceToUpdateQueryVariables
+      >({
+        query: ServiceToUpdateDocument,
+        variables: { slug: slug as string },
+      })
+      return { service: result.data?.service }
+    }
+    return { service: null }
   } catch {
     if (res) {
       res.writeHead(302, { Location: '/admin/login' })
       res.end()
-    } else router.push('/admin/login')
+    } else document.location.pathname = '/admin/login'
 
-    return { router }
+    return { service: null }
   }
 }
 
-export default withApollo({ ssr: true })(withRouter(EditServicePage))
+export default EditServicePage

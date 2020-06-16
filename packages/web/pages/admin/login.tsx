@@ -3,11 +3,11 @@ import Header from 'components/Header'
 import { HeadingOne } from 'components/Text/Headings'
 import { Field, Formik } from 'formik'
 import { useLoggedInUserQuery, useLoginUserMutation } from 'generated/graphql'
-import { withApollo } from 'libs/apollo'
 import { NextPage } from 'next'
 import { useCookie } from 'next-cookie'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import Section from 'components/Section'
 
 const Login: NextPage = () => {
   const cookie = useCookie()
@@ -18,6 +18,7 @@ const Login: NextPage = () => {
   useEffect(() => {
     if (data) {
       cookie.set('auth-token', data.loginUser, { path: '/' })
+      console.log(data)
       router.push('/admin')
     }
   }, [data])
@@ -29,34 +30,38 @@ const Login: NextPage = () => {
   return (
     <>
       <Header />
-      <HeadingOne centre>Inloggen</HeadingOne>
-      <Formik
-        initialValues={{ username: '', password: '' }}
-        onSubmit={user => mutation({ variables: { user } })}
-      >
-        {({ handleSubmit, handleReset }) => (
-          <Form onSubmit={handleSubmit} onReset={handleReset}>
-            <Field
-              type="text"
-              label="Gebruikersnaam"
-              placeholder="Jonah"
-              name="username"
-              as={Input}
-            />
-            <Field
-              type="password"
-              placeholder="Een super geheim wachtwoord"
-              label="Wachtwoord"
-              name="password"
-              as={Input}
-            />
-            <Button>{loading ? 'Bezig...' : 'Inloggen'}</Button>
-          </Form>
-        )}
-      </Formik>
+      <Section background="primary">
+        <HeadingOne centre>Inloggen</HeadingOne>
+      </Section>
+      <Section background="primary">
+        <Formik
+          initialValues={{ username: '', password: '' }}
+          onSubmit={user => mutation({ variables: { user } })}
+        >
+          {({ handleSubmit, handleReset }) => (
+            <Form onSubmit={handleSubmit} onReset={handleReset}>
+              <Field
+                type="text"
+                label="Gebruikersnaam"
+                placeholder="Jonah"
+                name="username"
+                as={Input}
+              />
+              <Field
+                type="password"
+                placeholder="Een super geheim wachtwoord"
+                label="Wachtwoord"
+                name="password"
+                as={Input}
+              />
+              <Button>{loading ? 'Bezig...' : 'Inloggen'}</Button>
+            </Form>
+          )}
+        </Formik>
+      </Section>
       {error && <pre>{JSON.stringify(error)}</pre>}
     </>
   )
 }
 
-export default withApollo({ ssr: true })(Login)
+export default Login

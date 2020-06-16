@@ -1,4 +1,3 @@
-import { WithApolloClient } from 'apolloClient'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import List from 'components/List'
@@ -10,8 +9,8 @@ import {
   ServicesQuery,
   ServicesQueryVariables,
 } from 'generated/graphql'
-import { withApollo } from 'libs/apollo'
-import { NextPage, NextPageContext } from 'next'
+import { initializeApollo } from 'libs/apolloClient'
+import { NextPage } from 'next'
 import Head from 'next/head'
 
 type Props = {
@@ -55,9 +54,8 @@ const ServicesPage: NextPage<Props> = ({ data: { services } }) => {
   )
 }
 
-ServicesPage.getInitialProps = async ({
-  apolloClient,
-}: WithApolloClient<NextPageContext>) => {
+ServicesPage.getInitialProps = async ctx => {
+  const apolloClient = initializeApollo(ctx)
   const result = await apolloClient.query<
     ServicesQuery,
     ServicesQueryVariables
@@ -66,4 +64,4 @@ ServicesPage.getInitialProps = async ({
   return { data: result.data }
 }
 
-export default withApollo({ ssr: true })(ServicesPage)
+export default ServicesPage

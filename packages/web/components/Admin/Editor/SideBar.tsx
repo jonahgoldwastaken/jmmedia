@@ -21,7 +21,7 @@ type SideBarProps = {
 }
 
 const SideBarContainer = styled.div`
-  height: ${props => props.theme.heights[4]};
+  height: 100vh;
   background: ${props => props.theme.colours.tertiary};
   padding: 0 ${props => `${props.theme.spacing[2]} ${props.theme.spacing[2]}`};
   border-right: calc(${props => props.theme.spacing[0]}) solid

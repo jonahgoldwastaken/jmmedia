@@ -1,9 +1,10 @@
-import Footer, { DestkopFooterNavLink } from 'components/Footer'
+import Footer from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Project/Article'
 import { FieldArray, useFormikContext } from 'formik'
 import { ProjectInput, useProjectServiceOptionsQuery } from 'generated/graphql'
 import Editor, { Sandbox, SideBar } from '../Editor'
 import Content from './Content'
+import CTA from 'components/CTA'
 
 type Props = {
   sideBarTitle?: string
@@ -52,18 +53,11 @@ export const ProjectEditor: React.FC<Props> = ({ onDelete, sideBarTitle }) => {
         <Article>
           <ArticleTitle>{title || 'Titel'}</ArticleTitle>
           <FieldArray name="content" component={Content} />
-        </Article>
-        <Footer>
-          <DestkopFooterNavLink colour="secondary" href="#">
-            Vorig project
-          </DestkopFooterNavLink>
-          <DestkopFooterNavLink colour="secondary" href="#">
+          <CTA centre href="#">
             {callToAction}
-          </DestkopFooterNavLink>
-          <DestkopFooterNavLink colour="secondary" href="#">
-            Volgend project
-          </DestkopFooterNavLink>
-        </Footer>
+          </CTA>
+        </Article>
+        <Footer />
       </Sandbox>
     </Editor>
   )

@@ -1,6 +1,6 @@
+import gql from 'graphql-tag'
 import * as ApolloReactCommon from '@apollo/react-common'
 import * as ApolloReactHooks from '@apollo/react-hooks'
-import gql from 'graphql-tag'
 export type Maybe<T> = T | null
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -197,6 +197,18 @@ export type AdminPanelQuery = { __typename?: 'Query' } & {
       'listImage' | 'name' | 'slug' | '_id'
     >
   >
+}
+
+export type FooterServicesQueryVariables = {}
+
+export type FooterServicesQuery = { __typename?: 'Query' } & {
+  services: Array<{ __typename?: 'Service' } & Pick<Service, 'name' | 'slug'>>
+}
+
+export type FooterProjectsQueryVariables = {}
+
+export type FooterProjectsQuery = { __typename?: 'Query' } & {
+  projects: Array<{ __typename?: 'Project' } & Pick<Project, 'title' | 'slug'>>
 }
 
 export type ImageUploadMutationVariables = {
@@ -440,6 +452,118 @@ export type AdminPanelLazyQueryHookResult = ReturnType<
 export type AdminPanelQueryResult = ApolloReactCommon.QueryResult<
   AdminPanelQuery,
   AdminPanelQueryVariables
+>
+export const FooterServicesDocument = gql`
+  query footerServices {
+    services {
+      name
+      slug
+    }
+  }
+`
+
+/**
+ * __useFooterServicesQuery__
+ *
+ * To run a query within a React component, call `useFooterServicesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFooterServicesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFooterServicesQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFooterServicesQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    FooterServicesQuery,
+    FooterServicesQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    FooterServicesQuery,
+    FooterServicesQueryVariables
+  >(FooterServicesDocument, baseOptions)
+}
+export function useFooterServicesLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    FooterServicesQuery,
+    FooterServicesQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    FooterServicesQuery,
+    FooterServicesQueryVariables
+  >(FooterServicesDocument, baseOptions)
+}
+export type FooterServicesQueryHookResult = ReturnType<
+  typeof useFooterServicesQuery
+>
+export type FooterServicesLazyQueryHookResult = ReturnType<
+  typeof useFooterServicesLazyQuery
+>
+export type FooterServicesQueryResult = ApolloReactCommon.QueryResult<
+  FooterServicesQuery,
+  FooterServicesQueryVariables
+>
+export const FooterProjectsDocument = gql`
+  query footerProjects {
+    projects {
+      title
+      slug
+    }
+  }
+`
+
+/**
+ * __useFooterProjectsQuery__
+ *
+ * To run a query within a React component, call `useFooterProjectsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFooterProjectsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFooterProjectsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useFooterProjectsQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    FooterProjectsQuery,
+    FooterProjectsQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    FooterProjectsQuery,
+    FooterProjectsQueryVariables
+  >(FooterProjectsDocument, baseOptions)
+}
+export function useFooterProjectsLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    FooterProjectsQuery,
+    FooterProjectsQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    FooterProjectsQuery,
+    FooterProjectsQueryVariables
+  >(FooterProjectsDocument, baseOptions)
+}
+export type FooterProjectsQueryHookResult = ReturnType<
+  typeof useFooterProjectsQuery
+>
+export type FooterProjectsLazyQueryHookResult = ReturnType<
+  typeof useFooterProjectsLazyQuery
+>
+export type FooterProjectsQueryResult = ApolloReactCommon.QueryResult<
+  FooterProjectsQuery,
+  FooterProjectsQueryVariables
 >
 export const ImageUploadDocument = gql`
   mutation imageUpload($imageFile: Upload!) {

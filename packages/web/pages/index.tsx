@@ -5,8 +5,9 @@ import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
 import Head from 'next/head'
+import { NextPage } from 'next'
 
-export default () => {
+const Index: NextPage = () => {
   return (
     <>
       <Head>
@@ -97,3 +98,5 @@ export default () => {
     </>
   )
 }
+
+export default Index

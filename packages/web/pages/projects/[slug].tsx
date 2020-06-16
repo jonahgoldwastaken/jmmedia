@@ -1,5 +1,5 @@
 import { ApolloQueryResult } from 'apollo-client'
-import { WithApolloClient } from 'apolloClient'
+import CTA from 'components/CTA'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import {
@@ -19,7 +19,7 @@ import {
   ProjectQueryVariables,
 } from 'generated/graphql'
 import { imageValue, rowValue } from 'interfaces/Project'
-import { withApollo } from 'libs/apollo'
+import { initializeApollo } from 'libs/apolloClient'
 import { NextPage, NextPageContext } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
@@ -90,6 +90,13 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
               )
             } else return <ArticleVideo key={_id} id={data} />
           })}
+          <CTA
+            centre
+            href="/services/[slug]"
+            as={`/services/${project.service.slug}`}
+          >
+            {project.callToAction}
+          </CTA>
         </Article>
         <DarkRoom />
       </ArticleContext.Provider>
@@ -98,12 +105,11 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
   )
 }
 
-ProjectPage.getInitialProps = async (
-  ctx: WithApolloClient<NextPageContext>
-) => {
+ProjectPage.getInitialProps = async (ctx: NextPageContext) => {
+  const apolloClient = initializeApollo(ctx)
   const slug = ctx.query.slug as string
   try {
-    const result = await ctx.apolloClient.query<
+    const result = await apolloClient.query<
       ProjectQuery,
       ProjectQueryVariables
     >({
@@ -116,4 +122,4 @@ ProjectPage.getInitialProps = async (
   }
 }
 
-export default withApollo({ ssr: true })(ProjectPage)
+export default ProjectPage

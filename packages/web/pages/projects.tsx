@@ -9,21 +9,34 @@ import {
 import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
 import { HeadingOne } from 'components/Text/Headings'
-import { useProjectsQuery } from 'generated/graphql'
-import { withApollo } from 'libs/apollo'
+import {
+  ProjectsQuery,
+  ProjectsQueryVariables,
+  ProjectsDocument,
+  useProjectsLazyQuery,
+} from 'generated/graphql'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
+import { initializeApollo } from 'libs/apolloClient'
 
-type Props = {}
+type Props = { data: ProjectsQuery }
 
-const Portfolio: NextPage<Props> = () => {
-  const { data, refetch, called } = useProjectsQuery()
+const Portfolio: NextPage<Props> = ({ data: ssrData }) => {
+  const [projects, setProjects] = useState<ProjectsQuery['projects']>(
+    ssrData.projects
+  )
+  const [query, { called, data: clientData, refetch }] = useProjectsLazyQuery()
   const [filter, setFilter] = useState<string>('')
 
   useEffect(() => {
     if (called) refetch({ service: filter })
+    else query({ variables: { service: filter } })
   }, [filter])
+
+  useEffect(() => {
+    if (clientData) setProjects(clientData.projects)
+  }, [clientData])
 
   return (
     <>
@@ -40,9 +53,9 @@ const Portfolio: NextPage<Props> = () => {
               <HeadingOne noMargin>Portfolio</HeadingOne>
               <ProjectListFilter />
             </ProjectListHeader>
-            {data ? (
+            {projects ? (
               <List
-                items={data.projects.map(project => ({
+                items={projects.map(project => ({
                   name: project.title,
                   slug: project.slug,
                   listImage: project.listImage,
@@ -63,4 +76,14 @@ const Portfolio: NextPage<Props> = () => {
   )
 }
 
-export default withApollo({ ssr: true })(Portfolio)
+Portfolio.getInitialProps = async ctx => {
+  const apolloClient = initializeApollo(ctx)
+  const result = await apolloClient.query<
+    ProjectsQuery,
+    ProjectsQueryVariables
+  >({ query: ProjectsDocument })
+
+  return { data: result.data }
+}
+
+export default Portfolio

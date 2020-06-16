@@ -1,11 +1,10 @@
-import { WithApolloClient } from 'apolloClient'
 import { Button } from 'components/Form'
 import Header from 'components/Header'
 import List from 'components/List'
 import Section from 'components/Section'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
 import { LoggedInUserDocument, useAdminPanelQuery } from 'generated/graphql'
-import { withApollo } from 'libs/apollo'
+import { initializeApollo } from 'libs/apolloClient'
 import { NextPage, NextPageContext } from 'next'
 import { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
@@ -72,11 +71,9 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
   )
 }
 
-AdminPanel.getInitialProps = async ({
-  res,
-  router,
-  apolloClient,
-}: WithApolloClient<NextPageContext & WithRouterProps>) => {
+AdminPanel.getInitialProps = async (ctx: NextPageContext & WithRouterProps) => {
+  const apolloClient = initializeApollo(ctx)
+  const { res, router } = ctx
   try {
     const {
       data: { currentUser },
@@ -98,4 +95,4 @@ AdminPanel.getInitialProps = async ({
   }
 }
 
-export default withApollo({ ssr: true })(withRouter(AdminPanel))
+export default withRouter(AdminPanel)

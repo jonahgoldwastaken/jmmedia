@@ -3,7 +3,10 @@ import { useMemo } from 'react'
 import { useInView } from 'react-intersection-observer'
 import styled from 'styled-components'
 import { animation } from 'theme/animation'
-import { DesktopFooterNav } from './FooterNav'
+import { DesktopFooterContact } from './Contact'
+import { DesktopFooterNav } from './Nav'
+import { DesktopFooterProjects } from './Projects'
+import { DesktopFooterServices } from './Services'
 
 const StyledDiv = motion.custom(styled.div`
   width: 100%;
@@ -33,6 +36,8 @@ const StyledFooter = styled.footer`
   margin: 0 auto;
   z-index: 10;
   padding: ${({ theme }) => `${theme.spacing[2]} ${theme.spacing[1]}`};
+  display: flex;
+  flex-direction: row;
 
   @media screen and (min-width: ${props => props.theme.breakpoints[3]}) {
     max-width: 96rem;
@@ -55,6 +60,9 @@ export const DesktopFooter: React.FC = () => {
     >
       <StyledFooter>
         <DesktopFooterNav />
+        <DesktopFooterServices />
+        <DesktopFooterProjects />
+        <DesktopFooterContact />
       </StyledFooter>
     </StyledDiv>
   )

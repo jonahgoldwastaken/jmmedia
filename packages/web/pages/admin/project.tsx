@@ -1,4 +1,3 @@
-import { WithApolloClient } from 'apolloClient'
 import ProjectEditor from 'components/Admin/ProjectEditor'
 import { Formik } from 'formik'
 import {
@@ -6,7 +5,7 @@ import {
   ProjectInput,
   useNewProjectMutation,
 } from 'generated/graphql'
-import { withApollo } from 'libs/apollo'
+import { initializeApollo } from 'libs/apolloClient'
 import { NextPage, NextPageContext } from 'next'
 import withRouter, { WithRouterProps } from 'next/dist/client/with-router'
 import Head from 'next/head'
@@ -48,11 +47,11 @@ const NewProjectPage: NextPage<WithRouterProps> = ({ router }) => {
   )
 }
 
-NewProjectPage.getInitialProps = async ({
-  res,
-  router,
-  apolloClient,
-}: WithApolloClient<NextPageContext & WithRouterProps>) => {
+NewProjectPage.getInitialProps = async (
+  ctx: NextPageContext & WithRouterProps
+) => {
+  const apolloClient = initializeApollo(ctx)
+  const { router, res } = ctx
   try {
     const {
       data: { currentUser },
@@ -74,4 +73,4 @@ NewProjectPage.getInitialProps = async ({
   }
 }
 
-export default withApollo({ ssr: true })(withRouter(NewProjectPage))
+export default withRouter(NewProjectPage)

@@ -1,0 +1,13 @@
+query footerServices {
+  services {
+    name
+    slug
+  }
+}
+
+query footerProjects {
+  projects {
+    title
+    slug
+  }
+}
