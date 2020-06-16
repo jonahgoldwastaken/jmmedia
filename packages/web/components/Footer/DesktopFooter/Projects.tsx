@@ -1,11 +1,20 @@
-import { useFooterProjectsQuery } from 'generated/graphql'
+import { useFooterProjectsLazyQuery } from 'generated/graphql'
 import Link from 'next/link'
 import { DesktopFooterContainer } from './Container'
 import { DesktopFooterHeading } from './Heading'
 import { DesktopFooterList, DesktopFooterListItem } from './List'
+import { useEffect } from 'react'
 
-export const DesktopFooterProjects: React.FC = () => {
-  const { data, loading } = useFooterProjectsQuery()
+interface Props {
+  inView: boolean
+}
+
+export const DesktopFooterProjects: React.FC<Props> = ({ inView }) => {
+  const [query, { data, loading, called }] = useFooterProjectsLazyQuery()
+
+  useEffect(() => {
+    if (inView && !called) query()
+  }, [inView])
 
   return (
     <DesktopFooterContainer>
@@ -14,7 +23,7 @@ export const DesktopFooterProjects: React.FC = () => {
       </DesktopFooterHeading>
       <DesktopFooterList>
         {data?.projects.map(({ title, slug }) => (
-          <DesktopFooterListItem>
+          <DesktopFooterListItem key={slug}>
             <Link
               href="/projects/[slug]"
               as={`/projects/${slug}`}

@@ -1,14 +1,20 @@
 import { motion, Transition, Variants } from 'framer-motion'
 import { useMemo } from 'react'
 import { useInView } from 'react-intersection-observer'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { animation } from 'theme/animation'
 import { DesktopFooterContact } from './Contact'
 import { DesktopFooterNav } from './Nav'
 import { DesktopFooterProjects } from './Projects'
 import { DesktopFooterServices } from './Services'
+import { stripUnit } from 'polished'
+import getDocumentFontSize from 'libs/documentFontSize'
 
 const StyledDiv = motion.custom(styled.div`
+  position: sticky;
+  top: 100vh;
+  left: 0;
+
   width: 100%;
   background: ${({ theme }) => theme.colours.primary};
 `)
@@ -45,7 +51,12 @@ const StyledFooter = styled.footer`
 `
 
 export const DesktopFooter: React.FC = () => {
-  const [ref, inView] = useInView({ triggerOnce: true })
+  const theme = useTheme()
+  const [ref, inView] = useInView({
+    triggerOnce: true,
+    threshold: 0,
+    rootMargin: `${stripUnit(theme.heights[2]) * getDocumentFontSize()}px`,
+  })
   const key = useMemo(() => Math.random(), [inView])
 
   return (
@@ -60,8 +71,8 @@ export const DesktopFooter: React.FC = () => {
     >
       <StyledFooter>
         <DesktopFooterNav />
-        <DesktopFooterServices />
-        <DesktopFooterProjects />
+        <DesktopFooterServices inView={inView} />
+        <DesktopFooterProjects inView={inView} />
         <DesktopFooterContact />
       </StyledFooter>
     </StyledDiv>

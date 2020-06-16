@@ -18,7 +18,9 @@ import { useApollo } from 'libs/apolloClient'
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
   ${styledSanitize};
-  body {
+  body, #__next {
+    min-height: 100vh;
+    height: 100%;
     background: ${({ theme }) => theme.colours.tertiary};
     @media screen and (max-width: ${darkTheme.breakpoints[1]}) {
     margin-bottom: 3.875rem;
