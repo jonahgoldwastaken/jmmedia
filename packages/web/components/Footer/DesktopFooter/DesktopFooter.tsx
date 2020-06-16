@@ -1,5 +1,6 @@
 import { motion, Transition, Variants } from 'framer-motion'
-import { useMemo } from 'react'
+import getDocumentFontSize from 'libs/documentFontSize'
+import { stripUnit } from 'polished'
 import { useInView } from 'react-intersection-observer'
 import styled, { useTheme } from 'styled-components'
 import { animation } from 'theme/animation'
@@ -7,8 +8,6 @@ import { DesktopFooterContact } from './Contact'
 import { DesktopFooterNav } from './Nav'
 import { DesktopFooterProjects } from './Projects'
 import { DesktopFooterServices } from './Services'
-import { stripUnit } from 'polished'
-import getDocumentFontSize from 'libs/documentFontSize'
 
 const StyledDiv = motion.custom(styled.div`
   position: sticky;
@@ -57,12 +56,11 @@ export const DesktopFooter: React.FC = () => {
     threshold: 0,
     rootMargin: `${stripUnit(theme.heights[2]) * getDocumentFontSize()}px`,
   })
-  const key = useMemo(() => Math.random(), [inView])
 
   return (
     <StyledDiv
       ref={ref}
-      key={key}
+      key={inView ? 'inViewFooter' : 'outOfViewFooter'}
       variants={inView ? footerVariants : { initial: footerVariants.initial }}
       transition={footerTransition}
       initial="initial"

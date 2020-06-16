@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const DesktopFooterServices: React.FC<Props> = ({ inView }) => {
-  const [query, { data, loading, called }] = useFooterServicesLazyQuery()
+  const [query, { data, called }] = useFooterServicesLazyQuery()
 
   useEffect(() => {
     if (inView && !called) query()
@@ -18,9 +18,7 @@ export const DesktopFooterServices: React.FC<Props> = ({ inView }) => {
 
   return (
     <DesktopFooterContainer>
-      <DesktopFooterHeading>
-        {loading ? 'Laden...' : 'Services'}
-      </DesktopFooterHeading>
+      <DesktopFooterHeading>Services</DesktopFooterHeading>
       <DesktopFooterList>
         {data?.services.map(({ name, slug }) => (
           <DesktopFooterListItem key={slug}>
