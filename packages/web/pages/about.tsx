@@ -20,7 +20,7 @@ export default () => {
         <Section grid background="secondary">
           <Image
             animation
-            src="/jonah.jpeg"
+            src="/jonah.jpg"
             alt="Foto van Jonah, gemaakt door Evelyn Cardoso"
           />
           <div>
