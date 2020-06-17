@@ -22,7 +22,7 @@ const Index: NextPage = () => {
         <Section background="secondary">
           <CoverImage
             colour="orange"
-            src="https://unsplash.com/photos/oSvR0wGYUBs/download"
+            src="/evenement.jpg"
             transform={[
               {
                 left: 66,
@@ -33,12 +33,12 @@ const Index: NextPage = () => {
               },
             ]}
           >
-            Jouw nieuwe unieke product die de markt door gaat breken.
+            Een ervaring die je op elk moment terug wilt kijken.
           </CoverImage>
           <CoverImage
             colour="grey"
             width={[405, 607.5]}
-            src="https://unsplash.com/photos/ZODcBkEohk8/download"
+            src="/productfoto.jpg"
             transform={[
               {
                 top: 82.5,
@@ -50,12 +50,12 @@ const Index: NextPage = () => {
               },
             ]}
           >
-            Een ervaring die je op elk moment terug wilt kijken.
+            Jouw nieuwe unieke product die de markt door gaat breken.
           </CoverImage>
           <CoverImage
             colour="grey"
             width={[360, 540]}
-            src="/evenement.jpg"
+            src="/gebeurtenis.jpg"
             transform={[
               {
                 top: 90,
@@ -72,7 +72,7 @@ const Index: NextPage = () => {
           <CoverImage
             colour="orange"
             width={[270, 337.5]}
-            src="https://unsplash.com/photos/wynMU8psYo4/download"
+            src="/profielfoto.jpg"
             transform={[
               {
                 top: 62,

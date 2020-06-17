@@ -168,7 +168,7 @@ export const CoverImage: React.FC<CoverImageProps> = ({
       style={{ rotate: deg }}
       {...props}
     >
-      <StyledImage src={src} />
+      <StyledImage animation src={src} />
       <Text variants={textVariants} colour={props.colour}>
         {children}
       </Text>

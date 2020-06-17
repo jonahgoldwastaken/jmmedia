@@ -49,10 +49,10 @@ const ImageQuote = styled.q`
 
 const imageVariants: Variants = {
   initial: {
-    clipPath: 'inset(100% 0% 0% 0%)',
+    opacity: 0,
   },
   loaded: {
-    clipPath: 'inset(0% 0% 0% 0%)',
+    opacity: 1,
     transition: {
       ease: animation.curve,
       duration: animation.timing[1],
@@ -84,6 +84,7 @@ export const Image: React.FC<ImageProps> = ({
 
   return (
     <Container
+      key={animation ? 'animatedImage' + src : 'nonAnimatedImage' + src}
       variants={animation ? imageVariants : {}}
       animate={controls}
       {...props}
