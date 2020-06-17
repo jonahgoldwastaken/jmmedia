@@ -38,7 +38,6 @@ const MyApp: NextPage<AppContext & AppInitialProps> = ({
   ctx,
 }) => {
   const router = useRouter()
-  const lightMode: boolean = useMedia('(prefers-color-scheme: light)')
   const darkMode: boolean = useMedia('(prefers-color-scheme: dark)')
   const prefersReducedMotion: boolean = useMedia(
     '(prefers-reduced-motion: reduce)'
@@ -47,11 +46,10 @@ const MyApp: NextPage<AppContext & AppInitialProps> = ({
   const MediaQueryContextValue = useMemo<MediaQueryContext>(
     () => ({
       darkMode,
-      lightMode,
       prefersReducedMotion,
       isMobile,
     }),
-    [lightMode, darkMode, prefersReducedMotion, isMobile]
+    [darkMode, prefersReducedMotion, isMobile]
   )
   const apolloClient = useApollo(ctx, pageProps.initialApolloState)
 
