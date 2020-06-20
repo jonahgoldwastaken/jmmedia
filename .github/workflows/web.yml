@@ -42,6 +42,9 @@ jobs:
       run: yarn build:web
       env:
         NEXT_PUBLIC_SERVER_URL: /api/
+        
+    - name: Yarn Prod Install
+      run: yarn install --force --frozen-lockfile --prod
 
     - name: Upload build
       uses: Burnett01/rsync-deployments@4.0
@@ -51,6 +54,16 @@ jobs:
         remote_user: ${{secrets.DEPLOY_USER}}
         remote_path: ${{secrets.WEB_PATH}}
         switches: -avzr --delete --exclude '.git*' --exclude 'tsconfig.json' --exclude '.vscode' --exclude '**/tsconfig.json' --exclude '.prettierrc' --exclude '**/.git*'
+        remote_key: ${{secrets.PRIVATE_KEY}}
+        
+    - name: Upload Prod Packages
+      uses: Brunett01/rsync-deployment@4.0
+      with:
+        path: node_modules/
+        remote_host: ${{secrets.DEPLOY_URL}}
+        remote_user: ${{secrets.DEPLOY_USER}}
+        remote_path: ${{secrets.WEB_PATH}}node_modules/
+        switches: -avzr --delete
         remote_key: ${{secrets.PRIVATE_KEY}}
 
     - name: Run SSH command
