@@ -22,7 +22,9 @@ function createApolloClient(ctx?: NextPageContext) {
 
   const link = createUploadLink({
     uri: process.env.NEXT_PUBLIC_SERVER_URL
-      ? `${ctx?.req?.headers.host ?? ''}${process.env.NEXT_PUBLIC_SERVER_URL}`
+      ? `${ctx?.req?.headers.host ? `https://${ctx?.req?.headers.host}` : ''}${
+          process.env.NEXT_PUBLIC_SERVER_URL
+        }`
       : 'http://localhost:4000/api/',
     fetch: enhancedFetch,
   })
