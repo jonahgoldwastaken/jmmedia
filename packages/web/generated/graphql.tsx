@@ -11,6 +11,8 @@ export type Scalars = {
   Float: number
   /** The `Upload` scalar type represents a file upload. */
   Upload: any
+  /** A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/. */
+  EmailAddress: any
 }
 
 export type Query = {
@@ -105,6 +107,8 @@ export type Mutation = {
   deleteProject: Scalars['Boolean']
   loginUser?: Maybe<Scalars['String']>
   registerUser?: Maybe<User>
+  /** Submit a contact form */
+  submitRequest: Scalars['String']
 }
 
 export type MutationUploadImageArgs = {
@@ -153,6 +157,10 @@ export type MutationRegisterUserArgs = {
   user: UserInput
 }
 
+export type MutationSubmitRequestArgs = {
+  request: ServiceRequestInput
+}
+
 export type ServiceInput = {
   name: Scalars['String']
   slug: Scalars['String']
@@ -180,6 +188,14 @@ export type ContentInput = {
 export type UserInput = {
   username: Scalars['String']
   password: Scalars['String']
+}
+
+/** The Service Request Model */
+export type ServiceRequestInput = {
+  email: Scalars['EmailAddress']
+  subject: Scalars['String']
+  service: Scalars['String']
+  message: Scalars['String']
 }
 
 export type AdminPanelQueryVariables = {}
@@ -282,12 +298,6 @@ export type ProjectToUpdateQuery = { __typename?: 'Query' } & {
   >
 }
 
-export type ProjectServiceOptionsQueryVariables = {}
-
-export type ProjectServiceOptionsQuery = { __typename?: 'Query' } & {
-  services: Array<{ __typename?: 'Service' } & Pick<Service, 'name' | '_id'>>
-}
-
 export type ProjectsQueryVariables = {
   service?: Maybe<Scalars['String']>
 }
@@ -312,6 +322,15 @@ export type ProjectQuery = { __typename?: 'Query' } & {
       }
   >
 }
+
+export type RequestServiceMutationVariables = {
+  request: ServiceRequestInput
+}
+
+export type RequestServiceMutation = { __typename?: 'Mutation' } & Pick<
+  Mutation,
+  'submitRequest'
+>
 
 export type NewServiceMutationVariables = {
   service: ServiceInput
@@ -383,6 +402,12 @@ export type ServiceQuery = { __typename?: 'Query' } & {
       | 'callToAction'
     >
   >
+}
+
+export type ServiceSelectQueryVariables = {}
+
+export type ServiceSelectQuery = { __typename?: 'Query' } & {
+  services: Array<{ __typename?: 'Service' } & Pick<Service, '_id' | 'name'>>
 }
 
 export type LoggedInUserQueryVariables = {}
@@ -925,62 +950,6 @@ export type ProjectToUpdateQueryResult = ApolloReactCommon.QueryResult<
   ProjectToUpdateQuery,
   ProjectToUpdateQueryVariables
 >
-export const ProjectServiceOptionsDocument = gql`
-  query projectServiceOptions {
-    services {
-      name
-      _id
-    }
-  }
-`
-
-/**
- * __useProjectServiceOptionsQuery__
- *
- * To run a query within a React component, call `useProjectServiceOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useProjectServiceOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProjectServiceOptionsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useProjectServiceOptionsQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >(ProjectServiceOptionsDocument, baseOptions)
-}
-export function useProjectServiceOptionsLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >(ProjectServiceOptionsDocument, baseOptions)
-}
-export type ProjectServiceOptionsQueryHookResult = ReturnType<
-  typeof useProjectServiceOptionsQuery
->
-export type ProjectServiceOptionsLazyQueryHookResult = ReturnType<
-  typeof useProjectServiceOptionsLazyQuery
->
-export type ProjectServiceOptionsQueryResult = ApolloReactCommon.QueryResult<
-  ProjectServiceOptionsQuery,
-  ProjectServiceOptionsQueryVariables
->
 export const ProjectsDocument = gql`
   query projects($service: String) {
     projects(service: $service, includeDeleted: false) {
@@ -1097,6 +1066,54 @@ export type ProjectLazyQueryHookResult = ReturnType<typeof useProjectLazyQuery>
 export type ProjectQueryResult = ApolloReactCommon.QueryResult<
   ProjectQuery,
   ProjectQueryVariables
+>
+export const RequestServiceDocument = gql`
+  mutation requestService($request: ServiceRequestInput!) {
+    submitRequest(request: $request)
+  }
+`
+export type RequestServiceMutationFn = ApolloReactCommon.MutationFunction<
+  RequestServiceMutation,
+  RequestServiceMutationVariables
+>
+
+/**
+ * __useRequestServiceMutation__
+ *
+ * To run a mutation, you first call `useRequestServiceMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRequestServiceMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [requestServiceMutation, { data, loading, error }] = useRequestServiceMutation({
+ *   variables: {
+ *      request: // value for 'request'
+ *   },
+ * });
+ */
+export function useRequestServiceMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    RequestServiceMutation,
+    RequestServiceMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    RequestServiceMutation,
+    RequestServiceMutationVariables
+  >(RequestServiceDocument, baseOptions)
+}
+export type RequestServiceMutationHookResult = ReturnType<
+  typeof useRequestServiceMutation
+>
+export type RequestServiceMutationResult = ApolloReactCommon.MutationResult<
+  RequestServiceMutation
+>
+export type RequestServiceMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  RequestServiceMutation,
+  RequestServiceMutationVariables
 >
 export const NewServiceDocument = gql`
   mutation newService($service: ServiceInput!) {
@@ -1421,6 +1438,62 @@ export type ServiceLazyQueryHookResult = ReturnType<typeof useServiceLazyQuery>
 export type ServiceQueryResult = ApolloReactCommon.QueryResult<
   ServiceQuery,
   ServiceQueryVariables
+>
+export const ServiceSelectDocument = gql`
+  query serviceSelect {
+    services {
+      _id
+      name
+    }
+  }
+`
+
+/**
+ * __useServiceSelectQuery__
+ *
+ * To run a query within a React component, call `useServiceSelectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useServiceSelectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useServiceSelectQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useServiceSelectQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ServiceSelectQuery,
+    ServiceSelectQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    ServiceSelectQuery,
+    ServiceSelectQueryVariables
+  >(ServiceSelectDocument, baseOptions)
+}
+export function useServiceSelectLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ServiceSelectQuery,
+    ServiceSelectQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    ServiceSelectQuery,
+    ServiceSelectQueryVariables
+  >(ServiceSelectDocument, baseOptions)
+}
+export type ServiceSelectQueryHookResult = ReturnType<
+  typeof useServiceSelectQuery
+>
+export type ServiceSelectLazyQueryHookResult = ReturnType<
+  typeof useServiceSelectLazyQuery
+>
+export type ServiceSelectQueryResult = ApolloReactCommon.QueryResult<
+  ServiceSelectQuery,
+  ServiceSelectQueryVariables
 >
 export const LoggedInUserDocument = gql`
   query loggedInUser {

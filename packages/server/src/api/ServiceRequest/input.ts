@@ -1,5 +1,5 @@
-import { Field, InputType } from 'type-graphql'
 import { EmailAddressResolver } from 'graphql-scalars'
+import { Field, InputType } from 'type-graphql'
 
 @InputType({ description: 'The Service Request Model' })
 export class ServiceRequestInput {

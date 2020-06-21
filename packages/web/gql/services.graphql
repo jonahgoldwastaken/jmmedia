@@ -15,3 +15,10 @@ query service($slug: String!) {
     callToAction
   }
 }
+
+query serviceSelect {
+  services {
+    _id
+    name
+  }
+}

@@ -24,6 +24,7 @@ function createApolloClient(ctx?: NextPageContext) {
     uri: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:4000',
     fetch: enhancedFetch,
   })
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link,

@@ -1,5 +1,5 @@
 import { BaseRunning } from 'components/Text'
-import { useProjectServiceOptionsQuery } from 'generated/graphql'
+import { useServiceSelectQuery } from 'generated/graphql'
 import { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import { ProjectListContext } from './Context'
@@ -20,7 +20,7 @@ const StyledSelect = styled.select<{
 `
 
 export const ProjectListFilter = () => {
-  const { data } = useProjectServiceOptionsQuery()
+  const { data } = useServiceSelectQuery()
   const { setFilter, currentFilter } = useContext(ProjectListContext)
   const ref = useRef<HTMLSelectElement>()
   return (
