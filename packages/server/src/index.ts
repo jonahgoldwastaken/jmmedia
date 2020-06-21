@@ -47,16 +47,13 @@ const initialiseBootSequence = async () => {
     .use(async (ctx, next) => {
       if (process.env.NODE_ENV === 'production')
         if (ctx.hostname.endsWith('jmmedia.nl')) {
-          ctx.setHeader(
-            'Access-Control-Allow-Origin',
-            `https://${ctx.hostname}`
-          )
-          ctx.setHeader(
+          ctx.set('Access-Control-Allow-Origin', `https://${ctx.hostname}`)
+          ctx.set(
             'Access-Control-Allow-Headers',
             'X-Requested-With,Content-Type,Authorization'
           )
-          ctx.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-        } else ctx.setHeader('Access-Control-Allow-Origin', '*')
+          ctx.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        } else ctx.set('Access-Control-Allow-Origin', '*')
       await next()
     })
     .use(
