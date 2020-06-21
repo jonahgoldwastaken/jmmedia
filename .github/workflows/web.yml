@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths: 
       - 'packages/web/**'
+      - '.github/workflows/web.yml'
   
 jobs:
   deploy:
