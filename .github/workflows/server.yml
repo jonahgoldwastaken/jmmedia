@@ -1,5 +1,6 @@
 name: "Deploy Server"
 
+
 on:
   push:
     branches: [master]
