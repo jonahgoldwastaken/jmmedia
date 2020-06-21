@@ -41,7 +41,7 @@ jobs:
     - name: Build deployment
       run: yarn build:web
       env:
-        NEXT_PUBLIC_SERVER_URL: /api/
+        NEXT_PUBLIC_SERVER_URL: https://api.jmmedia.nl
         
     - name: Yarn Prod Install
       run: yarn install --force --frozen-lockfile --prod
@@ -57,7 +57,7 @@ jobs:
         remote_key: ${{secrets.PRIVATE_KEY}}
         
     - name: Upload Prod Packages
-      uses: Brunett01/rsync-deployment@4.0
+      uses: Burnett01/rsync-deployments@4.0
       with:
         path: node_modules/
         remote_host: ${{secrets.DEPLOY_URL}}

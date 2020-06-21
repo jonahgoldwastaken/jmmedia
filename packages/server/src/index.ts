@@ -44,6 +44,21 @@ const initialiseBootSequence = async () => {
       if (user) ctx.state.user = user
       await next()
     })
+    .use(async (ctx, next) => {
+      if (process.env.NODE_ENV === 'production')
+        if (ctx.hostname.endsWith('jmmedia.nl')) {
+          ctx.setHeader(
+            'Access-Control-Allow-Origin',
+            `https://${ctx.hostname}`
+          )
+          ctx.setHeader(
+            'Access-Control-Allow-Headers',
+            'X-Requested-With,Content-Type,Authorization'
+          )
+          ctx.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        } else ctx.setHeader('Access-Control-Allow-Origin', '*')
+      await next()
+    })
     .use(
       graphqlUploadKoa({
         maxFieldSize: 1000000,
@@ -53,8 +68,7 @@ const initialiseBootSequence = async () => {
     )
     .use(
       server.getMiddleware({
-        path: '/api/',
-        cors: process.env.NODE_ENV === 'development' ? { origin: '*' } : false,
+        path: '/',
       })
     )
     .listen(PORT, () => {
