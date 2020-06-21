@@ -56,7 +56,7 @@ jobs:
         path: node_modules/
         remote_host: ${{secrets.DEPLOY_URL}}
         remote_user: ${{secrets.DEPLOY_USER}}
-        remote_path: ${{secrets.SERVER_PATH}}node_modules/
+        remote_path: ${{secrets.SERVER_PATH}}/node_modules/
         switches: -avzr --delete
         remote_key: ${{secrets.PRIVATE_KEY}}
 
