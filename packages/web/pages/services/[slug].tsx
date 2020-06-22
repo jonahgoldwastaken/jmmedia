@@ -1,4 +1,5 @@
 import { ApolloQueryResult } from 'apollo-client'
+import CTA from 'components/CTA'
 import Footer from 'components/Footer'
 import Header from 'components/Header'
 import Image from 'components/Image'
@@ -11,11 +12,10 @@ import {
   ServiceQuery,
   ServiceQueryVariables,
 } from 'generated/graphql'
+import { initializeApollo } from 'libs/apolloClient'
 import { NextPage } from 'next'
 import Error from 'next/error'
 import Head from 'next/head'
-import { initializeApollo } from 'libs/apolloClient'
-import CTA from 'components/CTA'
 
 type Props = {
   result: ApolloQueryResult<ServiceQuery> | null
@@ -62,7 +62,7 @@ const ServicePage: NextPage<Props> = ({ result }) => {
 }
 
 ServicePage.getInitialProps = async ctx => {
-  const apolloClient = initializeApollo(ctx)
+  const apolloClient = initializeApollo()
   const slug = ctx.query.slug as string
   try {
     const result = await apolloClient.query<

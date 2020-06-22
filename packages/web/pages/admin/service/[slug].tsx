@@ -66,7 +66,7 @@ const EditServicePage: NextPage<Props> = ({ service }) => {
 }
 
 EditServicePage.getInitialProps = async ctx => {
-  const apolloClient = initializeApollo(ctx)
+  const apolloClient = initializeApollo()
   const {
     res,
     query: { slug },

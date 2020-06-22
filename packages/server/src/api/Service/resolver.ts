@@ -1,8 +1,8 @@
-import { Resolver, Query, Arg, Authorized, Mutation } from 'type-graphql'
-import { Service, ServiceModel } from './model'
 import { UserInputError } from 'apollo-server-koa'
-import { ServiceInput } from './input'
+import { Arg, Authorized, Mutation, Query, Resolver } from 'type-graphql'
 import { ProjectModel } from '../Project'
+import { ServiceInput } from './input'
+import { Service, ServiceModel } from './model'
 
 @Resolver(() => Service)
 export class ServiceResolver {

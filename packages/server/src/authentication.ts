@@ -19,11 +19,12 @@ export const issueToken = (id: User['_id']) => {
 }
 
 export const authorizeToken = async ({
-  headers: { authorization },
+  cookies,
 }: KoaContext): Promise<AuthenticationData> => {
-  if (!authorization) return [null, null, 'No Token provided']
+  const tokenFromCookie = cookies.get('auth-token')
+  if (!tokenFromCookie) return [null, null, 'No Token provided']
   try {
-    const token = (authorization as string).replace(/^bearer /g, '')
+    const token = (tokenFromCookie as string).replace(/^bearer /g, '')
     const payload = verify(token, SESSION_SECRET as string, {
       issuer: 'api.jmmedia.nl',
       audience: 'jmmedia.nl',

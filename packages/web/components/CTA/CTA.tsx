@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
 import { BaseRunning } from 'components/Text'
 import Link from 'next/link'
+import styled, { css } from 'styled-components'
 
 interface Props {
   href: string

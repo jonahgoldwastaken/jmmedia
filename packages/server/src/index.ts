@@ -12,10 +12,10 @@ import { buildSchema } from 'type-graphql'
 import { MediaResolver } from './api/Media'
 import { ProjectResolver } from './api/Project'
 import { ServiceResolver } from './api/Service'
+import { ServiceRequestResolver } from './api/ServiceRequest'
 import { UserResolver } from './api/User'
 import { authChecker, authorizeToken } from './authentication'
 import connectToDB from './db'
-import { ServiceRequestResolver } from './api/ServiceRequest'
 const initialiseBootSequence = async () => {
   const hasDbConnection = await connectToDB()
   const schema = await buildSchema({
@@ -56,20 +56,6 @@ const initialiseBootSequence = async () => {
       if (user) ctx.state.user = user
       await next()
     })
-    .use(async (ctx, next) => {
-      if (process.env.NODE_ENV === 'production') {
-        if (ctx.hostname.endsWith('jmmedia.nl')) {
-          ctx.set('Access-Control-Allow-Origin', `https://${ctx.hostname}`)
-          ctx.set(
-            'Access-Control-Allow-Headers',
-            'X-Requested-With,Content-Type,Authorization'
-          )
-          ctx.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-        }
-      } else if (process.env.NODE_ENV === 'development')
-        ctx.set('Access-Control-Allow-Origin', '*')
-      await next()
-    })
     .use(
       graphqlUploadKoa({
         maxFieldSize: 1000000,
@@ -80,6 +66,26 @@ const initialiseBootSequence = async () => {
     .use(
       server.getMiddleware({
         path: '/',
+        cors: {
+          allowMethods: ['GET', 'POST', 'OPTIONS'],
+          allowHeaders: [
+            'X-Requested-With',
+            'Content-Type',
+            'Authorization',
+            'Origin',
+          ],
+          credentials: true,
+          origin: ({ hostname }) => {
+            if (
+              process.env.NODE_ENV === 'production' &&
+              hostname.endsWith('jmmedia.nl')
+            )
+              return `https://${hostname}`
+            else if (process.env.NODE_ENV === 'development')
+              return 'http://localhost:3000'
+            return 'https://jmmedia.nl'
+          },
+        },
       })
     )
     .listen(PORT, () => {

@@ -72,7 +72,7 @@ const AdminPanel: NextPage<Props> = ({ currentUser }) => {
 }
 
 AdminPanel.getInitialProps = async (ctx: NextPageContext & WithRouterProps) => {
-  const apolloClient = initializeApollo(ctx)
+  const apolloClient = initializeApollo()
   const { res, router } = ctx
   try {
     const {

@@ -4,8 +4,8 @@ import Header from 'components/Header'
 import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
 import { HeadingOne, HeadingTwo } from 'components/Text/Headings'
-import Head from 'next/head'
 import { NextPage } from 'next'
+import Head from 'next/head'
 
 const Index: NextPage = () => {
   return (

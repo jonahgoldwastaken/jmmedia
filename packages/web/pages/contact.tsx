@@ -1,12 +1,12 @@
-import { NextPage } from 'next'
-import Head from 'next/head'
 import Footer from 'components/Footer'
+import Form, { Input, SelectInput } from 'components/Form'
+import Header from 'components/Header'
 import Section from 'components/Section'
 import { HeadingOne } from 'components/Text/Headings'
-import Header from 'components/Header'
-import { Formik, Field } from 'formik'
-import Form, { Input, SelectInput } from 'components/Form'
+import { Field, Formik } from 'formik'
 import { useServiceSelectQuery } from 'generated/graphql'
+import { NextPage } from 'next'
+import Head from 'next/head'
 
 // const validateContactForm = values => {}
 

@@ -1,9 +1,9 @@
 import { useFooterServicesLazyQuery } from 'generated/graphql'
 import Link from 'next/link'
+import { useEffect } from 'react'
 import { DesktopFooterContainer } from './Container'
 import { DesktopFooterHeading } from './Heading'
 import { DesktopFooterList, DesktopFooterListItem } from './List'
-import { useEffect } from 'react'
 
 interface Props {
   inView: boolean

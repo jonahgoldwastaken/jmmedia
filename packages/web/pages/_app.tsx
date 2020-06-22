@@ -1,7 +1,9 @@
 require('intersection-observer')
+import { ApolloProvider } from '@apollo/react-hooks'
 import MediaQueryContext from 'components/MediaQueryContext'
 import { AnimatePresence } from 'framer-motion'
 import { logPageViews } from 'libs/analytics'
+import { useApollo } from 'libs/apolloClient'
 import { NextPage } from 'next'
 import { AppContext, AppInitialProps } from 'next/app'
 import { useRouter } from 'next/router'
@@ -12,8 +14,6 @@ import styledSanitize from 'styled-sanitize'
 import { darkTheme, lightTheme } from 'theme'
 import { breakpoints } from 'theme/breakpoints'
 import useMedia from 'use-media'
-import { ApolloProvider } from '@apollo/react-hooks'
-import { useApollo } from 'libs/apolloClient'
 
 const CriticalCSS = createGlobalStyle`
   ${styledNormalize};
@@ -51,7 +51,7 @@ const MyApp: NextPage<AppContext & AppInitialProps> = ({
     }),
     [darkMode, prefersReducedMotion, isMobile]
   )
-  const apolloClient = useApollo(ctx, pageProps.initialApolloState)
+  const apolloClient = useApollo(pageProps.initialApolloState)
 
   useEffect(() => {
     if (typeof window !== 'undefined') logPageViews()

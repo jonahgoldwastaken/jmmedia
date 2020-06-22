@@ -6,7 +6,9 @@
   "author": "Jonah Meijers <jonahmeijers97@gmail.com> (https://www.jonahmeijers.nl/)",
   "private": true,
   "scripts": {
-    "dev": "nodemon -w src -e ts --exec \"ts-node src\"",
+    "dev": "concurrently \"yarn:dev:src\" \"yarn:dev:dist\"",
+    "dev:dist": "nodemon --delay 1 -w dist",
+    "dev:src": "nodemon -w src -e ts --exec \"tsc\"",
     "start": "node dist",
     "build": "tsc"
   },

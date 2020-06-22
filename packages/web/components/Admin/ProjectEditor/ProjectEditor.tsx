@@ -1,10 +1,10 @@
+import CTA from 'components/CTA'
 import Footer from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Project/Article'
 import { FieldArray, useFormikContext } from 'formik'
 import { ProjectInput, useServiceSelectQuery } from 'generated/graphql'
 import Editor, { Sandbox, SideBar } from '../Editor'
 import Content from './Content'
-import CTA from 'components/CTA'
 
 type Props = {
   sideBarTitle?: string

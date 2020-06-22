@@ -10,15 +10,15 @@ import Section from 'components/Section'
 import { Paragraph } from 'components/Text'
 import { HeadingOne } from 'components/Text/Headings'
 import {
+  ProjectsDocument,
   ProjectsQuery,
   ProjectsQueryVariables,
-  ProjectsDocument,
   useProjectsLazyQuery,
 } from 'generated/graphql'
+import { initializeApollo } from 'libs/apolloClient'
 import { NextPage } from 'next'
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
-import { initializeApollo } from 'libs/apolloClient'
 
 type Props = { data: ProjectsQuery }
 
@@ -77,7 +77,7 @@ const Portfolio: NextPage<Props> = ({ data: ssrData }) => {
 }
 
 Portfolio.getInitialProps = async ctx => {
-  const apolloClient = initializeApollo(ctx)
+  const apolloClient = initializeApollo()
   const result = await apolloClient.query<
     ProjectsQuery,
     ProjectsQueryVariables

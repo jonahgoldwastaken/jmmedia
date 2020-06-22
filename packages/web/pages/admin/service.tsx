@@ -3,8 +3,8 @@ import { Formik } from 'formik'
 import { LoggedInUserDocument, useNewServiceMutation } from 'generated/graphql'
 import { initializeApollo } from 'libs/apolloClient'
 import { NextPage, NextPageContext } from 'next'
-import Router, { NextRouter } from 'next/router'
 import Head from 'next/head'
+import Router, { NextRouter } from 'next/router'
 import { useEffect } from 'react'
 
 const NewServicePage: NextPage<{ router: NextRouter }> = ({ router }) => {
@@ -38,7 +38,7 @@ const NewServicePage: NextPage<{ router: NextRouter }> = ({ router }) => {
 }
 
 NewServicePage.getInitialProps = async (ctx: NextPageContext) => {
-  const apolloClient = initializeApollo(ctx)
+  const apolloClient = initializeApollo()
   const { res } = ctx
   try {
     const {
