@@ -3,6 +3,9 @@ import { Field, InputType } from 'type-graphql'
 
 @InputType({ description: 'The Service Request Model' })
 export class ServiceRequestInput {
+  @Field()
+  name: string
+
   @Field(() => EmailAddressResolver)
   email: string
 

@@ -41,7 +41,7 @@ type Mutation {
   registerUser(user: UserInput!): User
 
   """Submit a contact form"""
-  submitRequest(request: ServiceRequestInput!): String!
+  submitRequest(request: ServiceRequestInput!): Boolean!
   updateProject(id: String!, project: ProjectInput!): Project!
   updateService(id: String!, service: ServiceInput!): Service!
 
@@ -121,6 +121,7 @@ input ServiceInput {
 input ServiceRequestInput {
   email: EmailAddress!
   message: String!
+  name: String!
   service: String!
   subject: String!
 }
