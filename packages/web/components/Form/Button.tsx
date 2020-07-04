@@ -9,7 +9,7 @@ export const Button = styled.button<ButtonProps>`
   all: unset;
   box-sizing: border-box;
   ${BaseRunning};
-  font-weight: ${props => props.theme.fontWeights[2]};
+  font-weight: ${props => props.theme.fontWeights[3]};
   padding: ${props => props.theme.spacing[0]};
   background: ${props => props.theme.colours.primary};
   color: ${props => props.theme.colours.tertiary};

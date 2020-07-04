@@ -61,7 +61,7 @@ const ContactPage: NextPage = () => {
                   name="email"
                   type="email"
                 />
-                <Field as={Input} label="Je naam" name="name" />
+                <Field as={Input} label="Je naam" name="name" bottomSpacing />
                 <Field as={Input} label="Onderwerp" name="subject" />
                 <Field
                   name="service"

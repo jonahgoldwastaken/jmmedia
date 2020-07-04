@@ -14,8 +14,12 @@ const InputTag = styled.input<InputTagProps>`
   ${BaseInputStyling}
 `
 
-export const Input: React.FC<InputProps> = ({ label, ...props }) => (
-  <Label>
+export const Input: React.FC<InputProps> = ({
+  label,
+  bottomSpacing,
+  ...props
+}) => (
+  <Label bottomSpacing={bottomSpacing}>
     {label}
     <InputTag {...props} />
   </Label>

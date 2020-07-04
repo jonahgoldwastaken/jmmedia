@@ -13,7 +13,7 @@ export const HeaderNavLink = styled(BaseHeading).attrs({
   margin: 0 0 0 ${props => props.theme.spacing[1]} !important;
   font-size: ${props => props.theme.fontSizes[2]};
   color: ${props => props.theme.colours.secondary};
-  font-weight: ${props => props.theme.fontWeights[2]};
+  font-weight: ${props => props.theme.fontWeights[3]};
   cursor: pointer;
   text-decoration: ${({ href, route }) =>
     href && route === href ? 'underline' : 'none'};
