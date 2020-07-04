@@ -32,5 +32,5 @@ export const Label = styled.label<{ bottomSpacing?: boolean }>`
   font-size: ${props => props.theme.fontSizes[2]};
   font-weight: ${props => props.theme.fontWeights[2]};
   margin-bottom: ${({ theme, bottomSpacing }) =>
-    bottomSpacing ? theme.spacing[2] : theme.spacing[1]};
+    bottomSpacing ? theme.spacing[3] : theme.spacing[1]};
 `
