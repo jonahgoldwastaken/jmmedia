@@ -76,7 +76,7 @@ const Portfolio: NextPage<Props> = ({ data: ssrData }) => {
   )
 }
 
-Portfolio.getInitialProps = async ctx => {
+Portfolio.getInitialProps = async () => {
   const apolloClient = initializeApollo()
   const result = await apolloClient.query<
     ProjectsQuery,

@@ -35,7 +35,6 @@ const handleAnimationCompletion = () => {
 const MyApp: NextPage<AppContext & AppInitialProps> = ({
   Component,
   pageProps,
-  ctx,
 }) => {
   const router = useRouter()
   const darkMode: boolean = useMedia('(prefers-color-scheme: dark)')
