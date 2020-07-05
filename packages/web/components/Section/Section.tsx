@@ -50,7 +50,7 @@ const SectionDiv = styled.section<SectionProps>`
     css`
       display: flex;
       flex-direction: column;
-      justify-content: center;
+      align-items: center;
     `}
 
     @media screen and (min-width: ${props => props.theme.breakpoints[3]}) {

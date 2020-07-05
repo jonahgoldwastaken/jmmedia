@@ -37,17 +37,14 @@ export const Content: React.FC<FieldArrayRenderProps> = ({
 }) => {
   const [{ value }] = useField<ContentInput[]>('content')
 
-  const changeHandler = (index: number) => (data: string) => {
+  const changeHandler = (index: number) => (data: string) =>
     replace(index, { type: value[index].type, data })
-  }
 
-  const cancelHandler = (index: number) => () => {
-    if (!value[index].data) remove(index)
-  }
+  const cancelHandler = (index: number) => () =>
+    !value[index].data && remove(index)
 
-  const saveHandler = () => {
-    if (value[value.length - 1].data) push({ type: 'paragraph', data: '' })
-  }
+  const saveHandler = () =>
+    value[value.length - 1].data && push({ type: 'paragraph', data: '' })
 
   const typeChangeHandler = (value: ContentInput, index: number) => (
     type: ContentTypes

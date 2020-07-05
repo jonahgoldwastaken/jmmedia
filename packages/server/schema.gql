@@ -24,6 +24,25 @@ enum ContentTypes {
   row
 }
 
+"""
+A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/.
+"""
+scalar EmailAddress
+
+"""The Message Model"""
+type Message {
+  email: EmailAddress!
+  name: String!
+}
+
+"""The Message Input Model"""
+input MessageInput {
+  email: EmailAddress!
+  message: String!
+  name: String!
+  subject: String!
+}
+
 type Mutation {
   createProject(project: ProjectInput!): Project!
   createService(service: ServiceInput!): Service!
@@ -34,6 +53,12 @@ type Mutation {
   deleteService(id: String!): Boolean!
   loginUser(user: UserInput!): String
   registerUser(user: UserInput!): User
+
+  """Submit a message form"""
+  submitMessage(message: MessageInput!): Message!
+
+  """Submit a service request form"""
+  submitRequest(request: ServiceRequestInput!): ServiceRequest!
   updateProject(id: String!, project: ProjectInput!): Project!
   updateService(id: String!, service: ServiceInput!): Service!
 
@@ -107,6 +132,21 @@ input ServiceInput {
   listImage: String!
   name: String!
   slug: String!
+}
+
+"""The Service Request Model"""
+type ServiceRequest {
+  email: EmailAddress!
+  name: String!
+}
+
+"""The Service Request Input Model"""
+input ServiceRequestInput {
+  email: EmailAddress!
+  message: String!
+  name: String!
+  service: String!
+  subject: String!
 }
 
 """The `Upload` scalar type represents a file upload."""

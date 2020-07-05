@@ -1,9 +1,9 @@
+import { DefaultTheme } from 'styled-components'
 import { animation } from './animation'
 import { breakpoints } from './breakpoints'
 import { colours } from './colours'
 import { fontFamilies, fontSizes, fontWeights } from './fonts'
 import { heights, spacing, widths } from './layout'
-import { DefaultTheme } from 'styled-components'
 
 const defaultTheme = {
   breakpoints,

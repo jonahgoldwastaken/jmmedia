@@ -1,10 +1,10 @@
+import CTA from 'components/CTA'
 import Footer from 'components/Footer'
 import { Article, ArticleTitle } from 'components/Project/Article'
 import { FieldArray, useFormikContext } from 'formik'
-import { ProjectInput, useProjectServiceOptionsQuery } from 'generated/graphql'
+import { ProjectInput, useServiceSelectQuery } from 'generated/graphql'
 import Editor, { Sandbox, SideBar } from '../Editor'
 import Content from './Content'
-import CTA from 'components/CTA'
 
 type Props = {
   sideBarTitle?: string
@@ -12,7 +12,7 @@ type Props = {
 }
 
 export const ProjectEditor: React.FC<Props> = ({ onDelete, sideBarTitle }) => {
-  const { data, loading } = useProjectServiceOptionsQuery()
+  const { data, loading } = useServiceSelectQuery()
   const {
     values: { title, callToAction },
   } = useFormikContext<ProjectInput>()

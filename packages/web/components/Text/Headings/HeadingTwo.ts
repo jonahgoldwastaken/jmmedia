@@ -3,7 +3,7 @@ import { BaseHeading } from './BaseHeading'
 
 export const HeadingTwo = styled(BaseHeading).attrs({ as: 'h2' })`
   font-size: ${props => props.theme.fontSizes[2]};
-  font-weight: ${props => props.theme.fontWeights[2]};
+  font-weight: ${props => props.theme.fontWeights[3]};
   color: ${props =>
     props.colour
       ? props.colour === 'secondary' && props.theme.colours.tertiary

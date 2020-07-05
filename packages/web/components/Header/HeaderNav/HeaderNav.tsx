@@ -43,12 +43,9 @@ export const HeaderNav: React.FC = () => {
           </Link>
         </motion.li>
         <motion.li>
-          <HeaderNavLink
-            route={route}
-            href="mailto:hoi@jonahmeijers.nl?SUBJECT=Aanvraag:%20"
-          >
-            Contact
-          </HeaderNavLink>
+          <Link scroll={false} passHref href="/contact">
+            <HeaderNavLink route={route}>Contact</HeaderNavLink>
+          </Link>
         </motion.li>
       </NavList>
     </StyledNav>

@@ -10,6 +10,7 @@ interface SelectInputTagProps extends BaseInputTagProps<'select'> {}
 
 interface SelectInputProps extends BaseInputProps<'select'> {
   options: Array<{ name: string; value: string }>
+  defaultText?: string
 }
 
 const SelectInputTag = styled.select<SelectInputTagProps>`
@@ -20,12 +21,13 @@ const SelectInputTag = styled.select<SelectInputTagProps>`
 export const SelectInput: React.FC<SelectInputProps> = ({
   label,
   options,
+  defaultText,
   ...props
 }) => (
   <Label>
     {label}
     <SelectInputTag {...props}>
-      <option>Kies een optie...</option>
+      <option>{defaultText ?? 'Kies een optie'}</option>
       {options.map(option => (
         <option key={option.value} value={option.value}>
           {option.name}

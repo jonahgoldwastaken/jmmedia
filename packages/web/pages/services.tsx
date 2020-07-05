@@ -54,8 +54,8 @@ const ServicesPage: NextPage<Props> = ({ data: { services } }) => {
   )
 }
 
-ServicesPage.getInitialProps = async ctx => {
-  const apolloClient = initializeApollo(ctx)
+ServicesPage.getInitialProps = async () => {
+  const apolloClient = initializeApollo()
   const result = await apolloClient.query<
     ServicesQuery,
     ServicesQueryVariables

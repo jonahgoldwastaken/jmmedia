@@ -1,29 +1,25 @@
-import { useMemo } from 'react'
-import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import { ApolloClient } from 'apollo-client'
 import { createUploadLink } from 'apollo-upload-client'
-import { NextPageContext } from 'next'
+import { useMemo } from 'react'
 
 let apolloClient: ApolloClient<any>
 
-function createApolloClient(ctx?: NextPageContext) {
+function createApolloClient() {
   const enhancedFetch = (url: string, init: any) =>
     fetch(url, {
       ...init,
       headers: {
         ...init.headers,
-        Authorization: ctx?.req?.headers.cookie
-          ? `bearer ${ctx?.req?.headers.cookie.split(';')[0].split('=')[1]}`
-          : typeof document !== 'undefined' && document.cookie
-          ? `bearer ${document.cookie.split('=')[1]}`
-          : '',
       },
     }).then(response => response)
 
   const link = createUploadLink({
     uri: process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:4000',
     fetch: enhancedFetch,
+    credentials: 'include',
   })
+
   return new ApolloClient({
     ssrMode: typeof window === 'undefined',
     link,
@@ -31,11 +27,8 @@ function createApolloClient(ctx?: NextPageContext) {
   })
 }
 
-export function initializeApollo(
-  ctx: NextPageContext | undefined = undefined,
-  initialState: any = null
-) {
-  const _apolloClient = apolloClient ?? createApolloClient(ctx)
+export function initializeApollo(initialState: any = null) {
+  const _apolloClient = apolloClient ?? createApolloClient()
 
   // If your page has Next.js data fetching methods that use Apollo Client, the initial state
   // gets hydrated here
@@ -50,9 +43,7 @@ export function initializeApollo(
   return _apolloClient
 }
 
-export function useApollo(ctx: NextPageContext, initialState: any) {
-  const store = useMemo(() => initializeApollo(ctx, initialState), [
-    initialState,
-  ])
+export function useApollo(initialState: any) {
+  const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
 }

@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
 import { BaseRunning } from 'components/Text'
 import Link from 'next/link'
+import styled, { css } from 'styled-components'
 
 interface Props {
   href: string
@@ -22,7 +22,7 @@ const CTAButton = styled.a<CTAButtonProps>`
     margin: ${theme.spacing[2]} ${centre ? 'auto' : '0'};
     padding: ${theme.spacing[2]} ${theme.spacing[3]};
     font-size: ${theme.fontSizes[3]};
-    font-weight: ${theme.fontWeights[2]};
+    font-weight: ${theme.fontWeights[3]};
     color: ${theme.colours.tertiary};
     background: ${theme.colours.secondary};
   `}

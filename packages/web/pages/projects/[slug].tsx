@@ -106,7 +106,7 @@ const ProjectPage: NextPage<Props> = ({ result }) => {
 }
 
 ProjectPage.getInitialProps = async (ctx: NextPageContext) => {
-  const apolloClient = initializeApollo(ctx)
+  const apolloClient = initializeApollo()
   const slug = ctx.query.slug as string
   try {
     const result = await apolloClient.query<

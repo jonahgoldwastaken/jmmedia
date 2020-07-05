@@ -6,6 +6,7 @@ import {
   BaseInputTagProps,
   Label,
 } from './BaseInput'
+import { useMemo } from 'react'
 
 interface TextAreaProps extends BaseInputTagProps<'textarea'> {}
 
@@ -13,6 +14,7 @@ interface TextAreaInputProps extends BaseInputProps<'textarea'> {}
 
 const TextArea = styled.textarea<TextAreaProps>`
   ${BaseInputStyling}
+  cursor: text;
 `
 
 export const TextAreaInput: React.FC<TextAreaInputProps> = ({
@@ -24,14 +26,17 @@ export const TextAreaInput: React.FC<TextAreaInputProps> = ({
   const [{ value, onChange: _onChange, ...field }, , { setValue }] = useField({
     name,
   })
+  const valueIsArray = useMemo(() => typeof value !== 'string', [value])
   return (
     <Label>
       {label}
       <TextArea
         onKeyUp={onKeyUp}
-        value={value ? value.join('\n') : value}
+        value={value && valueIsArray ? value.join('\n') : value}
         onChange={e => {
-          setValue(e.currentTarget.value.split('\n'))
+          valueIsArray
+            ? setValue(e.currentTarget.value.split('\n'))
+            : setValue(e.currentTarget.value)
         }}
         {...props}
         {...field}

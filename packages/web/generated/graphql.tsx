@@ -11,6 +11,8 @@ export type Scalars = {
   Float: number
   /** The `Upload` scalar type represents a file upload. */
   Upload: any
+  /** A field whose value conforms to the standard internet email address format as specified in RFC822: https://www.w3.org/Protocols/rfc822/. */
+  EmailAddress: any
 }
 
 export type Query = {
@@ -97,12 +99,16 @@ export type Mutation = {
   uploadListImage: Scalars['String']
   /** Deletes files at specified URL */
   deleteImage: Scalars['Boolean']
+  /** Submit a message form */
+  submitMessage: Message
   createService: Service
   updateService: Service
   deleteService: Scalars['Boolean']
   createProject: Project
   updateProject: Project
   deleteProject: Scalars['Boolean']
+  /** Submit a service request form */
+  submitRequest: ServiceRequest
   loginUser?: Maybe<Scalars['String']>
   registerUser?: Maybe<User>
 }
@@ -117,6 +123,10 @@ export type MutationUploadListImageArgs = {
 
 export type MutationDeleteImageArgs = {
   url: Scalars['String']
+}
+
+export type MutationSubmitMessageArgs = {
+  message: MessageInput
 }
 
 export type MutationCreateServiceArgs = {
@@ -145,12 +155,31 @@ export type MutationDeleteProjectArgs = {
   id: Scalars['String']
 }
 
+export type MutationSubmitRequestArgs = {
+  request: ServiceRequestInput
+}
+
 export type MutationLoginUserArgs = {
   user: UserInput
 }
 
 export type MutationRegisterUserArgs = {
   user: UserInput
+}
+
+/** The Message Model */
+export type Message = {
+  __typename?: 'Message'
+  name: Scalars['String']
+  email: Scalars['EmailAddress']
+}
+
+/** The Message Input Model */
+export type MessageInput = {
+  email: Scalars['EmailAddress']
+  name: Scalars['String']
+  subject: Scalars['String']
+  message: Scalars['String']
 }
 
 export type ServiceInput = {
@@ -177,6 +206,22 @@ export type ContentInput = {
   data: Scalars['String']
 }
 
+/** The Service Request Model */
+export type ServiceRequest = {
+  __typename?: 'ServiceRequest'
+  name: Scalars['String']
+  email: Scalars['EmailAddress']
+}
+
+/** The Service Request Input Model */
+export type ServiceRequestInput = {
+  name: Scalars['String']
+  email: Scalars['EmailAddress']
+  subject: Scalars['String']
+  service: Scalars['String']
+  message: Scalars['String']
+}
+
 export type UserInput = {
   username: Scalars['String']
   password: Scalars['String']
@@ -197,6 +242,25 @@ export type AdminPanelQuery = { __typename?: 'Query' } & {
       'listImage' | 'name' | 'slug' | '_id'
     >
   >
+}
+
+export type SendRequestMutationVariables = {
+  request: ServiceRequestInput
+}
+
+export type SendRequestMutation = { __typename?: 'Mutation' } & {
+  submitRequest: { __typename?: 'ServiceRequest' } & Pick<
+    ServiceRequest,
+    'name' | 'email'
+  >
+}
+
+export type SendMessageMutationVariables = {
+  message: MessageInput
+}
+
+export type SendMessageMutation = { __typename?: 'Mutation' } & {
+  submitMessage: { __typename?: 'Message' } & Pick<Message, 'name' | 'email'>
 }
 
 export type FooterServicesQueryVariables = {}
@@ -280,12 +344,6 @@ export type ProjectToUpdateQuery = { __typename?: 'Query' } & {
         >
       }
   >
-}
-
-export type ProjectServiceOptionsQueryVariables = {}
-
-export type ProjectServiceOptionsQuery = { __typename?: 'Query' } & {
-  services: Array<{ __typename?: 'Service' } & Pick<Service, 'name' | '_id'>>
 }
 
 export type ProjectsQueryVariables = {
@@ -385,6 +443,12 @@ export type ServiceQuery = { __typename?: 'Query' } & {
   >
 }
 
+export type ServiceSelectQueryVariables = {}
+
+export type ServiceSelectQuery = { __typename?: 'Query' } & {
+  services: Array<{ __typename?: 'Service' } & Pick<Service, '_id' | 'name'>>
+}
+
 export type LoggedInUserQueryVariables = {}
 
 export type LoggedInUserQuery = { __typename?: 'Query' } & {
@@ -452,6 +516,108 @@ export type AdminPanelLazyQueryHookResult = ReturnType<
 export type AdminPanelQueryResult = ApolloReactCommon.QueryResult<
   AdminPanelQuery,
   AdminPanelQueryVariables
+>
+export const SendRequestDocument = gql`
+  mutation sendRequest($request: ServiceRequestInput!) {
+    submitRequest(request: $request) {
+      name
+      email
+    }
+  }
+`
+export type SendRequestMutationFn = ApolloReactCommon.MutationFunction<
+  SendRequestMutation,
+  SendRequestMutationVariables
+>
+
+/**
+ * __useSendRequestMutation__
+ *
+ * To run a mutation, you first call `useSendRequestMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendRequestMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sendRequestMutation, { data, loading, error }] = useSendRequestMutation({
+ *   variables: {
+ *      request: // value for 'request'
+ *   },
+ * });
+ */
+export function useSendRequestMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    SendRequestMutation,
+    SendRequestMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    SendRequestMutation,
+    SendRequestMutationVariables
+  >(SendRequestDocument, baseOptions)
+}
+export type SendRequestMutationHookResult = ReturnType<
+  typeof useSendRequestMutation
+>
+export type SendRequestMutationResult = ApolloReactCommon.MutationResult<
+  SendRequestMutation
+>
+export type SendRequestMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  SendRequestMutation,
+  SendRequestMutationVariables
+>
+export const SendMessageDocument = gql`
+  mutation sendMessage($message: MessageInput!) {
+    submitMessage(message: $message) {
+      name
+      email
+    }
+  }
+`
+export type SendMessageMutationFn = ApolloReactCommon.MutationFunction<
+  SendMessageMutation,
+  SendMessageMutationVariables
+>
+
+/**
+ * __useSendMessageMutation__
+ *
+ * To run a mutation, you first call `useSendMessageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useSendMessageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [sendMessageMutation, { data, loading, error }] = useSendMessageMutation({
+ *   variables: {
+ *      message: // value for 'message'
+ *   },
+ * });
+ */
+export function useSendMessageMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    SendMessageMutation,
+    SendMessageMutationVariables
+  >
+) {
+  return ApolloReactHooks.useMutation<
+    SendMessageMutation,
+    SendMessageMutationVariables
+  >(SendMessageDocument, baseOptions)
+}
+export type SendMessageMutationHookResult = ReturnType<
+  typeof useSendMessageMutation
+>
+export type SendMessageMutationResult = ApolloReactCommon.MutationResult<
+  SendMessageMutation
+>
+export type SendMessageMutationOptions = ApolloReactCommon.BaseMutationOptions<
+  SendMessageMutation,
+  SendMessageMutationVariables
 >
 export const FooterServicesDocument = gql`
   query footerServices {
@@ -925,62 +1091,6 @@ export type ProjectToUpdateQueryResult = ApolloReactCommon.QueryResult<
   ProjectToUpdateQuery,
   ProjectToUpdateQueryVariables
 >
-export const ProjectServiceOptionsDocument = gql`
-  query projectServiceOptions {
-    services {
-      name
-      _id
-    }
-  }
-`
-
-/**
- * __useProjectServiceOptionsQuery__
- *
- * To run a query within a React component, call `useProjectServiceOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useProjectServiceOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useProjectServiceOptionsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useProjectServiceOptionsQuery(
-  baseOptions?: ApolloReactHooks.QueryHookOptions<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >
-) {
-  return ApolloReactHooks.useQuery<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >(ProjectServiceOptionsDocument, baseOptions)
-}
-export function useProjectServiceOptionsLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >
-) {
-  return ApolloReactHooks.useLazyQuery<
-    ProjectServiceOptionsQuery,
-    ProjectServiceOptionsQueryVariables
-  >(ProjectServiceOptionsDocument, baseOptions)
-}
-export type ProjectServiceOptionsQueryHookResult = ReturnType<
-  typeof useProjectServiceOptionsQuery
->
-export type ProjectServiceOptionsLazyQueryHookResult = ReturnType<
-  typeof useProjectServiceOptionsLazyQuery
->
-export type ProjectServiceOptionsQueryResult = ApolloReactCommon.QueryResult<
-  ProjectServiceOptionsQuery,
-  ProjectServiceOptionsQueryVariables
->
 export const ProjectsDocument = gql`
   query projects($service: String) {
     projects(service: $service, includeDeleted: false) {
@@ -1421,6 +1531,62 @@ export type ServiceLazyQueryHookResult = ReturnType<typeof useServiceLazyQuery>
 export type ServiceQueryResult = ApolloReactCommon.QueryResult<
   ServiceQuery,
   ServiceQueryVariables
+>
+export const ServiceSelectDocument = gql`
+  query serviceSelect {
+    services {
+      _id
+      name
+    }
+  }
+`
+
+/**
+ * __useServiceSelectQuery__
+ *
+ * To run a query within a React component, call `useServiceSelectQuery` and pass it any options that fit your needs.
+ * When your component renders, `useServiceSelectQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useServiceSelectQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useServiceSelectQuery(
+  baseOptions?: ApolloReactHooks.QueryHookOptions<
+    ServiceSelectQuery,
+    ServiceSelectQueryVariables
+  >
+) {
+  return ApolloReactHooks.useQuery<
+    ServiceSelectQuery,
+    ServiceSelectQueryVariables
+  >(ServiceSelectDocument, baseOptions)
+}
+export function useServiceSelectLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    ServiceSelectQuery,
+    ServiceSelectQueryVariables
+  >
+) {
+  return ApolloReactHooks.useLazyQuery<
+    ServiceSelectQuery,
+    ServiceSelectQueryVariables
+  >(ServiceSelectDocument, baseOptions)
+}
+export type ServiceSelectQueryHookResult = ReturnType<
+  typeof useServiceSelectQuery
+>
+export type ServiceSelectLazyQueryHookResult = ReturnType<
+  typeof useServiceSelectLazyQuery
+>
+export type ServiceSelectQueryResult = ApolloReactCommon.QueryResult<
+  ServiceSelectQuery,
+  ServiceSelectQueryVariables
 >
 export const LoggedInUserDocument = gql`
   query loggedInUser {

@@ -1,5 +1,6 @@
 import Form, { Button, Input } from 'components/Form'
 import Header from 'components/Header'
+import Section from 'components/Section'
 import { HeadingOne } from 'components/Text/Headings'
 import { Field, Formik } from 'formik'
 import { useLoggedInUserQuery, useLoginUserMutation } from 'generated/graphql'
@@ -7,7 +8,6 @@ import { NextPage } from 'next'
 import { useCookie } from 'next-cookie'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import Section from 'components/Section'
 
 const Login: NextPage = () => {
   const cookie = useCookie()

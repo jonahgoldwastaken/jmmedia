@@ -50,7 +50,7 @@ const NewProjectPage: NextPage<WithRouterProps> = ({ router }) => {
 NewProjectPage.getInitialProps = async (
   ctx: NextPageContext & WithRouterProps
 ) => {
-  const apolloClient = initializeApollo(ctx)
+  const apolloClient = initializeApollo()
   const { router, res } = ctx
   try {
     const {

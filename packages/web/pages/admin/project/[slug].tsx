@@ -73,7 +73,7 @@ const EditProjectPage: NextPage<Props> = ({ project }) => {
 }
 
 EditProjectPage.getInitialProps = async (ctx: NextPageContext) => {
-  const apolloClient = initializeApollo(ctx)
+  const apolloClient = initializeApollo()
   const {
     res,
     query: { slug },
