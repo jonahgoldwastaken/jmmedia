@@ -21,6 +21,10 @@ export const BaseInputStyling = css`
   padding: ${props => props.theme.spacing[0]};
   border: calc(${props => props.theme.spacing[0]} / 4) solid
     ${props => props.theme.colours.secondary};
+
+  ::placeholder {
+    opacity: 0.6;
+  }
 `
 
 export const Label = styled.label<{ bottomSpacing?: boolean }>`

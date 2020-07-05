@@ -14,6 +14,7 @@ interface TextAreaInputProps extends BaseInputProps<'textarea'> {}
 
 const TextArea = styled.textarea<TextAreaProps>`
   ${BaseInputStyling}
+  cursor: text;
 `
 
 export const TextAreaInput: React.FC<TextAreaInputProps> = ({

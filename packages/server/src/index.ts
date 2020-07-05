@@ -1,7 +1,10 @@
+//#region
 import { resolve } from 'path'
 require('dotenv').config({
   path: resolve(process.cwd(), '..', '..', '.env'),
 })
+//#endregion
+
 import { ApolloServer } from 'apollo-server-koa'
 import { graphqlUploadKoa } from 'graphql-upload'
 import koa from 'koa'
@@ -10,12 +13,14 @@ import logger from 'koa-logger'
 import 'reflect-metadata'
 import { buildSchema } from 'type-graphql'
 import { MediaResolver } from './api/Media'
+import { MessageResolver } from './api/Message'
 import { ProjectResolver } from './api/Project'
 import { ServiceResolver } from './api/Service'
 import { ServiceRequestResolver } from './api/ServiceRequest'
 import { UserResolver } from './api/User'
 import { authChecker, authorizeToken } from './authentication'
 import connectToDB from './db'
+
 const initialiseBootSequence = async () => {
   const hasDbConnection = await connectToDB()
   const schema = await buildSchema({
@@ -25,6 +30,7 @@ const initialiseBootSequence = async () => {
       ServiceResolver,
       MediaResolver,
       ServiceRequestResolver,
+      MessageResolver,
     ],
     validate: false,
     authChecker,

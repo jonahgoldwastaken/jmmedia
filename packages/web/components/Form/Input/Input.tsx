@@ -12,15 +12,18 @@ interface InputProps extends BaseInputProps<'input'> {}
 
 const InputTag = styled.input<InputTagProps>`
   ${BaseInputStyling}
+  cursor: text;
 `
 
 export const Input: React.FC<InputProps> = ({
   label,
   bottomSpacing,
   ...props
-}) => (
-  <Label bottomSpacing={bottomSpacing}>
-    {label}
-    <InputTag {...props} />
-  </Label>
-)
+}) => {
+  return (
+    <Label bottomSpacing={bottomSpacing}>
+      {label}
+      <InputTag {...props} />
+    </Label>
+  )
+}

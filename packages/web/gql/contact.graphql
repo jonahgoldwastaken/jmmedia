@@ -1,0 +1,13 @@
+mutation sendRequest($request: ServiceRequestInput!) {
+  submitRequest(request: $request) {
+    name
+    email
+  }
+}
+
+mutation sendMessage($message: MessageInput!) {
+  submitMessage(message: $message) {
+    name
+    email
+  }
+}

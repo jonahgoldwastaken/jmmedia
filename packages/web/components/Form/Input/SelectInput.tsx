@@ -27,7 +27,7 @@ export const SelectInput: React.FC<SelectInputProps> = ({
   <Label>
     {label}
     <SelectInputTag {...props}>
-      <option>{defaultText ?? 'Kies een optie...'}</option>
+      <option>{defaultText ?? 'Kies een optie'}</option>
       {options.map(option => (
         <option key={option.value} value={option.value}>
           {option.name}
