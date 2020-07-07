@@ -21,12 +21,14 @@ import { NextPage } from 'next'
 import Head from 'next/head'
 import { ChangeEvent, useCallback, useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import { ReCaptcha, loadReCaptcha } from 'react-recaptcha-v3'
 
 type ContactType = 'message' | 'request' | ''
 
 const ContactPage: NextPage = () => {
   const router = useRouter()
   const [contactType, setContactType] = useState<ContactType>('')
+  const [maySubmit, setMaySubmit] = useState(false)
   const onContactTypeSelect = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) =>
       setContactType(e.currentTarget.value as ContactType),
@@ -65,6 +67,8 @@ const ContactPage: NextPage = () => {
     }
   }, [messageMutationData, requestMutationData])
 
+  useEffect(() => loadReCaptcha('6Ldmia4ZAAAAAM0QkDwEfEY21tLV3lSEboLG4iNw'), [])
+
   return (
     <>
       <Head>
@@ -82,7 +86,7 @@ const ContactPage: NextPage = () => {
           {contactType === 'message' ? (
             <Formik
               onSubmit={(message: MessageInput) => {
-                messageMutation({ variables: { message } })
+                if (maySubmit) messageMutation({ variables: { message } })
               }}
               initialValues={
                 {
@@ -137,7 +141,7 @@ const ContactPage: NextPage = () => {
             contactType === 'request' && (
               <Formik
                 onSubmit={(request: ServiceRequestInput) => {
-                  requestMutation({ variables: { request } })
+                  if (maySubmit) requestMutation({ variables: { request } })
                 }}
                 initialValues={
                   {
@@ -205,6 +209,13 @@ const ContactPage: NextPage = () => {
           )}
         </Section>
       </main>
+      <ReCaptcha
+        sitekey="6Ldmia4ZAAAAAM0QkDwEfEY21tLV3lSEboLG4iNw"
+        action="request_verify"
+        verifyCallback={token => {
+          if (token) setMaySubmit(true)
+        }}
+      />
       <Footer />
     </>
   )
